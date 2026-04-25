@@ -1,0 +1,9 @@
+export default function Footer() {
+    return (
+        <footer className="border-t border-[var(--color-border)] mt-[clamp(48px,6vw,80px)]">
+            <div className="max-w-[1400px] mx-auto px-[clamp(24px,4vw,64px)] py-6 text-center">
+                <p className="text-xs text-[var(--color-text-secondary)] font-light tracking-[0.02em]">&copy; 2026 Studio Tarek Atoui</p>
+            </div>
+        </footer>
+    );
+}

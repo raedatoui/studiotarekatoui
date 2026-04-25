@@ -1,0 +1,437 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "Studio Tarek Atoui" [ref=e5] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e6]:
+        - navigation [ref=e7]:
+          - link "About" [ref=e8] [cursor=pointer]:
+            - /url: /about
+          - link "Exhibitions" [ref=e9] [cursor=pointer]:
+            - /url: /exhibitions
+          - link "Portfolio" [ref=e10] [cursor=pointer]:
+            - /url: /portfolio
+          - link "Editions" [ref=e11] [cursor=pointer]:
+            - /url: https://www.crousel.com/artiste/tarek-atoui-r90lmw/#items
+          - link "Contact" [ref=e12] [cursor=pointer]:
+            - /url: /contact
+        - button "Passer en français" [ref=e13] [cursor=pointer]: FR
+  - main [ref=e15]:
+    - heading "Selected Works" [level=1] [ref=e17]
+    - navigation [ref=e18]:
+      - list [ref=e19]:
+        - listitem [ref=e20]:
+          - link "The Wind Harvesters2023" [ref=e21] [cursor=pointer]:
+            - /url: "#the-wind-harvesters"
+        - listitem [ref=e22]:
+          - link "The Rain2023" [ref=e23] [cursor=pointer]:
+            - /url: "#the-rain"
+        - listitem [ref=e24]:
+          - link "The Whisperers2021 —" [ref=e25] [cursor=pointer]:
+            - /url: "#the-whisperers"
+        - listitem [ref=e26]:
+          - link "Waters' Witness2020 —" [ref=e27] [cursor=pointer]:
+            - /url: "#waters-witness"
+        - listitem [ref=e28]:
+          - link "The Wave2019" [ref=e29] [cursor=pointer]:
+            - /url: "#the-wave"
+        - listitem [ref=e30]:
+          - link "The Ground2018" [ref=e31] [cursor=pointer]:
+            - /url: "#the-ground"
+        - listitem [ref=e32]:
+          - link "WITHIN2016–2017 —" [ref=e33] [cursor=pointer]:
+            - /url: "#within"
+        - listitem [ref=e34]:
+          - link "The Reverse Collection2016–2021" [ref=e35] [cursor=pointer]:
+            - /url: "#the-reverse-collection"
+        - listitem [ref=e36]:
+          - link "The Metastable Circuit 12012" [ref=e37] [cursor=pointer]:
+            - /url: "#the-metastable-circuit-1"
+        - listitem [ref=e38]:
+          - link "On and From Tarab2011–2012" [ref=e39] [cursor=pointer]:
+            - /url: "#on-and-from-tarab"
+    - generic [ref=e40]:
+      - generic [ref=e41]:
+        - heading "The Wind Harvesters" [level=2] [ref=e42]
+        - paragraph [ref=e43]: "2023"
+        - generic [ref=e44]:
+          - paragraph [ref=e45]: "The Wind Harvesters #1 is an air circuit inspired by the water irrigation systems of rice fields in the area of Chiang Rai. It is made out of bamboo sections into which traditional wind instruments from the Akha and Lisu tribes were mounted and tuned by Atoui, the musicians and the instrument makers from these communities."
+          - paragraph [ref=e46]: A computer-based composition translates the sound of the traditional wind instruments into water and hidden sound flows creating an intricate composition and listening situation for the audience visiting the work. The artist also conceived the space of this composition and its elements as a hospitality and performance ground for the members of these tribes and other musicians during the time of the exhibition.
+      - generic [ref=e47]:
+        - generic [ref=e48]:
+          - generic [ref=e49]:
+            - generic [ref=e50]:
+              - img "The Wind Harvesters — Installation view, Thailand Biennale at Mae Fah Luang Park, Chiang Rai, 2023"
+            - generic [ref=e51]:
+              - img "The Wind Harvesters — Installation view, Thailand Biennale at Mae Fah Luang Park, Chiang Rai, 2023"
+            - generic [ref=e52]:
+              - img "The Wind Harvesters — Installation views, Thailand Biennale at Mae Fah Luang Park, Chiang Rai, 2023"
+            - generic [ref=e53]:
+              - img "The Wind Harvesters — Installation views, Thailand Biennale at Mae Fah Luang Park, Chiang Rai, 2023"
+            - generic [ref=e54]:
+              - img "The Wind Harvesters — Instrument details, Thailand Biennale at Mae Fah Luang Park, Chiang Rai, 2023"
+            - generic [ref=e55]:
+              - img "The Wind Harvesters — Instrument details, Thailand Biennale at Mae Fah Luang Park, Chiang Rai, 2023"
+            - generic [ref=e56]:
+              - img "The Wind Harvesters — Instrument details, Thailand Biennale at Mae Fah Luang Park, Chiang Rai, 2023"
+            - generic [ref=e57]:
+              - img "The Wind Harvesters — Instrument details, Thailand Biennale at Mae Fah Luang Park, Chiang Rai, 2023"
+          - button "Previous image" [ref=e58]:
+            - img [ref=e59]
+          - button "Next image" [ref=e61]:
+            - img [ref=e62]
+        - generic [ref=e64]: Installation view, Thailand Biennale at Mae Fah Luang Park, Chiang Rai, 2023
+        - generic [ref=e65]:
+          - button "Go to image 1" [ref=e66]
+          - button "Go to image 2" [ref=e67]
+          - button "Go to image 3" [ref=e68]
+          - button "Go to image 4" [ref=e69]
+          - button "Go to image 5" [ref=e70]
+          - button "Go to image 6" [ref=e71]
+          - button "Go to image 7" [ref=e72]
+          - button "Go to image 8" [ref=e73]
+        - paragraph [ref=e74]: 1 / 8
+    - generic [ref=e75]:
+      - generic [ref=e76]:
+        - heading "The Rain" [level=2] [ref=e77]
+        - paragraph [ref=e78]: "2023"
+        - generic [ref=e79]:
+          - paragraph [ref=e80]: The Rain offers a unique fusion of Korean traditional percussion instruments and electronic soundscapes, introducing visitors to an entirely novel way of experiencing sound.
+          - paragraph [ref=e81]: Atoui's journey began in 2019 when he embarked on a research expedition to South Korea. During this exploration, he developed a profound fascination with Korean traditional culture, extending his interest beyond traditional instruments to include ceramics, porcelain, hanji (traditional Korean paper), weaving, and more. Through collaborations with artisans, craftsmen, and scholars of traditional culture, he has created instruments and forms that reflect his distinctive artistic style.
+      - generic [ref=e82]:
+        - generic [ref=e83]:
+          - generic [ref=e84]:
+            - generic [ref=e85]:
+              - img "The Rain — Exhibition view, Art Sonje Center, Seoul (South Korea), 2023"
+            - generic [ref=e86]:
+              - img "The Rain — Hanging Structures, Art Sonje Center, Seoul (South Korea), 2023"
+            - generic [ref=e87]:
+              - img "The Rain — Hanging Structures, Art Sonje Center, Seoul (South Korea), 2023"
+            - generic [ref=e88]:
+              - img "The Rain — Hanging Structures, Art Sonje Center, Seoul (South Korea), 2023"
+            - generic [ref=e89]:
+              - img "The Rain — Micro city - unit 3, Art Sonje Center, Seoul (South Korea), 2023"
+            - generic [ref=e90]:
+              - img "The Rain — Micro city - unit 2 (detail), Art Sonje Center, Seoul (South Korea), 2023"
+            - generic [ref=e91]:
+              - img "The Rain — Water Drum - unit 1, Art Sonje Center, Seoul (South Korea), 2023"
+            - generic [ref=e92]:
+              - img "The Rain — Items, Art Sonje Center, Seoul (South Korea), 2023"
+            - generic [ref=e93]:
+              - img "The Rain — Items, Art Sonje Center, Seoul (South Korea), 2023"
+            - generic [ref=e94]:
+              - img "The Rain — Ceramics detail, Art Sonje Center, Seoul (South Korea), 2023"
+            - generic [ref=e95]:
+              - img "The Rain — Mallets detail, Art Sonje Center, Seoul (South Korea), 2023"
+          - button "Previous image" [ref=e96]:
+            - img [ref=e97]
+          - button "Next image" [ref=e99]:
+            - img [ref=e100]
+        - generic [ref=e102]: Exhibition view, Art Sonje Center, Seoul (South Korea), 2023
+        - generic [ref=e103]:
+          - button "Go to image 1" [ref=e104]
+          - button "Go to image 2" [ref=e105]
+          - button "Go to image 3" [ref=e106]
+          - button "Go to image 4" [ref=e107]
+          - button "Go to image 5" [ref=e108]
+          - button "Go to image 6" [ref=e109]
+          - button "Go to image 7" [ref=e110]
+          - button "Go to image 8" [ref=e111]
+          - button "Go to image 9" [ref=e112]
+          - button "Go to image 10" [ref=e113]
+          - button "Go to image 11" [ref=e114]
+        - paragraph [ref=e115]: 1 / 11
+    - generic [ref=e116]:
+      - generic [ref=e117]:
+        - heading "The Whisperers" [level=2] [ref=e118]
+        - paragraph [ref=e119]: 2021 —
+        - generic [ref=e120]:
+          - paragraph [ref=e121]: The Whisperers conceived by Tarek Atoui is a series of listening devices composed of different materials that conduct and amplify sound in multi-sensory ways. These assemblages bring together plastic, wood, brass, water, bronze, glass and stone, experimenting with each material acoustic properties and the unique ways they transmit and reflect sound. Through The Whisperers, Atoui invites the visitor to plug-in their own music and experience it in fresh and innovative ways, they offer a medium for discovery and unpredictable, undoing the familiar and known.
+          - paragraph [ref=e122]: Tarek Atoui has created a new series of The Whisperers in 2021 influenced and inspired by five workshop sessions that took place between November 2020 and June 2021 in a kindergarten classroom, l'École alsacienne in Paris, with 5-year-old students.
+      - generic [ref=e123]:
+        - generic [ref=e124]:
+          - generic [ref=e125]:
+            - generic [ref=e126]:
+              - img "The Whisperers — Installation view, The FLAG Art Foundation, New York, USA, 2022"
+            - generic [ref=e127]:
+              - img "The Whisperers — Installation view, The FLAG Art Foundation, New York, USA, 2022"
+            - generic [ref=e128]:
+              - img "The Whisperers — Installation view, The FLAG Art Foundation, New York, USA, 2022"
+            - generic [ref=e129]:
+              - img "The Whisperers — Installation view, The FLAG Art Foundation, New York, USA, 2022"
+            - generic [ref=e130]:
+              - img "The Whisperers — Installation view, The FLAG Art Foundation, New York, USA, 2022"
+            - generic [ref=e131]:
+              - img "The Whisperers — Installation view, The Contemporary Austin, Austin, USA, 2022"
+            - generic [ref=e132]:
+              - img "The Whisperers — Installation view, The Contemporary Austin, Austin, USA, 2022"
+            - generic [ref=e133]:
+              - img "The Whisperers — Installation view, The Contemporary Austin, Austin, USA, 2022"
+            - generic [ref=e134]:
+              - img "The Whisperers — Installation view, The Contemporary Austin, Austin, USA, 2022"
+            - generic [ref=e135]:
+              - img "The Whisperers — The Whisperers / Module 1, 2021"
+            - generic [ref=e136]:
+              - img "The Whisperers — Installation view, Galerie Chantal Crousel, Paris, France, 2021"
+            - generic [ref=e137]:
+              - img "The Whisperers — Installation view, Galerie Chantal Crousel, Paris, France, 2021"
+            - generic [ref=e138]:
+              - img "The Whisperers — The Whisperers / Module 3, 2021"
+          - button "Previous image" [ref=e139]:
+            - img [ref=e140]
+          - button "Next image" [ref=e142]:
+            - img [ref=e143]
+        - generic [ref=e145]: Installation view, The FLAG Art Foundation, New York, USA, 2022
+        - generic [ref=e146]:
+          - button "Go to image 1" [ref=e147]
+          - button "Go to image 2" [ref=e148]
+          - button "Go to image 3" [ref=e149]
+          - button "Go to image 4" [ref=e150]
+          - button "Go to image 5" [ref=e151]
+          - button "Go to image 6" [ref=e152]
+          - button "Go to image 7" [ref=e153]
+          - button "Go to image 8" [ref=e154]
+          - button "Go to image 9" [ref=e155]
+          - button "Go to image 10" [ref=e156]
+          - button "Go to image 11" [ref=e157]
+          - button "Go to image 12" [ref=e158]
+          - button "Go to image 13" [ref=e159]
+        - paragraph [ref=e160]: 1 / 13
+    - generic [ref=e161]:
+      - generic [ref=e162]:
+        - heading "Waters' Witness" [level=2] [ref=e163]
+        - paragraph [ref=e164]: 2020 —
+        - generic [ref=e165]:
+          - paragraph [ref=e166]: Waters' Witness is based on the ongoing project I/E Tarek Atoui initiated in 2015. Drawing upon research made in collaboration with the musicians and composers Chris Watson and Eric La Casa, Tarek Atoui uses sound recordings to document the human, ecological, historical and industrial realities of coastal cities that have a past rooted in their docklands, such as Athens, Abu Dhabi, Singapore, Beirut and Porto. Working in close proximity to or under the water, Atoui uses various recording techniques to capture the sounds of the sea and docks, and materials such as metal, stone and wood.
+          - paragraph [ref=e167]: The first iteration of Waters' Witness took place at the Fridericianum in Kassel in 2020, followed by a new version in the Serralves Museum of Contemporary Art in 2022. Then, Waters' Witness was presented in 2022 at the Mudam Luxembourg and in 2023 at the MCA Sydney.
+      - generic [ref=e168]:
+        - generic [ref=e169]:
+          - generic [ref=e170]:
+            - generic [ref=e171]:
+              - img "Waters' Witness — Installation view, MCA Sydney, Sydney, Australia, 2023"
+            - generic [ref=e172]:
+              - img "Waters' Witness — Installation view, MCA Sydney, Sydney, Australia, 2023"
+            - generic [ref=e173]:
+              - img "Waters' Witness — Installation view, MCA Sydney, Sydney, Australia, 2023"
+            - generic [ref=e174]:
+              - img "Waters' Witness — Installation view, MCA Sydney, Sydney, Australia, 2023"
+            - generic [ref=e175]:
+              - img "Waters' Witness — Installation view, MCA Sydney, Sydney, Australia, 2023"
+            - generic [ref=e176]:
+              - img "Waters' Witness — Installation view, MCA Sydney, Sydney, Australia, 2023"
+            - generic [ref=e177]:
+              - img "Waters' Witness — Installation view, MCA Sydney, Sydney, Australia, 2023"
+            - generic [ref=e178]:
+              - img "Waters' Witness — Mudam Luxembourg, Luxembourg, 2022"
+            - generic [ref=e179]:
+              - img "Waters' Witness — Mudam Luxembourg, Luxembourg, 2022"
+            - generic [ref=e180]:
+              - img "Waters' Witness — Mudam Luxembourg, Luxembourg, 2022"
+            - generic [ref=e181]:
+              - img "Waters' Witness — Serralves Museum, Porto, Portugal, 2022"
+            - generic [ref=e182]:
+              - img "Waters' Witness — Serralves Museum, Porto, Portugal, 2022"
+            - generic [ref=e183]:
+              - img "Waters' Witness — Fridericianum, Kassel, Germany, 2020"
+            - generic [ref=e184]:
+              - img "Waters' Witness — I/E Elefsina, recording sessions, Elefsina, Greece, 2015"
+          - button "Previous image" [ref=e185]:
+            - img [ref=e186]
+          - button "Next image" [ref=e188]:
+            - img [ref=e189]
+        - generic [ref=e191]: Installation view, MCA Sydney, Sydney, Australia, 2023
+        - generic [ref=e192]:
+          - button "Go to image 1" [ref=e193]
+          - button "Go to image 2" [ref=e194]
+          - button "Go to image 3" [ref=e195]
+          - button "Go to image 4" [ref=e196]
+          - button "Go to image 5" [ref=e197]
+          - button "Go to image 6" [ref=e198]
+          - button "Go to image 7" [ref=e199]
+          - button "Go to image 8" [ref=e200]
+          - button "Go to image 9" [ref=e201]
+          - button "Go to image 10" [ref=e202]
+          - button "Go to image 11" [ref=e203]
+          - button "Go to image 12" [ref=e204]
+          - button "Go to image 13" [ref=e205]
+          - button "Go to image 14" [ref=e206]
+        - paragraph [ref=e207]: 1 / 14
+    - generic [ref=e208]:
+      - generic [ref=e209]:
+        - heading "The Wave" [level=2] [ref=e210]
+        - paragraph [ref=e211]: "2019"
+        - generic [ref=e212]:
+          - paragraph [ref=e213]: The Wave is a composition deriving from experimentation that Tarek Atoui has been doing with the instruments and sounds constituting the piece. The instruments were developed for WITHIN, The Reverse Collection and The Ground, Atoui’s previous projects. The sounds are field recordings from I/E, Atoui’s project on harbour cities (Abu Dhabi, Athens and Singapore). Since their creation, these sound libraries and instruments have been activated by a variety of collaborators and musicians. Some were deaf, interacting with sound and performance for the first time; others were professional musicians familiar with improvisation and extended techniques. The Wave is inspired by these individual and collective encounters.
+          - paragraph [ref=e214]: Instruments are animated by objects and sound, and sounds are broadcast through metal and stone. The listening space that is created is a delicate ever-changing microcosm that repeatedly gets washed away by the Horns of Putin and then builds up again.
+      - generic [ref=e215]:
+        - generic [ref=e216]:
+          - generic [ref=e217]:
+            - generic [ref=e218]:
+              - img "The Wave — The Wave, 2019"
+            - generic [ref=e219]:
+              - img "The Wave — The Wave, 2019"
+            - generic [ref=e220]:
+              - img "The Wave — The Wave, 2019"
+            - generic [ref=e221]:
+              - img "The Wave — Installation view, The Contemporary Austin, Austin, USA, 2022"
+            - generic [ref=e222]:
+              - img "The Wave — Installation view, The Contemporary Austin, Austin, USA, 2022"
+            - generic [ref=e223]:
+              - img "The Wave — Installation view, If The Snake, Okayama Art summit, Okayama, Japan, 2019"
+            - generic [ref=e224]:
+              - img "The Wave — The Wave, 2019 — Detail"
+          - button "Previous image" [ref=e225]:
+            - img [ref=e226]
+          - button "Next image" [ref=e228]:
+            - img [ref=e229]
+        - generic [ref=e231]: The Wave, 2019
+        - generic [ref=e232]:
+          - button "Go to image 1" [ref=e233]
+          - button "Go to image 2" [ref=e234]
+          - button "Go to image 3" [ref=e235]
+          - button "Go to image 4" [ref=e236]
+          - button "Go to image 5" [ref=e237]
+          - button "Go to image 6" [ref=e238]
+          - button "Go to image 7" [ref=e239]
+        - paragraph [ref=e240]: 1 / 7
+    - generic [ref=e241]:
+      - generic [ref=e242]:
+        - heading "The Ground" [level=2] [ref=e243]
+        - paragraph [ref=e244]: "2018"
+        - generic [ref=e245]:
+          - paragraph [ref=e246]: Combining visual, tactile and aural modes of perceiving sound, this composition is the result of five years of travel Atoui undertook in the Pearl River Delta in southern China, where he observed local practices of farming and the architectural environment. During this time, Atoui recorded his observations of contemporary and traditional agricultural, architectural and musical practices from the region in a booklet that he shared with craftsmen and instrument makers, who then interpreted the information in their work.
+          - paragraph [ref=e247]: The resulting instruments were set up by Atoui to play separately and autonomously at exhibitions, first in Guangzhou and later in Singapore, where various artists and musicians were invited to respond to both the forms and sounds of the work. At the Venice Biennale (2019), the piece was presented as a completed composition and listening space based on the project’s previous iterations.
+      - generic [ref=e248]:
+        - generic [ref=e249]:
+          - generic [ref=e250]:
+            - generic [ref=e251]:
+              - img "The Ground — The Ground, 2018 — Mixed media"
+            - generic [ref=e252]:
+              - img "The Ground — Installation view, 58th International Art Exhibition — La Biennale di Venezia, 2019"
+            - generic [ref=e253]:
+              - img "The Ground — Installation view, 58th International Art Exhibition — La Biennale di Venezia, 2019"
+          - button "Previous image" [ref=e254]:
+            - img [ref=e255]
+          - button "Next image" [ref=e257]:
+            - img [ref=e258]
+        - generic [ref=e260]: The Ground, 2018 — Mixed media
+        - generic [ref=e261]:
+          - button "Go to image 1" [ref=e262]
+          - button "Go to image 2" [ref=e263]
+          - button "Go to image 3" [ref=e264]
+        - paragraph [ref=e265]: 1 / 3
+    - generic [ref=e266]:
+      - generic [ref=e267]:
+        - heading "WITHIN" [level=2] [ref=e268]
+        - paragraph [ref=e269]: 2016–2017 —
+        - generic [ref=e270]:
+          - paragraph [ref=e271]: WITHIN investigates how deafness can influence the way we understand sound, sound performance and concert situations. Reflecting a deaf person’s perspective, WITHIN also questions the act of listening and the way we build instruments, conduct, improvise, write scores and relate to an audience. Initiated in 2013 with Sharjah Art Foundation and Al Amal School for the Deaf, and enriched by the contribution of the curatorial duo Council (Sandra Terdjman and Gregory Castera), WITHIN further evolved at the Experimental Music and Performing Art Center, Rensselaer, US (2015); Berkeley Art Museum, US (2015); Bergen Assembly, Norway (2016); ZKM, Karlsruhe, Germany (2016); Galerie Chantal Crousel, Paris (2017); Garage Museum of Contemporary Art, Moscow (2018); and CentroCentro, Madrid (2019).
+          - paragraph [ref=e272]: Throughout this journey, Tarek Atoui conceived an ensemble of 11 musical instruments that address both deaf and hearing people, and these instruments have been played by hundreds of professionals and amateurs, both deaf and hearing. Today, the project is expanding notions of listening beyond the aural, and its principles rely on modes of tactile, physical, visual and gestural sound perception.
+      - generic [ref=e273]:
+        - generic [ref=e274]:
+          - generic [ref=e275]:
+            - generic [ref=e276]:
+              - img "WITHIN — Workshop, WITHIN, Bergen Assembly, Bergen, Norway, 2016"
+            - generic [ref=e277]:
+              - img "WITHIN — Workshop, WITHIN, Bergen Assembly, Bergen, Norway, 2016"
+            - generic [ref=e278]:
+              - img "WITHIN — 33 Soft Cells, 2016"
+            - generic [ref=e279]:
+              - 'img "WITHIN — Sub-ink #1, 2016"'
+            - generic [ref=e280]:
+              - img "WITHIN — Workshop, WITHIN, Bergen Assembly, Bergen, Norway, 2016"
+            - generic [ref=e281]:
+              - img "WITHIN — WITHIN, performance, Bergen Assembly, Bergen, Norway, 2016"
+            - generic [ref=e282]:
+              - img "WITHIN — WITHIN, performance, Bergen Assembly, Bergen, Norway, 2016"
+          - button "Previous image" [ref=e283]:
+            - img [ref=e284]
+          - button "Next image" [ref=e286]:
+            - img [ref=e287]
+        - generic [ref=e289]: Workshop, WITHIN, Bergen Assembly, Bergen, Norway, 2016
+        - generic [ref=e290]:
+          - button "Go to image 1" [ref=e291]
+          - button "Go to image 2" [ref=e292]
+          - button "Go to image 3" [ref=e293]
+          - button "Go to image 4" [ref=e294]
+          - button "Go to image 5" [ref=e295]
+          - button "Go to image 6" [ref=e296]
+          - button "Go to image 7" [ref=e297]
+        - paragraph [ref=e298]: 1 / 7
+    - generic [ref=e299]:
+      - generic [ref=e300]:
+        - heading "The Reverse Collection" [level=2] [ref=e301]
+        - paragraph [ref=e302]: 2016–2021
+        - generic [ref=e303]:
+          - paragraph [ref=e304]: Between October 2013 and May 2014, Tarek Atoui invited 18 experimental musicians from around the world to select and improvise on the instrument collection of the Dahlem Ethnological Museum in Berlin. Devoid of any historical or anthropological information, they engaged with the instruments intuitively, using unconventional techniques and objects to produce sounds. On 30 May and 1 June 2014, Atoui presented a series of 12 live performances at the Dahlem Museum. Composed and directed by the artist, Dahlem Sessions was performed in front of a small audience and meticulously recorded.
+          - paragraph [ref=e305]: Tarek Atoui took audio excerpts recorded in the Dahlem Sessions as a starting point for The Reverse Collection and collaborating with instrument makers on imagining and building the objects that could have generated these recordings. Without involving any images, Atoui proposed to engage with sound directly — contrary to the usual path of ethnomusicology, which studies the shape and mechanism of an instrument with an emphasis on its cultural and social context.
+      - generic [ref=e306]:
+        - generic [ref=e307]:
+          - generic [ref=e308]:
+            - generic [ref=e309]:
+              - img "The Reverse Collection — The Reverse Collection, 2016-2021"
+            - generic [ref=e310]:
+              - img "The Reverse Collection — The Reverse Collection, 2016-2021 — Detail"
+            - generic [ref=e311]:
+              - img "The Reverse Collection — Exhibition view, Tate Modern, London, U.K., 2016"
+          - button "Previous image" [ref=e312]:
+            - img [ref=e313]
+          - button "Next image" [ref=e315]:
+            - img [ref=e316]
+        - generic [ref=e318]: The Reverse Collection, 2016-2021
+        - generic [ref=e319]:
+          - button "Go to image 1" [ref=e320]
+          - button "Go to image 2" [ref=e321]
+          - button "Go to image 3" [ref=e322]
+        - paragraph [ref=e323]: 1 / 3
+    - generic [ref=e324]:
+      - generic [ref=e325]:
+        - heading "The Metastable Circuit 1" [level=2] [ref=e326]
+        - paragraph [ref=e327]: "2012"
+        - paragraph [ref=e329]: "Tarek Atoui created an autonomous electroacoustic instrument called the Metastable Circuit 1 especially for dOCUMENTA (13) in Kassel: a networked ensemble of desks made of computers, hard and software, controllers, touchpads, conductors and wired interface and control boards that continuously generates new stories and collages from a seemingly inexhaustible source of concrete sound material."
+      - generic [ref=e330]:
+        - generic [ref=e331]:
+          - generic [ref=e332]:
+            - generic [ref=e333]:
+              - img "The Metastable Circuit 1 — Metastable Circuit 1, 2012"
+            - generic [ref=e334]:
+              - img "The Metastable Circuit 1 — Metastable Circuit 1, 2012"
+          - button "Previous image" [ref=e335]:
+            - img [ref=e336]
+          - button "Next image" [ref=e338]:
+            - img [ref=e339]
+        - generic [ref=e341]: Metastable Circuit 1, 2012
+        - generic [ref=e342]:
+          - button "Go to image 1" [ref=e343]
+          - button "Go to image 2" [ref=e344]
+        - paragraph [ref=e345]: 1 / 2
+    - generic [ref=e346]:
+      - generic [ref=e347]:
+        - heading "On and From Tarab" [level=2] [ref=e348]
+        - paragraph [ref=e349]: 2011–2012
+        - generic [ref=e350]:
+          - paragraph [ref=e351]: There is no word in English that accurately translates the word Tarab from Arabic to English, which makes it very difficult to define. Tarab is used in Arab culture to describe the emotional effect of music, but it is also associated with a traditional form of art-music. The word ‘Tarab’ refers to an older repertoire, which is rooted in the pre World War I musical practice of Egypt and the East-Mediterranean Arab world and is directly associated with emotional evocation. Tarab sessions are known to last hours where both enchantment and ecstasy play an important role within the Tarab performance.
+          - paragraph [ref=e352]: The starting point of this project is the private music collection of Kamal Kassar who owns the biggest library of Tarab and classical Arab music in the world. The project is about revisiting Tarab as musical genre and form as well as looking at it from a sound & performative perspectives.
+      - generic [ref=e353]:
+        - generic [ref=e354]:
+          - generic [ref=e355]:
+            - generic [ref=e356]:
+              - img "On and From Tarab — Revisiting Tarab, Sharjah Art Foundation, United Arab Emirates, 2011"
+            - generic [ref=e357]:
+              - img "On and From Tarab — La Suite, Serpentine Gallery, London, 2011-2012"
+            - generic [ref=e358]:
+              - img "On and From Tarab — La Suite, Serpentine Gallery, London, 2011-2012"
+          - button "Previous image" [ref=e359]:
+            - img [ref=e360]
+          - button "Next image" [ref=e362]:
+            - img [ref=e363]
+        - generic [ref=e365]: Revisiting Tarab, Sharjah Art Foundation, United Arab Emirates, 2011
+        - generic [ref=e366]:
+          - button "Go to image 1" [ref=e367]
+          - button "Go to image 2" [ref=e368]
+          - button "Go to image 3" [ref=e369]
+        - paragraph [ref=e370]: 1 / 3
+  - contentinfo [ref=e371]:
+    - paragraph [ref=e373]: © 2026 Studio Tarek Atoui
+  - button "Open Next.js Dev Tools" [ref=e379] [cursor=pointer]:
+    - img [ref=e380]

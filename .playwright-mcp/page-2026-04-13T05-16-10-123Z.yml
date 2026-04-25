@@ -1,0 +1,28 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "Studio Tarek Atoui" [ref=e5] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e6]:
+        - navigation [ref=e7]:
+          - link "About" [ref=e8] [cursor=pointer]:
+            - /url: /about
+          - link "Exhibitions" [ref=e9] [cursor=pointer]:
+            - /url: /exhibitions
+          - link "Portfolio" [ref=e10] [cursor=pointer]:
+            - /url: /portfolio
+          - link "Editions" [ref=e11] [cursor=pointer]:
+            - /url: https://www.crousel.com/artiste/tarek-atoui-r90lmw/#items
+          - link "Contact" [ref=e12] [cursor=pointer]:
+            - /url: /contact
+        - button "Passer en français" [ref=e13] [cursor=pointer]: FR
+        - button "Switch to dark mode" [ref=e14] [cursor=pointer]:
+          - img [ref=e15]
+  - main [ref=e17]:
+    - generic [ref=e18]:
+      - generic [ref=e19]: Contact
+      - link "contact@studiotarekatoui.com" [ref=e20] [cursor=pointer]:
+        - /url: mailto:contact@studiotarekatoui.com
+  - contentinfo [ref=e21]:
+    - paragraph [ref=e23]: © 2026 Studio Tarek Atoui
+  - alert [ref=e24]

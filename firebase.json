@@ -1,0 +1,8 @@
+{
+    "hosting": {
+        "public": "out",
+        "site": "studiotarekatoui",
+        "ignore": ["firebase.json", "**/.*", "**/node_modules/**", ".firebase/**", ".idea/**"],
+        "cleanUrls": true
+    }
+}
