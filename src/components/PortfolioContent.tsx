@@ -1,11 +1,11 @@
 'use client';
 
 import ImageSlider from '@/components/ImageSlider';
-import { portfolioWorks } from '@/data/portfolio';
-import { portfolioTranslations } from '@/i18n/portfolio-en';
+import { useSiteData } from '@/data/SiteDataProvider';
 import { useEffect, useRef, useState } from 'react';
 
 export default function PortfolioContent() {
+    const { portfolio: portfolioWorks } = useSiteData();
     const [activeId, setActiveId] = useState<string>('');
     const navRef = useRef<HTMLElement>(null);
 
@@ -28,12 +28,12 @@ export default function PortfolioContent() {
                     }
                 }
             },
-            { rootMargin: '-20% 0px -60% 0px' },
+            { rootMargin: '-20% 0px -60% 0px' }
         );
 
         for (const section of sections) observer.observe(section);
         return () => observer.disconnect();
-    }, []);
+    }, [portfolioWorks]);
 
     useEffect(() => {
         if (!activeId || !navRef.current) return;
@@ -73,37 +73,27 @@ export default function PortfolioContent() {
                 </ul>
             </nav>
 
-            {portfolioWorks.map((work) => {
-                const translated = portfolioTranslations[work.id];
-                const descriptions = translated?.description ?? work.description;
-                const captions = translated?.captions;
-
-                return (
-                    <section key={work.id} id={work.id} className="py-[clamp(48px,8vw,96px)] border-b border-[var(--color-border)] last:border-b-0 scroll-mt-[calc(var(--header-height,60px)+52px)]">
-                        <div className="max-w-[700px] mx-auto text-center mb-[clamp(32px,5vw,64px)]">
-                            <h2 className="text-[clamp(24px,3vw,36px)] font-light italic tracking-[0.02em]">{work.title}</h2>
-                            <p className="mt-2 text-[clamp(18px,2vw,24px)] font-light text-[var(--color-text-secondary)]">{work.year}</p>
-                            <div className="mt-8 space-y-5">
-                                {descriptions.map((paragraph) => (
-                                    <p key={paragraph} className="text-[clamp(14px,1.1vw,16px)] font-light leading-[1.8] text-[var(--color-text)]">
-                                        {paragraph}
-                                    </p>
-                                ))}
-                            </div>
+            {portfolioWorks.map((work) => (
+                <section
+                    key={work.id}
+                    id={work.id}
+                    className="py-[clamp(48px,8vw,96px)] border-b border-[var(--color-border)] last:border-b-0 scroll-mt-[calc(var(--header-height,60px)+52px)]"
+                >
+                    <div className="max-w-[700px] mx-auto text-center mb-[clamp(32px,5vw,64px)]">
+                        <h2 className="text-[clamp(24px,3vw,36px)] font-light italic tracking-[0.02em]">{work.title}</h2>
+                        <p className="mt-2 text-[clamp(18px,2vw,24px)] font-light text-[var(--color-text-secondary)]">{work.year}</p>
+                        <div className="mt-8 space-y-5">
+                            {work.description.map((paragraph) => (
+                                <p key={paragraph} className="text-[clamp(14px,1.1vw,16px)] font-light leading-[1.8] text-[var(--color-text)]">
+                                    {paragraph}
+                                </p>
+                            ))}
                         </div>
+                    </div>
 
-                        {work.images.length > 0 && (
-                            <ImageSlider
-                                images={work.images.map((image, idx) => ({
-                                    src: image.src,
-                                    caption: captions?.[idx] ?? image.caption,
-                                }))}
-                                title={work.title}
-                            />
-                        )}
-                    </section>
-                );
-            })}
+                    {work.images.length > 0 && <ImageSlider images={work.images} title={work.title} />}
+                </section>
+            ))}
         </main>
     );
 }

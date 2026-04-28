@@ -20,7 +20,7 @@ export default function ImageSlider({ images, title }: ImageSliderProps) {
         (dir: 1 | -1) => {
             setCurrent((prev) => (prev + dir + total) % total);
         },
-        [total],
+        [total]
     );
 
     useEffect(() => {

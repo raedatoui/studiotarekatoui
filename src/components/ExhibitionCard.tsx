@@ -1,4 +1,4 @@
-import type { Exhibition } from '@/data/exhibitions';
+import type { Exhibition } from '@/data/schema';
 
 export default function ExhibitionCard({ exhibition, id }: { exhibition: Exhibition; id?: string }) {
     const content = (
@@ -26,6 +26,12 @@ export default function ExhibitionCard({ exhibition, id }: { exhibition: Exhibit
                         <>
                             <br />
                             <span className="text-[var(--color-text-secondary)] text-[13px]">{exhibition.organization}</span>
+                        </>
+                    )}
+                    {exhibition.location && (
+                        <>
+                            <br />
+                            <span className="text-[var(--color-text-secondary)] text-[13px]">{exhibition.location}</span>
                         </>
                     )}
                     {exhibition.work && (
