@@ -3,8 +3,6 @@
 @theme {
     --spacing: 0.25rem;
     --font-inter: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    --font-display: "Instrument Serif", Georgia, "Times New Roman", serif;
-    --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 :root {
@@ -14,9 +12,6 @@
     --color-border: #e0e0e0;
     --color-header-bg: rgba(250, 250, 250, 0.9);
     --color-hover-bg: rgba(0, 0, 0, 0.015);
-    /* verdigris — the patina bronze and brass take on from time and water */
-    --color-accent: #2f6b5e;
-    --color-accent-strong: #1f5347;
 }
 
 :root.dark {
@@ -26,8 +21,6 @@
     --color-border: #2a2a2a;
     --color-header-bg: rgba(17, 17, 17, 0.9);
     --color-hover-bg: rgba(255, 255, 255, 0.03);
-    --color-accent: #6fb3a1;
-    --color-accent-strong: #8ecdbb;
 }
 
 html {
@@ -59,60 +52,4 @@ a {
 }
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
-}
-
-/* Projects hub — orchestrated load + the ongoing "now" pulse */
-@keyframes thread-rise {
-    from {
-        opacity: 0;
-        transform: translateY(14px);
-    }
-    to {
-        opacity: 1;
-        transform: none;
-    }
-}
-
-@keyframes thread-draw {
-    from {
-        transform: scaleX(0);
-    }
-    to {
-        transform: scaleX(1);
-    }
-}
-
-@keyframes thread-pulse {
-    0%,
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 0.3;
-        transform: scale(1.9);
-    }
-}
-
-.thread-rise {
-    animation: thread-rise 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) both;
-}
-
-.thread-draw {
-    transform-origin: left center;
-    animation: thread-draw 0.7s cubic-bezier(0.25, 0.1, 0.25, 1) both;
-}
-
-.thread-pulse {
-    animation: thread-pulse 2.6s ease-in-out infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .thread-rise,
-    .thread-draw,
-    .thread-pulse {
-        animation: none;
-        transform: none;
-        opacity: 1;
-    }
 }
