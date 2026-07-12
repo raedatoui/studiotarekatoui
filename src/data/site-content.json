@@ -7,6 +7,7 @@
     "navigation": [
         { "label": "About", "href": "/about" },
         { "label": "Exhibitions", "href": "/exhibitions" },
+        { "label": "Projects", "href": "/projects" },
         { "label": "Portfolio", "href": "/portfolio" },
         { "label": "Editions", "href": "https://www.crousel.com/artiste/tarek-atoui-r90lmw/#items", "external": true },
         { "label": "Contact", "href": "/contact" }
@@ -92,8 +93,8 @@
             "title": "At-Tāriq",
             "year": "2023 —",
             "description": [
-                "A Majlis is a traditional space of hospitality in Arab and North African homes, where guests are received and offered shelter and conviviality. This ethos of hospitality animates Tarek Atoui’s long-term research project and exhibition At-Tāriq, meaning “The Nightcomer” or “The Morning Star.”",
-                "Over the years, Atoui has developed an artistic practice rooted in research and fieldwork, traveling extensively to connect with the musical heritage of different cultures. In At-Tāriq, he retraces trans-Saharan routes of pilgrimage and trade, exploring rural musical forms of the Arab world and North Africa.",
+                "A Majlis is a traditional space of hospitality in Arab and North African homes, where guests are received and offered shelter and conviviality. At-Tāriq — meaning “The Nightcomer” or “The Morning Star” — infuses this ethos of hospitality across a long-term research project and a suite of exhibitions, constellating spaces of listening and repose.",
+                "Over the years, Tarek Atoui has developed an artistic practice rooted in research and fieldwork, traveling extensively to connect with the musical heritage of different cultures. In At-Tāriq, he retraces trans-Saharan routes of pilgrimage and trade, exploring rural musical forms of the Arab world and North Africa.",
                 "Building on Atoui’s compositional approach, which fuses traditional and contemporary expressions of sound, performance, and craftsmanship, At-Tāriq is activated by a suite of experimental sonic objects. Suspended from the ceiling in layered stacks, these kinetic object-instruments produce textured tonalities that seem to emerge from the mineral and material elements of the Atlas Mountains. Made by Amazigh artisans, these objects carry the imprint of generations of knowledge and material sensibilities.",
                 "At-Tāriq also functions as a living archive of Arab and Amazigh music, translated into an electroacoustic “soundtrack” composed and performed with Atoui’s collaborators. Developed during a residency in Córdoba with percussionist Susie Ibarra, musician Nancy Mounir, and DJ-composer Ziúr — and later expanded with other contributors, this layered composition circulates through the objects and reverberates across the Majlis spaces."
             ],
