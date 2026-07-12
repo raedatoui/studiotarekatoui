@@ -1,0 +1,722 @@
+{
+    "themes": [
+        {
+            "id": "at-tariq",
+            "title": "At-Tāriq",
+            "subtitle": "The Nightcomer / The Morning Star",
+            "yearStart": 2024,
+            "ongoing": true,
+            "yearsDisplay": "2024 — ongoing",
+            "summary": "A Majlis of hospitality retracing trans-Saharan musical routes of the Arab world and North Africa.",
+            "description": [
+                "A Majlis is a traditional space of hospitality in Arab and North African homes, where guests are received and offered shelter and conviviality. This ethos of hospitality animates Tarek Atoui's long-term research project and exhibition At-Tāriq, meaning “The Nightcomer” or “The Morning Star.”",
+                "Over the years, Atoui has developed an artistic practice rooted in research and fieldwork, traveling extensively to connect with the musical heritage of different cultures. In At-Tāriq, he retraces trans-Saharan routes of pilgrimage and trade, exploring rural musical forms of the Arab world and North Africa.",
+                "Building on Atoui's compositional approach, which fuses traditional and contemporary expressions of sound, performance, and craftsmanship, At-Tāriq is activated by a suite of experimental sonic objects. Suspended from the ceiling in layered stacks, these kinetic object-instruments produce textured tonalities that seem to emerge from the mineral and material elements of the Atlas Mountains. Made by Amazigh artisans, these objects carry the imprint of generations of knowledge and material sensibilities.",
+                "At-Tāriq also functions as a living archive of Arab and Amazigh music, translated into an electroacoustic “soundtrack” composed and performed with Atoui's collaborators. Developed during a residency in Córdoba with percussionist Susie Ibarra, musician Nancy Mounir, and DJ-composer Ziúr — and later expanded with other contributors, this layered composition circulates through the objects and reverberates across the Majlis spaces."
+            ],
+            "heroImage": "/portfolio/at-tariq/exhibition-tba-madrid-2025.jpg",
+            "collaborators": ["Susie Ibarra", "Nancy Mounir", "Ziúr"],
+            "portfolioId": "at-tariq"
+        },
+        {
+            "id": "the-rain",
+            "title": "The Rain",
+            "yearStart": 2023,
+            "ongoing": true,
+            "yearsDisplay": "2023 — ongoing",
+            "summary": "A fusion of Korean traditional percussion and electronic soundscapes, born of fieldwork in South Korea.",
+            "description": [
+                "The Rain offers a unique fusion of Korean traditional percussion instruments and electronic soundscapes, introducing visitors to an entirely novel way of experiencing sound.",
+                "Atoui's journey began in 2019 when he embarked on a research expedition to South Korea. During this exploration, he developed a profound fascination with Korean traditional culture, extending his interest beyond traditional instruments to include ceramics, porcelain, hanji (traditional Korean paper), weaving, and more. Through collaborations with artisans, craftsmen, and scholars of traditional culture, he has created instruments and forms that reflect his distinctive artistic style."
+            ],
+            "heroImage": "/portfolio/the-rain/img-010.jpg",
+            "materials": ["Korean percussion", "ceramics", "porcelain", "hanji"],
+            "portfolioId": "the-rain"
+        },
+        {
+            "id": "the-whisperers",
+            "title": "The Whisperers",
+            "yearStart": 2021,
+            "ongoing": true,
+            "yearsDisplay": "2021 — ongoing",
+            "summary": "Listening devices of brass, water, bronze, glass and stone that let visitors plug in and hear anew.",
+            "description": [
+                "The Whisperers conceived by Tarek Atoui is a series of listening devices composed of different materials that conduct and amplify sound in multi-sensory ways. These assemblages bring together plastic, wood, brass, water, bronze, glass and stone, experimenting with each material acoustic properties and the unique ways they transmit and reflect sound. Through The Whisperers, Atoui invites the visitor to plug-in their own music and experience it in fresh and innovative ways, they offer a medium for discovery and unpredictable, undoing the familiar and known.",
+                "Tarek Atoui has created a new series of The Whisperers in 2021 influenced and inspired by five workshop sessions that took place between November 2020 and June 2021 in a kindergarten classroom, l'École alsacienne in Paris, with 5-year-old students."
+            ],
+            "heroImage": "/portfolio/the-whisperers/img-021.jpg",
+            "materials": ["plastic", "wood", "brass", "water", "bronze", "glass", "stone"],
+            "portfolioId": "the-whisperers"
+        },
+        {
+            "id": "waters-witness",
+            "title": "Waters' Witness",
+            "subtitle": "based on I/E (2015 — ongoing)",
+            "yearStart": 2020,
+            "ongoing": true,
+            "yearsDisplay": "2020 — ongoing",
+            "summary": "Recordings of harbours and docklands — Athens, Abu Dhabi, Singapore, Beirut, Porto — sounded through metal, stone and wood.",
+            "description": [
+                "Waters' Witness is based on the ongoing project I/E Tarek Atoui initiated in 2015. Drawing upon research made in collaboration with the musicians and composers Chris Watson and Eric La Casa, Tarek Atoui uses sound recordings to document the human, ecological, historical and industrial realities of coastal cities that have a past rooted in their docklands, such as Athens, Abu Dhabi, Singapore, Beirut and Porto. Working in close proximity to or under the water, Atoui uses various recording techniques to capture the sounds of the sea and docks, and materials such as metal, stone and wood.",
+                "The first iteration of Waters' Witness took place at the Fridericianum in Kassel in 2020, followed by a new version in the Serralves Museum of Contemporary Art in 2022. Then, Waters' Witness was presented in 2022 at the Mudam Luxembourg and in 2023 at the MCA Sydney."
+            ],
+            "heroImage": "/portfolio/waters-witness/img-038.jpg",
+            "collaborators": ["Chris Watson", "Eric La Casa"],
+            "materials": ["water", "metal", "stone", "wood"],
+            "portfolioId": "waters-witness"
+        },
+        {
+            "id": "the-ground",
+            "title": "The Ground",
+            "yearStart": 2018,
+            "yearEnd": 2021,
+            "ongoing": false,
+            "yearsDisplay": "2018 — 2021",
+            "summary": "Five years in the Pearl River Delta translated into autonomous instruments of farming, architecture and sound.",
+            "description": [
+                "Combining visual, tactile and aural modes of perceiving sound, this composition is the result of five years of travel Atoui undertook in the Pearl River Delta in southern China, where he observed local practices of farming and the architectural environment. During this time, Atoui recorded his observations of contemporary and traditional agricultural, architectural and musical practices from the region in a booklet that he shared with craftsmen and instrument makers, who then interpreted the information in their work.",
+                "The resulting instruments were set up by Atoui to play separately and autonomously at exhibitions, first in Guangzhou and later in Singapore, where various artists and musicians were invited to respond to both the forms and sounds of the work. At the Venice Biennale (2019), the piece was presented as a completed composition and listening space based on the project's previous iterations."
+            ],
+            "heroImage": "/portfolio/the-ground/img-059.jpg",
+            "portfolioId": "the-ground"
+        },
+        {
+            "id": "within",
+            "title": "WITHIN",
+            "yearStart": 2013,
+            "ongoing": true,
+            "yearsDisplay": "2013 — ongoing",
+            "summary": "Sound as an embodied experience, developed with Deaf and hearing participants across nearly 15 countries.",
+            "description": [
+                "WITHIN disconnects sound from listening, moving beyond auditory perception to approach sound as an embodied experience - an activity that resonates throughout the body. Deaf participants were approached not through the lens of disability, but as experts of another sensory relationship to sound and vibration. This distinct mode of perception opens other ways of communicating and creates bridges between deaf and hearing participants. Developed over the past 13 years through workshops, performances, and exhibitions, the project has taken place in nearly 15 countries and brought together hundreds of participants.",
+                "Initiated with Sharjah Art Foundation and Al Amal School for the Deaf, WITHIN was enriched by the contribution of the curatorial duo Council (Sandra Terdjman and Gregory Castera). A series of workshops were developed over the years including with the school for the Deaf in South Lebanon where they recorded the harbour of Beirut in 2019. Following these years of research, a series of nine experimental instruments were developed. Conceived as both sonic and sensory devices, these instruments are activated in concerts and exhibition settings, where they invite alternative modes of perception. Their design and playability emerged through a long process of collaboration with acoustic instrument makers, speaker designers, software engineers, composers, as well as Deaf and hearing participants. This collective approach gradually shaped a unique instrumentarium grounded in shared knowledge and embodied experimentation. In September 2016, the instruments were brought together for the first time at Sentralbadet, an abandoned swimming pool, as part of the Bergen Assembly. Composers and musicians - amateur and professional, Deaf and hearing, were invited to explore and activate the instruments, individually or collectively. This open format turned the exhibition into a space of experimentation, where WITHIN further evolved."
+            ],
+            "heroImage": "/portfolio/within/img-067.jpg",
+            "collaborators": ["Sharjah Art Foundation", "Al Amal School for the Deaf", "Council (Sandra Terdjman & Gregory Castera)"],
+            "portfolioId": "within"
+        },
+        {
+            "id": "the-reverse-collection",
+            "title": "The Reverse Collection",
+            "yearStart": 2016,
+            "yearEnd": 2021,
+            "ongoing": false,
+            "yearsDisplay": "2016 — 2021",
+            "summary": "Instruments built backwards — from the recorded sound of the Dahlem Sessions to the objects that might have made it.",
+            "description": [
+                "Between October 2013 and May 2014, Tarek Atoui invited 18 experimental musicians from around the world to select and improvise on the instrument collection of the Dahlem Ethnological Museum in Berlin. Devoid of any historical or anthropological information, they engaged with the instruments intuitively, using unconventional techniques and objects to produce sounds. On 30 May and 1 June 2014, Atoui presented a series of 12 live performances at the Dahlem Museum. Composed and directed by the artist, Dahlem Sessions was performed in front of a small audience and meticulously recorded.",
+                "Tarek Atoui took audio excerpts recorded in the Dahlem Sessions as a starting point for The Reverse Collection and collaborating with instrument makers on imagining and building the objects that could have generated these recordings. Without involving any images, Atoui proposed to engage with sound directly — contrary to the usual path of ethnomusicology, which studies the shape and mechanism of an instrument with an emphasis on its cultural and social context."
+            ],
+            "heroImage": "/portfolio/the-reverse-collection/img-071.jpg",
+            "portfolioId": "the-reverse-collection"
+        },
+        {
+            "id": "on-and-from-tarab",
+            "title": "On and From Tarab",
+            "yearStart": 2011,
+            "yearEnd": 2012,
+            "ongoing": false,
+            "yearsDisplay": "2011 — 2012",
+            "summary": "Revisiting Tarab — the emotional ecstasy of classical Arab music — from the archive of Kamal Kassar.",
+            "description": [
+                "There is no word in English that accurately translates the word Tarab from Arabic to English, which makes it very difficult to define. Tarab is used in Arab culture to describe the emotional effect of music, but it is also associated with a traditional form of art-music. The word ‘Tarab' refers to an older repertoire, which is rooted in the pre World War I musical practice of Egypt and the East-Mediterranean Arab world and is directly associated with emotional evocation. Tarab sessions are known to last hours where both enchantment and ecstasy play an important role within the Tarab performance.",
+                "The starting point of this project is the private music collection of Kamal Kassar who owns the biggest library of Tarab and classical Arab music in the world. The project is about revisiting Tarab as musical genre and form as well as looking at it from a sound & performative perspectives."
+            ],
+            "heroImage": "/portfolio/on-and-from-tarab/img-074.jpg",
+            "collaborators": ["Kamal Kassar (AMAR Foundation)"],
+            "portfolioId": "on-and-from-tarab"
+        }
+    ],
+    "manifestations": [
+        {
+            "id": "imma-dublin-2026",
+            "themeIds": ["within", "the-rain", "the-whisperers"],
+            "kind": "solo",
+            "title": "Sunflowers / Souffle Continu",
+            "year": 2026,
+            "dateStart": "2026-02-21",
+            "dateEnd": "2026-07-19",
+            "dateDisplay": "February 21 – July 19, 2026",
+            "status": "current",
+            "venue": "IMMA — Irish Museum of Modern Art",
+            "city": "Dublin",
+            "country": "Ireland",
+            "note": "Sunflowers (Gallery 3, to July 19, 2026) and Souffle Continu (Chapel, to April 19, 2026).",
+            "url": "https://imma.ie/whats-on/tarek-atoui-exhibition/",
+            "media": [
+                {
+                    "type": "image",
+                    "url": "https://www.dropbox.com/scl/fi/7dm8738f72pir6wnajv1w/202602_TarekAtoui_Souffle-Continu_Exhibition-view_IMMA_Dublin_Ros-Kavanagh1.jpg?rlkey=os6bsdfvqvrt6vt9d15g4aiq1&dl=0",
+                    "label": "Souffle Continu, exhibition view — Photo: Ros Kavanagh"
+                }
+            ]
+        },
+        {
+            "id": "phonolites-alwarsha-2026",
+            "themeIds": ["the-whisperers", "the-reverse-collection"],
+            "kind": "solo",
+            "title": "Phonolites",
+            "year": 2026,
+            "dateStart": "2026-02-01",
+            "dateEnd": "2026-04-15",
+            "dateDisplay": "February 1 – April 15, 2026",
+            "status": "past",
+            "venue": "AlWarsha",
+            "city": "AlUla",
+            "country": "Saudi Arabia",
+            "organization": "Royal Commission for AlUla",
+            "media": [
+                {
+                    "type": "image",
+                    "url": "https://www.dropbox.com/scl/fi/viqxtgpbw3vfxwepeeapo/202602__Phonolites_Litophone-details_AlWarsha-AlUla-Saudi-Arabia-image-credit-Nick-Jackson38.jpg?rlkey=dqvh51tzxb0zly68y8lyfqg4z&dl=0",
+                    "label": "Litophone details — Photo: Nick Jackson"
+                }
+            ]
+        },
+        {
+            "id": "thomaskerk-amsterdam-2026",
+            "themeIds": ["at-tariq"],
+            "kind": "performance",
+            "title": "Concert at Thomaskerk",
+            "year": 2026,
+            "dateStart": "2026-03-07",
+            "dateDisplay": "March 7, 2026",
+            "status": "past",
+            "venue": "Thomaskerk",
+            "city": "Amsterdam",
+            "country": "Netherlands",
+            "organization": "Hartwig Art Foundation",
+            "url": "https://www.hartwigartfoundation.nl/en/programmes/tarek-atoui2026/"
+        },
+        {
+            "id": "mathaf-doha-2025",
+            "themeIds": ["waters-witness"],
+            "kind": "solo",
+            "title": "Waters' Witness",
+            "year": 2025,
+            "dateStart": "2025-12-16",
+            "dateEnd": "2026-05-18",
+            "dateDisplay": "December 16, 2025 – May 18, 2026",
+            "status": "past",
+            "venue": "Mathaf: Arab Museum of Modern Art",
+            "city": "Doha",
+            "country": "Qatar",
+            "url": "https://mathaf.org.qa/en/calendar/waters-witness-by-tarek-atoui/"
+        },
+        {
+            "id": "tba21-madrid-2025",
+            "themeIds": ["at-tariq"],
+            "kind": "solo",
+            "title": "At-Tāriq. A Journey into the Rural Music Traditions of North Africa and the Arab World",
+            "year": 2025,
+            "dateDisplay": "2025",
+            "status": "past",
+            "venue": "TBA21 – Thyssen-Bornemisza Art Contemporary",
+            "city": "Madrid",
+            "country": "Spain",
+            "media": [
+                {
+                    "type": "image",
+                    "url": "https://www.dropbox.com/scl/fi/b7fbk0behz0yva0wk4q2s/202502_TBA-Madrid-EXHIBITION-VIEW-Lourdes-Cabrera-27.jpg?rlkey=o7scucvmtuexwrma1vesd1hci&dl=0",
+                    "label": "Exhibition view — Photo: Lourdes Cabrera"
+                },
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=0em36gqFE0E",
+                    "label": "Exhibition film"
+                }
+            ]
+        },
+        {
+            "id": "hangarbicocca-milan-2025",
+            "themeIds": ["waters-witness", "the-rain", "within"],
+            "kind": "solo",
+            "title": "Improvisation in 10 Days",
+            "year": 2025,
+            "dateDisplay": "2025",
+            "status": "past",
+            "venue": "Pirelli HangarBicocca",
+            "city": "Milan",
+            "country": "Italy"
+        },
+        {
+            "id": "bayt-al-hams-alwarsha-2025",
+            "themeIds": ["the-whisperers", "the-reverse-collection", "within"],
+            "kind": "solo",
+            "title": "Bayt Al Hams",
+            "year": 2025,
+            "dateDisplay": "2025",
+            "status": "past",
+            "venue": "AlWarsha",
+            "city": "AlUla",
+            "country": "Saudi Arabia"
+        },
+        {
+            "id": "afrosonica-geneva-2025",
+            "themeIds": ["the-reverse-collection"],
+            "kind": "group",
+            "title": "Afrosonica – Soundscapes",
+            "year": 2025,
+            "dateDisplay": "2025",
+            "status": "past",
+            "venue": "Musée d'Ethnographie de Genève (MEG)",
+            "city": "Geneva",
+            "country": "Switzerland",
+            "note": "Showed Litophone (from The Reverse Collection), 2019."
+        },
+        {
+            "id": "de-balie-amsterdam-2025",
+            "themeIds": ["at-tariq"],
+            "kind": "performance",
+            "title": "Forgotten Tales Through Time",
+            "year": 2025,
+            "dateDisplay": "2025",
+            "status": "past",
+            "venue": "De Balie",
+            "city": "Amsterdam",
+            "country": "Netherlands",
+            "organization": "Hartwig Art Foundation"
+        },
+        {
+            "id": "marrakesh-parure-2025",
+            "themeIds": ["at-tariq"],
+            "kind": "performance",
+            "title": "Forgotten Tales Through Time",
+            "year": 2025,
+            "dateDisplay": "2025",
+            "status": "past",
+            "venue": "Le Monde des Arts de la Parure",
+            "city": "Marrakesh",
+            "country": "Morocco",
+            "organization": "TBA21"
+        },
+        {
+            "id": "bukhara-biennial-2025",
+            "themeIds": ["the-reverse-collection"],
+            "kind": "commission",
+            "title": "untitled",
+            "year": 2025,
+            "dateDisplay": "2025",
+            "status": "past",
+            "venue": "Bukhara Biennial",
+            "city": "Bukhara",
+            "country": "Uzbekistan",
+            "note": "Horn instruments — tentatively linked to The Reverse Collection lineage; studio to confirm (see open questions). Also presented as a solo performance.",
+            "needsReview": true
+        },
+        {
+            "id": "diriyah-biennale-2024",
+            "themeIds": ["at-tariq"],
+            "kind": "performance",
+            "title": "At-Tāriq",
+            "year": 2024,
+            "dateDisplay": "2024",
+            "venue": "Diriyah Contemporary Art Biennale",
+            "city": "Riyadh",
+            "country": "Saudi Arabia",
+            "note": "Early At-Tāriq performance.",
+            "media": [
+                {
+                    "type": "image",
+                    "url": "/portfolio/at-tariq/performance-diriyah-biennale-2024.jpg",
+                    "label": "At-Tāriq, performance, Diriyah Biennale, Riyadh, 2024"
+                }
+            ]
+        },
+        {
+            "id": "art-sonje-seoul-2023",
+            "themeIds": ["the-rain"],
+            "kind": "solo",
+            "title": "The Rain",
+            "year": 2023,
+            "venue": "Art Sonje Center",
+            "city": "Seoul",
+            "country": "South Korea"
+        },
+        {
+            "id": "mca-sydney-2023",
+            "themeIds": ["waters-witness"],
+            "kind": "solo",
+            "title": "Waters' Witness",
+            "year": 2023,
+            "venue": "MCA — Museum of Contemporary Art Australia",
+            "city": "Sydney",
+            "country": "Australia"
+        },
+        {
+            "id": "luma-westbau-zurich-2023",
+            "themeIds": ["the-whisperers"],
+            "kind": "solo",
+            "title": "The Whisperers",
+            "year": 2023,
+            "venue": "Luma Westbau",
+            "city": "Zurich",
+            "country": "Switzerland"
+        },
+        {
+            "id": "serralves-porto-2022",
+            "themeIds": ["waters-witness"],
+            "kind": "solo",
+            "title": "Waters' Witness",
+            "year": 2022,
+            "venue": "Serralves Foundation",
+            "city": "Porto",
+            "country": "Portugal"
+        },
+        {
+            "id": "contemporary-austin-2022",
+            "themeIds": ["the-whisperers"],
+            "kind": "solo",
+            "title": "The Whisperers",
+            "year": 2022,
+            "venue": "The Contemporary Austin – Jones Center on Congress Avenue",
+            "city": "Austin",
+            "country": "USA"
+        },
+        {
+            "id": "flag-art-foundation-2022",
+            "themeIds": ["the-whisperers"],
+            "kind": "solo",
+            "title": "The Whisperers",
+            "year": 2022,
+            "venue": "The FLAG Art Foundation",
+            "city": "New York",
+            "country": "USA"
+        },
+        {
+            "id": "mudam-luxembourg-2022",
+            "themeIds": ["waters-witness"],
+            "kind": "solo",
+            "title": "Waters' Witness",
+            "year": 2022,
+            "venue": "Mudam Luxembourg",
+            "city": "Luxembourg",
+            "country": "Luxembourg"
+        },
+        {
+            "id": "bourse-de-commerce-2021",
+            "themeIds": ["the-ground"],
+            "kind": "solo",
+            "title": "THE GROUND Sessions",
+            "year": 2021,
+            "venue": "Bourse de Commerce — Pinault Collection",
+            "city": "Paris",
+            "country": "France"
+        },
+        {
+            "id": "crousel-whisperers-2021",
+            "themeIds": ["the-whisperers"],
+            "kind": "solo",
+            "title": "The Whisperers",
+            "year": 2021,
+            "venue": "Galerie Chantal Crousel",
+            "city": "Paris",
+            "country": "France"
+        },
+        {
+            "id": "fridericianum-kassel-2020",
+            "themeIds": ["waters-witness"],
+            "kind": "solo",
+            "title": "Waters' Witness",
+            "year": 2020,
+            "venue": "Fridericianum",
+            "city": "Kassel",
+            "country": "Germany",
+            "note": "First iteration of Waters' Witness."
+        },
+        {
+            "id": "centrocentro-madrid-2019",
+            "themeIds": ["within"],
+            "kind": "group",
+            "title": "Oído Infinito / Infinite Ear",
+            "year": 2019,
+            "venue": "CentroCentro",
+            "city": "Madrid",
+            "country": "Spain"
+        },
+        {
+            "id": "herrenhausen-hanover-2019",
+            "themeIds": ["within"],
+            "kind": "group",
+            "title": "WITHIN",
+            "year": 2019,
+            "venue": "Kunstfestspiele Herrenhausen",
+            "city": "Hanover",
+            "country": "Germany"
+        },
+        {
+            "id": "venice-biennale-2019",
+            "themeIds": ["the-ground"],
+            "kind": "group",
+            "title": "The Ground",
+            "year": 2019,
+            "venue": "58th Venice Biennale — May You Live in Interesting Times",
+            "city": "Venice",
+            "country": "Italy",
+            "note": "The Ground presented as a completed composition and listening space."
+        },
+        {
+            "id": "serralves-ie-porto-2018",
+            "themeIds": ["waters-witness"],
+            "kind": "solo",
+            "title": "I/E",
+            "year": 2018,
+            "venue": "Serralves Foundation",
+            "city": "Porto",
+            "country": "Portugal",
+            "note": "I/E — the research strand that became Waters' Witness."
+        },
+        {
+            "id": "ntu-cca-singapore-2018",
+            "themeIds": ["the-ground"],
+            "kind": "solo",
+            "title": "The Ground: From the Land to the Sea",
+            "year": 2018,
+            "venue": "NTU Centre for Contemporary Art Singapore",
+            "city": "Singapore",
+            "country": "Singapore"
+        },
+        {
+            "id": "garage-moscow-2018",
+            "themeIds": ["within"],
+            "kind": "group",
+            "title": "Infinite Ear",
+            "year": 2018,
+            "venue": "Garage Museum of Contemporary Art",
+            "city": "Moscow",
+            "country": "Russia"
+        },
+        {
+            "id": "mirrored-gardens-guangzhou-2017",
+            "themeIds": ["the-ground"],
+            "kind": "solo",
+            "title": "The Ground",
+            "year": 2017,
+            "venue": "Mirrored Gardens",
+            "city": "Guangzhou",
+            "country": "China",
+            "note": "First presentation of The Ground."
+        },
+        {
+            "id": "kfda-brussels-2017",
+            "themeIds": ["within"],
+            "kind": "solo",
+            "title": "WITHIN",
+            "year": 2017,
+            "venue": "Kunstenfestivaldesarts",
+            "city": "Brussels",
+            "country": "Belgium"
+        },
+        {
+            "id": "crousel-within-2017",
+            "themeIds": ["within"],
+            "kind": "solo",
+            "title": "WITHIN",
+            "year": 2017,
+            "venue": "Galerie Chantal Crousel",
+            "city": "Paris",
+            "country": "France"
+        },
+        {
+            "id": "ie-abu-dhabi-2017",
+            "themeIds": ["waters-witness"],
+            "kind": "group",
+            "title": "I/E Abu Dhabi",
+            "year": 2017,
+            "venue": "Durub Al Tawaya Programme, Abu Dhabi Art",
+            "city": "Abu Dhabi",
+            "country": "UAE",
+            "note": "I/E recording in the docklands of Abu Dhabi."
+        },
+        {
+            "id": "bergen-assembly-2016",
+            "themeIds": ["within"],
+            "kind": "solo",
+            "title": "WITHIN / Infinite Ear",
+            "year": 2016,
+            "venue": "Bergen Assembly (Sentralbadet)",
+            "city": "Bergen",
+            "country": "Norway",
+            "collaborators": ["Council"],
+            "note": "First time the WITHIN instruments were brought together, in an abandoned swimming pool."
+        },
+        {
+            "id": "tate-modern-reverse-2016",
+            "themeIds": ["the-reverse-collection"],
+            "kind": "solo",
+            "title": "The Reverse Collection",
+            "year": 2016,
+            "venue": "Tate Modern",
+            "city": "London",
+            "country": "UK"
+        },
+        {
+            "id": "zkm-karlsruhe-2016",
+            "themeIds": ["within"],
+            "kind": "group",
+            "title": "GLOBALE: New Sensorium",
+            "year": 2016,
+            "venue": "ZKM | Center for Art and Media",
+            "city": "Karlsruhe",
+            "country": "Germany"
+        },
+        {
+            "id": "ie-elefsina-2015",
+            "themeIds": ["waters-witness"],
+            "kind": "solo",
+            "title": "I/E Elefsina",
+            "year": 2015,
+            "venue": "Aisxylia Festival (with locus Athens)",
+            "city": "Elefsina",
+            "country": "Greece",
+            "note": "Recording sessions — a foundation of Waters' Witness.",
+            "url": "https://www.crousel.com/artiste/tarek-atoui-r90lmw/projets/ie-elefsina-2015/"
+        },
+        {
+            "id": "bampfa-matrix-258-2015",
+            "themeIds": ["within"],
+            "kind": "solo",
+            "title": "Matrix 258",
+            "year": 2015,
+            "venue": "Berkeley Art Museum and Pacific Film Archive (BAMPFA)",
+            "city": "Berkeley",
+            "country": "USA",
+            "url": "https://bampfa.org/press/tarek-atoui-matrix-258-march-2–november-7-2015"
+        },
+        {
+            "id": "kurimanzutto-reverse-sessions-2014",
+            "themeIds": ["the-reverse-collection"],
+            "kind": "solo",
+            "title": "The Reverse Sessions",
+            "year": 2014,
+            "venue": "Kurimanzutto",
+            "city": "Mexico City",
+            "country": "Mexico",
+            "media": [
+                {
+                    "type": "image",
+                    "url": "https://www.dropbox.com/scl/fo/l0d38anh3ilbnerxvfop8/AAXC87O026AKuJXx57MjMr4?rlkey=z2aq4tjvcfuysnmtzbwhyortl&st=qs63dqzg&dl=0",
+                    "label": "Exhibition images (Dropbox)"
+                },
+                {
+                    "type": "video",
+                    "url": "https://www.dropbox.com/scl/fo/vuidh7ptffwj78lwvn917/ADsMC1PCEK_KHB8bbH6Q7hg?rlkey=4wa5pm291an5wi9rq6m2hagjn&st=sh6qyeic&dl=0",
+                    "label": "Performance (Dropbox)"
+                }
+            ]
+        },
+        {
+            "id": "berlin-biennale-dahlem-sessions-2014",
+            "themeIds": ["the-reverse-collection"],
+            "kind": "performance",
+            "title": "Dahlem Sessions",
+            "year": 2014,
+            "venue": "8th Berlin Biennale",
+            "city": "Berlin",
+            "country": "Germany",
+            "note": "The source recordings that The Reverse Collection was built from.",
+            "media": [
+                {
+                    "type": "external",
+                    "url": "https://www.berlinbiennale.de/en/personen/65/tarek-atoui",
+                    "label": "Berlin Biennale page"
+                },
+                {
+                    "type": "image",
+                    "url": "https://www.dropbox.com/scl/fo/splhh2jnm3fnsrq31y9hv/AEwBNL3-d9sTuYRFCJifCgw?rlkey=xiwu9qcdo2wrv39l9ogk34pjp&st=0149yp1e&dl=0",
+                    "label": "Images (Dropbox)"
+                },
+                { "type": "video", "url": "https://vimeo.com/100364735", "label": "Video" }
+            ]
+        },
+        {
+            "id": "sharjah-biennial-11-within-2013",
+            "themeIds": ["within"],
+            "kind": "performance",
+            "title": "WITHIN",
+            "year": 2013,
+            "venue": "Sharjah Biennial 11",
+            "city": "Sharjah",
+            "country": "UAE",
+            "note": "Initiated with Sharjah Art Foundation and Al Amal School for the Deaf.",
+            "url": "https://www.crousel.com/en/artist/tarek-atoui-r90lmw/projects/within-sharjah-biennal-11-2013/",
+            "media": [
+                {
+                    "type": "image",
+                    "url": "https://www.dropbox.com/scl/fo/0u9ayaq4p3nhyadvusrld/AKISGs4Bjgzhz100Rt12YaY?rlkey=serkpieal115mwb0iw89jqtct&st=o5v7tu0g&dl=0",
+                    "label": "Images (Dropbox)"
+                },
+                { "type": "video", "url": "https://vimeo.com/102746092", "label": "Video" }
+            ]
+        },
+        {
+            "id": "sharjah-revisiting-tarab-2012",
+            "themeIds": ["on-and-from-tarab"],
+            "kind": "solo",
+            "title": "Re-Visiting Tarab",
+            "year": 2012,
+            "venue": "Sharjah Art Foundation",
+            "city": "Sharjah",
+            "country": "UAE",
+            "url": "https://www.sharjahart.org/en/press/details/saf-announces-the-premiere-of-revisiting-tarab"
+        },
+        {
+            "id": "nuit-blanche-tarab-2012",
+            "themeIds": ["on-and-from-tarab"],
+            "kind": "performance",
+            "title": "Tarab",
+            "year": 2012,
+            "venue": "Nuit Blanche",
+            "city": "Paris",
+            "country": "France",
+            "url": "https://www.crousel.com/artiste/tarek-atoui-r90lmw/projets/tarab-pour-une-nuit-blanche/"
+        },
+        {
+            "id": "serpentine-la-suite-2012",
+            "themeIds": ["on-and-from-tarab"],
+            "kind": "group",
+            "title": "La Suite",
+            "year": 2012,
+            "venue": "Serpentine Gallery (Memory Marathon)",
+            "city": "London",
+            "country": "UK",
+            "media": [
+                {
+                    "type": "image",
+                    "url": "https://www.dropbox.com/scl/fo/5ppq90t3w7o5vbb2b6r9s/AFcGQHR97ipKcO75sXWYUqk?rlkey=xgvx18wmpu3lqdiyhalse7zna&st=cydzgzla&dl=0",
+                    "label": "Images (Dropbox)"
+                }
+            ]
+        },
+        {
+            "id": "performa-11-visiting-tarab-2011",
+            "themeIds": ["on-and-from-tarab"],
+            "kind": "performance",
+            "title": "Visiting Tarab",
+            "year": 2011,
+            "venue": "Performa 11",
+            "city": "New York",
+            "country": "USA",
+            "media": [{ "type": "video", "url": "https://www.youtube.com/watch?v=szoiwBB2EYk", "label": "Performance video" }]
+        }
+    ],
+    "openQuestions": [
+        {
+            "question": "Metal Shelf — is it tied to one particular project, or shown across several?"
+        },
+        {
+            "question": "Can all the horn projects (e.g. Bukhara) be associated with The Reverse Collection?",
+            "relatedThemeIds": ["the-reverse-collection"],
+            "relatedManifestationIds": ["bukhara-biennial-2025"]
+        },
+        {
+            "question": "How should the Venice project — Untitled (a gathering of remarkable people), Qatar Pavilion, Venice Biennale — appear? It is a curation, not one of the eight long-term themes."
+        },
+        {
+            "question": "Is the Black Gold Museum (Black Gold Alchemy) a permanent collection — will it always be on view?"
+        },
+        {
+            "question": "Where should Organon (with choreographer Noé Soulier) be placed? It sits outside the eight long-term themes."
+        }
+    ]
+}

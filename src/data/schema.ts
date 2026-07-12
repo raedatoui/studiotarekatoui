@@ -22,6 +22,19 @@ export const exhibitionSchema = z.strictObject({
     subExhibitions: z.array(subExhibitionSchema).optional(),
 });
 
+export const portfolioImageSchema = z.strictObject({
+    src: z.string(),
+    caption: z.string(),
+});
+
+export const portfolioWorkSchema = z.strictObject({
+    id: z.string(),
+    title: z.string(),
+    year: z.string(),
+    description: z.array(z.string()),
+    images: z.array(portfolioImageSchema),
+});
+
 const metaSchema = z.strictObject({
     siteTitle: z.string(),
     domain: z.string(),
@@ -63,9 +76,12 @@ export const siteContentSchema = z.strictObject({
         group: z.array(exhibitionSchema),
     }),
     contact: contactSchema,
+    portfolio: z.array(portfolioWorkSchema),
 });
 
 export type NavItem = z.infer<typeof navItemSchema>;
 export type SubExhibition = z.infer<typeof subExhibitionSchema>;
 export type Exhibition = z.infer<typeof exhibitionSchema>;
+export type PortfolioImage = z.infer<typeof portfolioImageSchema>;
+export type PortfolioWork = z.infer<typeof portfolioWorkSchema>;
 export type SiteContent = z.infer<typeof siteContentSchema>;
