@@ -8,7 +8,10 @@
         "start": "next start",
         "lint": "biome lint",
         "format": "biome format --write",
-        "check": "biome check --write"
+        "check": "biome check --write",
+        "verify:zod": "node .verify-zod.mts",
+        "verify:data": "node .verify.mjs",
+        "verify": "pnpm verify:zod && pnpm verify:data"
     },
     "dependencies": {
         "next": "^16.1.1",

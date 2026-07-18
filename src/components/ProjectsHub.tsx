@@ -81,7 +81,7 @@ export default function ProjectsHub() {
                         Tarek Atoui works in long-term threads rather than single exhibitions. Each begins in fieldwork and collaboration, takes form as
                         instruments and listening spaces, and keeps changing as it travels. Follow them below across the years and the places they have
                         sounded — the full chronology lives on the{' '}
-                        <a className="text-[var(--color-text)] underline decoration-[var(--color-border)] underline-offset-4 hover:decoration-[var(--color-accent)]" href="/exhibitions">
+                        <a className="text-[var(--color-text)] underline decoration-[var(--color-border)] underline-offset-4 hover:decoration-[var(--color-accent)]" href="/news">
                             timeline
                         </a>
                         .
