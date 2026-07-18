@@ -9,8 +9,8 @@
         "lint": "biome lint",
         "format": "biome format --write",
         "check": "biome check --write",
-        "verify:zod": "node .verify-zod.mts",
-        "verify:data": "node .verify.mjs",
+        "verify:zod": "node scripts/verify-zod.mts",
+        "verify:data": "node scripts/verify.mjs",
         "verify": "pnpm verify:zod && pnpm verify:data"
     },
     "dependencies": {

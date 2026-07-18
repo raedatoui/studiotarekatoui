@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs';
-import { projectsDataSchema } from './src/data/projects-schema.ts';
+import { projectsDataSchema } from '../src/data/projects-schema.ts';
 const raw = JSON.parse(readFileSync('./src/data/projects.json', 'utf8'));
 const r = projectsDataSchema.safeParse(raw);
 if (!r.success) {
