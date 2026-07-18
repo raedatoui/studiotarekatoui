@@ -4,7 +4,7 @@ import './globals.css';
 
 export const metadata: Metadata = {
     title: 'Studio Tarek Atoui',
-    description: 'Tarek Atoui \u2014 artist and electroacoustic composer. Exhibitions and contact.',
+    description: 'Tarek Atoui \u2014 artist and electroacoustic composer. News and contact.',
 };
 
 const initScript = `
