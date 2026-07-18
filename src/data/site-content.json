@@ -6,7 +6,7 @@
     },
     "navigation": [
         { "label": "About", "href": "/about" },
-        { "label": "News", "href": "/exhibitions" },
+        { "label": "News", "href": "/news" },
         { "label": "Contact", "href": "/contact" }
     ],
     "bio": {
