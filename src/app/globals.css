@@ -17,6 +17,8 @@
     /* verdigris — the patina bronze and brass take on from time and water */
     --color-accent: #2f6b5e;
     --color-accent-strong: #1f5347;
+    /* light green — this year's projects on the timelines */
+    --color-recent: #8fce9f;
 }
 
 :root.dark {
@@ -28,6 +30,7 @@
     --color-hover-bg: rgba(255, 255, 255, 0.03);
     --color-accent: #6fb3a1;
     --color-accent-strong: #8ecdbb;
+    --color-recent: #a3dcb0;
 }
 
 html {

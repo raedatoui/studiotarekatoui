@@ -4,7 +4,7 @@ import Header from '@/components/Header';
 import ProjectsHub from '@/components/ProjectsHub';
 
 export const metadata: Metadata = {
-    title: 'Projects — Studio Tarek Atoui',
+    title: 'Research — Studio Tarek Atoui',
     description: 'The long-term research threads of Tarek Atoui — ongoing inquiries into sound, material and listening, traced across time and place.',
 };
 

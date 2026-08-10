@@ -1,21 +1,24 @@
 import { z } from 'zod';
 
 /**
- * Combined data model for the Projects hub.
+ * Combined data model for the Research hub.
  *
  * Two linked collections:
- *   - `themes`         — the long-term research projects (the "thematical" list).
- *   - `manifestations` — the dated exhibitions / performances where a theme was shown.
+ *   - `themes`   — the long-term research projects (the "thematical" list).
+ *   - `projects` — every dated presentation: exhibitions, performances, commissions,
+ *                  curations, collaborations, residencies…
  *
- * They are joined relationally: every manifestation lists the `themeIds` it belongs
- * to (a single event can belong to several themes, e.g. a group show running
- * Waters' Witness + The Rain + WITHIN at once). Each manifestation carries its own
- * TIME (year / dateStart / dateEnd) and SPACE (venue / city / country) so the hub can
- * plot the spread of a theme across time and geography.
+ * They are joined relationally: a project MAY list the `themeIds` it belongs to
+ * (a single event can belong to several themes, e.g. a group show running
+ * Waters' Witness + The Rain + WITHIN at once); projects with no `themeIds` are
+ * standalone work outside the eight long-term themes (Un-Drum, The Metastable
+ * Circuit, Organon…). Each project carries its own TIME (year / dateStart /
+ * dateEnd) and SPACE (venue / city / country) so the hub can plot the spread of
+ * a theme across time and geography.
  *
  * Sources combined here:
  *   - "WEBSITE texts STA" sheet → LONG TERM RESEARCH PROJECTS (thematical) = `themes`.
- *   - "PROJECTS Tarek Atoui" doc → ALL PROJECTS (chronological) = `manifestations`.
+ *   - "PROJECTS Tarek Atoui" doc → ALL PROJECTS (chronological) = `projects`.
  */
 
 const mediaTypeSchema = z.enum(['image', 'video', 'audio', 'press', 'interview', 'external']);
@@ -26,12 +29,14 @@ export const mediaSchema = z.strictObject({
     label: z.string().optional(),
 });
 
-/** How a theme appeared at a given time and place. */
-const manifestationKindSchema = z.enum([
+/** How a project appeared at a given time and place. */
+const projectKindSchema = z.enum([
     'solo', // solo exhibition
     'group', // group exhibition
     'performance', // solo or collective performance / concert
     'commission',
+    'curation',
+    'collaboration', // e.g. Organon with Noé Soulier
     'residency',
     'workshop',
 ]);
@@ -39,7 +44,7 @@ const manifestationKindSchema = z.enum([
 const statusSchema = z.enum(['current', 'upcoming', 'past']);
 
 export const themeSchema = z.strictObject({
-    /** Slug. Joins to `manifestation.themeIds`. */
+    /** Slug. Joins to `project.themeIds`. */
     id: z.string(),
     title: z.string(),
     subtitle: z.string().optional(),
@@ -61,11 +66,11 @@ export const themeSchema = z.strictObject({
     portfolioId: z.string().optional(),
 });
 
-export const manifestationSchema = z.strictObject({
+export const projectSchema = z.strictObject({
     id: z.string(),
-    /** Themes this event belongs to. 0 = not yet assigned (see `needsReview`). */
-    themeIds: z.array(z.string()),
-    kind: manifestationKindSchema,
+    /** Themes this project belongs to. Omit for standalone projects outside the eight themes. */
+    themeIds: z.array(z.string()).optional(),
+    kind: projectKindSchema,
     /** Title shown for this specific showing, e.g. "I/E Elefsina". */
     title: z.string().optional(),
 
@@ -96,17 +101,17 @@ export const manifestationSchema = z.strictObject({
 const openQuestionSchema = z.strictObject({
     question: z.string(),
     relatedThemeIds: z.array(z.string()).optional(),
-    relatedManifestationIds: z.array(z.string()).optional(),
+    relatedProjectIds: z.array(z.string()).optional(),
 });
 
 export const projectsDataSchema = z.strictObject({
     themes: z.array(themeSchema),
-    manifestations: z.array(manifestationSchema),
+    projects: z.array(projectSchema),
     openQuestions: z.array(openQuestionSchema).optional(),
 });
 
 export type Media = z.infer<typeof mediaSchema>;
 export type Theme = z.infer<typeof themeSchema>;
-export type Manifestation = z.infer<typeof manifestationSchema>;
+export type Project = z.infer<typeof projectSchema>;
 export type OpenQuestion = z.infer<typeof openQuestionSchema>;
 export type ProjectsData = z.infer<typeof projectsDataSchema>;

@@ -71,7 +71,7 @@ export const siteContentSchema = z.strictObject({
     navigation: z.array(navItemSchema),
     bio: bioSchema,
     portrait: portraitSchema,
-    exhibitions: z.strictObject({
+    news: z.strictObject({
         solo: z.array(exhibitionSchema),
         group: z.array(exhibitionSchema),
     }),

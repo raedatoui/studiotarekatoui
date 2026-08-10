@@ -15,5 +15,6 @@ src/app/fonts
 
 
 next-env.d.ts
+tsconfig.tsbuildinfo
 .firebase/
 .idea/

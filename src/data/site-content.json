@@ -7,7 +7,7 @@
     "navigation": [
         { "label": "About", "href": "/about" },
         { "label": "News", "href": "/news" },
-        { "label": "Projects", "href": "/projects" },
+        { "label": "Research", "href": "/research" },
         { "label": "Portfolio", "href": "/portfolio" },
         { "label": "Editions", "href": "https://www.crousel.com/artiste/tarek-atoui-r90lmw/#items", "external": true },
         { "label": "Contact", "href": "/contact" }
@@ -24,7 +24,7 @@
         "alt": "Portrait of Tarek Atoui",
         "credit": "Issey Miyake Fashion Show, Paris, 2025"
     },
-    "exhibitions": {
+    "news": {
         "solo": [
             {
                 "venue": "MATHAF: Arab Museum of Modern Art, Doha, Qatar",
@@ -33,7 +33,7 @@
                 "dateEnd": "2026-05-18",
                 "dateDisplay": "December 16, 2025 – May 18, 2026",
                 "url": "https://mathaf.org.qa/en/calendar/waters-witness-by-tarek-atoui/",
-                "status": "current"
+                "status": "past"
             },
             {
                 "venue": "IMMA, Dublin, Ireland",
@@ -50,7 +50,7 @@
                     }
                 ],
                 "url": "https://imma.ie/whats-on/tarek-atoui-exhibition/",
-                "status": "current"
+                "status": "past"
             },
             {
                 "venue": "Tate, London, UK",
@@ -73,13 +73,19 @@
                 "dateDisplay": "July 17, 2025 – May 31, 2026",
                 "work": "band camp (2025)",
                 "url": "https://www.hausderkunst.de/en/eintauchen/for-children-art-stories-since-1968",
-                "status": "current"
+                "status": "past"
             },
             {
                 "venue": "Black Gold Museum, Riyadh",
-                "dateDisplay": "Opening 2026 (TBC)",
-                "work": "Black Gold Alchemy (2024)",
-                "status": "upcoming"
+                "dateDisplay": "On view permanently",
+                "work": "The Black Gold Alchemy (2024)",
+                "status": "current"
+            },
+            {
+                "venue": "Desert X AlUla, AlUla, Saudi Arabia",
+                "dateDisplay": "2026",
+                "work": "The Water Song (2026)",
+                "status": "past"
             }
         ]
     },
