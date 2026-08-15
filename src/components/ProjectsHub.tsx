@@ -67,6 +67,9 @@ const tracks = sortedThemes.map((theme) => {
     };
 });
 
+// The score reads left→right in time; the reading panels below it lead with the newest thread.
+const threadsNewestFirst = [...tracks].reverse();
+
 const distinctCities = new Set(themed.filter((m) => m.city).map((m) => `${m.city}, ${m.country ?? ''}`));
 const SHOW_COUNT = themed.length;
 const PLACE_COUNT = distinctCities.size;
@@ -304,7 +307,7 @@ export default function ProjectsHub() {
 
             {/* ── The threads, in full ───────────────────────────────── */}
             <section className="max-w-[1400px] mx-auto px-[clamp(24px,4vw,64px)]">
-                {tracks.map((t) => {
+                {threadsNewestFirst.map((t) => {
                     const { theme } = t;
                     return (
                         <article
