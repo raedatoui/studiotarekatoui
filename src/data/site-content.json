@@ -8,8 +8,6 @@
         { "label": "About", "href": "/about" },
         { "label": "News", "href": "/news" },
         { "label": "Research", "href": "/research" },
-        { "label": "Portfolio", "href": "/portfolio" },
-        { "label": "Chronology", "href": "/chronology" },
         { "label": "Editions", "href": "https://www.crousel.com/artiste/tarek-atoui-r90lmw/#items", "external": true },
         { "label": "Contact", "href": "/contact" }
     ],

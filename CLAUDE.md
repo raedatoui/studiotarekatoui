@@ -20,9 +20,9 @@ No test framework.
 ## Branches & Deployment
 
 - `main` — trimmed production site (`/`, `/about`, `/contact`, `/news`) served at tarekatoui.com
-- `dev` — full site, including `/portfolio` and `/research`
+- `dev` — preparing `/research` and `/research/[slug]` for production; `/portfolio` and `/chronology` are excluded from routing and static exports via private folders (`src/app/_portfolio`, `src/app/_chronology`)
 
-When deploying production: build from `main`, remove `out/portfolio` if present, then `firebase deploy`.
+When deploying production: run `pnpm deploy:prod` from `main`. Keep `out/portfolio`: it contains shared images used by research pages, not an exported portfolio page.
 
 ## Tech Stack
 
@@ -39,7 +39,7 @@ Routes (all statically exported; server pages compose `'use client'` components)
 
 - `/` — Bio, Exhibitions, Contact sections
 - `/about`, `/contact`, `/news` — single-purpose pages
-- `/portfolio` — selected works with image sliders
+- `/portfolio`, `/chronology` — disabled; page source is retained in private folders and excluded from static exports
 - `/research` — hub for long-term research themes (`ProjectsHub`)
 - `/research/[slug]` — one page per theme (`ResearchThread`), slugs from `generateStaticParams` over theme ids
 

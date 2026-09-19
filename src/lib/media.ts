@@ -10,6 +10,34 @@ export interface GallerySlide {
 
 const localAssets: Record<string, { src: string; name: string }[]> = mediaAssets;
 
+export function isDropboxUrl(src: string): boolean {
+    const host = new URL(src, 'https://tarekatoui.com').hostname;
+    return /(^|\.)(dropbox\.com|dropboxusercontent\.com|db\.tt)$/.test(host);
+}
+
+/** Dropbox is an import source; only its downloaded assets are public media. */
+export function publicMedia(items: Media[]): Media[] {
+    return items.flatMap((item) => {
+        if (!isDropboxUrl(item.url)) return [item];
+        const assets = localAssets[item.url] ?? [];
+        return assets.map((asset) => ({
+            type: item.type,
+            url: asset.src,
+            label: [item.label?.replace(/\s*\(Dropbox\)/g, ''), assets.length > 1 ? asset.name.replace(/_/g, ' ') : ''].filter(Boolean).join(' — '),
+        }));
+    });
+}
+
+function referenceKey(src: string): string {
+    const url = new URL(src, 'https://tarekatoui.com');
+    url.hash = '';
+    for (const key of [...url.searchParams.keys()]) {
+        if (key.startsWith('utm_') || key === 'fbclid' || key === 'gclid') url.searchParams.delete(key);
+    }
+    url.searchParams.sort();
+    return `${url.hostname.replace(/^www\./, '')}${url.pathname.replace(/\/+$/, '')}${url.search}`;
+}
+
 function videoSlide(media: Media, caption: string): GallerySlide | undefined {
     const url = new URL(media.url, 'https://tarekatoui.com');
     const host = url.hostname.replace(/^www\./, '');
@@ -24,23 +52,29 @@ function videoSlide(media: Media, caption: string): GallerySlide | undefined {
         if (id) return { type: 'embed', src: `https://player.vimeo.com/video/${id}`, caption };
     }
     if (/\.(mp4|webm|ogv)$/i.test(url.pathname)) {
-        if (host === 'dropbox.com') {
-            url.searchParams.delete('dl');
-            url.searchParams.set('raw', '1');
-        }
-        return { type: 'video', src: url.href, caption };
+        return { type: 'video', src: media.url, caption };
     }
 }
 
 /** Resolve and deduplicate portfolio, presentation, and theme media for the shared gallery. */
 export function collectGalleryMedia(images: PortfolioImage[], projects: Project[], themeMedia: Media[] = []) {
     const slides: GallerySlide[] = [...images];
-    const references: { src: string; caption: string }[] = [];
-    const sources = projects.map((project) => ({ media: project.media ?? [], context: `${project.venue}, ${project.year}` }));
-    sources.push({ media: themeMedia, context: '' });
+    const references: { src: string; caption: string; publisher: string; type: Media['type'] }[] = [];
+    const sources = [
+        { media: themeMedia, context: '' },
+        ...projects.map((project) => ({
+            media: [
+                ...(project.media ?? []),
+                ...(project.url
+                    ? [{ type: 'external' as const, url: project.url, label: project.title ?? project.venue, publisher: project.venue }]
+                    : []),
+            ],
+            context: `${project.venue}, ${project.year}`,
+        })),
+    ];
 
     for (const source of sources) {
-        for (const media of source.media) {
+        for (const media of publicMedia(source.media)) {
             const label = media.label?.replace(/\s*\(Dropbox\)/g, '');
             const caption = [label, source.context].filter(Boolean).join(' — ');
             if (media.type === 'image') {
@@ -63,7 +97,12 @@ export function collectGalleryMedia(images: PortfolioImage[], projects: Project[
                     continue;
                 }
             }
-            references.push({ src: media.url, caption });
+            references.push({
+                src: media.url,
+                caption,
+                publisher: media.publisher ?? new URL(media.url, 'https://tarekatoui.com').hostname.replace(/^www\./, ''),
+                type: media.type,
+            });
         }
     }
 
@@ -75,8 +114,9 @@ export function collectGalleryMedia(images: PortfolioImage[], projects: Project[
             return true;
         }),
         references: references.filter((reference) => {
-            if (seen.has(reference.src)) return false;
-            seen.add(reference.src);
+            const key = referenceKey(reference.src);
+            if (seen.has(key)) return false;
+            seen.add(key);
             return true;
         }),
     };

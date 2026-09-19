@@ -66,6 +66,7 @@ for (const t of data.themes) {
         for (const md of t.media) {
             if (!MEDIA.has(md.type)) errs.push(`theme ${t.id}: bad media type ${md.type}`);
             if (!md.url) errs.push(`theme ${t.id}: media missing url`);
+            if (md.publisher !== undefined && typeof md.publisher !== 'string') errs.push(`theme ${t.id}: media publisher not string`);
         }
     if (themeIds.has(t.id)) errs.push(`duplicate theme id: ${t.id}`);
     themeIds.add(t.id);
@@ -90,6 +91,7 @@ for (const p of data.projects) {
         for (const md of p.media) {
             if (!MEDIA.has(md.type)) errs.push(`project ${p.id}: bad media type ${md.type}`);
             if (!md.url) errs.push(`project ${p.id}: media missing url`);
+            if (md.publisher !== undefined && typeof md.publisher !== 'string') errs.push(`project ${p.id}: media publisher not string`);
         }
     if (projectIds.has(p.id)) errs.push(`duplicate project id: ${p.id}`);
     projectIds.add(p.id);

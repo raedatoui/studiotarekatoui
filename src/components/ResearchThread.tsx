@@ -81,7 +81,6 @@ export default function ResearchThread({ themeId }: { themeId: string }) {
                 </div>
 
                 <dl className="mt-[clamp(28px,4vw,48px)] flex flex-wrap gap-x-[clamp(40px,6vw,96px)] gap-y-7 border-t border-[var(--color-border)] pt-[clamp(20px,2.5vw,32px)]">
-                    <MetaItem label="Span" value={theme.yearsDisplay} />
                     {places.length > 0 && <MetaItem label="Places" value={places.map((p) => p.split(',')[0]).join(' · ')} />}
                     {theme.materials && theme.materials.length > 0 && <MetaItem label="Material" value={theme.materials.join(' · ')} />}
                     {theme.collaborators && theme.collaborators.length > 0 && <MetaItem label="With" value={theme.collaborators.join(', ')} />}
@@ -133,31 +132,40 @@ export default function ResearchThread({ themeId }: { themeId: string }) {
             </section>
 
             {/* ── Gallery — all presentations and portfolio media ────── */}
-            {(slides.length > 0 || references.length > 0) && (
+            {slides.length > 0 && (
                 <section className="max-w-[1400px] mx-auto px-[clamp(24px,4vw,64px)] pb-[clamp(56px,8vw,112px)]">
                     <div className="flex items-baseline justify-between border-t border-[var(--color-border)] pt-5 mb-[clamp(24px,3vw,40px)]">
                         <h2 className="font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.3em] text-[var(--color-text-secondary)]">Gallery</h2>
-                        {work && (
-                            <a
-                                href={`/portfolio#${work.id}`}
-                                className="font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.18em] text-[var(--color-accent)] hover:underline underline-offset-4"
-                            >
-                                In the portfolio →
-                            </a>
-                        )}
                     </div>
                     <MediaSlider items={slides} title={theme.title} />
-                    {references.length > 0 && (
-                        <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-3 text-[length:calc(12px*var(--copy-scale))] text-[var(--color-text-secondary)]">
-                            {references.map((reference) => (
-                                <li key={reference.src}>
-                                    <a href={reference.src} target="_blank" rel="noreferrer" className="hover:underline underline-offset-4">
-                                        {reference.caption} ↗
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
-                    )}
+                </section>
+            )}
+
+            {references.length > 0 && (
+                <section aria-labelledby="press-heading" className="max-w-[1400px] mx-auto px-[clamp(24px,4vw,64px)] pb-[clamp(56px,8vw,112px)]">
+                    <h2
+                        id="press-heading"
+                        className="border-t border-[var(--color-border)] pt-5 font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.3em] text-[var(--color-text-secondary)]"
+                    >
+                        Press
+                    </h2>
+                    <ul className="mt-5">
+                        {references.map((reference) => (
+                            <li key={reference.src} className="border-b border-[var(--color-border)]">
+                                <a href={reference.src} target="_blank" rel="noreferrer" className="group flex items-start justify-between gap-6 py-5">
+                                    <span>
+                                        <span className="block font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.18em] text-[var(--color-text-secondary)]">
+                                            {reference.publisher} · {reference.type === 'external' ? 'Reference' : reference.type === 'press' ? 'Article' : reference.type}
+                                        </span>
+                                        <span className="mt-2 block text-[length:calc(clamp(14px,1.2vw,18px)*var(--copy-scale))] font-light leading-relaxed group-hover:text-[var(--color-accent)]">
+                                            {reference.caption}
+                                        </span>
+                                    </span>
+                                    <span aria-hidden className="text-[var(--color-accent)]">↗</span>
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
                 </section>
             )}
         </main>

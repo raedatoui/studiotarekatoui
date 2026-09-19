@@ -1,8 +1,17 @@
 {
-    "hosting": {
-        "public": "out",
-        "site": "studiotarekatoui",
-        "ignore": ["firebase.json", "**/.*", "**/node_modules/**", ".firebase/**", ".idea/**"],
-        "cleanUrls": true
-    }
+    "hosting": [
+        {
+            "target": "prod",
+            "public": "out",
+            "ignore": ["firebase.json", "**/.*", "**/node_modules/**", ".firebase/**", ".idea/**"],
+            "cleanUrls": true
+        },
+        {
+            "target": "staging",
+            "public": "out",
+            "ignore": ["firebase.json", "**/.*", "**/node_modules/**", ".firebase/**", ".idea/**"],
+            "cleanUrls": true,
+            "headers": [{ "source": "**", "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }] }]
+        }
+    ]
 }

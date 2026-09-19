@@ -11,7 +11,7 @@ import { z } from 'zod';
  * They are joined relationally: a project MAY list the `themeIds` it belongs to
  * (a single event can belong to several themes, e.g. a group show running
  * Waters' Witness + The Rain + WITHIN at once); projects with no `themeIds` are
- * standalone work outside the eight long-term themes (Un-Drum, The Metastable
+ * standalone work outside the long-term themes (Un-Drum, The Metastable
  * Circuit, Organon…). Each project carries its own TIME (year / dateStart /
  * dateEnd) and SPACE (venue / city / country) so the hub can plot the spread of
  * a theme across time and geography.
@@ -27,6 +27,7 @@ export const mediaSchema = z.strictObject({
     type: mediaTypeSchema,
     url: z.string(),
     label: z.string().optional(),
+    publisher: z.string().optional(),
 });
 
 /** How a project appeared at a given time and place. */
@@ -70,7 +71,7 @@ export const themeSchema = z.strictObject({
 
 export const projectSchema = z.strictObject({
     id: z.string(),
-    /** Themes this project belongs to. Omit for standalone projects outside the eight themes. */
+    /** Themes this project belongs to. Omit for standalone projects outside the long-term themes. */
     themeIds: z.array(z.string()).optional(),
     kind: projectKindSchema,
     /** Title shown for this specific showing, e.g. "I/E Elefsina". */

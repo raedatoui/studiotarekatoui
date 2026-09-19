@@ -3,6 +3,7 @@ import Chronology from '@/components/Chronology';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 
+// Parked in a private folder to exclude this page from routing and static exports.
 export const metadata: Metadata = {
     title: 'Chronology — Studio Tarek Atoui',
     description:

@@ -3,6 +3,7 @@
 import { type ReactNode, useEffect, useMemo, useState } from 'react';
 import { getTheme, projects } from '@/data/projects';
 import type { Media, Project } from '@/data/projects-schema';
+import { isDropboxUrl, publicMedia } from '@/lib/media';
 
 /**
  * Chronology — every project, newest first, as one vertical run of cards.
@@ -59,6 +60,7 @@ function Filter({ label, value, onChange, children }: { label: string; value: st
 
 function ProjectCard({ project, open, onToggle }: { project: Project; open: boolean; onToggle: () => void }) {
     const place = [project.city, project.country].filter(Boolean).join(', ');
+    const media = publicMedia(project.media ?? []);
     // Only the threads this project actually belongs to; standalone work shows none.
     const linkedThemes = (project.themeIds ?? []).map(getTheme).filter((t) => t !== undefined);
 
@@ -99,7 +101,7 @@ function ProjectCard({ project, open, onToggle }: { project: Project; open: bool
                 </span>
 
                 <span className="flex shrink-0 items-center gap-3 font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.15em] text-[var(--color-text-secondary)]">
-                    {project.media?.length ? <span className="max-sm:hidden">{project.media.length} media</span> : null}
+                    {media.length ? <span className="max-sm:hidden">{media.length} media</span> : null}
                     <span className="text-[length:calc(13px*var(--copy-scale))]">{open ? '−' : '+'}</span>
                 </span>
             </button>
@@ -131,9 +133,9 @@ function ProjectCard({ project, open, onToggle }: { project: Project; open: bool
                         </p>
                     )}
 
-                    {project.media && project.media.length > 0 ? (
+                    {media.length > 0 ? (
                         <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                            {project.media.map((item) => (
+                            {media.map((item) => (
                                 <MediaBox key={item.url} item={item} />
                             ))}
                         </div>
@@ -145,7 +147,7 @@ function ProjectCard({ project, open, onToggle }: { project: Project; open: bool
                         </div>
                     )}
 
-                    {project.url && (
+                    {project.url && !isDropboxUrl(project.url) && (
                         <a
                             href={project.url}
                             target="_blank"

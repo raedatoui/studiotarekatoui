@@ -155,7 +155,7 @@ export default function ProjectsHub() {
             </section>
 
             {/* ── The score ──────────────────────────────────────────── */}
-            <section className="max-w-[1400px] mx-auto px-[clamp(24px,4vw,64px)] pb-[clamp(48px,7vw,96px)]">
+            <section className="max-w-[1400px] mx-auto px-[clamp(24px,4vw,64px)]">
                 <div className="thread-rise flex items-baseline justify-between border-t border-[var(--color-border)] pt-5">
                     <h2 className="font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.3em] text-[var(--color-text-secondary)]">The threads</h2>
                     <p className="hidden gap-5 font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.18em] text-[var(--color-text-secondary)] sm:flex">
@@ -313,7 +313,7 @@ export default function ProjectsHub() {
                         <article
                             key={theme.id}
                             id={`thread-${theme.id}`}
-                            className="scroll-mt-[calc(var(--header-height,64px)+16px)] border-t border-[var(--color-border)] py-[clamp(40px,7vw,104px)]"
+                            className="scroll-mt-[calc(var(--header-height,64px)+16px)] border-t border-[var(--color-border)] py-[clamp(40px,7vw,104px)] first:border-t-0 first:pt-[clamp(28px,4vw,48px)]"
                         >
                             <div className="flex items-center gap-3 font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.22em]">
                                 {theme.ongoing ? (

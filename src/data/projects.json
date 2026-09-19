@@ -16,7 +16,43 @@
             ],
             "heroImage": "/portfolio/at-tariq/exhibition-tba-madrid-2025.jpg",
             "collaborators": ["Susie Ibarra", "Nancy Mounir", "Ziúr"],
-            "portfolioId": "at-tariq"
+            "portfolioId": "at-tariq",
+            "media": [
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=0em36gqFE0E",
+                    "label": "At-Tāriq — Artist interview, TBA21"
+                },
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=yNTiUClEOkc",
+                    "label": "At-Tāriq — Activation and Concert, TBA21"
+                },
+                {
+                    "type": "press",
+                    "url": "https://elpais.com/babelia/2025-03-29/la-travesia-del-sonido-de-tarek-atoui-la-asignatura-pendiente-es-saber-escuchar.html",
+                    "label": "La travesía del sonido de Tarek Atoui: “La asignatura pendiente es saber escuchar”",
+                    "publisher": "El País"
+                },
+                {
+                    "type": "press",
+                    "url": "https://www.admiddleeast.com/story/at-tariq-lebanese-artist-tarek-atouis-latest-showcase-reimagines-the-traditions-of-arab-majlis-madrid-exhibition",
+                    "label": "At-Tariq: Arab hospitality through rural music, craft and technology",
+                    "publisher": "AD Middle East"
+                },
+                {
+                    "type": "press",
+                    "url": "https://www.thenationalnews.com/arts-culture/art-design/2025/04/06/tarek-atouli-lebanon-atlas-mountains-madrid-tba21/",
+                    "label": "Lebanese artist Tarek Atoui opens a door to musical heritage of Atlas Mountains in Madrid show",
+                    "publisher": "The National"
+                },
+                {
+                    "type": "external",
+                    "url": "https://tba21.org/Atoui_AtTariq",
+                    "label": "At-Tāriq — research and commission",
+                    "publisher": "TBA21"
+                }
+            ]
         },
         {
             "id": "the-rain",
@@ -31,7 +67,62 @@
             ],
             "heroImage": "/portfolio/the-rain/img-010.jpg",
             "materials": ["Korean percussion", "ceramics", "porcelain", "hanji"],
-            "portfolioId": "the-rain"
+            "portfolioId": "the-rain",
+            "media": [
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=mCCsF7nZvU0",
+                    "label": "The Elemental Set — Donghyuk Heo and Dong-gyu Kang, Gwangju Biennale, 2021"
+                },
+                {
+                    "type": "video",
+                    "url": "https://vimeo.com/986296103",
+                    "label": "The Rain at Mirrored Gardens, 2024 — The Pavilion / Vitamin Creative Space"
+                },
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=QRI4LrFTfnw",
+                    "label": "The Elemental Set — Byungjun Kwon, Gwangju Biennale, 2021"
+                },
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=NeG_S0zn4Qw",
+                    "label": "The Elemental Set — In-seok Seo, Gwangju Biennale, 2021"
+                },
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=sW_kZE-G-6s",
+                    "label": "The Elemental Set — Suhee Yoon, Gwangju Biennale, 2021"
+                },
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=jIbCIj8CmQk",
+                    "label": "Prelude to Rain — Opening performance, Gwangju Biennale, 2023"
+                },
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=xgBjZQNqtOE",
+                    "label": "The Elemental Set — Instrument-making workshop, Gwangju Biennale, 2021"
+                },
+                {
+                    "type": "press",
+                    "url": "https://www.art-it.asia/en/top_e/admin_expht_e/244558/",
+                    "label": "The Rain at Art Sonje Center — photo report",
+                    "publisher": "ART iT"
+                },
+                {
+                    "type": "press",
+                    "url": "https://www.asiae.co.kr/en/article/2023110310373300940",
+                    "label": "Gallery Walk: The Rain at Art Sonje Center",
+                    "publisher": "The Asia Business Daily"
+                },
+                {
+                    "type": "external",
+                    "url": "https://vitamincreativespace.com/en/?project=tarek-atoui-the-rain-2",
+                    "label": "The Rain — composition, research and exhibition at Mirrored Gardens",
+                    "publisher": "Vitamin Creative Space"
+                }
+            ]
         },
         {
             "id": "the-whisperers",
@@ -50,8 +141,45 @@
             "media": [
                 {
                     "type": "video",
+                    "url": "https://www.youtube.com/watch?v=MwI1RPpB4OU",
+                    "label": "The Whisperers — Galerie Chantal Crousel, 2021"
+                },
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=DBlez0rb6pI",
+                    "label": "The Whisperers — Part 1, The Contemporary Austin"
+                },
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=E2Yhbuy06kE",
+                    "label": "The Whisperers — Part 2, The Contemporary Austin"
+                },
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=0ZHHhXq-QIE",
+                    "label": "The Whisperers — Part 3, The Contemporary Austin"
+                },
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=CDu24yphYkM",
+                    "label": "The Whisperers — Part 4, The Contemporary Austin"
+                },
+                {
+                    "type": "video",
                     "url": "https://vimeo.com/654988548",
                     "label": "Whispering Totem, 2022"
+                },
+                {
+                    "type": "interview",
+                    "url": "https://sculpturemagazine.art/sonic-objects-a-conversation-with-tarek-atoui/",
+                    "label": "Sonic Objects: A Conversation with Tarek Atoui",
+                    "publisher": "Sculpture"
+                },
+                {
+                    "type": "external",
+                    "url": "https://www.crousel.com/en/article/tarek-atoui-tarek-atoui-the-whisperers-2023/",
+                    "label": "The Whisperers — exhibition publication",
+                    "publisher": "Galerie Chantal Crousel"
                 }
             ]
         },
@@ -70,7 +198,101 @@
             "heroImage": "/portfolio/waters-witness/img-038.jpg",
             "collaborators": ["Chris Watson", "Eric La Casa"],
             "materials": ["water", "metal", "stone", "wood"],
-            "portfolioId": "waters-witness"
+            "portfolioId": "waters-witness",
+            "media": [
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=EffXKpFk0C4",
+                    "label": "Waters' Witness — Fridericianum"
+                },
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=kWdnjZW2lSE",
+                    "label": "Waters' Witness — Live performance at the MCA, Sydney"
+                },
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=PmFfMq_MHIM",
+                    "label": "Waters' Witness — Mudam Luxembourg"
+                },
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=9VdHtb4AUOs",
+                    "label": "Waters' Witness — Tarek Atoui and Olaf Pyras, Fridericianum, 2021"
+                },
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=sqhpMeMDD1c",
+                    "label": "Waters' Witness — Olaf Pyras, Fridericianum, 2021"
+                },
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=n3UQjYkvfW4",
+                    "label": "Waters' Witness — Tarek Atoui, Alan Affichard, Amélie Legrand and Olaf Pyras, Fridericianum, 2021"
+                },
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=OPTatIQb2Pw",
+                    "label": "Waters' Witness — Episode 1, Serralves"
+                },
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=s_DO4M95Wf0",
+                    "label": "Waters' Witness — Episode 2, Serralves"
+                },
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=lreGsfAe7YI",
+                    "label": "Waters' Witness — Episode 3, Serralves"
+                },
+                {
+                    "type": "press",
+                    "url": "https://flash---art.com/article/tarek-atoui-waters-witness/",
+                    "label": "Waters’ Witness at Fridericianum, Kassel",
+                    "publisher": "Flash Art"
+                },
+                {
+                    "type": "press",
+                    "url": "https://artsoftheworkingclass.org/text/critique-of-sound-reason",
+                    "label": "Critique of Sound Reason",
+                    "publisher": "Arts of the Working Class"
+                },
+                {
+                    "type": "external",
+                    "url": "https://store.mca.com.au/products/waters-witness-author-tarek-atoui",
+                    "label": "Waters’ Witness — Sydney publication and artist interview",
+                    "publisher": "Museum of Contemporary Art Australia"
+                }
+            ]
+        },
+        {
+            "id": "the-wave",
+            "title": "The Wave",
+            "yearStart": 2019,
+            "ongoing": true,
+            "yearsDisplay": "2019 — ongoing",
+            "summary": "An evolving composition bringing experimental instruments and harbour recordings into a shared listening space.",
+            "description": [
+                "The Wave is a composition deriving from experimentation that Tarek Atoui has been doing with the instruments and sounds constituting the piece. The instruments were developed for WITHIN, The Reverse Collection and The Ground, Atoui’s previous projects. The sounds are field recordings from I/E, Atoui’s project on harbour cities (Abu Dhabi, Athens and Singapore). Since their creation, these sound libraries and instruments have been activated by a variety of collaborators and musicians. Some were deaf, interacting with sound and performance for the first time; others were professional musicians familiar with improvisation and extended techniques. The Wave is inspired by these individual and collective encounters.",
+                "Instruments are animated by objects and sound, and sounds are broadcast through metal and stone. The listening space that is created is a delicate ever-changing microcosm that repeatedly gets washed away by the Horns of Putin and then builds up again."
+            ],
+            "heroImage": "/portfolio/the-wave/img-052.jpg",
+            "materials": ["field recordings", "experimental instruments", "metal", "stone"],
+            "portfolioId": "the-wave",
+            "media": [
+                {
+                    "type": "external",
+                    "url": "https://www.crousel.com/artiste/tarek-atoui-r90lmw/projets/the-wave/",
+                    "label": "The Wave — composition and project archive",
+                    "publisher": "Galerie Chantal Crousel"
+                },
+                {
+                    "type": "press",
+                    "url": "https://letterstobarbara.com/cukrarna-gallery-ljubljana/",
+                    "label": "Standing Waves at Cukrarna Gallery",
+                    "publisher": "Letters to Barbara"
+                }
+            ]
         },
         {
             "id": "the-ground",
@@ -85,7 +307,53 @@
                 "The resulting instruments were set up by Atoui to play separately and autonomously at exhibitions, first in Guangzhou and later in Singapore, where various artists and musicians were invited to respond to both the forms and sounds of the work. At the Venice Biennale (2019), the piece was presented as a completed composition and listening space based on the project's previous iterations."
             ],
             "heroImage": "/portfolio/the-ground/img-059.jpg",
-            "portfolioId": "the-ground"
+            "portfolioId": "the-ground",
+            "media": [
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=qKF1cqMlK2M",
+                    "label": "The Ground — Tarek Atoui, Biennale Arte 2019"
+                },
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=DMQ71wlZ8R8",
+                    "label": "The Ground Sessions — Performance, Biennale Arte 2019"
+                },
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=VQ8VjNTMaRY",
+                    "label": "The Ground — Artist interview, Bourse de Commerce – Pinault Collection"
+                },
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=yTYKt8_Txc0",
+                    "label": "The Ground Sessions — Palazzo Grassi and Teatrino"
+                },
+                {
+                    "type": "press",
+                    "url": "https://www.artasiapacific.com/shows/tarek-atoui-s-the-ground-from-the-land-to-the-sea/",
+                    "label": "Tarek Atoui’s “The Ground: From the Land to the Sea”",
+                    "publisher": "ArtAsiaPacific"
+                },
+                {
+                    "type": "interview",
+                    "url": "https://panoramacactusdigitale.com/tarek-atoui-sessions/",
+                    "label": "Tarek Atoui: Sessions",
+                    "publisher": "Cactus"
+                },
+                {
+                    "type": "interview",
+                    "url": "https://www.pinaultcollection.com/fr/boursedecommerce/tout-commence-par-la-musique-tarek-atoui",
+                    "label": "“Tout a commencé par la musique” — Tarek Atoui",
+                    "publisher": "Bourse de Commerce – Pinault Collection"
+                },
+                {
+                    "type": "audio",
+                    "url": "https://www.sverigesradio.se/artikel/7220467",
+                    "label": "Tarek Atoui i Venedig: Tillbaka till marken",
+                    "publisher": "Sveriges Radio"
+                }
+            ]
         },
         {
             "id": "within",
@@ -102,6 +370,21 @@
             "collaborators": ["Sharjah Art Foundation", "Al Amal School for the Deaf", "Council (Sandra Terdjman & Gregory Castera)"],
             "portfolioId": "within",
             "media": [
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=-ecRMpql794",
+                    "label": "Infinite Ear / WITHIN — Kvadrat"
+                },
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=-ri0yyJMknk",
+                    "label": "WITHIN — Concert, Kunstenfestivaldesarts 2017"
+                },
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=6X8JwKAzuIg",
+                    "label": "DeafSpace and Making Musical Instruments — Arts Research Center, UC Berkeley, 2015"
+                },
                 {
                     "type": "video",
                     "url": "https://vimeo.com/638158274",
@@ -136,6 +419,30 @@
                     "type": "video",
                     "url": "https://vimeo.com/208801484",
                     "label": "WITHIN — 33 Soft Cells"
+                },
+                {
+                    "type": "press",
+                    "url": "https://www.frieze.com/article/tarek-atoui",
+                    "label": "Tarek Atoui — WITHIN at Galerie Chantal Crousel",
+                    "publisher": "Frieze"
+                },
+                {
+                    "type": "press",
+                    "url": "https://www.paris-art.com/within/",
+                    "label": "WITHIN — an exploration of sound and deafness",
+                    "publisher": "Paris Art"
+                },
+                {
+                    "type": "interview",
+                    "url": "https://sculpturemagazine.art/sonic-objects-a-conversation-with-tarek-atoui/",
+                    "label": "Sonic Objects: A Conversation with Tarek Atoui",
+                    "publisher": "Sculpture"
+                },
+                {
+                    "type": "external",
+                    "url": "https://arts.berkeley.edu/news/tarek-atoui-%E2%80%9Cdeafspace-and-making-musical-instruments%E2%80%9D",
+                    "label": "DeafSpace and Making Musical Instruments",
+                    "publisher": "Arts Research Center, UC Berkeley"
                 }
             ]
         },
@@ -152,7 +459,47 @@
                 "Tarek Atoui took audio excerpts recorded in the Dahlem Sessions as a starting point for The Reverse Collection and collaborating with instrument makers on imagining and building the objects that could have generated these recordings. Without involving any images, Atoui proposed to engage with sound directly — contrary to the usual path of ethnomusicology, which studies the shape and mechanism of an instrument with an emphasis on its cultural and social context."
             ],
             "heroImage": "/portfolio/the-reverse-collection/img-071.jpg",
-            "portfolioId": "the-reverse-collection"
+            "portfolioId": "the-reverse-collection",
+            "media": [
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=M-gIT9gCZgU",
+                    "label": "Sound Is a Physical Phenomenon — TateShots, Tate"
+                },
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=6X8JwKAzuIg",
+                    "label": "DeafSpace and Making Musical Instruments — Arts Research Center, UC Berkeley, 2015"
+                },
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=qSPOGIGW-Cw",
+                    "label": "The Reverse Collection — With Shane Aspegren and Takuro Mizuta Lippit, Para Site"
+                },
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=vVTpx5o2BvU",
+                    "label": "The Reverse Collection — Performance, Para Site, June 9, 2017"
+                },
+                {
+                    "type": "press",
+                    "url": "https://www.theguardian.com/music/2016/sep/02/why-tate-moderns-reverse-collection-of-musical-instruments-is-striking-an-unfamiliar-chord",
+                    "label": "Why Tate Modern’s new collection of musical instruments is striking an unfamiliar chord",
+                    "publisher": "The Guardian"
+                },
+                {
+                    "type": "press",
+                    "url": "https://www.independent.co.uk/arts-entertainment/art/reviews/bmw-tate-live-tarek-atoui-the-reverse-collection-review-linger-in-the-basement-of-the-new-tate-modern-and-enjoy-the-moment-a7091741.html",
+                    "label": "The Reverse Collection at Tate Modern — review",
+                    "publisher": "The Independent"
+                },
+                {
+                    "type": "external",
+                    "url": "https://www.lespressesdureel.com/ouvrage.php?id=5950&menu=0",
+                    "label": "The Reverse Collection / The Reverse Sessions — publication",
+                    "publisher": "Les presses du réel"
+                }
+            ]
         },
         {
             "id": "on-and-from-tarab",
@@ -168,7 +515,32 @@
             ],
             "heroImage": "/portfolio/on-and-from-tarab/img-074.jpg",
             "collaborators": ["Kamal Kassar (AMAR Foundation)"],
-            "portfolioId": "on-and-from-tarab"
+            "portfolioId": "on-and-from-tarab",
+            "media": [
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=szoiwBB2EYk",
+                    "label": "Visiting Tarab — Performa 11"
+                },
+                {
+                    "type": "press",
+                    "url": "https://www.newyorker.com/culture/culture-desk/tarek-atoui-visiting-tarab",
+                    "label": "Tarek Atoui: Visiting Tarab",
+                    "publisher": "The New Yorker"
+                },
+                {
+                    "type": "press",
+                    "url": "https://www.theculturist.com/home/revisiting-tarab-by-tarek-atoui.html",
+                    "label": "Revisiting Tarab by Tarek Atoui",
+                    "publisher": "The Culturist"
+                },
+                {
+                    "type": "external",
+                    "url": "https://www.crousel.com/en/artist/tarek-atoui-r90lmw/projects/on-and-from-tarab/",
+                    "label": "On and from Tarab — project archive",
+                    "publisher": "Galerie Chantal Crousel"
+                }
+            ]
         }
     ],
     "projects": [
@@ -354,7 +726,8 @@
                     "url": "https://www.youtube.com/watch?v=0em36gqFE0E",
                     "label": "Exhibition film"
                 }
-            ]
+            ],
+            "url": "https://www.museothyssen.org/en/exhibitions/tarek-atoui-tariq"
         },
         {
             "id": "hangarbicocca-milan-2025",
@@ -484,7 +857,21 @@
             "year": 2024,
             "venue": "Cukrarna Gallery",
             "city": "Ljubljana",
-            "country": "Slovenia"
+            "country": "Slovenia",
+            "url": "https://cukrarna.art/en/program/exhibitions/29/tarek-atoui/",
+            "themeIds": ["the-wave"],
+            "title": "Standing Waves",
+            "dateStart": "2024-02-29",
+            "dateEnd": "2024-06-02",
+            "dateDisplay": "February 29 – June 2, 2024",
+            "media": [
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=Hgtr1qIK2KM",
+                    "label": "Standing Waves — exhibition film",
+                    "publisher": "Cukrarna"
+                }
+            ]
         },
         {
             "id": "art-sonje-undo-planet-2024",
@@ -531,7 +918,8 @@
             "year": 2023,
             "venue": "Art Sonje Center",
             "city": "Seoul",
-            "country": "South Korea"
+            "country": "South Korea",
+            "url": "https://artsonje.org/en/exhibition/tarek-atoui-the-rain/"
         },
         {
             "id": "mca-sydney-2023",
@@ -601,13 +989,22 @@
         },
         {
             "id": "contemporary-austin-2022",
-            "themeIds": ["the-whisperers"],
+            "themeIds": ["the-whisperers", "the-wave"],
             "kind": "solo",
             "title": "The Whisperers",
             "year": 2022,
             "venue": "The Contemporary Austin – Jones Center on Congress Avenue",
             "city": "Austin",
-            "country": "USA"
+            "country": "USA",
+            "url": "https://thecontemporaryaustin.org/exhibitions/tarek-atoui-the-whisperers/",
+            "media": [
+                {
+                    "type": "press",
+                    "url": "https://www.e-flux.com/criticism/464837/tarek-atoui-s-the-whisperers",
+                    "label": "The Whisperers and The Wave — exhibition review",
+                    "publisher": "e-flux"
+                }
+            ]
         },
         {
             "id": "flag-art-foundation-2022",
@@ -627,7 +1024,8 @@
             "year": 2022,
             "venue": "Mudam Luxembourg",
             "city": "Luxembourg",
-            "country": "Luxembourg"
+            "country": "Luxembourg",
+            "url": "https://www.mudam.com/whats-on/exhibitions/waters-witness"
         },
         {
             "id": "istanbul-biennial-17-2022",
@@ -671,7 +1069,8 @@
                     "url": "https://vimeo.com/912886608",
                     "label": "The Whisperers / Whispering Playground, 2021"
                 }
-            ]
+            ],
+            "url": "https://www.crousel.com/en/exhibition/tarek-atoui-2021-yxqatc/"
         },
         {
             "id": "struer-tracks-2021",
@@ -714,7 +1113,8 @@
             "venue": "Fridericianum",
             "city": "Kassel",
             "country": "Germany",
-            "note": "First iteration of Waters' Witness."
+            "note": "First iteration of Waters' Witness.",
+            "url": "https://fridericianum.org/de/ausstellungen/tarek-atoui/"
         },
         {
             "id": "sharjah-cycle-in-11-2020",
@@ -789,7 +1189,8 @@
             "venue": "Okayama Art Summit",
             "city": "Okayama",
             "country": "Japan",
-            "note": "Showed The Wave (2019)."
+            "note": "Showed The Wave (2019).",
+            "themeIds": ["the-wave"]
         },
         {
             "id": "yorkshire-sculpture-international-2019",
@@ -884,7 +1285,8 @@
             "year": 2018,
             "venue": "NTU Centre for Contemporary Art Singapore",
             "city": "Singapore",
-            "country": "Singapore"
+            "country": "Singapore",
+            "url": "https://ntu.ccasingapore.org/exhibition/tarek-atoui-the-ground-from-the-land-to-the-sea/"
         },
         {
             "id": "printemps-de-septembre-2018",
@@ -1052,8 +1454,13 @@
                 },
                 {
                     "type": "video",
-                    "url": "https://www.dropbox.com/scl/fo/em4p7f9atb9dji33muy1y/ABQUbxXKP7ZBW9dcul0V1TU?rlkey=zbi4trxer8deyyn7zqxhw3brs&st=jzaqvcgg&dl=0",
-                    "label": "Performance (Dropbox)"
+                    "url": "/media/projects/bergen-assembly-2016/within-2016-the-bergen-assembly-bergen-norway-performance-02-09-2016-b-a86ad2cd03df-web.mp4",
+                    "label": "Performance — 2 September 2016 (black and white)"
+                },
+                {
+                    "type": "video",
+                    "url": "/media/projects/bergen-assembly-2016/within-2016-the-bergen-assembly-bergen-norway-performance-02-09-2016-e7975585bf56-web.mp4",
+                    "label": "Performance — 2 September 2016"
                 },
                 {
                     "type": "video",
@@ -1084,8 +1491,23 @@
                 },
                 {
                     "type": "video",
-                    "url": "https://www.dropbox.com/scl/fo/458jph74vqn6yfbm99gxw/AB0TWLzYxfxXJxJRblGecRo?rlkey=pceduaytw5z6533llidnlhp3i&st=en4yj0at&dl=0",
-                    "label": "Performance (Dropbox)"
+                    "url": "/media/projects/tate-modern-reverse-2016/reverse-collection-tate-modern-2016-1-6c166a2b7ee3-web.mp4",
+                    "label": "The Reverse Collection — performance 1"
+                },
+                {
+                    "type": "video",
+                    "url": "/media/projects/tate-modern-reverse-2016/reverse-collection-tate-modern-2016-2-3907db2c3e25-web.mp4",
+                    "label": "The Reverse Collection — performance 2"
+                },
+                {
+                    "type": "video",
+                    "url": "/media/projects/tate-modern-reverse-2016/reverse-collection-tate-modern-2016-3-cf65e8bd8511-web.mp4",
+                    "label": "The Reverse Collection — performance 3"
+                },
+                {
+                    "type": "video",
+                    "url": "/media/projects/tate-modern-reverse-2016/reverse-collection-tate-modern-2016-4-66d9a1f1e11d-web.mp4",
+                    "label": "The Reverse Collection — performance 4"
                 },
                 {
                     "type": "video",
@@ -1121,8 +1543,8 @@
                 },
                 {
                     "type": "video",
-                    "url": "https://www.dropbox.com/scl/fi/hntbkvap67pbaiw59cyw8/WITHIN_2016_The-Bergen-Assembly-Bergen-Norway-_-Performance-02-09-2016-B-W.mp4?rlkey=3m2jrz24yhljc9h71col0ykwd&st=angr1ouh&dl=0",
-                    "label": "Performance video (Dropbox)"
+                    "url": "/media/projects/zkm-karlsruhe-2016/within-2016-the-bergen-assembly-bergen-norway-performance-02-09-2016-b-a86ad2cd03df-web.mp4",
+                    "label": "Performance video (black and white)"
                 },
                 {
                     "type": "image",
@@ -1211,8 +1633,18 @@
                 },
                 {
                     "type": "video",
-                    "url": "https://www.dropbox.com/scl/fo/vuidh7ptffwj78lwvn917/ADsMC1PCEK_KHB8bbH6Q7hg?rlkey=4wa5pm291an5wi9rq6m2hagjn&st=sh6qyeic&dl=0",
-                    "label": "Performance (Dropbox)"
+                    "url": "/media/projects/kurimanzutto-reverse-sessions-2014/aimee-babasse-57a24d059dd5-web.mp4",
+                    "label": "Performance — Aimee Babasse"
+                },
+                {
+                    "type": "video",
+                    "url": "/media/projects/kurimanzutto-reverse-sessions-2014/aimee-bow-22c2c06ad513-web.mp4",
+                    "label": "Performance — Aimee Bow"
+                },
+                {
+                    "type": "video",
+                    "url": "/media/projects/kurimanzutto-reverse-sessions-2014/chris-bow-f02b37cf3225-web.mp4",
+                    "label": "Performance — Chris Bow"
                 },
                 {
                     "type": "video",
