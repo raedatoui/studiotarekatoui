@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { projects, projectsForTheme, themePlaces, themes } from '@/data/projects';
 import type { Project } from '@/data/projects-schema';
+import { mediaUrl } from '@/lib/mediaUrl';
 
 /**
  * Projects hub — the long-term research threads as a living score.
@@ -343,7 +344,7 @@ export default function ProjectsHub() {
                             <div className="mt-[clamp(28px,4vw,56px)] grid items-start gap-[clamp(28px,4vw,56px)] lg:grid-cols-[1.45fr_1fr]">
                                 <div>
                                     {theme.heroImage && (
-                                        <img src={theme.heroImage} alt={theme.title} loading="lazy" className="w-full object-cover aspect-[3/2]" />
+                                        <img src={mediaUrl(theme.heroImage)} alt={theme.title} loading="lazy" className="w-full object-cover aspect-[3/2]" />
                                     )}
                                 </div>
 

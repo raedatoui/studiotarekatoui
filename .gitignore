@@ -12,6 +12,8 @@ src/app/fonts
 
 # misc
 .DS_Store
+/.env*
+!/.env.example
 
 
 next-env.d.ts

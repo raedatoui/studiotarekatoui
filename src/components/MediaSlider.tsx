@@ -2,6 +2,7 @@
 
 import { useCallback, useRef, useState } from 'react';
 import type { GallerySlide } from '@/lib/media';
+import { mediaUrl } from '@/lib/mediaUrl';
 
 interface MediaSliderProps {
     items: GallerySlide[];
@@ -85,7 +86,7 @@ export default function MediaSlider({ items: media, title }: MediaSliderProps) {
                         >
                             {!item.type || item.type === 'image' ? (
                                 <img
-                                    src={item.src}
+                                    src={mediaUrl(item.src)}
                                     alt={`${title} — ${item.caption}`}
                                     className="max-w-full max-h-[70vh] w-auto h-auto object-contain pointer-events-none"
                                     loading={idx === 0 ? 'eager' : 'lazy'}
@@ -96,7 +97,7 @@ export default function MediaSlider({ items: media, title }: MediaSliderProps) {
                                     {idx === current &&
                                         (item.type === 'embed' ? (
                                             <iframe
-                                                src={item.src}
+                                                src={mediaUrl(item.src)}
                                                 title={`${title} — ${item.caption}`}
                                                 className="h-full w-full border-0"
                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -105,7 +106,7 @@ export default function MediaSlider({ items: media, title }: MediaSliderProps) {
                                             />
                                         ) : (
                                             // biome-ignore lint/a11y/useMediaCaption: Caption tracks are not available in the current video data.
-                                            <video src={item.src} aria-label={item.caption} className="h-full w-full" controls playsInline preload="metadata" />
+                                            <video src={mediaUrl(item.src)} aria-label={item.caption} className="h-full w-full" controls playsInline preload="metadata" />
                                         ))}
                                 </div>
                             )}

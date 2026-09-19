@@ -4,6 +4,7 @@ import { type ReactNode, useEffect, useMemo, useState } from 'react';
 import { getTheme, projects } from '@/data/projects';
 import type { Media, Project } from '@/data/projects-schema';
 import { isDropboxUrl, publicMedia } from '@/lib/media';
+import { mediaUrl } from '@/lib/mediaUrl';
 
 /**
  * Chronology — every project, newest first, as one vertical run of cards.
@@ -22,7 +23,7 @@ const THIS_YEAR = new Date().getFullYear();
 /** A media item as a placeholder box: type badge up top, caption below, links out. */
 function MediaBox({ item }: { item: Media }) {
     return (
-        <a href={item.url} target="_blank" rel="noreferrer" className="group block border border-[var(--color-border)]">
+        <a href={mediaUrl(item.url)} target="_blank" rel="noreferrer" className="group block border border-[var(--color-border)]">
             <span className="flex aspect-[4/3] items-center justify-center bg-[var(--color-hover-bg)]">
                 <span className="border border-[var(--color-border)] px-2.5 py-1.5 font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-text-secondary)] transition-colors group-hover:border-[var(--color-accent)] group-hover:text-[var(--color-accent)]">
                     {item.type} ↗

@@ -12,6 +12,7 @@
         "verify:zod": "node scripts/verify-zod.mts",
         "verify:data": "node scripts/verify.mjs",
         "verify": "pnpm verify:zod && pnpm verify:data",
+        "media:upload": "node --env-file=.env scripts/upload-media.mjs",
         "deploy:staging": "next build && firebase deploy --only hosting:staging",
         "deploy:prod": "next build && firebase deploy --only hosting:prod"
     },

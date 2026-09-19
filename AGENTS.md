@@ -10,6 +10,7 @@ Artist portfolio website for Tarek Atoui (electroacoustic composer/artist). Stat
 
 - `pnpm dev` — start Next.js dev server
 - `pnpm build` — static export to `out/` directory
+- `pnpm media:upload` — sync `public/images`, `public/portfolio`, and `public/media` to the GCS bucket and prefix configured in `.env`
 - `pnpm lint` — lint with Biome
 - `pnpm format` — format with Biome (auto-fix)
 - `pnpm check` — Biome lint + format combined (auto-fix)
@@ -22,7 +23,7 @@ No test framework.
 - `main` — trimmed production site (`/`, `/about`, `/contact`, `/news`) served at tarekatoui.com
 - `dev` — preparing `/research` and `/research/[slug]` for production; `/portfolio` and `/chronology` are excluded from routing and static exports via private folders (`src/app/_portfolio`, `src/app/_chronology`)
 
-When deploying production: run `pnpm deploy:prod` from `main`. Keep `out/portfolio`: it contains shared images used by research pages, not an exported portfolio page.
+When deploying production: run `pnpm deploy:prod` from `main`. Upload new media with `pnpm media:upload` before deploying. Media is served from `https://storage.googleapis.com/typedef/tarekatoui.com`, configured via `NEXT_PUBLIC_MEDIA_BASE_URL` in `.env`; copy `.env.example` for a fresh checkout. The corresponding GCS objects must be publicly readable. Firebase Hosting excludes `images/**`, `portfolio/**`, and `media/**` for both targets. Local files remain in `public/` for imports and uploads; `out/portfolio` contains shared media, not an exported portfolio page. Production builds require the media base URL.
 
 ## Tech Stack
 

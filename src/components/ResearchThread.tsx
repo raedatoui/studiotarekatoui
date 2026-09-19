@@ -4,6 +4,7 @@ import MediaSlider from '@/components/MediaSlider';
 import { getTheme, projectsForTheme, themePlaces } from '@/data/projects';
 import { useSiteData } from '@/data/SiteDataProvider';
 import { collectGalleryMedia } from '@/lib/media';
+import { mediaUrl } from '@/lib/mediaUrl';
 
 /** Research text, presentation timeline, and a shared gallery of images and films. */
 const THIS_YEAR = new Date().getFullYear();
@@ -152,7 +153,7 @@ export default function ResearchThread({ themeId }: { themeId: string }) {
                     <ul className="mt-5">
                         {references.map((reference) => (
                             <li key={reference.src} className="border-b border-[var(--color-border)]">
-                                <a href={reference.src} target="_blank" rel="noreferrer" className="group flex items-start justify-between gap-6 py-5">
+                                <a href={mediaUrl(reference.src)} target="_blank" rel="noreferrer" className="group flex items-start justify-between gap-6 py-5">
                                     <span>
                                         <span className="block font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.18em] text-[var(--color-text-secondary)]">
                                             {reference.publisher} · {reference.type === 'external' ? 'Reference' : reference.type === 'press' ? 'Article' : reference.type}
