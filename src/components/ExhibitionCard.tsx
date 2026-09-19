@@ -5,7 +5,7 @@ export default function ExhibitionCard({ exhibition, id }: { exhibition: Exhibit
         <div className="space-y-[2px]">
             {exhibition.subExhibitions ? (
                 <>
-                    <div className="text-[15px] font-normal">{exhibition.venue}</div>
+                    <div className="text-[length:calc(15px*var(--copy-scale))] font-normal">{exhibition.venue}</div>
                     {exhibition.subExhibitions.map((sub) => (
                         <div key={sub.title} className="pl-0">
                             <span className="italic">{sub.title}</span>
@@ -25,19 +25,19 @@ export default function ExhibitionCard({ exhibition, id }: { exhibition: Exhibit
                     {exhibition.organization && (
                         <>
                             <br />
-                            <span className="text-[var(--color-text-secondary)] text-[13px]">{exhibition.organization}</span>
+                            <span className="text-[var(--color-text-secondary)] text-[length:calc(13px*var(--copy-scale))]">{exhibition.organization}</span>
                         </>
                     )}
                     {exhibition.location && (
                         <>
                             <br />
-                            <span className="text-[var(--color-text-secondary)] text-[13px]">{exhibition.location}</span>
+                            <span className="text-[var(--color-text-secondary)] text-[length:calc(13px*var(--copy-scale))]">{exhibition.location}</span>
                         </>
                     )}
                     {exhibition.work && (
                         <>
                             <br />
-                            <span className="text-[var(--color-text-secondary)] text-[13px]">
+                            <span className="text-[var(--color-text-secondary)] text-[length:calc(13px*var(--copy-scale))]">
                                 <em>{exhibition.work.split(' (')[0]}</em>
                                 {exhibition.work.includes('(') && ` (${exhibition.work.split(' (')[1]}`}
                             </span>
@@ -52,7 +52,7 @@ export default function ExhibitionCard({ exhibition, id }: { exhibition: Exhibit
         return (
             <a
                 id={id}
-                className="block py-3 text-[15px] leading-[1.6] hover:opacity-70 transition-opacity duration-200"
+                className="block py-3 text-[length:calc(15px*var(--copy-scale))] leading-[1.6] hover:opacity-70 transition-opacity duration-200"
                 href={exhibition.url}
                 target="_blank"
                 rel="noopener"
@@ -63,7 +63,7 @@ export default function ExhibitionCard({ exhibition, id }: { exhibition: Exhibit
     }
 
     return (
-        <div id={id} className="py-3 text-[15px] leading-[1.6]">
+        <div id={id} className="py-3 text-[length:calc(15px*var(--copy-scale))] leading-[1.6]">
             {content}
         </div>
     );

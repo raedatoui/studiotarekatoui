@@ -64,6 +64,8 @@ export const themeSchema = z.strictObject({
     materials: z.array(z.string()).optional(),
     /** Links to the matching work in site-content.json `portfolio`, when one exists. */
     portfolioId: z.string().optional(),
+    /** Media about the research as a whole, independent of a specific presentation. */
+    media: z.array(mediaSchema).optional(),
 });
 
 export const projectSchema = z.strictObject({

@@ -8,6 +8,7 @@
 }
 
 :root {
+    --copy-scale: 1.2;
     --color-bg: #fafafa;
     --color-text: #1a1a1a;
     --color-text-secondary: #6b6b6b;
@@ -45,6 +46,7 @@ html {
 
 body {
     font-family: var(--font-inter);
+    font-size: calc(1rem * var(--copy-scale));
     background-color: var(--color-bg);
     color: var(--color-text);
     line-height: 1.6;

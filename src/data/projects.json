@@ -46,7 +46,14 @@
             ],
             "heroImage": "/portfolio/the-whisperers/img-021.jpg",
             "materials": ["plastic", "wood", "brass", "water", "bronze", "glass", "stone"],
-            "portfolioId": "the-whisperers"
+            "portfolioId": "the-whisperers",
+            "media": [
+                {
+                    "type": "video",
+                    "url": "https://vimeo.com/654988548",
+                    "label": "Whispering Totem, 2022"
+                }
+            ]
         },
         {
             "id": "waters-witness",
@@ -93,7 +100,14 @@
             ],
             "heroImage": "/portfolio/within/img-067.jpg",
             "collaborators": ["Sharjah Art Foundation", "Al Amal School for the Deaf", "Council (Sandra Terdjman & Gregory Castera)"],
-            "portfolioId": "within"
+            "portfolioId": "within",
+            "media": [
+                {
+                    "type": "video",
+                    "url": "https://vimeo.com/638158274",
+                    "label": "WITHIN — Iteration On Drums #3"
+                }
+            ]
         },
         {
             "id": "the-reverse-collection",
@@ -620,7 +634,14 @@
             "year": 2021,
             "venue": "Galerie Chantal Crousel",
             "city": "Paris",
-            "country": "France"
+            "country": "France",
+            "media": [
+                {
+                    "type": "video",
+                    "url": "https://vimeo.com/912886608",
+                    "label": "The Whisperers / Whispering Playground, 2021"
+                }
+            ]
         },
         {
             "id": "struer-tracks-2021",

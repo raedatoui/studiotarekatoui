@@ -23,32 +23,32 @@ function MediaBox({ item }: { item: Media }) {
     return (
         <a href={item.url} target="_blank" rel="noreferrer" className="group block border border-[var(--color-border)]">
             <span className="flex aspect-[4/3] items-center justify-center bg-[var(--color-hover-bg)]">
-                <span className="border border-[var(--color-border)] px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-text-secondary)] transition-colors group-hover:border-[var(--color-accent)] group-hover:text-[var(--color-accent)]">
+                <span className="border border-[var(--color-border)] px-2.5 py-1.5 font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-text-secondary)] transition-colors group-hover:border-[var(--color-accent)] group-hover:text-[var(--color-accent)]">
                     {item.type} ↗
                 </span>
             </span>
             {item.label && (
-                <span className="block border-t border-[var(--color-border)] px-3 py-2.5 text-[12px] font-light leading-snug">{item.label}</span>
+                <span className="block border-t border-[var(--color-border)] px-3 py-2.5 text-[length:calc(12px*var(--copy-scale))] font-light leading-snug">{item.label}</span>
             )}
         </a>
     );
 }
 
 const SELECT =
-    'cursor-pointer appearance-none border border-[var(--color-border)] bg-[var(--color-bg)] py-2 pl-3 pr-9 font-mono text-[11px] uppercase tracking-[0.15em] text-[var(--color-text)] transition-colors hover:border-[var(--color-accent)] focus:border-[var(--color-accent)] focus:outline-none';
+    'cursor-pointer appearance-none border border-[var(--color-border)] bg-[var(--color-bg)] py-2 pl-3 pr-9 font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.15em] text-[var(--color-text)] transition-colors hover:border-[var(--color-accent)] focus:border-[var(--color-accent)] focus:outline-none';
 
 /** Native select wrapped for the chevron and its micro-label. */
 function Filter({ label, value, onChange, children }: { label: string; value: string; onChange: (v: string) => void; children: ReactNode }) {
     return (
         <label className="flex items-center gap-3">
-            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">{label}</span>
+            <span className="font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">{label}</span>
             <span className="relative inline-block">
                 <select className={SELECT} value={value} onChange={(e) => onChange(e.target.value)}>
                     {children}
                 </select>
                 <span
                     aria-hidden
-                    className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 font-mono text-[10px] text-[var(--color-text-secondary)]"
+                    className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 font-mono text-[length:calc(10px*var(--copy-scale))] text-[var(--color-text-secondary)]"
                 >
                     ▾
                 </span>
@@ -76,7 +76,7 @@ function ProjectCard({ project, open, onToggle }: { project: Project; open: bool
                 className="grid w-full cursor-pointer grid-cols-[1fr_auto] items-start gap-4 px-[clamp(16px,2vw,28px)] py-[clamp(16px,2vw,24px)] text-left transition-colors hover:bg-[var(--color-hover-bg)]"
             >
                 <span>
-                    <span className="flex flex-wrap items-center gap-x-3 gap-y-1.5 font-mono text-[10px] uppercase tracking-[0.2em]">
+                    <span className="flex flex-wrap items-center gap-x-3 gap-y-1.5 font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em]">
                         <span className={project.year === THIS_YEAR ? 'text-[var(--color-recent)]' : 'text-[var(--color-accent)]'}>{project.kind}</span>
                         {project.status && project.status !== 'past' && (
                             <span className="border border-[var(--color-border)] px-2 py-0.5 text-[var(--color-text-secondary)]">{project.status}</span>
@@ -87,20 +87,20 @@ function ProjectCard({ project, open, onToggle }: { project: Project; open: bool
                         {project.title ?? project.venue}
                     </span>
 
-                    <span className="mt-2 block text-[13.5px] font-light leading-snug">
+                    <span className="mt-2 block text-[length:calc(13.5px*var(--copy-scale))] font-light leading-snug">
                         {project.title && <span>{project.venue}</span>}
                         {project.title && place && <span className="text-[var(--color-text-secondary)]"> — </span>}
                         {place && <span className="text-[var(--color-text-secondary)]">{place}</span>}
                     </span>
 
                     {project.dateDisplay && (
-                        <span className="mt-1.5 block font-mono text-[11px] text-[var(--color-text-secondary)]">{project.dateDisplay}</span>
+                        <span className="mt-1.5 block font-mono text-[length:calc(11px*var(--copy-scale))] text-[var(--color-text-secondary)]">{project.dateDisplay}</span>
                     )}
                 </span>
 
-                <span className="flex shrink-0 items-center gap-3 font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--color-text-secondary)]">
+                <span className="flex shrink-0 items-center gap-3 font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.15em] text-[var(--color-text-secondary)]">
                     {project.media?.length ? <span className="max-sm:hidden">{project.media.length} media</span> : null}
-                    <span className="text-[13px]">{open ? '−' : '+'}</span>
+                    <span className="text-[length:calc(13px*var(--copy-scale))]">{open ? '−' : '+'}</span>
                 </span>
             </button>
 
@@ -111,7 +111,7 @@ function ProjectCard({ project, open, onToggle }: { project: Project; open: bool
                         <a
                             key={theme.id}
                             href={`/research/${theme.id}`}
-                            className="border border-[var(--color-border)] px-2 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
+                            className="border border-[var(--color-border)] px-2 py-1 font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
                         >
                             {theme.title}
                         </a>
@@ -122,11 +122,11 @@ function ProjectCard({ project, open, onToggle }: { project: Project; open: bool
             {open && (
                 <div className="border-t border-[var(--color-border)] px-[clamp(16px,2vw,28px)] pb-7 pt-5">
                     {project.organization && (
-                        <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">{project.organization}</p>
+                        <p className="font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">{project.organization}</p>
                     )}
-                    {project.note && <p className="mt-2 max-w-[64ch] text-[13px] font-light leading-relaxed">{project.note}</p>}
+                    {project.note && <p className="mt-2 max-w-[64ch] text-[length:calc(13px*var(--copy-scale))] font-light leading-relaxed">{project.note}</p>}
                     {project.collaborators && project.collaborators.length > 0 && (
-                        <p className="mt-2 max-w-[64ch] text-[13px] font-light leading-relaxed text-[var(--color-text-secondary)]">
+                        <p className="mt-2 max-w-[64ch] text-[length:calc(13px*var(--copy-scale))] font-light leading-relaxed text-[var(--color-text-secondary)]">
                             With {project.collaborators.join(', ')}
                         </p>
                     )}
@@ -139,7 +139,7 @@ function ProjectCard({ project, open, onToggle }: { project: Project; open: bool
                         </div>
                     ) : (
                         <div className="mt-4 flex aspect-[4/1] max-w-[480px] items-center justify-center border border-dashed border-[var(--color-border)]">
-                            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
+                            <span className="font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
                                 documentation coming soon
                             </span>
                         </div>
@@ -150,7 +150,7 @@ function ProjectCard({ project, open, onToggle }: { project: Project; open: bool
                             href={project.url}
                             target="_blank"
                             rel="noreferrer"
-                            className="mt-4 inline-block font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent)] underline-offset-4 hover:underline"
+                            className="mt-4 inline-block font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.18em] text-[var(--color-accent)] underline-offset-4 hover:underline"
                         >
                             Visit ↗
                         </a>
@@ -182,11 +182,11 @@ export default function Chronology() {
         <main className="bg-[var(--color-bg)] text-[var(--color-text)]">
             {/* ── Hero ───────────────────────────────────────────────── */}
             <section className="max-w-[1400px] mx-auto px-[clamp(24px,4vw,64px)] pt-[clamp(40px,8vh,104px)] pb-[clamp(28px,4vw,48px)]">
-                <p className="thread-rise font-mono text-[11px] uppercase tracking-[0.3em] text-[var(--color-accent)]">Chronology</p>
+                <p className="thread-rise font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.3em] text-[var(--color-accent)]">Chronology</p>
                 <h1 className="thread-rise mt-[clamp(16px,2vw,28px)] font-[family-name:var(--font-display)] text-[clamp(38px,6vw,84px)] font-normal leading-[0.98] tracking-[-0.01em] [animation-delay:80ms]">
                     Every project, year by year.
                 </h1>
-                <p className="thread-rise mt-[clamp(20px,2.5vw,36px)] max-w-[62ch] text-[clamp(15px,1.3vw,18px)] font-light leading-[1.7] text-[var(--color-text-secondary)] [animation-delay:160ms]">
+                <p className="thread-rise mt-[clamp(20px,2.5vw,36px)] max-w-[62ch] text-[length:calc(clamp(15px,1.3vw,18px)*var(--copy-scale))] font-light leading-[1.7] text-[var(--color-text-secondary)] [animation-delay:160ms]">
                     Exhibitions, performances, commissions, curations and residencies, most recent first. Where a project belongs to one of the
                     long-term{' '}
                     <a
@@ -220,7 +220,7 @@ export default function Chronology() {
                         ))}
                     </Filter>
 
-                    <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
+                    <span className="font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
                         {shown.length} / {BY_DATE.length}
                     </span>
 
@@ -231,7 +231,7 @@ export default function Chronology() {
                                 setKind('all');
                                 setYear('all');
                             }}
-                            className="cursor-pointer font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-accent)] underline-offset-4 hover:underline"
+                            className="cursor-pointer font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-accent)] underline-offset-4 hover:underline"
                         >
                             Reset
                         </button>
@@ -242,7 +242,7 @@ export default function Chronology() {
             {/* ── The run ────────────────────────────────────────────── */}
             <section className="max-w-[1400px] mx-auto px-[clamp(24px,4vw,64px)] pb-[clamp(56px,8vw,112px)] pt-[clamp(24px,3vw,40px)]">
                 {shown.length === 0 ? (
-                    <p className="py-[clamp(48px,8vw,96px)] text-center font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
+                    <p className="py-[clamp(48px,8vw,96px)] text-center font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
                         Nothing in this selection
                     </p>
                 ) : (
@@ -252,7 +252,7 @@ export default function Chronology() {
                                 {/* hairline carrying the year, drawn wherever the year changes */}
                                 {(i === 0 || shown[i - 1].year !== project.year) && (
                                     <div className={`flex items-center gap-4 ${i === 0 ? '' : 'mt-[clamp(14px,2vw,28px)]'}`}>
-                                        <span className="font-mono text-[11px] tracking-[0.15em] text-[var(--color-text-secondary)]">
+                                        <span className="font-mono text-[length:calc(11px*var(--copy-scale))] tracking-[0.15em] text-[var(--color-text-secondary)]">
                                             {project.year}
                                         </span>
                                         <span aria-hidden className="h-px flex-1 bg-[var(--color-border)]" />

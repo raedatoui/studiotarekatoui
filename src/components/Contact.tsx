@@ -11,7 +11,7 @@ export default function Contact() {
             {text}&nbsp;
             <a
                 href={`mailto:${email}`}
-                className="text-[clamp(14px,1.1vw,17px)] font-normal border-b border-transparent hover:border-[var(--color-text)] transition-[border-color] duration-200"
+                className="text-[length:calc(clamp(14px,1.1vw,17px)*var(--copy-scale))] font-normal border-b border-transparent hover:border-[var(--color-text)] transition-[border-color] duration-200"
             >
                 {email}
             </a>

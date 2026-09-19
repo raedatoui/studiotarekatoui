@@ -1,6 +1,6 @@
 'use client';
 
-import ImageSlider from '@/components/ImageSlider';
+import MediaSlider from '@/components/MediaSlider';
 import { useSiteData } from '@/data/SiteDataProvider';
 import { useEffect, useRef, useState } from 'react';
 
@@ -59,14 +59,14 @@ export default function PortfolioContent() {
                             <a
                                 href={`#${work.id}`}
                                 data-id={work.id}
-                                className={`text-[13px] tracking-[0.02em] transition-colors duration-200 ${
+                                className={`text-[length:calc(13px*var(--copy-scale))] tracking-[0.02em] transition-colors duration-200 ${
                                     activeId === work.id
                                         ? 'text-[var(--color-text)] font-medium'
                                         : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text)]'
                                 }`}
                             >
                                 {work.title}
-                                <span className="ml-1 text-[11px] opacity-60">{work.year}</span>
+                                <span className="ml-1 text-[length:calc(11px*var(--copy-scale))] opacity-60">{work.year}</span>
                             </a>
                         </li>
                     ))}
@@ -81,17 +81,17 @@ export default function PortfolioContent() {
                 >
                     <div className="max-w-[700px] mx-auto text-center mb-[clamp(32px,5vw,64px)]">
                         <h2 className="text-[clamp(24px,3vw,36px)] font-light italic tracking-[0.02em]">{work.title}</h2>
-                        <p className="mt-2 text-[clamp(18px,2vw,24px)] font-light text-[var(--color-text-secondary)]">{work.year}</p>
+                        <p className="mt-2 text-[length:calc(clamp(18px,2vw,24px)*var(--copy-scale))] font-light text-[var(--color-text-secondary)]">{work.year}</p>
                         <div className="mt-8 space-y-5">
                             {work.description.map((paragraph) => (
-                                <p key={paragraph} className="text-[clamp(14px,1.1vw,16px)] font-light leading-[1.8] text-[var(--color-text)]">
+                                <p key={paragraph} className="text-[length:calc(clamp(14px,1.1vw,16px)*var(--copy-scale))] font-light leading-[1.8] text-[var(--color-text)]">
                                     {paragraph}
                                 </p>
                             ))}
                         </div>
                     </div>
 
-                    {work.images.length > 0 && <ImageSlider images={work.images} title={work.title} />}
+                    {work.images.length > 0 && <MediaSlider items={work.images} title={work.title} />}
                 </section>
             ))}
         </main>

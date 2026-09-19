@@ -28,6 +28,7 @@ const themeKeys = new Set([
     'collaborators',
     'materials',
     'portfolioId',
+    'media',
 ]);
 const projectKeys = new Set([
     'id',
@@ -61,6 +62,11 @@ for (const t of data.themes) {
     if (typeof t.yearStart !== 'number' || !Number.isInteger(t.yearStart)) errs.push(`theme ${t.id}: yearStart not int`);
     if (typeof t.ongoing !== 'boolean') errs.push(`theme ${t.id}: ongoing not bool`);
     if (!Array.isArray(t.description) || t.description.some((d) => typeof d !== 'string')) errs.push(`theme ${t.id}: description not string[]`);
+    if (t.media)
+        for (const md of t.media) {
+            if (!MEDIA.has(md.type)) errs.push(`theme ${t.id}: bad media type ${md.type}`);
+            if (!md.url) errs.push(`theme ${t.id}: media missing url`);
+        }
     if (themeIds.has(t.id)) errs.push(`duplicate theme id: ${t.id}`);
     themeIds.add(t.id);
 }

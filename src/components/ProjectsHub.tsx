@@ -80,7 +80,7 @@ function Figure({ value, label }: { value: string; label: string }) {
     return (
         <li className="shrink-0">
             <span className="block font-mono text-[clamp(18px,2.1vw,28px)] leading-none">{value}</span>
-            <span className="mt-2 block font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">{label}</span>
+            <span className="mt-2 block font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">{label}</span>
         </li>
     );
 }
@@ -98,13 +98,13 @@ function MarkCard({ m }: { m: Project }) {
             className="pointer-events-none absolute bottom-[calc(100%+10px)] z-30 w-[min(268px,62vw)] border border-[var(--color-border)] bg-[var(--color-bg)] px-3.5 py-3 shadow-[0_10px_30px_rgba(0,0,0,0.12)]"
             style={{ left: `${left}%`, transform: anchor }}
         >
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-accent)]">
+            <p className="font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-accent)]">
                 {m.kind} · {m.year}
             </p>
-            {m.title && <p className="mt-2 font-[family-name:var(--font-display)] text-[17px] leading-tight">{m.title}</p>}
-            <p className="mt-1.5 text-[12.5px] font-light leading-snug">{m.venue}</p>
-            {place && <p className="text-[12.5px] font-light leading-snug text-[var(--color-text-secondary)]">{place}</p>}
-            {m.dateDisplay && <p className="mt-2 font-mono text-[10px] text-[var(--color-text-secondary)]">{m.dateDisplay}</p>}
+            {m.title && <p className="mt-2 font-[family-name:var(--font-display)] text-[length:calc(17px*var(--copy-scale))] leading-tight">{m.title}</p>}
+            <p className="mt-1.5 text-[length:calc(12.5px*var(--copy-scale))] font-light leading-snug">{m.venue}</p>
+            {place && <p className="text-[length:calc(12.5px*var(--copy-scale))] font-light leading-snug text-[var(--color-text-secondary)]">{place}</p>}
+            {m.dateDisplay && <p className="mt-2 font-mono text-[length:calc(10px*var(--copy-scale))] text-[var(--color-text-secondary)]">{m.dateDisplay}</p>}
         </div>
     );
 }
@@ -128,12 +128,12 @@ export default function ProjectsHub() {
         <main className="bg-[var(--color-bg)] text-[var(--color-text)]">
             {/* ── Hero ───────────────────────────────────────────────── */}
             <section className="max-w-[1400px] mx-auto px-[clamp(24px,4vw,64px)] pt-[clamp(40px,8vh,104px)] pb-[clamp(36px,5vw,64px)]">
-                <p className="thread-rise font-mono text-[11px] uppercase tracking-[0.3em] text-[var(--color-accent)]">Long-term research</p>
+                <p className="thread-rise font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.3em] text-[var(--color-accent)]">Long-term research</p>
                 <h1 className="thread-rise mt-[clamp(16px,2vw,28px)] whitespace-nowrap font-[family-name:var(--font-display)] text-[min(3.25vw,47px)] font-normal leading-[0.96] tracking-[-0.01em] [animation-delay:80ms]">
                     An ongoing inquiry into sound, carried across time and place.
                 </h1>
                 <div className="thread-rise mt-[clamp(24px,3vw,44px)] grid gap-[clamp(24px,4vw,72px)] md:grid-cols-[1fr_auto] md:items-end [animation-delay:160ms]">
-                    <p className="max-w-[62ch] text-[clamp(15px,1.3vw,18px)] font-light leading-[1.7] text-[var(--color-text-secondary)]">
+                    <p className="max-w-[62ch] text-[length:calc(clamp(15px,1.3vw,18px)*var(--copy-scale))] font-light leading-[1.7] text-[var(--color-text-secondary)]">
                         Tarek Atoui works in long-term threads rather than single exhibitions. Each begins in fieldwork and collaboration, takes form
                         as instruments and listening spaces, and keeps changing as it travels. Follow them below across the years and the places they
                         have sounded — the full chronology lives on the{' '}
@@ -157,8 +157,8 @@ export default function ProjectsHub() {
             {/* ── The score ──────────────────────────────────────────── */}
             <section className="max-w-[1400px] mx-auto px-[clamp(24px,4vw,64px)] pb-[clamp(48px,7vw,96px)]">
                 <div className="thread-rise flex items-baseline justify-between border-t border-[var(--color-border)] pt-5">
-                    <h2 className="font-mono text-[11px] uppercase tracking-[0.3em] text-[var(--color-text-secondary)]">The threads</h2>
-                    <p className="hidden gap-5 font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--color-text-secondary)] sm:flex">
+                    <h2 className="font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.3em] text-[var(--color-text-secondary)]">The threads</h2>
+                    <p className="hidden gap-5 font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.18em] text-[var(--color-text-secondary)] sm:flex">
                         <span className="flex items-center gap-2">
                             <span className="h-[7px] w-[7px] rounded-full bg-[var(--color-accent)]" />
                             ongoing
@@ -177,13 +177,13 @@ export default function ProjectsHub() {
                         {TICKS.map((y) => (
                             <span
                                 key={y}
-                                className="absolute -translate-x-1/2 font-mono text-[10px] text-[var(--color-text-secondary)]"
+                                className="absolute -translate-x-1/2 font-mono text-[length:calc(10px*var(--copy-scale))] text-[var(--color-text-secondary)]"
                                 style={{ left: `${pos(y)}%` }}
                             >
                                 {y}
                             </span>
                         ))}
-                        <span className="absolute right-0 hidden font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--color-accent)] sm:block">
+                        <span className="absolute right-0 hidden font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.15em] text-[var(--color-accent)] sm:block">
                             ongoing →
                         </span>
                     </div>
@@ -216,7 +216,7 @@ export default function ProjectsHub() {
                                     >
                                         {t.theme.title}
                                     </span>
-                                    <span className="shrink-0 font-mono text-[10px] tracking-[0.1em] text-[var(--color-text-secondary)] sm:mt-1 sm:block">
+                                    <span className="shrink-0 font-mono text-[length:calc(10px*var(--copy-scale))] tracking-[0.1em] text-[var(--color-text-secondary)] sm:mt-1 sm:block">
                                         {t.theme.yearsDisplay}
                                     </span>
                                 </div>
@@ -315,7 +315,7 @@ export default function ProjectsHub() {
                             id={`thread-${theme.id}`}
                             className="scroll-mt-[calc(var(--header-height,64px)+16px)] border-t border-[var(--color-border)] py-[clamp(40px,7vw,104px)]"
                         >
-                            <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em]">
+                            <div className="flex items-center gap-3 font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.22em]">
                                 {theme.ongoing ? (
                                     <span className="flex items-center gap-2 text-[var(--color-accent)]">
                                         <span className={`h-[7px] w-[7px] rounded-full bg-[var(--color-accent)] ${t.live ? 'thread-pulse' : ''}`} />
@@ -337,7 +337,7 @@ export default function ProjectsHub() {
                                     {theme.subtitle}
                                 </p>
                             )}
-                            <p className="mt-6 max-w-[58ch] text-[clamp(16px,1.5vw,22px)] font-light leading-[1.55]">{theme.summary}</p>
+                            <p className="mt-6 max-w-[58ch] text-[length:calc(clamp(16px,1.5vw,22px)*var(--copy-scale))] font-light leading-[1.55]">{theme.summary}</p>
 
                             <div className="mt-[clamp(28px,4vw,56px)] grid items-start gap-[clamp(28px,4vw,56px)] lg:grid-cols-[1.45fr_1fr]">
                                 <div>
@@ -351,24 +351,24 @@ export default function ProjectsHub() {
                                         <Row label="Span" value={theme.yearsDisplay} />
                                         {t.places.length > 0 && (
                                             <div className="grid grid-cols-[78px_1fr] items-baseline gap-4 border-t border-[var(--color-border)] py-4">
-                                                <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
+                                                <dt className="font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
                                                     Places
                                                 </dt>
-                                                <dd className="font-mono text-[12px] leading-relaxed">
+                                                <dd className="font-mono text-[length:calc(12px*var(--copy-scale))] leading-relaxed">
                                                     {t.places.map((p) => p.split(',')[0]).join(' · ')}
                                                 </dd>
                                             </div>
                                         )}
                                         {theme.materials && theme.materials.length > 0 && (
                                             <div className="grid grid-cols-[78px_1fr] items-baseline gap-4 border-t border-[var(--color-border)] py-4">
-                                                <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
+                                                <dt className="font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
                                                     Material
                                                 </dt>
                                                 <dd className="flex flex-wrap gap-1.5">
                                                     {theme.materials.map((mat) => (
                                                         <span
                                                             key={mat}
-                                                            className="border border-[var(--color-border)] px-2 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)]"
+                                                            className="border border-[var(--color-border)] px-2 py-1 font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.08em] text-[var(--color-text-secondary)]"
                                                         >
                                                             {mat}
                                                         </span>
@@ -378,24 +378,24 @@ export default function ProjectsHub() {
                                         )}
                                         {theme.collaborators && theme.collaborators.length > 0 && (
                                             <div className="grid grid-cols-[78px_1fr] items-baseline gap-4 border-t border-[var(--color-border)] py-4">
-                                                <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
+                                                <dt className="font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
                                                     With
                                                 </dt>
-                                                <dd className="text-[13px] font-light leading-relaxed">{theme.collaborators.join(', ')}</dd>
+                                                <dd className="text-[length:calc(13px*var(--copy-scale))] font-light leading-relaxed">{theme.collaborators.join(', ')}</dd>
                                             </div>
                                         )}
                                     </dl>
 
                                     {/* where & when — the thread's own path across time and space */}
                                     <div className="mt-1 border-t border-[var(--color-border)] pt-5">
-                                        <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
+                                        <p className="mb-4 font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
                                             Where &amp; when
                                         </p>
                                         <ol className="space-y-3">
                                             {t.ms.map((m) => (
                                                 <li key={m.id} className="grid grid-cols-[40px_1fr] items-baseline gap-3">
-                                                    <span className="font-mono text-[12px] text-[var(--color-accent)]">{m.year}</span>
-                                                    <span className="text-[13px] leading-snug">
+                                                    <span className="font-mono text-[length:calc(12px*var(--copy-scale))] text-[var(--color-accent)]">{m.year}</span>
+                                                    <span className="text-[length:calc(13px*var(--copy-scale))] leading-snug">
                                                         {m.venue}
                                                         {m.city && (
                                                             <span className="text-[var(--color-text-secondary)]">
@@ -412,7 +412,7 @@ export default function ProjectsHub() {
 
                                     <a
                                         href={`/research/${theme.id}`}
-                                        className="mt-7 inline-block font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent)] hover:underline underline-offset-4"
+                                        className="mt-7 inline-block font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.18em] text-[var(--color-accent)] hover:underline underline-offset-4"
                                     >
                                         Explore the thread →
                                     </a>
@@ -429,8 +429,8 @@ export default function ProjectsHub() {
 function Row({ label, value }: { label: string; value: string }) {
     return (
         <div className="grid grid-cols-[78px_1fr] items-baseline gap-4 border-t border-[var(--color-border)] py-4">
-            <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">{label}</dt>
-            <dd className="text-[14px] font-light">{value}</dd>
+            <dt className="font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">{label}</dt>
+            <dd className="text-[length:calc(14px*var(--copy-scale))] font-light">{value}</dd>
         </div>
     );
 }
