@@ -291,6 +291,7 @@ export default function ProjectsHub() {
                                     {t.ms.map((m) => (
                                         <span
                                             key={`hit-${m.id}`}
+                                            aria-hidden="true"
                                             onMouseEnter={() => setMark({ themeId: t.theme.id, m })}
                                             onMouseLeave={() => setMark(null)}
                                             className="absolute top-0 bottom-0 z-20 w-[12px] -translate-x-1/2"

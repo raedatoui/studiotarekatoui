@@ -104,6 +104,7 @@ export default function MediaSlider({ items: media, title }: MediaSliderProps) {
                                                 allowFullScreen
                                             />
                                         ) : (
+                                            // biome-ignore lint/a11y/useMediaCaption: Caption tracks are not available in the current video data.
                                             <video src={item.src} aria-label={item.caption} className="h-full w-full" controls playsInline preload="metadata" />
                                         ))}
                                 </div>
@@ -120,7 +121,7 @@ export default function MediaSlider({ items: media, title }: MediaSliderProps) {
                             className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center rounded-full bg-black/30 text-white backdrop-blur-sm hover:bg-black/50 transition-colors"
                             aria-label="Previous slide"
                         >
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                                 <path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                         </button>
@@ -130,7 +131,7 @@ export default function MediaSlider({ items: media, title }: MediaSliderProps) {
                             className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center rounded-full bg-black/30 text-white backdrop-blur-sm hover:bg-black/50 transition-colors"
                             aria-label="Next slide"
                         >
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                                 <path d="M6 3L11 8L6 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                         </button>
