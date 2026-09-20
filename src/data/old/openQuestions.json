@@ -1,0 +1,33 @@
+[
+    {
+        "question": "Metal Shelf — is it tied to one particular project, or shown across several?"
+    },
+    {
+        "question": "Can all the horn projects (e.g. Bukhara) be associated with The Reverse Collection?",
+        "relatedThemeIds": [
+            "the-reverse-collection"
+        ],
+        "relatedProjectIds": [
+            "bukhara-biennial-2025"
+        ]
+    },
+    {
+        "question": "How should the Venice project — Untitled (a gathering of remarkable people), Qatar Pavilion, Venice Biennale — appear? It is a curation, not one of the eight long-term themes.",
+        "relatedProjectIds": [
+            "qatar-pavilion-venice-2026"
+        ]
+    },
+    {
+        "question": "Is the Black Gold Museum (Black Gold Alchemy) a permanent collection — will it always be on view?",
+        "relatedProjectIds": [
+            "black-gold-museum-riyadh-2025"
+        ]
+    },
+    {
+        "question": "Where should Organon (with choreographer Noé Soulier) be placed? It sits outside the eight long-term themes.",
+        "relatedProjectIds": [
+            "organon-kfda-brussels-2025",
+            "organon-festival-automne-paris-2025"
+        ]
+    }
+]

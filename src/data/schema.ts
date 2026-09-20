@@ -1,5 +1,40 @@
 import { z } from 'zod';
 
+/** Active long-term research themes. Shelved events and source text live in ./old. */
+const mediaTypeSchema = z.enum(['image', 'video', 'audio', 'press', 'interview', 'external']);
+
+export const mediaSchema = z.strictObject({
+    type: mediaTypeSchema,
+    url: z.string(),
+    label: z.string().optional(),
+    publisher: z.string().optional(),
+});
+
+export const themeSchema = z.strictObject({
+    /** Research page slug. */
+    id: z.string(),
+    title: z.string(),
+    subtitle: z.string().optional(),
+    /** First year of the research. */
+    yearStart: z.number().int(),
+    /** Last year; omit when the project is still active. */
+    yearEnd: z.number().int().optional(),
+    ongoing: z.boolean(),
+    /** Human label, e.g. "2020 — ongoing". */
+    yearsDisplay: z.string(),
+    /** One-line hook for the hub cards. */
+    summary: z.string(),
+    /** Full thematic text, paragraph per entry (from the website-texts sheet). */
+    description: z.array(z.string()),
+    heroImage: z.string().optional(),
+    collaborators: z.array(z.string()).optional(),
+    materials: z.array(z.string()).optional(),
+    /** Gallery images and captions carried over from the portfolio. */
+    images: z.array(z.strictObject({ src: z.string(), caption: z.string() })).optional(),
+    /** Media about the research as a whole, independent of a specific presentation. */
+    media: z.array(mediaSchema).optional(),
+});
+
 const exhibitionStatusSchema = z.enum(['current', 'upcoming', 'past']);
 
 export const subExhibitionSchema = z.strictObject({
@@ -20,19 +55,6 @@ export const exhibitionSchema = z.strictObject({
     url: z.string().optional(),
     status: exhibitionStatusSchema.optional(),
     subExhibitions: z.array(subExhibitionSchema).optional(),
-});
-
-export const portfolioImageSchema = z.strictObject({
-    src: z.string(),
-    caption: z.string(),
-});
-
-export const portfolioWorkSchema = z.strictObject({
-    id: z.string(),
-    title: z.string(),
-    year: z.string(),
-    description: z.array(z.string()),
-    images: z.array(portfolioImageSchema),
 });
 
 const metaSchema = z.strictObject({
@@ -76,12 +98,13 @@ export const siteContentSchema = z.strictObject({
         group: z.array(exhibitionSchema),
     }),
     contact: contactSchema,
-    portfolio: z.array(portfolioWorkSchema),
+    themes: z.array(themeSchema),
 });
 
 export type NavItem = z.infer<typeof navItemSchema>;
 export type SubExhibition = z.infer<typeof subExhibitionSchema>;
 export type Exhibition = z.infer<typeof exhibitionSchema>;
-export type PortfolioImage = z.infer<typeof portfolioImageSchema>;
-export type PortfolioWork = z.infer<typeof portfolioWorkSchema>;
 export type SiteContent = z.infer<typeof siteContentSchema>;
+
+export type Media = z.infer<typeof mediaSchema>;
+export type Theme = z.infer<typeof themeSchema>;

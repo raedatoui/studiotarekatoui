@@ -122,7 +122,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--videos-only', action='store_true', help='Import only Dropbox videos')
     args = parser.parse_args()
-    projects = json.loads((ROOT / 'src/data/projects.json').read_text())['projects']
+    projects = json.loads((ROOT / 'src/data/old/projects.json').read_text())
     assets = json.loads(MANIFEST.read_text()) if MANIFEST.exists() else {}
     failures = []
     for project in projects:

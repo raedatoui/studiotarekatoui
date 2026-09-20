@@ -1,8 +1,10 @@
 'use client';
 
 import { type ReactNode, useEffect, useMemo, useState } from 'react';
-import { getTheme, projects } from '@/data/projects';
-import type { Media, Project } from '@/data/projects-schema';
+import { getTheme } from '@/data/siteContent';
+import { projects } from '@/data/old/projects';
+import type { Project } from '@/data/old/projects-schema';
+import type { Media } from '@/data/schema';
 import { isDropboxUrl, publicMedia } from '@/lib/media';
 import { mediaUrl } from '@/lib/mediaUrl';
 

@@ -1,80 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { projects, projectsForTheme, themePlaces, themes } from '@/data/projects';
-import type { Project } from '@/data/projects-schema';
+import { useSiteData } from '@/data/SiteDataProvider';
 import { mediaUrl } from '@/lib/mediaUrl';
 
-/**
- * Projects hub — the long-term research threads as a living score.
- *
- * Each thread is a lifeline plotted on a shared time axis (TIME); ongoing threads
- * dissolve off the right edge into a patina tail (the ongoing inquiry), concluded
- * ones cap off. Below, each thread opens into a reading panel carrying the places it
- * has travelled (SPACE), its materials, collaborators and chronology.
- */
+/** Long-term research threads plotted by their declared start and end years. */
 
 // Shared time scale. Years map into 0–92% so the right 8% reads as the "ongoing / now" zone.
 const TICKS = [2011, 2014, 2017, 2020, 2023, 2026];
-const sortedThemes = [...themes].sort((a, b) => a.yearStart - b.yearStart);
-// The hub plots the research threads, so the axis and figures count only theme-linked projects.
-const themed = projects.filter((p) => (p.themeIds?.length ?? 0) > 0);
-const allYears = themed.map((m) => m.year);
-const MIN_YEAR = Math.min(...sortedThemes.map((t) => t.yearStart), ...allYears);
-const MAX_YEAR = Math.max(...allYears);
-const SPAN = MAX_YEAR - MIN_YEAR;
-const pos = (year: number): number => ((year - MIN_YEAR) / SPAN) * 92;
-const THIS_YEAR = new Date().getFullYear();
-
-// Marks sharing a year fan out around it, otherwise they stack into what reads as one dot.
-// The gap is that year's own share of the axis, floored in px by CSS max() so a crowded
-// year stays countable on a narrow track without having to measure it.
-const MARK_GAP_PX = 12;
-const fanMarks = (ms: Project[]): Map<string, string> => {
-    const byYear = new Map<number, Project[]>();
-    for (const m of ms) {
-        byYear.set(m.year, [...(byYear.get(m.year) ?? []), m]);
-    }
-    const left = new Map<string, string>();
-    for (const [year, group] of byYear) {
-        const gap = 92 / SPAN / (group.length + 1);
-        group.forEach((m, i) => {
-            const k = i - (group.length - 1) / 2;
-            const offset = `${Math.abs(k)} * max(${gap.toFixed(3)}%, ${MARK_GAP_PX}px)`;
-            left.set(m.id, k === 0 ? `${pos(year)}%` : `calc(${pos(year)}% ${k < 0 ? '-' : '+'} ${offset})`);
-        });
-    }
-    return left;
-};
-
-const tracks = sortedThemes.map((theme) => {
-    const ms = projectsForTheme(theme.id);
-    const years = ms.map((m) => m.year);
-    const startYear = Math.min(theme.yearStart, ...(years.length ? years : [theme.yearStart]));
-    const lastYear = years.length ? Math.max(...years) : theme.yearStart;
-    // A lifeline always spans far enough to cover its own marks, even when the
-    // declared yearEnd predates a later (re)appearance in a group show.
-    const endYear = theme.ongoing ? MAX_YEAR : Math.max(theme.yearEnd ?? theme.yearStart, lastYear);
-    const sorted = [...ms].sort((a, b) => a.year - b.year);
-    return {
-        theme,
-        ms: sorted,
-        marks: fanMarks(sorted),
-        startYear,
-        endYear,
-        places: themePlaces(theme.id),
-        // "Live" = something is happening right now; only then does the ongoing dot pulse.
-        live: ms.some((m) => m.status === 'current'),
-    };
-});
-
-// The score reads left→right in time; the reading panels below it lead with the newest thread.
-const threadsNewestFirst = [...tracks].reverse();
-
-const distinctCities = new Set(themed.filter((m) => m.city).map((m) => `${m.city}, ${m.country ?? ''}`));
-const SHOW_COUNT = themed.length;
-const PLACE_COUNT = distinctCities.size;
-
 const SCORE_GRID = 'grid gap-x-[clamp(14px,2.4vw,32px)] sm:grid-cols-[150px_1fr] md:grid-cols-[210px_1fr]';
 
 function Figure({ value, label }: { value: string; label: string }) {
@@ -88,39 +21,24 @@ function Figure({ value, label }: { value: string; label: string }) {
     );
 }
 
-/** Hover card for a single project mark on the time axis. */
-function MarkCard({ m }: { m: Project }) {
-    const left = pos(m.year);
-    // Keep the card inside the track at both ends of the axis.
-    const anchor = left < 15 ? 'translateX(0)' : left > 78 ? 'translateX(-100%)' : 'translateX(-50%)';
-    const place = [m.city, m.country].filter(Boolean).join(', ');
-
-    return (
-        <div
-            aria-hidden
-            className="pointer-events-none absolute bottom-[calc(100%+10px)] z-30 w-[min(268px,62vw)] border border-[var(--color-border)] bg-[var(--color-bg)] px-3.5 py-3 shadow-[0_10px_30px_rgba(0,0,0,0.12)]"
-            style={{ left: `${left}%`, transform: anchor }}
-        >
-            <p className="font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-accent)]">
-                {m.kind} · {m.year}
-            </p>
-            {m.title && (
-                <p className="mt-2 font-[family-name:var(--font-display)] text-[length:calc(17px*var(--copy-scale))] leading-tight">{m.title}</p>
-            )}
-            <p className="mt-1.5 text-[length:calc(12.5px*var(--copy-scale))] font-light leading-snug">{m.venue}</p>
-            {place && (
-                <p className="text-[length:calc(12.5px*var(--copy-scale))] font-light leading-snug text-[var(--color-text-secondary)]">{place}</p>
-            )}
-            {m.dateDisplay && (
-                <p className="mt-2 font-mono text-[length:calc(10px*var(--copy-scale))] text-[var(--color-text-secondary)]">{m.dateDisplay}</p>
-            )}
-        </div>
-    );
-}
-
 export default function ProjectsHub() {
+    const { themes } = useSiteData();
     const [hovered, setHovered] = useState('');
-    const [mark, setMark] = useState<{ themeId: string; m: Project } | null>(null);
+
+    const sortedThemes = [...themes].sort((a, b) => a.yearStart - b.yearStart);
+    const MIN_YEAR = Math.min(...sortedThemes.map((t) => t.yearStart));
+    const MAX_YEAR = Math.max(new Date().getFullYear(), ...sortedThemes.map((t) => t.yearEnd ?? t.yearStart));
+    const SPAN = MAX_YEAR - MIN_YEAR;
+    const pos = (year: number): number => ((year - MIN_YEAR) / SPAN) * 92;
+
+    const tracks = sortedThemes.map((theme) => ({
+        theme,
+        startYear: theme.yearStart,
+        endYear: theme.ongoing ? MAX_YEAR : (theme.yearEnd ?? theme.yearStart),
+    }));
+
+    // The score reads left→right in time; the reading panels below it lead with the newest thread.
+    const threadsNewestFirst = [...tracks].reverse();
 
     useEffect(() => {
         const header = document.querySelector('header');
@@ -159,8 +77,6 @@ export default function ProjectsHub() {
                     <ul className="flex flex-wrap gap-x-[clamp(22px,3vw,48px)] gap-y-5 md:justify-end">
                         <Figure value={`${MIN_YEAR}→`} label="spanning" />
                         <Figure value={String(themes.length)} label="threads" />
-                        <Figure value={String(SHOW_COUNT)} label="presentations" />
-                        <Figure value={String(PLACE_COUNT)} label="places" />
                     </ul>
                 </div>
             </section>
@@ -269,30 +185,10 @@ export default function ProjectsHub() {
                                             />
                                         )}
 
-                                        {/* project marks — this year's in light green, older ones gray */}
-                                        {t.ms.map((m) => {
-                                            const lit = mark?.themeId === t.theme.id && mark.m.id === m.id;
-                                            const size = lit ? 'h-[12px] w-[12px]' : active ? 'h-[8px] w-[8px]' : 'h-[6px] w-[6px]';
-                                            const color = lit
-                                                ? 'bg-[var(--color-accent)]'
-                                                : m.year === THIS_YEAR
-                                                  ? 'bg-[var(--color-recent)]'
-                                                  : active
-                                                    ? 'bg-[var(--color-accent)]'
-                                                    : 'bg-[var(--color-text)] opacity-55';
-                                            return (
-                                                <span
-                                                    key={m.id}
-                                                    className={`absolute top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full transition-all ${size} ${color}`}
-                                                    style={{ left: t.marks.get(m.id) ?? `${pos(m.year)}%` }}
-                                                />
-                                            );
-                                        })}
-
                                         {/* end state */}
                                         {t.theme.ongoing ? (
                                             <span
-                                                className={`absolute top-1/2 h-[7px] w-[7px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--color-accent)] ${t.live ? 'thread-pulse' : ''}`}
+                                                className="absolute top-1/2 h-[7px] w-[7px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--color-accent)]"
                                                 style={{ left: `${pos(t.endYear)}%` }}
                                             />
                                         ) : (
@@ -303,18 +199,6 @@ export default function ProjectsHub() {
                                         )}
                                     </div>
 
-                                    {/* hover targets + card, outside .thread-draw so the draw animation never clips them */}
-                                    {t.ms.map((m) => (
-                                        <span
-                                            key={`hit-${m.id}`}
-                                            aria-hidden="true"
-                                            onMouseEnter={() => setMark({ themeId: t.theme.id, m })}
-                                            onMouseLeave={() => setMark(null)}
-                                            className="absolute top-0 bottom-0 z-20 w-[12px] -translate-x-1/2"
-                                            style={{ left: t.marks.get(m.id) ?? `${pos(m.year)}%` }}
-                                        />
-                                    ))}
-                                    {mark?.themeId === t.theme.id && <MarkCard m={mark.m} />}
                                 </div>
                             </button>
                         );
@@ -335,7 +219,7 @@ export default function ProjectsHub() {
                             <div className="flex items-center gap-3 font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.22em]">
                                 {theme.ongoing ? (
                                     <span className="flex items-center gap-2 text-[var(--color-accent)]">
-                                        <span className={`h-[7px] w-[7px] rounded-full bg-[var(--color-accent)] ${t.live ? 'thread-pulse' : ''}`} />
+                                        <span className="h-[7px] w-[7px] rounded-full bg-[var(--color-accent)]" />
                                         ongoing
                                     </span>
                                 ) : (
@@ -368,16 +252,6 @@ export default function ProjectsHub() {
                                 <aside>
                                     <dl>
                                         <Row label="Span" value={theme.yearsDisplay} />
-                                        {t.places.length > 0 && (
-                                            <div className="grid grid-cols-[78px_1fr] items-baseline gap-4 border-t border-[var(--color-border)] py-4">
-                                                <dt className="font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
-                                                    Places
-                                                </dt>
-                                                <dd className="font-mono text-[length:calc(12px*var(--copy-scale))] leading-relaxed">
-                                                    {t.places.map((p) => p.split(',')[0]).join(' · ')}
-                                                </dd>
-                                            </div>
-                                        )}
                                         {theme.materials && theme.materials.length > 0 && (
                                             <div className="grid grid-cols-[78px_1fr] items-baseline gap-4 border-t border-[var(--color-border)] py-4">
                                                 <dt className="font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
@@ -406,32 +280,6 @@ export default function ProjectsHub() {
                                             </div>
                                         )}
                                     </dl>
-
-                                    {/* where & when — the thread's own path across time and space */}
-                                    <div className="mt-1 border-t border-[var(--color-border)] pt-5">
-                                        <p className="mb-4 font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
-                                            Where &amp; when
-                                        </p>
-                                        <ol className="space-y-3">
-                                            {t.ms.map((m) => (
-                                                <li key={m.id} className="grid grid-cols-[40px_1fr] items-baseline gap-3">
-                                                    <span className="font-mono text-[length:calc(12px*var(--copy-scale))] text-[var(--color-accent)]">
-                                                        {m.year}
-                                                    </span>
-                                                    <span className="text-[length:calc(13px*var(--copy-scale))] leading-snug">
-                                                        {m.venue}
-                                                        {m.city && (
-                                                            <span className="text-[var(--color-text-secondary)]">
-                                                                {' — '}
-                                                                {m.city}
-                                                                {m.country ? `, ${m.country}` : ''}
-                                                            </span>
-                                                        )}
-                                                    </span>
-                                                </li>
-                                            ))}
-                                        </ol>
-                                    </div>
 
                                     <a
                                         href={`/research/${theme.id}`}

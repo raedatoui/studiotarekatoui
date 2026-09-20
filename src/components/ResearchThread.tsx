@@ -1,13 +1,9 @@
 'use client';
 
 import MediaSlider from '@/components/MediaSlider';
-import { getTheme, projectsForTheme, themePlaces } from '@/data/projects';
 import { useSiteData } from '@/data/SiteDataProvider';
 import { collectGalleryMedia } from '@/lib/media';
 import { mediaUrl } from '@/lib/mediaUrl';
-
-/** Research text, presentation timeline, and a shared gallery of images and films. */
-const THIS_YEAR = new Date().getFullYear();
 
 /** One fact in the horizontal meta row under the description. */
 function MetaItem({ label, value }: { label: string; value: string }) {
@@ -22,19 +18,13 @@ function MetaItem({ label, value }: { label: string; value: string }) {
 }
 
 export default function ResearchThread({ themeId }: { themeId: string }) {
-    const theme = getTheme(themeId);
-    const { portfolio } = useSiteData();
+    const { themes } = useSiteData();
+    const theme = themes.find((item) => item.id === themeId);
     if (!theme) {
         return null;
     }
 
-    // Newest first, same order as /chronology.
-    const ms = [...projectsForTheme(themeId)].sort((a, b) => b.year - a.year || (b.dateStart ?? '').localeCompare(a.dateStart ?? ''));
-    // "Live" = something is happening right now; only then do the ongoing dots pulse.
-    const live = ms.some((m) => m.status === 'current');
-    const places = themePlaces(themeId);
-    const work = theme.portfolioId ? portfolio.find((w) => w.id === theme.portfolioId) : undefined;
-    const { slides, references } = collectGalleryMedia(work?.images ?? [], ms, theme.media);
+    const { slides, references } = collectGalleryMedia(theme.images ?? [], theme.media);
 
     return (
         <main className="bg-[var(--color-bg)] text-[var(--color-text)]">
@@ -49,7 +39,7 @@ export default function ResearchThread({ themeId }: { themeId: string }) {
                 <div className="thread-rise mt-[clamp(20px,3vw,36px)] flex items-center gap-3 font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.22em] [animation-delay:60ms]">
                     {theme.ongoing ? (
                         <span className="flex items-center gap-2 text-[var(--color-accent)]">
-                            <span className={`h-[7px] w-[7px] rounded-full bg-[var(--color-accent)] ${live ? 'thread-pulse' : ''}`} />
+                            <span className="h-[7px] w-[7px] rounded-full bg-[var(--color-accent)]" />
                             ongoing
                         </span>
                     ) : (
@@ -84,59 +74,12 @@ export default function ResearchThread({ themeId }: { themeId: string }) {
                 </div>
 
                 <dl className="mt-[clamp(28px,4vw,48px)] flex flex-wrap gap-x-[clamp(40px,6vw,96px)] gap-y-7 border-t border-[var(--color-border)] pt-[clamp(20px,2.5vw,32px)]">
-                    {places.length > 0 && <MetaItem label="Places" value={places.map((p) => p.split(',')[0]).join(' · ')} />}
                     {theme.materials && theme.materials.length > 0 && <MetaItem label="Material" value={theme.materials.join(' · ')} />}
                     {theme.collaborators && theme.collaborators.length > 0 && <MetaItem label="With" value={theme.collaborators.join(', ')} />}
                 </dl>
             </section>
 
-            {/* ── Where & when — vertical timeline ───────────────────── */}
-            <section className="max-w-[1400px] mx-auto px-[clamp(24px,4vw,64px)] pb-[clamp(40px,6vw,80px)]">
-                <div className="flex items-baseline justify-between border-t border-[var(--color-border)] pt-5">
-                    <h2 className="font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.3em] text-[var(--color-text-secondary)]">
-                        Where &amp; when
-                    </h2>
-                    <p className="hidden font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.18em] text-[var(--color-text-secondary)] sm:block">
-                        {ms.length} {ms.length === 1 ? 'presentation' : 'presentations'}
-                    </p>
-                </div>
-
-                <ol className="mt-2 [--timeline-mark-y:calc(1rem+0.8rem*var(--copy-scale))]">
-                    {ms.map((m, index) => {
-                        const place = [m.city, m.country].filter(Boolean).join(', ');
-                        return (
-                            <li key={m.id} id={`project-${m.id}`} className="relative">
-                                {index < ms.length - 1 && (
-                                    <span
-                                        aria-hidden
-                                        className="pointer-events-none absolute top-[var(--timeline-mark-y)] bottom-[calc(-1*var(--timeline-mark-y))] left-[48px] w-px bg-[var(--color-text)] opacity-30"
-                                    />
-                                )}
-                                <span aria-hidden className="absolute right-0 bottom-0 left-[64px] h-px bg-[var(--color-border)]" />
-                                <div className="relative grid grid-cols-[48px_minmax(0,1fr)] items-baseline gap-4 py-4">
-                                    <span
-                                        aria-hidden
-                                        className={`absolute top-[var(--timeline-mark-y)] left-[48px] h-[9px] w-[9px] -translate-x-1/2 -translate-y-1/2 rounded-full ${
-                                            m.year === THIS_YEAR ? 'bg-[var(--color-recent)]' : 'bg-[var(--color-text)] opacity-55'
-                                        }`}
-                                    />
-                                    <span className="font-mono text-[length:calc(12px*var(--copy-scale))] text-[var(--color-accent)]">{m.year}</span>
-                                    <span>
-                                        <span className="text-[length:calc(15px*var(--copy-scale))] leading-snug">{m.title ?? m.venue}</span>
-                                        <span className="mt-1 block text-[length:calc(12.5px*var(--copy-scale))] font-light text-[var(--color-text-secondary)]">
-                                            {m.kind}
-                                            {m.title && ` · ${m.venue}`}
-                                            {place && ` — ${place}`}
-                                        </span>
-                                    </span>
-                                </div>
-                            </li>
-                        );
-                    })}
-                </ol>
-            </section>
-
-            {/* ── Gallery — all presentations and portfolio media ────── */}
+            {/* ── Gallery — research images and films ────── */}
             {slides.length > 0 && (
                 <section className="max-w-[1400px] mx-auto px-[clamp(24px,4vw,64px)] pb-[clamp(56px,8vw,112px)]">
                     <div className="flex items-baseline justify-between border-t border-[var(--color-border)] pt-5 mb-[clamp(24px,3vw,40px)]">

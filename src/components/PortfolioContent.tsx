@@ -1,11 +1,10 @@
 'use client';
 
 import MediaSlider from '@/components/MediaSlider';
-import { useSiteData } from '@/data/SiteDataProvider';
+import portfolioWorks from '@/data/old/portfolio.json';
 import { useEffect, useRef, useState } from 'react';
 
 export default function PortfolioContent() {
-    const { portfolio: portfolioWorks } = useSiteData();
     const [activeId, setActiveId] = useState<string>('');
     const navRef = useRef<HTMLElement>(null);
 

@@ -3,14 +3,14 @@ import { notFound } from 'next/navigation';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import ResearchThread from '@/components/ResearchThread';
-import { getTheme, themes } from '@/data/projects';
+import { getTheme, siteContent } from '@/data/siteContent';
 
 type Params = { slug: string };
 
 export const dynamicParams = false;
 
 export function generateStaticParams(): Params[] {
-    return themes.map((theme) => ({ slug: theme.id }));
+    return siteContent.themes.map((theme) => ({ slug: theme.id }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {

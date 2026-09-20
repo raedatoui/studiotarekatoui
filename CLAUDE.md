@@ -13,7 +13,7 @@ Artist portfolio website for Tarek Atoui (electroacoustic composer/artist). Stat
 - `pnpm lint` — lint with Biome
 - `pnpm format` — format with Biome (auto-fix)
 - `pnpm check` — Biome lint + format combined (auto-fix)
-- `pnpm verify` — validate `src/data/projects.json` (`verify:zod` runs the real zod schema; `verify:data` is an independent zero-dependency re-check of the same rules)
+- `pnpm verify` — validate `src/data/site-content.json` (`verify:zod` runs the full zod schema; `verify:data` independently checks research theme structure and IDs)
 
 No test framework.
 
@@ -47,8 +47,10 @@ Routes (all statically exported; server pages compose `'use client'` components)
 
 All content lives in JSON under `src/data/`, validated with zod **strictObject** schemas at module load — adding a key to the JSON fails the build until the schema is updated (and `scripts/verify.mjs`, which duplicates the key lists independently).
 
-- `site-content.json` ↔ `schema.ts`, parsed in `siteContent.ts` — site meta, navigation, bio, exhibitions, contact, and the `portfolio` works. Client components read it via the `useSiteData()` context hook (`SiteDataProvider` wraps the app in `layout.tsx`).
-- `projects.json` ↔ `projects-schema.ts`, parsed in `projects.ts` — two relationally linked collections: `themes` (long-term research projects) and `manifestations` (dated showings: exhibitions, performances, residencies…). A manifestation lists the `themeIds` it belongs to; one event can belong to several themes. `projects.ts` exports query helpers (`getTheme`, `manifestationsForTheme`, `themePlaces`…). `theme.portfolioId` joins a theme to its matching work in `site-content.json`'s portfolio.
+- `site-content.json` ↔ `schema.ts`, parsed once by `siteContent.ts` — all active editorial content: site meta, navigation, bio, portrait, news, contact, and research `themes` with descriptions, gallery images/captions, and media.
+- Client components share the single `useSiteData()` context (`SiteDataProvider` wraps the app in `layout.tsx`). Server pages use `siteContent` and `getTheme` from `siteContent.ts` for research routes and metadata.
+- `media-assets.json` — generated media download lookup, separate from editorial content.
+- `src/data/old/` — shelved dated `projects`, `openQuestions`, and the original `portfolio` records (including every description and image caption). Only the disabled portfolio and chronology pages consume this archive; active research pages do not import it. See `src/data/old/README.md` for text provenance.
 
 ### Theming
 
