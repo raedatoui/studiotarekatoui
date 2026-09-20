@@ -19,7 +19,10 @@ export default function Bio() {
 
                 <div className="md:w-1/2 px-[clamp(24px,4vw,64px)] pt-[clamp(24px,3vw,40px)] pb-[clamp(40px,6vw,72px)] space-y-[1.8em]">
                     {paragraphs.map((paragraph) => (
-                        <p key={paragraph} className="text-[length:calc(clamp(15px,1.15vw,17px)*var(--copy-scale))] font-light leading-[1.8] text-[var(--color-text)]">
+                        <p
+                            key={paragraph}
+                            className="text-[length:calc(clamp(15px,1.15vw,17px)*var(--copy-scale))] font-light leading-[1.8] text-[var(--color-text)]"
+                        >
                             {paragraph}
                         </p>
                     ))}

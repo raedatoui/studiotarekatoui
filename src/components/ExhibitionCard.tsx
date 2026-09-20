@@ -25,13 +25,17 @@ export default function ExhibitionCard({ exhibition, id }: { exhibition: Exhibit
                     {exhibition.organization && (
                         <>
                             <br />
-                            <span className="text-[var(--color-text-secondary)] text-[length:calc(13px*var(--copy-scale))]">{exhibition.organization}</span>
+                            <span className="text-[var(--color-text-secondary)] text-[length:calc(13px*var(--copy-scale))]">
+                                {exhibition.organization}
+                            </span>
                         </>
                     )}
                     {exhibition.location && (
                         <>
                             <br />
-                            <span className="text-[var(--color-text-secondary)] text-[length:calc(13px*var(--copy-scale))]">{exhibition.location}</span>
+                            <span className="text-[var(--color-text-secondary)] text-[length:calc(13px*var(--copy-scale))]">
+                                {exhibition.location}
+                            </span>
                         </>
                     )}
                     {exhibition.work && (

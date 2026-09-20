@@ -42,7 +42,7 @@ function videoSlide(media: Media, caption: string): GallerySlide | undefined {
     const url = new URL(media.url, 'https://tarekatoui.com');
     const host = url.hostname.replace(/^www\./, '');
     if (host === 'youtu.be' || host === 'youtube.com' || host === 'm.youtube.com' || host === 'youtube-nocookie.com') {
-        const id = host === 'youtu.be' ? url.pathname.slice(1) : url.searchParams.get('v') ?? url.pathname.split('/')[2];
+        const id = host === 'youtu.be' ? url.pathname.slice(1) : (url.searchParams.get('v') ?? url.pathname.split('/')[2]);
         if (id && /^[\w-]{11}$/.test(id)) {
             return { type: 'embed', src: `https://www.youtube.com/embed/${id}?playsinline=1`, caption };
         }

@@ -30,7 +30,9 @@ function MediaBox({ item }: { item: Media }) {
                 </span>
             </span>
             {item.label && (
-                <span className="block border-t border-[var(--color-border)] px-3 py-2.5 text-[length:calc(12px*var(--copy-scale))] font-light leading-snug">{item.label}</span>
+                <span className="block border-t border-[var(--color-border)] px-3 py-2.5 text-[length:calc(12px*var(--copy-scale))] font-light leading-snug">
+                    {item.label}
+                </span>
             )}
         </a>
     );
@@ -43,7 +45,9 @@ const SELECT =
 function Filter({ label, value, onChange, children }: { label: string; value: string; onChange: (v: string) => void; children: ReactNode }) {
     return (
         <label className="flex items-center gap-3">
-            <span className="font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">{label}</span>
+            <span className="font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
+                {label}
+            </span>
             <span className="relative inline-block">
                 <select className={SELECT} value={value} onChange={(e) => onChange(e.target.value)}>
                     {children}
@@ -80,9 +84,13 @@ function ProjectCard({ project, open, onToggle }: { project: Project; open: bool
             >
                 <span>
                     <span className="flex flex-wrap items-center gap-x-3 gap-y-1.5 font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em]">
-                        <span className={project.year === THIS_YEAR ? 'text-[var(--color-recent)]' : 'text-[var(--color-accent)]'}>{project.kind}</span>
+                        <span className={project.year === THIS_YEAR ? 'text-[var(--color-recent)]' : 'text-[var(--color-accent)]'}>
+                            {project.kind}
+                        </span>
                         {project.status && project.status !== 'past' && (
-                            <span className="border border-[var(--color-border)] px-2 py-0.5 text-[var(--color-text-secondary)]">{project.status}</span>
+                            <span className="border border-[var(--color-border)] px-2 py-0.5 text-[var(--color-text-secondary)]">
+                                {project.status}
+                            </span>
                         )}
                     </span>
 
@@ -97,7 +105,9 @@ function ProjectCard({ project, open, onToggle }: { project: Project; open: bool
                     </span>
 
                     {project.dateDisplay && (
-                        <span className="mt-1.5 block font-mono text-[length:calc(11px*var(--copy-scale))] text-[var(--color-text-secondary)]">{project.dateDisplay}</span>
+                        <span className="mt-1.5 block font-mono text-[length:calc(11px*var(--copy-scale))] text-[var(--color-text-secondary)]">
+                            {project.dateDisplay}
+                        </span>
                     )}
                 </span>
 
@@ -125,9 +135,13 @@ function ProjectCard({ project, open, onToggle }: { project: Project; open: bool
             {open && (
                 <div className="border-t border-[var(--color-border)] px-[clamp(16px,2vw,28px)] pb-7 pt-5">
                     {project.organization && (
-                        <p className="font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">{project.organization}</p>
+                        <p className="font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
+                            {project.organization}
+                        </p>
                     )}
-                    {project.note && <p className="mt-2 max-w-[64ch] text-[length:calc(13px*var(--copy-scale))] font-light leading-relaxed">{project.note}</p>}
+                    {project.note && (
+                        <p className="mt-2 max-w-[64ch] text-[length:calc(13px*var(--copy-scale))] font-light leading-relaxed">{project.note}</p>
+                    )}
                     {project.collaborators && project.collaborators.length > 0 && (
                         <p className="mt-2 max-w-[64ch] text-[length:calc(13px*var(--copy-scale))] font-light leading-relaxed text-[var(--color-text-secondary)]">
                             With {project.collaborators.join(', ')}
@@ -185,7 +199,9 @@ export default function Chronology() {
         <main className="bg-[var(--color-bg)] text-[var(--color-text)]">
             {/* ── Hero ───────────────────────────────────────────────── */}
             <section className="max-w-[1400px] mx-auto px-[clamp(24px,4vw,64px)] pt-[clamp(40px,8vh,104px)] pb-[clamp(28px,4vw,48px)]">
-                <p className="thread-rise font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.3em] text-[var(--color-accent)]">Chronology</p>
+                <p className="thread-rise font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.3em] text-[var(--color-accent)]">
+                    Chronology
+                </p>
                 <h1 className="thread-rise mt-[clamp(16px,2vw,28px)] font-[family-name:var(--font-display)] text-[clamp(38px,6vw,84px)] font-normal leading-[0.98] tracking-[-0.01em] [animation-delay:80ms]">
                     Every project, year by year.
                 </h1>

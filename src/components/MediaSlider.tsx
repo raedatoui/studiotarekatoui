@@ -10,9 +10,7 @@ interface MediaSliderProps {
 }
 
 export default function MediaSlider({ items: media, title }: MediaSliderProps) {
-    const items = [...media].sort(
-        (a, b) => Number(b.type === 'embed' || b.type === 'video') - Number(a.type === 'embed' || a.type === 'video')
-    );
+    const items = [...media].sort((a, b) => Number(b.type === 'embed' || b.type === 'video') - Number(a.type === 'embed' || a.type === 'video'));
     const [current, setCurrent] = useState(0);
     const [isDragging, setIsDragging] = useState(false);
     const [dragOffset, setDragOffset] = useState(0);
@@ -106,7 +104,14 @@ export default function MediaSlider({ items: media, title }: MediaSliderProps) {
                                             />
                                         ) : (
                                             // biome-ignore lint/a11y/useMediaCaption: Caption tracks are not available in the current video data.
-                                            <video src={mediaUrl(item.src)} aria-label={item.caption} className="h-full w-full" controls playsInline preload="metadata" />
+                                            <video
+                                                src={mediaUrl(item.src)}
+                                                aria-label={item.caption}
+                                                className="h-full w-full"
+                                                controls
+                                                playsInline
+                                                preload="metadata"
+                                            />
                                         ))}
                                 </div>
                             )}

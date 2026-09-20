@@ -5,7 +5,8 @@ import ProjectsHub from '@/components/ProjectsHub';
 
 export const metadata: Metadata = {
     title: 'Research — Studio Tarek Atoui',
-    description: 'The long-term research threads of Tarek Atoui — ongoing inquiries into sound, material and listening, traced across time and place.',
+    description:
+        'The long-term research threads of Tarek Atoui — ongoing inquiries into sound, material and listening, traced across time and place.',
 };
 
 export default function ProjectsPage() {

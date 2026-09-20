@@ -13,7 +13,9 @@ const THIS_YEAR = new Date().getFullYear();
 function MetaItem({ label, value }: { label: string; value: string }) {
     return (
         <div className="max-w-[44ch]">
-            <dt className="font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">{label}</dt>
+            <dt className="font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
+                {label}
+            </dt>
             <dd className="mt-2.5 text-[length:calc(clamp(16px,1.4vw,20px)*var(--copy-scale))] font-light leading-snug">{value}</dd>
         </div>
     );
@@ -91,7 +93,9 @@ export default function ResearchThread({ themeId }: { themeId: string }) {
             {/* ── Where & when — vertical timeline ───────────────────── */}
             <section className="max-w-[1400px] mx-auto px-[clamp(24px,4vw,64px)] pb-[clamp(40px,6vw,80px)]">
                 <div className="flex items-baseline justify-between border-t border-[var(--color-border)] pt-5">
-                    <h2 className="font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.3em] text-[var(--color-text-secondary)]">Where &amp; when</h2>
+                    <h2 className="font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.3em] text-[var(--color-text-secondary)]">
+                        Where &amp; when
+                    </h2>
                     <p className="hidden font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.18em] text-[var(--color-text-secondary)] sm:block">
                         {ms.length} {ms.length === 1 ? 'presentation' : 'presentations'}
                     </p>
@@ -136,7 +140,9 @@ export default function ResearchThread({ themeId }: { themeId: string }) {
             {slides.length > 0 && (
                 <section className="max-w-[1400px] mx-auto px-[clamp(24px,4vw,64px)] pb-[clamp(56px,8vw,112px)]">
                     <div className="flex items-baseline justify-between border-t border-[var(--color-border)] pt-5 mb-[clamp(24px,3vw,40px)]">
-                        <h2 className="font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.3em] text-[var(--color-text-secondary)]">Gallery</h2>
+                        <h2 className="font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.3em] text-[var(--color-text-secondary)]">
+                            Gallery
+                        </h2>
                     </div>
                     <MediaSlider items={slides} title={theme.title} />
                 </section>
@@ -153,16 +159,24 @@ export default function ResearchThread({ themeId }: { themeId: string }) {
                     <ul className="mt-5">
                         {references.map((reference) => (
                             <li key={reference.src} className="border-b border-[var(--color-border)]">
-                                <a href={mediaUrl(reference.src)} target="_blank" rel="noreferrer" className="group flex items-start justify-between gap-6 py-5">
+                                <a
+                                    href={mediaUrl(reference.src)}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="group flex items-start justify-between gap-6 py-5"
+                                >
                                     <span>
                                         <span className="block font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.18em] text-[var(--color-text-secondary)]">
-                                            {reference.publisher} · {reference.type === 'external' ? 'Reference' : reference.type === 'press' ? 'Article' : reference.type}
+                                            {reference.publisher} ·{' '}
+                                            {reference.type === 'external' ? 'Reference' : reference.type === 'press' ? 'Article' : reference.type}
                                         </span>
                                         <span className="mt-2 block text-[length:calc(clamp(14px,1.2vw,18px)*var(--copy-scale))] font-light leading-relaxed group-hover:text-[var(--color-accent)]">
                                             {reference.caption}
                                         </span>
                                     </span>
-                                    <span aria-hidden className="text-[var(--color-accent)]">↗</span>
+                                    <span aria-hidden className="text-[var(--color-accent)]">
+                                        ↗
+                                    </span>
                                 </a>
                             </li>
                         ))}

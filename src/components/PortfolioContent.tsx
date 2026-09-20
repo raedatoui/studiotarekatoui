@@ -81,10 +81,15 @@ export default function PortfolioContent() {
                 >
                     <div className="max-w-[700px] mx-auto text-center mb-[clamp(32px,5vw,64px)]">
                         <h2 className="text-[clamp(24px,3vw,36px)] font-light italic tracking-[0.02em]">{work.title}</h2>
-                        <p className="mt-2 text-[length:calc(clamp(18px,2vw,24px)*var(--copy-scale))] font-light text-[var(--color-text-secondary)]">{work.year}</p>
+                        <p className="mt-2 text-[length:calc(clamp(18px,2vw,24px)*var(--copy-scale))] font-light text-[var(--color-text-secondary)]">
+                            {work.year}
+                        </p>
                         <div className="mt-8 space-y-5">
                             {work.description.map((paragraph) => (
-                                <p key={paragraph} className="text-[length:calc(clamp(14px,1.1vw,16px)*var(--copy-scale))] font-light leading-[1.8] text-[var(--color-text)]">
+                                <p
+                                    key={paragraph}
+                                    className="text-[length:calc(clamp(14px,1.1vw,16px)*var(--copy-scale))] font-light leading-[1.8] text-[var(--color-text)]"
+                                >
                                     {paragraph}
                                 </p>
                             ))}

@@ -81,7 +81,9 @@ function Figure({ value, label }: { value: string; label: string }) {
     return (
         <li className="shrink-0">
             <span className="block font-mono text-[clamp(18px,2.1vw,28px)] leading-none">{value}</span>
-            <span className="mt-2 block font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">{label}</span>
+            <span className="mt-2 block font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
+                {label}
+            </span>
         </li>
     );
 }
@@ -102,10 +104,16 @@ function MarkCard({ m }: { m: Project }) {
             <p className="font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-accent)]">
                 {m.kind} · {m.year}
             </p>
-            {m.title && <p className="mt-2 font-[family-name:var(--font-display)] text-[length:calc(17px*var(--copy-scale))] leading-tight">{m.title}</p>}
+            {m.title && (
+                <p className="mt-2 font-[family-name:var(--font-display)] text-[length:calc(17px*var(--copy-scale))] leading-tight">{m.title}</p>
+            )}
             <p className="mt-1.5 text-[length:calc(12.5px*var(--copy-scale))] font-light leading-snug">{m.venue}</p>
-            {place && <p className="text-[length:calc(12.5px*var(--copy-scale))] font-light leading-snug text-[var(--color-text-secondary)]">{place}</p>}
-            {m.dateDisplay && <p className="mt-2 font-mono text-[length:calc(10px*var(--copy-scale))] text-[var(--color-text-secondary)]">{m.dateDisplay}</p>}
+            {place && (
+                <p className="text-[length:calc(12.5px*var(--copy-scale))] font-light leading-snug text-[var(--color-text-secondary)]">{place}</p>
+            )}
+            {m.dateDisplay && (
+                <p className="mt-2 font-mono text-[length:calc(10px*var(--copy-scale))] text-[var(--color-text-secondary)]">{m.dateDisplay}</p>
+            )}
         </div>
     );
 }
@@ -129,7 +137,9 @@ export default function ProjectsHub() {
         <main className="bg-[var(--color-bg)] text-[var(--color-text)]">
             {/* ── Hero ───────────────────────────────────────────────── */}
             <section className="max-w-[1400px] mx-auto px-[clamp(24px,4vw,64px)] pt-[clamp(40px,8vh,104px)] pb-[clamp(36px,5vw,64px)]">
-                <p className="thread-rise font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.3em] text-[var(--color-accent)]">Long-term research</p>
+                <p className="thread-rise font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.3em] text-[var(--color-accent)]">
+                    Long-term research
+                </p>
                 <h1 className="thread-rise mt-[clamp(16px,2vw,28px)] whitespace-nowrap font-[family-name:var(--font-display)] text-[min(3.25vw,47px)] font-normal leading-[0.96] tracking-[-0.01em] [animation-delay:80ms]">
                     An ongoing inquiry into sound, carried across time and place.
                 </h1>
@@ -158,7 +168,9 @@ export default function ProjectsHub() {
             {/* ── The score ──────────────────────────────────────────── */}
             <section className="max-w-[1400px] mx-auto px-[clamp(24px,4vw,64px)]">
                 <div className="thread-rise flex items-baseline justify-between border-t border-[var(--color-border)] pt-5">
-                    <h2 className="font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.3em] text-[var(--color-text-secondary)]">The threads</h2>
+                    <h2 className="font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.3em] text-[var(--color-text-secondary)]">
+                        The threads
+                    </h2>
                     <p className="hidden gap-5 font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.18em] text-[var(--color-text-secondary)] sm:flex">
                         <span className="flex items-center gap-2">
                             <span className="h-[7px] w-[7px] rounded-full bg-[var(--color-accent)]" />
@@ -339,7 +351,9 @@ export default function ProjectsHub() {
                                     {theme.subtitle}
                                 </p>
                             )}
-                            <p className="mt-6 max-w-[58ch] text-[length:calc(clamp(16px,1.5vw,22px)*var(--copy-scale))] font-light leading-[1.55]">{theme.summary}</p>
+                            <p className="mt-6 max-w-[58ch] text-[length:calc(clamp(16px,1.5vw,22px)*var(--copy-scale))] font-light leading-[1.55]">
+                                {theme.summary}
+                            </p>
 
                             <div className="mt-[clamp(28px,4vw,56px)] grid items-start gap-[clamp(28px,4vw,56px)] lg:grid-cols-[1.45fr_1fr]">
                                 <div>
@@ -383,7 +397,9 @@ export default function ProjectsHub() {
                                                 <dt className="font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
                                                     With
                                                 </dt>
-                                                <dd className="text-[length:calc(13px*var(--copy-scale))] font-light leading-relaxed">{theme.collaborators.join(', ')}</dd>
+                                                <dd className="text-[length:calc(13px*var(--copy-scale))] font-light leading-relaxed">
+                                                    {theme.collaborators.join(', ')}
+                                                </dd>
                                             </div>
                                         )}
                                     </dl>
@@ -396,7 +412,9 @@ export default function ProjectsHub() {
                                         <ol className="space-y-3">
                                             {t.ms.map((m) => (
                                                 <li key={m.id} className="grid grid-cols-[40px_1fr] items-baseline gap-3">
-                                                    <span className="font-mono text-[length:calc(12px*var(--copy-scale))] text-[var(--color-accent)]">{m.year}</span>
+                                                    <span className="font-mono text-[length:calc(12px*var(--copy-scale))] text-[var(--color-accent)]">
+                                                        {m.year}
+                                                    </span>
                                                     <span className="text-[length:calc(13px*var(--copy-scale))] leading-snug">
                                                         {m.venue}
                                                         {m.city && (
@@ -431,7 +449,9 @@ export default function ProjectsHub() {
 function Row({ label, value }: { label: string; value: string }) {
     return (
         <div className="grid grid-cols-[78px_1fr] items-baseline gap-4 border-t border-[var(--color-border)] py-4">
-            <dt className="font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">{label}</dt>
+            <dt className="font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
+                {label}
+            </dt>
             <dd className="text-[length:calc(14px*var(--copy-scale))] font-light">{value}</dd>
         </div>
     );
