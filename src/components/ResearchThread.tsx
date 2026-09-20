@@ -27,9 +27,9 @@ export default function ResearchThread({ themeId }: { themeId: string }) {
     const { slides, references } = collectGalleryMedia(theme.images ?? [], theme.media);
 
     return (
-        <main className="bg-[var(--color-bg)] text-[var(--color-text)]">
+        <main className="bg-[var(--color-bg)] text-[var(--color-text)] max-sm:[&>section:last-child]:pb-6">
             {/* ── Hero ───────────────────────────────────────────────── */}
-            <section className="max-w-[1400px] mx-auto px-[clamp(24px,4vw,64px)] pt-[clamp(32px,6vh,72px)] pb-[clamp(32px,5vw,56px)]">
+            <section className="max-w-[1400px] mx-auto px-[clamp(24px,4vw,64px)] pt-[clamp(32px,6vh,72px)] max-sm:pt-6 pb-[clamp(32px,5vw,56px)]">
                 <a
                     className="thread-rise font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.3em] text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-accent)]"
                     href="/research"

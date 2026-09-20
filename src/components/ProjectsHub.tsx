@@ -54,7 +54,7 @@ export default function ProjectsHub() {
     return (
         <main className="bg-[var(--color-bg)] text-[var(--color-text)]">
             {/* ── Hero ───────────────────────────────────────────────── */}
-            <section className="max-w-[1400px] mx-auto px-[clamp(24px,4vw,64px)] pt-[clamp(40px,8vh,104px)] pb-[clamp(36px,5vw,64px)]">
+            <section className="max-w-[1400px] mx-auto px-[clamp(24px,4vw,64px)] pt-[clamp(40px,8vh,104px)] max-sm:pt-6 pb-[clamp(36px,5vw,64px)]">
                 <p className="thread-rise font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.3em] text-[var(--color-accent)]">
                     Long-term research
                 </p>
@@ -214,7 +214,7 @@ export default function ProjectsHub() {
                         <article
                             key={theme.id}
                             id={`thread-${theme.id}`}
-                            className="scroll-mt-[calc(var(--header-height,64px)+16px)] border-t border-[var(--color-border)] py-[clamp(40px,7vw,104px)] first:border-t-0 first:pt-[clamp(28px,4vw,48px)]"
+                            className="scroll-mt-[calc(var(--header-height,64px)+16px)] border-t border-[var(--color-border)] py-[clamp(40px,7vw,104px)] max-sm:last:pb-6 first:border-t-0 first:pt-[clamp(28px,4vw,48px)]"
                         >
                             <div className="flex items-center gap-3 font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.22em]">
                                 {theme.ongoing ? (
