@@ -140,7 +140,7 @@ export default function ProjectsHub() {
                 <p className="thread-rise font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.3em] text-[var(--color-accent)]">
                     Long-term research
                 </p>
-                <h1 className="thread-rise mt-[clamp(16px,2vw,28px)] whitespace-nowrap font-[family-name:var(--font-display)] text-[min(3.25vw,47px)] font-normal leading-[0.96] tracking-[-0.01em] [animation-delay:80ms]">
+                <h1 className="thread-rise mt-[clamp(16px,2vw,28px)] whitespace-nowrap max-sm:whitespace-normal max-sm:text-balance font-[family-name:var(--font-display)] text-[min(3.25vw,47px)] max-sm:text-[clamp(32px,8vw,44px)] font-normal leading-[0.96] max-sm:leading-[1.1] tracking-[-0.01em] [animation-delay:80ms]">
                     An ongoing inquiry into sound, carried across time and place.
                 </h1>
                 <div className="thread-rise mt-[clamp(24px,3vw,44px)] grid gap-[clamp(24px,4vw,72px)] md:grid-cols-[1fr_auto] md:items-end [animation-delay:160ms]">
@@ -184,7 +184,7 @@ export default function ProjectsHub() {
                 </div>
 
                 {/* axis */}
-                <div className={`thread-rise mt-7 ${SCORE_GRID}`}>
+                <div className={`thread-rise mt-7 max-sm:hidden ${SCORE_GRID}`}>
                     <div className="hidden sm:block" />
                     <div className="relative h-4">
                         {TICKS.map((y) => (
@@ -203,7 +203,7 @@ export default function ProjectsHub() {
                 </div>
 
                 {/* tracks */}
-                <div className="mt-1">
+                <div className="mt-4 sm:mt-1">
                     {tracks.map((t, i) => {
                         const active = hovered === t.theme.id;
                         const left = pos(t.startYear);
@@ -217,25 +217,28 @@ export default function ProjectsHub() {
                                 onMouseLeave={() => setHovered('')}
                                 onFocus={() => setHovered(t.theme.id)}
                                 onBlur={() => setHovered('')}
-                                className={`relative block w-full cursor-pointer border-b border-[var(--color-border)] py-2 text-left transition-colors ${SCORE_GRID} sm:items-center hover:bg-[var(--color-hover-bg)] ${active ? 'z-20' : ''}`}
+                                className={`relative block w-full cursor-pointer border-b border-[var(--color-border)] py-2 max-sm:py-3.5 text-left transition-colors ${SCORE_GRID} sm:items-center hover:bg-[var(--color-hover-bg)] ${active ? 'z-20' : ''}`}
                             >
                                 {/* label */}
                                 <div
-                                    className="thread-rise flex items-baseline justify-between gap-3 sm:block"
+                                    className="thread-rise flex flex-col items-start gap-1 sm:block"
                                     style={{ animationDelay: `${i * 55}ms` }}
                                 >
                                     <span
-                                        className={`font-[family-name:var(--font-display)] text-[clamp(17px,1.5vw,23px)] leading-tight transition-colors ${active ? 'text-[var(--color-accent)]' : ''}`}
+                                        className={`font-[family-name:var(--font-display)] text-[clamp(17px,1.5vw,23px)] max-sm:text-[clamp(22px,6vw,26px)] leading-tight transition-colors ${active ? 'text-[var(--color-accent)]' : ''}`}
                                     >
                                         {t.theme.title}
                                     </span>
-                                    <span className="shrink-0 font-mono text-[length:calc(10px*var(--copy-scale))] tracking-[0.1em] text-[var(--color-text-secondary)] sm:mt-1 sm:block">
+                                    <span className="flex items-center gap-2 font-mono text-[length:calc(10px*var(--copy-scale))] max-sm:text-[length:calc(11px*var(--copy-scale))] tracking-[0.1em] max-sm:tracking-[0.03em] text-[var(--color-text-secondary)] sm:mt-1 sm:block">
+                                        {t.theme.ongoing && (
+                                            <span aria-hidden="true" className="h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-accent)] sm:hidden" />
+                                        )}
                                         {t.theme.yearsDisplay}
                                     </span>
                                 </div>
 
                                 {/* track */}
-                                <div className="relative mt-2 h-[clamp(28px,4.5vh,44px)] sm:mt-0">
+                                <div className="relative mt-2 h-[clamp(28px,4.5vh,44px)] max-sm:hidden sm:mt-0">
                                     {/* gridlines (static, shared across rows) */}
                                     {TICKS.map((y) => (
                                         <span
