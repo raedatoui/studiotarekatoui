@@ -21,11 +21,20 @@ const initScript = `
 })();
 `;
 
+const analyticsScript = `
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-FGMV1SXH2X');
+`;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en" suppressHydrationWarning>
             <head>
                 <script>{initScript}</script>
+                <script async src="https://www.googletagmanager.com/gtag/js?id=G-FGMV1SXH2X" />
+                <script>{analyticsScript}</script>
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
                 <link

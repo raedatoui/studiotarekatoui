@@ -5,3 +5,4 @@ export const site = {
 };
 
 export const isStaging = process.env.NEXT_PUBLIC_SITE_ENV === 'staging';
+export const researchEnabled = process.env.NEXT_PUBLIC_SITE_ENV !== 'production';

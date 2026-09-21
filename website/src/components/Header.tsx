@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { site } from '@/config/site';
+import { researchEnabled, site } from '@/config/site';
 import { useSiteData } from '@/data/SiteDataProvider';
 import ThemeToggle from './ThemeToggle';
 
@@ -39,7 +39,13 @@ export default function Header() {
         };
     }, [menuOpen]);
 
-    const navLinks = navigation.items.map((link, index) => (
+    const visibleLinks = navigation.items.filter((link) => {
+        if (researchEnabled) return true;
+        const url = new URL(link.href, site.url);
+        return url.origin !== site.url || !/^\/research(?:\/|$)/.test(url.pathname);
+    });
+
+    const navLinks = visibleLinks.map((link, index) => (
         <a
             key={`${index}-${link.href}`}
             href={link.href}
