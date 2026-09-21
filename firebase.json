@@ -1,0 +1,19 @@
+{
+  "apphosting": [
+    {
+      "backendId": "cms",
+      "rootDir": ".",
+      "ignore": [
+        "node_modules",
+        ".git",
+        ".next",
+        ".firebase",
+        ".env",
+        ".env.*",
+        "*.pem",
+        "*.log",
+        "scripts"
+      ]
+    }
+  ]
+}

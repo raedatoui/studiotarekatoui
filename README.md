@@ -1,67 +1,100 @@
-# Payload Blank Template
+# Studio Tarek Atoui CMS
 
-This template comes configured with the bare minimum to get started on anything you need.
+Payload 3 on Next.js and React, deployed through Firebase App Hosting. Content lives in Firestore Enterprise with MongoDB compatibility. Editors sign in with Google through Auth.js; media stays on the existing GCS-backed CDN.
 
-## Quick start
+- [Hosted CMS](https://cms--studio-tarekatoui-cms.us-east4.hosted.app/admin)
+- [Firebase App Hosting dashboard](https://console.firebase.google.com/project/studio-tarekatoui-cms/apphosting)
 
-This template can be deployed directly from our Cloud hosting and it will setup MongoDB and cloud S3 object storage for media.
+Local and hosted instances share the same content. Publishing saves to Firestore; it does not deploy or update tarekatoui.com, which still uses its own JSON.
 
-## Quick Start - local setup
+## Local development
 
-To spin up this template locally, follow these steps:
+Use Node.js 22 and `pnpm@10.26.2`.
 
-### Clone
+```sh
+pnpm install
+cp .env.example .env
+pnpm dev
+```
 
-After you click the `Deploy` button above, you'll want to have standalone copy of this repo on your machine. If you've already cloned this repo, skip to [Development](#development).
+On a fresh checkout, fill in `.env` before starting. Keep an existing configured `.env` rather than replacing it.
 
-### Development
+| Variable | Purpose |
+| --- | --- |
+| `DATABASE_URL` | Firestore MongoDB connection string from Secret Manager secret `cms-firestore-database-url` |
+| `PAYLOAD_SECRET` | Local Payload secret |
+| `AUTH_SECRET` | Separate local session secret |
+| `AUTH_URL` | `http://localhost:3001` |
+| `AUTH_GOOGLE_ID` | Existing Google OAuth web client ID |
+| `AUTH_GOOGLE_SECRET` | Existing Google OAuth client secret |
+| `CMS_ALLOWED_EMAILS` | Comma-separated exact editor email addresses |
 
-1. First [clone the repo](#clone) if you have not done so already
-2. `cd my-project && cp .env.example .env` to copy the example environment variables. You'll need to add the `MONGODB_URL` from your Cloud project to your `.env` if you want to use S3 storage and the MongoDB database that was created for you.
+Generate distinct local secrets with `openssl rand -hex 32`. Never commit credentials. Restart the server after environment changes.
 
-3. `pnpm install && pnpm dev` to install dependencies and start the dev server
-4. open `http://localhost:3000` to open the app in your browser
+Open http://localhost:3001/admin. The local server binds to localhost and can run alongside the website on port 3000.
 
-That's it! Changes made in `./src` will be reflected in your app. Follow the on-screen instructions to login and create your first admin user. Then check out [Production](#production) once you're ready to build and serve your app, and [Deployment](#deployment) when you're ready to go live.
+## Google-only login
 
-#### Docker (Optional)
+Auth.js handles Google OAuth and encrypted HTTP-only session cookies; Firebase Auth and the Firebase client SDK are not required. Only exact, verified Google email addresses in `CMS_ALLOWED_EMAILS` can sign in. An empty allowlist denies everyone.
 
-If you prefer to use Docker for local development instead of a local MongoDB instance, the provided docker-compose.yml file can be used.
+The first successful sign-in creates the corresponding Payload user. Approved users have editorial access to all content; user records cannot be edited through the CMS/API. To remove access, update the allowlist and restart locally or redeploy the hosted app. The allowlist is checked on each authenticated request. Sessions expire after eight hours, and Sign out clears the Auth.js session.
 
-To do so, follow these steps:
+The [existing Google OAuth web client](https://console.cloud.google.com/auth/clients?project=992432653598) uses these origins and redirect URIs:
 
-- Modify the `MONGODB_URL` in your `.env` file to `mongodb://127.0.0.1/<dbname>`
-- Modify the `docker-compose.yml` file's `MONGODB_URL` to match the above `<dbname>`
-- Run `docker-compose up` to start the database, optionally pass `-d` to run in the background.
+| Environment | Authorized JavaScript origin | Authorized redirect URI |
+| --- | --- | --- |
+| Local | `http://localhost:3001` | `http://localhost:3001/api/auth/callback/google` |
+| Hosted | `https://cms--studio-tarekatoui-cms.us-east4.hosted.app` | `https://cms--studio-tarekatoui-cms.us-east4.hosted.app/api/auth/callback/google` |
 
-## How it works
+If the OAuth consent screen is in testing mode, the intended Google accounts must also be registered as test users.
 
-The Payload config is tailored specifically to the needs of most websites. It is pre-configured in the following ways:
+## Content
 
-### Collections
+- **Research themes:** complete research pages with descriptions, cover images, collaborators, organizations, materials, nested instances, galleries, and press/reference links.
+- **Research page:** section title, heading, and introduction.
+- **About:** biography and portrait.
+- **Contact:** heading, introductory text, and email.
 
-See the [Collections](https://payloadcms.com/docs/configuration/collections) docs for details on how to extend this functionality.
+Content supports drafts and up to 30 revisions. Content APIs require a signed-in editor. Text fields use plain text; media and press links use dedicated URL and caption fields. There is no separate media library or local upload storage.
 
-- #### Users (Authentication)
+## Firestore
 
-  Users are auth-enabled collections that have access to the admin panel.
+Project `studio-tarekatoui-cms` contains database `cms-content` in `us-east1`, with deletion protection enabled. Payload uses its MongoDB adapter and Firestore compatibility preset. Its declared indexes were provisioned separately; automatic index creation and transactions are disabled by the compatibility setup.
 
-  For additional help, see the official [Auth Example](https://github.com/payloadcms/payload/tree/3.x/examples/auth) or the [Authentication](https://payloadcms.com/docs/authentication/overview#authentication-overview) docs.
+The local and hosted CMS have been confirmed working by the user. Payload provides Firestore compatibility settings but does not officially support alternative MongoDB implementations.
 
-- #### Media
+The original migration snapshot, export, credentials backup, and ID mapping remain outside the repository at `~/tmp/tarek-cms-firestore-20260921-030412/`. Keep that directory private.
 
-  This is the uploads enabled collection. It features pre-configured sizes, focal point and manual resizing to help you manage your pictures.
+## Deployment
 
-### Docker
+```sh
+bash scripts/deploy.sh
+```
 
-Alternatively, you can use [Docker](https://www.docker.com) to spin up this template locally. To do so, follow these steps:
+This deploys the local checkout with `firebase deploy --only apphosting:cms --project=studio-tarekatoui-cms`. Temporary source archives are written under `~/tmp`. GitHub auto-deployment is not configured.
 
-1. Follow [steps 1 and 2 from above](#development), the docker-compose file will automatically use the `.env` file in your project root
-1. Next run `docker-compose up`
-1. Follow [steps 4 and 5 from above](#development) to login and create your first admin user
+Firebase App Hosting builds the full Next.js/Payload container and manages Cloud Run in `us-east4` (Virginia). `apphosting.yaml` sets 1 CPU, 1 GiB RAM, concurrency 20, zero minimum instances, and a one-instance maximum. `firebase.json` excludes local credentials, dependencies, build output, and deployment scripts from source uploads.
 
-That's it! The Docker instance will help you get up and running quickly while also standardizing the development environment across your teams.
+The backend service account is `firebase-app-hosting-compute@studio-tarekatoui-cms.iam.gserviceaccount.com`. Secret references are pinned to version `1` in `apphosting.yaml`:
 
-## Questions
+| Environment variable | Secret |
+| --- | --- |
+| `DATABASE_URL` | `cms-firestore-database-url` |
+| `PAYLOAD_SECRET` | `cms-payload-secret` |
+| `AUTH_SECRET` | `cms-auth-secret` |
+| `AUTH_GOOGLE_ID` | `cms-google-client-id` |
+| `AUTH_GOOGLE_SECRET` | `cms-google-client-secret` |
+| `CMS_ALLOWED_EMAILS` | `cms-allowed-emails` |
 
-If you have any issues or questions, reach out to us on [Discord](https://discord.com/invite/payload) or start a [GitHub discussion](https://github.com/payloadcms/payload/discussions).
+Only the Payload secret is also available during the build to initialize its configuration. Database and Google authentication credentials are runtime-only. `AUTH_URL` points to the hosted origin, and `AUTH_TRUST_HOST=true` supports the hosting proxy. Update pinned secret versions and redeploy when rotating credentials.
+
+## Commands
+
+- `pnpm dev` — local CMS on port 3001.
+- `pnpm generate:types` — regenerate Payload types after schema changes.
+- `pnpm generate:importmap` — regenerate the admin map after component registration changes.
+- `pnpm build` / `pnpm start` — production build and local production server.
+- `pnpm lint` — ESLint.
+- `bash scripts/deploy.sh` — deploy to Firebase App Hosting.
+
+Run verification and deployments only when requested, as described in `AGENTS.md`.
