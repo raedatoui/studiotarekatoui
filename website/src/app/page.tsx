@@ -1,13 +1,13 @@
-import Exhibitions from '@/components/Exhibitions';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
+import News from '@/components/News';
 
 export default function Home() {
     return (
         <>
             <Header />
             <main className="max-w-[1400px] mx-auto">
-                <Exhibitions />
+                <News />
             </main>
             <Footer />
         </>

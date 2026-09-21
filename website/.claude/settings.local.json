@@ -43,7 +43,11 @@
             "Bash(mv img-__TRACKED_VAR__.jpg the-whisperers/)",
             "Bash(mkdir -p _unused)",
             "Bash(mv img-000.jpg img-001.jpg _unused/)",
-            "Bash(mv img-026.jpg img-029.jpg img-032.jpg img-033.jpg the-whisperers/)"
+            "Bash(mv img-026.jpg img-029.jpg img-032.jpg img-033.jpg the-whisperers/)",
+            "Bash(firebase --version)",
+            "Bash(firebase login:list)",
+            "Bash(firebase target:apply hosting prod studiotarekatoui --project api-project-992432653598)",
+            "Bash(firebase target:apply hosting staging tarekatoui-dev --project api-project-992432653598)"
         ]
     }
 }

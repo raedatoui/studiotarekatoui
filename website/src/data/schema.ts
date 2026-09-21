@@ -1,6 +1,58 @@
 import { z } from 'zod';
 
+/** Active research content. Full archived event records and source text live in ./old. */
+const mediaTypeSchema = z.enum(['image', 'video', 'audio', 'press', 'interview', 'external']);
+
+export const mediaSchema = z.strictObject({
+    type: mediaTypeSchema,
+    url: z.string(),
+    label: z.string().optional(),
+    publisher: z.string().optional(),
+});
+
+export const themeSchema = z.strictObject({
+    /** Research page slug. */
+    id: z.string(),
+    title: z.string(),
+    subtitle: z.string().optional(),
+    /** First year of the research. */
+    yearStart: z.number().int(),
+    /** Last year; omit when the project is still active. */
+    yearEnd: z.number().int().optional(),
+    ongoing: z.boolean(),
+    /** Human label, e.g. "2020 — ongoing". */
+    yearsDisplay: z.string(),
+    /** One-line hook for the hub cards. */
+    summary: z.string(),
+    /** Full thematic text, paragraph per entry (from the website-texts sheet). */
+    description: z.array(z.string()),
+    heroImage: z.string().optional(),
+    collaborators: z.array(z.string()).optional(),
+    materials: z.array(z.string()).optional(),
+    /** Gallery images and captions carried over from the portfolio. */
+    images: z.array(z.strictObject({ src: z.string(), caption: z.string() })).optional(),
+    /** Media about the research as a whole, independent of a specific presentation. */
+    media: z.array(mediaSchema).optional(),
+});
+
 const exhibitionStatusSchema = z.enum(['current', 'upcoming', 'past']);
+
+/** Dated appearances shown on research timelines and presentation lists. */
+export const researchEventSchema = z.strictObject({
+    id: z.string(),
+    themeIds: z.array(z.string()).min(1),
+    kind: z.enum(['solo', 'group', 'performance', 'commission', 'curation', 'collaboration', 'residency', 'workshop']),
+    title: z.string().optional(),
+    year: z.number().int(),
+    dateStart: z.string().optional(),
+    dateDisplay: z.string().optional(),
+    status: exhibitionStatusSchema.optional(),
+    venue: z.string(),
+    city: z.string().optional(),
+    country: z.string().optional(),
+    url: z.string().optional(),
+    media: z.array(mediaSchema).optional(),
+});
 
 export const subExhibitionSchema = z.strictObject({
     title: z.string(),
@@ -58,14 +110,20 @@ export const siteContentSchema = z.strictObject({
     navigation: z.array(navItemSchema),
     bio: bioSchema,
     portrait: portraitSchema,
-    exhibitions: z.strictObject({
+    news: z.strictObject({
         solo: z.array(exhibitionSchema),
         group: z.array(exhibitionSchema),
     }),
     contact: contactSchema,
+    researchEvents: z.array(researchEventSchema),
+    themes: z.array(themeSchema),
 });
 
 export type NavItem = z.infer<typeof navItemSchema>;
 export type SubExhibition = z.infer<typeof subExhibitionSchema>;
 export type Exhibition = z.infer<typeof exhibitionSchema>;
 export type SiteContent = z.infer<typeof siteContentSchema>;
+
+export type Media = z.infer<typeof mediaSchema>;
+export type Theme = z.infer<typeof themeSchema>;
+export type ResearchEvent = z.infer<typeof researchEventSchema>;
