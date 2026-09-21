@@ -1,0 +1,24 @@
+# Dependencies
+/node_modules
+/.pnpm-store
+
+# Next.js
+/.next/
+/out/
+/build
+next-env.d.ts
+*.tsbuildinfo
+
+# Credentials
+.env*
+!.env.example
+*.pem
+
+# Logs and Firebase local state
+*.log
+.firebase/
+
+# Editors and OS files
+/.idea/*
+!/.idea/runConfigurations
+.DS_Store
