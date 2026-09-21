@@ -1,0 +1,79 @@
+{
+    "hosting": [
+        {
+            "target": "prod",
+            "public": "website/out",
+            "ignore": [
+                "firebase.json",
+                "**/.*",
+                "**/node_modules/**",
+                ".firebase/**",
+                ".idea/**",
+                "images/**",
+                "portfolio/**",
+                "media/**"
+            ],
+            "cleanUrls": true
+        },
+        {
+            "target": "staging",
+            "public": "website/out",
+            "ignore": [
+                "firebase.json",
+                "**/.*",
+                "**/node_modules/**",
+                ".firebase/**",
+                ".idea/**",
+                "images/**",
+                "portfolio/**",
+                "media/**"
+            ],
+            "cleanUrls": true,
+            "trailingSlash": false,
+            "headers": [
+                {
+                    "source": "**",
+                    "headers": [
+                        {
+                            "key": "X-Robots-Tag",
+                            "value": "noindex"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "apphosting": [
+        {
+            "backendId": "cms",
+            "rootDir": "cms",
+            "ignore": [
+                "**/node_modules/**",
+                "**/.git/**",
+                "**/.next/**",
+                "**/out/**",
+                "**/.firebase/**",
+                "**/.env",
+                "**/.env.*",
+                "**/*.pem",
+                "**/*.key",
+                "**/*.log",
+                "**/*.tsbuildinfo",
+                "**/.idea/**",
+                "**/.claude/**",
+                "**/.codex/**",
+                "**/.DS_Store",
+                "**/*.db",
+                "**/*.sqlite*",
+                "artifacts/**",
+                "backups/**",
+                "website/public/**",
+                "website/src/data/generated/**",
+                "**/*.pdf",
+                "**/*.docx",
+                "**/*.zip",
+                "cms-migration.md"
+            ]
+        }
+    ]
+}

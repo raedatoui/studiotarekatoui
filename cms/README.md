@@ -7,16 +7,17 @@ Payload 3 on Next.js and React, deployed through Firebase App Hosting. Content l
 
 The CMS custom-domain certificate is still provisioning as of September 21, 2026. Wait for App Hosting to report the domain as connected before using the custom-domain login.
 
-Local and hosted instances share the same content. Publishing saves to Firestore; it does not deploy or update tarekatoui.com, which still uses its own JSON.
+Local and hosted instances share the same content. Publishing saves to Firestore; it does not deploy or update tarekatoui.com, which now consumes an explicitly exported and validated snapshot. See the [workspace README](../README.md) for export, import, and live previews.
 
 ## Local development
 
-Use Node.js 22 and `pnpm@10.26.2`.
+Use Node.js 22 (at least 22.13) and pnpm 11.27.1. Install dependencies at the workspace root; keep its single lockfile.
 
 ```sh
+cd ..
 pnpm install
-cp .env.example .env
-pnpm dev
+# On a fresh checkout only: copy cms/.env.example to cms/.env and configure it.
+pnpm dev:cms
 ```
 
 On a fresh checkout, fill in `.env` before starting. Keep an existing configured `.env` rather than replacing it.
@@ -61,6 +62,7 @@ For future rotations, keep the downloaded client JSON outside this repository. S
 - **Research page:** section title, heading, and introduction.
 - **About:** biography and portrait.
 - **Contact:** heading, introductory text, and email.
+- **Navigation** (under Website): ordered menu labels, URLs, and new-tab settings for desktop and mobile. Initial defaults include Research, About, Editions linking to Galerie Chantal Crousel, and Contact. Publish this global before exporting schema-v2 content.
 
 Content supports drafts and up to 30 revisions. Content APIs require a signed-in editor. Text fields use plain text; media and press links use dedicated URL and caption fields. There is no separate media library or local upload storage.
 
@@ -75,12 +77,12 @@ The original migration snapshot, export, credentials backup, and ID mapping rema
 ## Deployment
 
 ```sh
-bash scripts/deploy.sh
+pnpm deploy:cms # from the workspace root
 ```
 
 This deploys the local checkout with `firebase deploy --only apphosting:cms --project=studio-tarekatoui-cms`. Temporary source archives are written under `~/tmp`. GitHub auto-deployment is not configured.
 
-Firebase App Hosting builds the full Next.js/Payload container and manages Cloud Run in `us-east4` (Virginia). `apphosting.yaml` sets 1 CPU, 1 GiB RAM, concurrency 20, zero minimum instances, and a one-instance maximum. `firebase.json` excludes local credentials, dependencies, build output, and deployment scripts from source uploads.
+Firebase App Hosting builds the full Next.js/Payload container and manages Cloud Run in `us-east4` (Virginia). `apphosting.yaml` sets 1 CPU, 1 GiB RAM, concurrency 20, zero minimum instances, and a one-instance maximum. The root `firebase.json` includes workspace manifests and the shared package, sets the application root to `cms`, and excludes nested credentials, dependencies, caches, local media, snapshots, and build output from source uploads. Monorepo deployment has not yet been verified.
 
 The backend service account is `firebase-app-hosting-compute@studio-tarekatoui-cms.iam.gserviceaccount.com`. Secret references are pinned in `apphosting.yaml`; Google client credentials use version `2`, and the remaining secrets use version `1`:
 
@@ -102,6 +104,6 @@ Only the Payload secret is also available during the build to initialize its con
 - `pnpm generate:importmap` — regenerate the admin map after component registration changes.
 - `pnpm build` / `pnpm start` — production build and local production server.
 - `pnpm lint` — ESLint.
-- `bash scripts/deploy.sh` — deploy to Firebase App Hosting.
+- `pnpm deploy:cms # from the workspace root` — deploy to Firebase App Hosting.
 
 Run verification and deployments only when requested, as described in `AGENTS.md`.

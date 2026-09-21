@@ -1,10 +1,14 @@
 import type { Metadata } from 'next';
 import { SiteDataProvider } from '@/data/SiteDataProvider';
+import { siteContent } from '@/data/siteContent';
+import { isStaging, site } from '@/config/site';
 import './globals.css';
 
 export const metadata: Metadata = {
-    title: 'Studio Tarek Atoui',
-    description: 'Tarek Atoui \u2014 artist and electroacoustic composer. News and contact.',
+    metadataBase: new URL(site.url),
+    title: site.title,
+    description: 'Tarek Atoui — artist and electroacoustic composer. Research, biography and contact.',
+    robots: isStaging ? { index: false, follow: false } : { index: true, follow: true },
 };
 
 const initScript = `
@@ -30,7 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 />
             </head>
             <body className="min-h-screen overflow-x-hidden">
-                <SiteDataProvider>{children}</SiteDataProvider>
+                <SiteDataProvider content={siteContent}>{children}</SiteDataProvider>
             </body>
         </html>
     );

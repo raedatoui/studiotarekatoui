@@ -2,30 +2,32 @@
 
 ## Project Structure & Module Organization
 
-This repository contains Studio Tarek Atoui’s Payload 3 CMS, built with Next.js and React and deployed through Firebase App Hosting. Local and hosted instances share Firestore content. Publishing content does not update the studio website.
+This repository contains Studio Tarek Atoui’s Payload 3 CMS, built with Next.js and React and deployed through Firebase App Hosting. Local and hosted instances share Firestore content. Publishing content does not update the studio website. The website consumes an explicit published-content export from the shared @tarek/content schema.
 
 - `src/payload.config.ts` registers collections, globals, authentication components, and Firestore storage through Payload’s MongoDB adapter.
-- `src/collections/` defines content schemas; `src/globals/` defines About, Contact, and the Research page.
-- `src/components/` contains custom admin components; `src/lib/` contains media URL helpers.
+- `src/collections/` defines content schemas; `src/globals/` defines About, Contact, the Research page, and Navigation. Navigation lives under the Website admin group and includes the original Editions link in its initial menu defaults.
+- `src/components/` contains custom admin components, including Export JSON; `src/content/` contains the typed serializer and authenticated export endpoint.
+- `scripts/export-content.ts` and `scripts/import-content.ts` implement the root content commands. Import is dry-run unless --apply; writes are drafts and require explicit user authorization.
+- Live Preview sends unsaved forms to static website preview routes. Configure WEBSITE_PREVIEW_URL; keep the website trusted CMS origin aligned.
 - `src/auth.ts`, `src/auth/`, and `src/access.ts` handle authentication and permissions.
 - `src/app/(payload)/` contains admin and API routes; `src/app/(frontend)/` contains frontend routes.
-- `apphosting.yaml` configures hosting and secret references; `firebase.json` configures source deployment; `scripts/deploy.sh` deploys the CMS. Media stays on the existing GCS-backed CDN.
+- `apphosting.yaml` configures hosting and secret references; the root `firebase.json` configures workspace source deployment; `scripts/deploy.sh` deploys the CMS. Media stays on the existing GCS-backed CDN.
 
 ## Build, Test, and Development Commands
 
-Use Node.js 22 and the pinned package manager, `pnpm@10.26.2`.
+Use Node.js 22 (at least 22.13) and pnpm 11.27.1 from the monorepo root. Shared versions are defined in `../pnpm-workspace.yaml`; use the single root lockfile.
 
-- `pnpm install` installs dependencies.
+- Run `pnpm install` from the workspace root to install dependencies.
 - `pnpm dev` starts the CMS at `http://localhost:3001/admin`.
 - `pnpm build` creates a production build; `pnpm start` serves it locally on port 3001.
-- `pnpm lint` runs ESLint with Next.js and TypeScript rules.
+- Root `pnpm lint` and `pnpm check` run Biome without rewriting files; `pnpm format` rewrites supported files.
 - `pnpm generate:types` regenerates `src/payload-types.ts` after schema changes.
 - `pnpm generate:importmap` regenerates the admin component map after component registration changes.
 - `bash scripts/deploy.sh` deploys to Firebase App Hosting and runs the required remote production build. Only deploy when requested.
 
 ## Coding Style & Naming Conventions
 
-Use strict TypeScript, two-space indentation, single quotes, no semicolons, trailing commas, and a 100-character print width, following `.prettierrc.json`. Match surrounding code. Use PascalCase for collection, global, and component files, and camelCase for fields and functions. Edit schema definitions rather than generated types. Keep changes scoped; avoid unrelated refactoring.
+Use TypeScript 7 and the root Biome style: four spaces, single quotes, semicolons, ES5 trailing commas, and 150 columns. Keep formatting-only changes separate from behavior changes; the existing CMS has not been bulk-reformatted. SCSS and generated files are excluded. Use PascalCase for collection, global, and component files, and camelCase for fields and functions. Edit schema definitions rather than generated types. Keep changes scoped; avoid unrelated refactoring.
 
 ## Testing Guidelines
 

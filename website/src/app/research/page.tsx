@@ -2,11 +2,12 @@ import type { Metadata } from 'next';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import ProjectsHub from '@/components/ProjectsHub';
+import { siteContent } from '@/data/siteContent';
 
 export const metadata: Metadata = {
     title: 'Research — Studio Tarek Atoui',
-    description:
-        'The long-term research threads of Tarek Atoui — ongoing inquiries into sound, material and listening, traced across time and place.',
+    description: siteContent.researchPage.introduction,
+    alternates: { canonical: '/research' },
 };
 
 export default function ProjectsPage() {

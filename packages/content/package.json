@@ -1,0 +1,13 @@
+{
+    "name": "@tarek/content",
+    "version": "1.0.0",
+    "private": true,
+    "type": "module",
+    "exports": {
+        ".": "./src/index.ts",
+        "./preview": "./src/preview.ts"
+    },
+    "scripts": { "typecheck": "tsc --noEmit" },
+    "dependencies": { "zod": "catalog:" },
+    "devDependencies": { "typescript": "catalog:", "@types/node": "catalog:" }
+}

@@ -10,18 +10,31 @@ import { Research } from './collections/Research'
 import { About } from './globals/About'
 import { Contact } from './globals/Contact'
 import { ResearchPage } from './globals/ResearchPage'
+import { Navigation } from './globals/Navigation'
+import { exportEndpoint } from './content/exportEndpoint'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export default buildConfig({
   serverURL,
   csrf: [serverURL],
+  endpoints: [exportEndpoint],
   admin: {
     user: Users.slug,
     autoRefresh: false,
     meta: { titleSuffix: '— Studio Tarek Atoui' },
     importMap: { baseDir: path.resolve(dirname) },
+    livePreview: {
+      collections: ['research'],
+      globals: ['research-page', 'about', 'contact', 'navigation'],
+      url: ({ collectionConfig, globalConfig }) => {
+        const kind = collectionConfig?.slug ?? globalConfig?.slug
+        const websiteURL = process.env.WEBSITE_PREVIEW_URL || 'http://localhost:3000'
+        return new URL(`/preview/${kind}`, websiteURL).href
+      },
+    },
     components: {
+      afterNavLinks: ['/components/ExportContent#ExportContent'],
       views: {
         login: { Component: '/components/GoogleLogin#GoogleLogin', path: '/login' },
         logout: { Component: '/components/GoogleLogout#GoogleLogout', path: '/logout' },
@@ -31,7 +44,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Research],
-  globals: [ResearchPage, About, Contact],
+  globals: [ResearchPage, About, Contact, Navigation],
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: { outputFile: path.resolve(dirname, 'payload-types.ts') },
   db: mongooseAdapter({

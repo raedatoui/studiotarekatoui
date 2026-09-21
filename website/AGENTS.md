@@ -1,73 +1,31 @@
-# AGENTS.md
+# Website guidelines
 
-This file provides guidance to Codex (Codex.ai/code) when working with code in this repository.
-
-## Project Overview
-
-Artist portfolio website for Tarek Atoui (electroacoustic composer/artist). Static site deployed to Firebase Hosting in project `studio-tarekatoui-cms` (production site `studio-tarekatoui-web`, staging site `studio-tarekatoui-staging`). Production domain: tarekatoui.com. Both deployment scripts explicitly target the new project. The old Hosting sites were deleted after their deployed releases were copied; the personal GCP project remains active.
-
-## Commands
-
-- `pnpm dev` — start Next.js dev server
-- `pnpm build` — static export to `out/` directory
-- `pnpm media:upload` — sync `public/images`, `public/portfolio`, and `public/media` to the GCS bucket and prefix configured in `.env`
-- `pnpm lint` — lint with Biome
-- `pnpm format` — format with Biome (auto-fix)
-- `pnpm check` — Biome lint + format combined (auto-fix)
-- `pnpm verify` — validate `src/data/site-content.json` (`verify:zod` runs the full zod schema; `verify:data` independently checks research theme structure and IDs)
-
-No test framework.
-
-## Branches & Deployment
-
-- `main` — trimmed production site (`/`, `/about`, `/contact`, `/news`) served at tarekatoui.com
-- `dev` — preparing `/research` and `/research/[slug]` for production; `/portfolio` and `/chronology` are excluded from routing and static exports via private folders (`src/app/_portfolio`, `src/app/_chronology`)
-
-When deploying production: run `pnpm deploy:prod` from `main`. Upload new media with `pnpm media:upload` before deploying. Media is configured to use the shared Google Cloud CDN at `https://cdn.typedefinc.com/tarekatoui.com` via `NEXT_PUBLIC_MEDIA_BASE_URL` in `.env`; copy `.env.example` for a fresh checkout. Uploads continue to `gs://typedef/tarekatoui.com`. A rebuild and deployment are required for media URL changes to reach the live site. The corresponding GCS objects must be publicly readable. Firebase Hosting excludes `images/**`, `portfolio/**`, and `media/**` for both targets. Local files remain in `public/` for imports and uploads; `out/portfolio` contains shared media, not an exported portfolio page. Production builds require the media base URL. Shared CDN resources and rollback are recorded in `cdn-plan.md`.
-
-## Tech Stack
-
-- **Next.js 16** with static export (`output: 'export'` in next.config.ts)
-- **React 19**, TypeScript, Tailwind CSS v4 (via `@tailwindcss/postcss`)
-- **zod v4** for data validation
-- **Biome** for linting/formatting (not ESLint/Prettier)
-- **pnpm** as package manager
-- **Firebase Hosting** for deployment (static files from `out/`)
+See ../AGENTS.md and ../README.md for workspace commands and constraints.
 
 ## Architecture
 
-Routes (all statically exported; server pages compose `'use client'` components):
+Next.js 16.3.5 / React 19.2.6 with static export to `website/out`. Active public routes: `/` (Research hub), `/research`, `/research/[slug]`, `/about`, `/contact`. Fixed preview routes under `/preview/[kind]` are noindex and use the same renderers.
 
-- `/` — Bio, Exhibitions, Contact sections
-- `/about`, `/contact`, `/news` — single-purpose pages
-- `/portfolio`, `/chronology` — disabled; page source is retained in private folders and excluded from static exports
-- `/research` — hub for long-term research themes (`ProjectsHub`)
-- `/research/[slug]` — one page per theme (`ResearchThread`), slugs from `generateStaticParams` over theme ids
+`src/data/siteContent.ts` parses the ignored generated snapshot with `@tarek/content`. The server layout passes it into `SiteDataProvider`; client components use `useSiteData`. Research documents contain their own instances/gallery/press. `ResearchThread` receives a document directly. A flattened timeline is only a rendering calculation. CMS sortOrder and nested editor ordering are preserved.
 
-### Data layer
+Site identity and production domain are application configuration in `src/config/site.ts`. Navigation is CMS-owned: the published Navigation global supplies ordered labels, links, and new-tab behavior through the snapshot, including Editions. Both desktop and mobile use the same menu. Page metadata and sitemap use the same snapshot as rendering. `generateStaticParams` creates research routes; missing slugs use the static 404. There are no News, portfolio, or chronology routes, legacy data files, Dropbox mappings, or runtime content APIs.
 
-All content lives in JSON under `src/data/`, validated with zod **strictObject** schemas at module load — adding a key to the JSON fails the build until the schema is updated (and `scripts/verify.mjs`, which duplicates the key lists independently).
+## Local work
 
-- `site-content.json` ↔ `schema.ts`, parsed once by `siteContent.ts` — all active editorial content: site meta, navigation, bio, portrait, news, contact, research `themes` with descriptions, gallery images/captions and media, and `researchEvents` linked by `themeIds` for timeline marks, hover details, place counts, thread instance lists, and presentation media/URLs included in research galleries and reference links.
-- Client components share the single `useSiteData()` context (`SiteDataProvider` wraps the app in `layout.tsx`). Server pages use `siteContent` and `getTheme` from `siteContent.ts` for research routes and metadata.
-- `media-assets.json` — generated media download lookup, separate from editorial content.
-- `src/data/old/` — shelved dated `projects`, `openQuestions`, and the original `portfolio` records (including every description and image caption). Only the disabled portfolio and chronology pages consume this archive; active research pages do not import it. See `src/data/old/README.md` for text provenance.
+Run workspace commands from the root:
 
-### Theming
+- `pnpm content:export --output website/src/data/generated/content.json`
+- `pnpm dev:web` (port 3000), `pnpm build:web` (static export)
+- `pnpm media:upload` (only when requested)
 
-Dark/light mode uses CSS custom variables defined in `globals.css` (`:root` / `:root.dark`). A blocking inline script in `layout.tsx` reads `localStorage('theme')` to avoid flash; `ThemeToggle` switches it. Fonts are Google-hosted with CSS variables: Inter (body), Instrument Serif (`--font-display`, headings), IBM Plex Mono (`--font-mono`, micro-labels).
+Export requires configured `cms/.env`; website media and preview origins are configured in `website/.env`. Preserve configured local environment files. A missing snapshot fails with a setup error. Do not run export/build/verification just to check a change unless requested in the current turn.
 
-## Styling Conventions
+## Styling and media
 
-- Tailwind utility classes with CSS custom properties for colors (e.g., `var(--color-text)`)
-- Responsive values use `clamp()` functions, not Tailwind breakpoints for sizing
-- Mobile nav breakpoint uses `max-md:` prefix
-- Recurring label idiom: uppercase mono micro-labels (`font-mono text-[10-11px] uppercase tracking-[0.2em+]`)
-- Path alias: `@/*` maps to `./src/*`
+Retain existing theme switching, typography, CSS variables, responsive clamp sizing, and useful presentation components. `@/*` maps to `src/*`. MediaSlider follows explicit CMS media types and order. Absolute CDN URLs are preserved; root-relative media resolves through NEXT_PUBLIC_MEDIA_BASE_URL.
 
-## Biome Configuration
+Local media working files remain in ignored `public/`. Hosting excludes images, portfolio media, and media directories from upload. The CDN is https://cdn.typedefinc.com/tarekatoui.com; uploads retain gs://typedef/tarekatoui.com. Do not delete cloud media during cleanup.
 
-- Indent: 4 spaces
-- Line width: 150
-- Single quotes, semicolons always, ES5 trailing commas
-- `noImgElement` rule is disabled (site uses `<img>` since images are unoptimized for static export)
+## Deployment
+
+Root Firebase configuration maps production and staging to studio-tarekatoui-web and studio-tarekatoui-staging in studio-tarekatoui-cms. Cloud website publishing commands are deferred; there is no GitHub workflow. Use NEXT_PUBLIC_SITE_ENV=staging for noindex builds. Production canonicals always use tarekatoui.com. Never deploy without the user's request.

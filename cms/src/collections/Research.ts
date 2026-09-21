@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { contentAccess } from '../access'
+import { INSTANCE_KINDS, INSTANCE_STATUSES, PRESS_TYPES } from '@tarek/content'
 
 export const Research: CollectionConfig = {
   slug: 'research',
@@ -47,7 +48,7 @@ export const Research: CollectionConfig = {
         { name: 'title', type: 'text' },
         {
           name: 'kind', type: 'select', required: true,
-          options: ['solo', 'group', 'performance', 'commission', 'curation', 'collaboration', 'residency', 'workshop'],
+          options: [...INSTANCE_KINDS],
         },
         { name: 'year', type: 'number', required: true },
         { name: 'organization', type: 'text', required: true },
@@ -59,7 +60,7 @@ export const Research: CollectionConfig = {
         },
         { name: 'dateStart', type: 'date' },
         { name: 'dateDisplay', type: 'text', label: 'Display dates' },
-        { name: 'status', type: 'select', options: ['current', 'upcoming', 'past'] },
+        { name: 'status', type: 'select', options: [...INSTANCE_STATUSES] },
         { name: 'url', type: 'text', label: 'Instance link' },
       ],
     },
@@ -100,7 +101,7 @@ export const Research: CollectionConfig = {
         { name: 'publisher', type: 'text' },
         {
           name: 'type', type: 'select', required: true, defaultValue: 'press',
-          options: ['press', 'interview', 'external', 'audio', 'video', 'image'],
+          options: [...PRESS_TYPES],
         },
         {
           name: 'preview', type: 'ui',

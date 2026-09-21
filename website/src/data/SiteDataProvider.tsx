@@ -1,16 +1,15 @@
 'use client';
 
 import { createContext, type ReactNode, useContext } from 'react';
-import type { SiteContent } from './schema';
-import { siteContent } from './siteContent';
+import type { ContentSnapshot } from '@tarek/content';
 
-const SiteDataContext = createContext<SiteContent | null>(null);
+const SiteDataContext = createContext<ContentSnapshot | null>(null);
 
-export function SiteDataProvider({ children }: { children: ReactNode }) {
-    return <SiteDataContext.Provider value={siteContent}>{children}</SiteDataContext.Provider>;
+export function SiteDataProvider({ children, content }: { children: ReactNode; content: ContentSnapshot }) {
+    return <SiteDataContext.Provider value={content}>{children}</SiteDataContext.Provider>;
 }
 
-export function useSiteData(): SiteContent {
+export function useSiteData(): ContentSnapshot {
     const value = useContext(SiteDataContext);
     if (!value) {
         throw new Error('useSiteData must be used within a SiteDataProvider');

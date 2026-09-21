@@ -1,11 +1,12 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { site } from '@/config/site';
 import { useSiteData } from '@/data/SiteDataProvider';
 import ThemeToggle from './ThemeToggle';
 
 export default function Header() {
-    const { meta, navigation } = useSiteData();
+    const { navigation } = useSiteData();
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef<HTMLDialogElement>(null);
 
@@ -38,9 +39,9 @@ export default function Header() {
         };
     }, [menuOpen]);
 
-    const navLinks = navigation.map((link) => (
+    const navLinks = navigation.items.map((link, index) => (
         <a
-            key={link.href}
+            key={`${index}-${link.href}`}
             href={link.href}
             {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
             className="text-[length:calc(13px*var(--copy-scale))] max-md:text-[length:calc(18px*var(--copy-scale))] font-normal tracking-[0.04em] text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-colors duration-200"
@@ -54,7 +55,7 @@ export default function Header() {
         <header className="sticky top-0 z-100 bg-[var(--color-header-bg)] backdrop-blur-[12px] border-b border-[var(--color-border)] transition-[background-color] duration-300">
             <div className="flex justify-between items-center max-md:gap-4 px-[clamp(24px,4vw,64px)] py-5 max-w-[1400px] mx-auto">
                 <div className="text-[clamp(20px,2vw,28px)] font-medium tracking-[0.08em] uppercase">
-                    <a href="/">{meta.siteTitle}</a>
+                    <a href="/">{site.title}</a>
                 </div>
 
                 <div className="flex items-center gap-6 max-md:order-first max-md:shrink-0 max-md:gap-3">
@@ -97,7 +98,7 @@ export default function Header() {
                                 <path d="m6 6 12 12M18 6 6 18" />
                             </svg>
                         </button>
-                        <span className="text-[clamp(20px,2vw,28px)] font-medium tracking-[0.08em] uppercase">{meta.siteTitle}</span>
+                        <span className="text-[clamp(20px,2vw,28px)] font-medium tracking-[0.08em] uppercase">{site.title}</span>
                     </div>
                     <nav className="flex flex-1 flex-col items-center justify-center gap-8 px-[clamp(24px,4vw,64px)] py-10">{navLinks}</nav>
                 </div>

@@ -91,11 +91,13 @@ export interface Config {
     'research-page': ResearchPage;
     about: About;
     contact: Contact;
+    navigation: Navigation;
   };
   globalsSelect: {
     'research-page': ResearchPageSelect<false> | ResearchPageSelect<true>;
     about: AboutSelect<false> | AboutSelect<true>;
     contact: ContactSelect<false> | ContactSelect<true>;
+    navigation: NavigationSelect<false> | NavigationSelect<true>;
   };
   locale: null;
   widgets: {
@@ -434,6 +436,28 @@ export interface Contact {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navigation".
+ */
+export interface Navigation {
+  id: string;
+  /**
+   * Drag to reorder. The same menu appears on desktop and mobile.
+   */
+  items: {
+    label: string;
+    /**
+     * A website path such as /research, or a full https:// URL.
+     */
+    href: string;
+    external?: boolean | null;
+    id?: string | null;
+  }[];
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "research-page_select".
  */
 export interface ResearchPageSelect<T extends boolean = true> {
@@ -471,6 +495,24 @@ export interface ContactSelect<T extends boolean = true> {
   heading?: T;
   text?: T;
   email?: T;
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navigation_select".
+ */
+export interface NavigationSelect<T extends boolean = true> {
+  items?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        external?: T;
+        id?: T;
+      };
   _status?: T;
   updatedAt?: T;
   createdAt?: T;

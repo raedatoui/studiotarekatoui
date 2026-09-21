@@ -1,12 +1,14 @@
-import { siteContent } from '@/data/siteContent';
+'use client';
+
+import { useSiteData } from '@/data/SiteDataProvider';
 
 export default function Contact() {
-    const { email, text } = siteContent.contact;
+    const { contact: { heading, email, text } } = useSiteData();
 
     return (
         <section className="py-[clamp(48px,6vw,80px)] px-[clamp(24px,4vw,64px)] max-w-[650px] mx-auto text-center">
             <div className="mb-[clamp(32px,4vw,56px)] border-b border-[var(--color-border)] pb-4">
-                <span className="text-[clamp(20px,2vw,28px)] font-bold">Contact</span>
+                <h1 className="text-[clamp(20px,2vw,28px)] font-bold">{heading}</h1>
             </div>
             {text}&nbsp;
             <a

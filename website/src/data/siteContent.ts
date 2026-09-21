@@ -1,8 +1,8 @@
-import { type SiteContent, siteContentSchema, type Theme } from './schema';
-import rawSiteContent from './site-content.json';
+import { parseContentSnapshot, type Research } from '@tarek/content';
+import rawSiteContent from './generated/content.json';
 
-export const siteContent: SiteContent = siteContentSchema.parse(rawSiteContent);
+export const siteContent = parseContentSnapshot(rawSiteContent);
 
-export function getTheme(id: string): Theme | undefined {
-    return siteContent.themes.find((theme) => theme.id === id);
+export function getResearch(slug: string): Research | undefined {
+    return siteContent.research.find((research) => research.slug === slug);
 }
