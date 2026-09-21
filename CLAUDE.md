@@ -47,7 +47,7 @@ Routes (all statically exported; server pages compose `'use client'` components)
 
 All content lives in JSON under `src/data/`, validated with zod **strictObject** schemas at module load — adding a key to the JSON fails the build until the schema is updated (and `scripts/verify.mjs`, which duplicates the key lists independently).
 
-- `site-content.json` ↔ `schema.ts`, parsed once by `siteContent.ts` — all active editorial content: site meta, navigation, bio, portrait, news, contact, and research `themes` with descriptions, gallery images/captions, and media.
+- `site-content.json` ↔ `schema.ts`, parsed once by `siteContent.ts` — all active editorial content: site meta, navigation, bio, portrait, news, contact, research `themes` with descriptions, gallery images/captions and media, and `researchEvents` linked by `themeIds` for timeline marks, hover details, place counts, thread instance lists, and presentation media/URLs included in research galleries and reference links.
 - Client components share the single `useSiteData()` context (`SiteDataProvider` wraps the app in `layout.tsx`). Server pages use `siteContent` and `getTheme` from `siteContent.ts` for research routes and metadata.
 - `media-assets.json` — generated media download lookup, separate from editorial content.
 - `src/data/old/` — shelved dated `projects`, `openQuestions`, and the original `portfolio` records (including every description and image caption). Only the disabled portfolio and chronology pages consume this archive; active research pages do not import it. See `src/data/old/README.md` for text provenance.

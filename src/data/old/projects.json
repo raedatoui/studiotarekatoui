@@ -25,11 +25,7 @@
     },
     {
         "id": "imma-dublin-2026",
-        "themeIds": [
-            "within",
-            "the-rain",
-            "the-whisperers"
-        ],
+        "themeIds": ["within", "the-rain", "the-whisperers"],
         "kind": "solo",
         "title": "Sunflowers / Souffle Continu",
         "year": 2026,
@@ -52,10 +48,7 @@
     },
     {
         "id": "phonolites-alwarsha-2026",
-        "themeIds": [
-            "the-whisperers",
-            "the-reverse-collection"
-        ],
+        "themeIds": ["the-whisperers", "the-reverse-collection"],
         "kind": "solo",
         "title": "Phonolites",
         "year": 2026,
@@ -88,9 +81,7 @@
     },
     {
         "id": "thomaskerk-amsterdam-2026",
-        "themeIds": [
-            "at-tariq"
-        ],
+        "themeIds": ["at-tariq"],
         "kind": "performance",
         "title": "Concert at Thomaskerk",
         "year": 2026,
@@ -130,9 +121,7 @@
     },
     {
         "id": "bukhara-biennial-2025",
-        "themeIds": [
-            "the-reverse-collection"
-        ],
+        "themeIds": ["the-reverse-collection"],
         "kind": "commission",
         "title": "untitled",
         "year": 2025,
@@ -157,9 +146,7 @@
     },
     {
         "id": "mathaf-doha-2025",
-        "themeIds": [
-            "waters-witness"
-        ],
+        "themeIds": ["waters-witness"],
         "kind": "solo",
         "title": "Waters' Witness",
         "year": 2025,
@@ -174,9 +161,7 @@
     },
     {
         "id": "tba21-madrid-2025",
-        "themeIds": [
-            "at-tariq"
-        ],
+        "themeIds": ["at-tariq"],
         "kind": "solo",
         "title": "At-Tāriq. A Journey into the Rural Music Traditions of North Africa and the Arab World",
         "year": 2025,
@@ -201,11 +186,7 @@
     },
     {
         "id": "hangarbicocca-milan-2025",
-        "themeIds": [
-            "waters-witness",
-            "the-rain",
-            "within"
-        ],
+        "themeIds": ["waters-witness", "the-rain", "within"],
         "kind": "solo",
         "title": "Improvisation in 10 Days",
         "year": 2025,
@@ -217,11 +198,7 @@
     },
     {
         "id": "bayt-al-hams-alwarsha-2025",
-        "themeIds": [
-            "the-whisperers",
-            "the-reverse-collection",
-            "within"
-        ],
+        "themeIds": ["the-whisperers", "the-reverse-collection", "within"],
         "kind": "solo",
         "title": "Bayt Al Hams",
         "year": 2025,
@@ -233,9 +210,7 @@
     },
     {
         "id": "afrosonica-geneva-2025",
-        "themeIds": [
-            "the-reverse-collection"
-        ],
+        "themeIds": ["the-reverse-collection"],
         "kind": "group",
         "title": "Afrosonica – Soundscapes",
         "year": 2025,
@@ -248,9 +223,7 @@
     },
     {
         "id": "de-balie-amsterdam-2025",
-        "themeIds": [
-            "at-tariq"
-        ],
+        "themeIds": ["at-tariq"],
         "kind": "performance",
         "title": "Forgotten Tales Through Time",
         "year": 2025,
@@ -263,9 +236,7 @@
     },
     {
         "id": "marrakesh-parure-2025",
-        "themeIds": [
-            "at-tariq"
-        ],
+        "themeIds": ["at-tariq"],
         "kind": "performance",
         "title": "Forgotten Tales Through Time",
         "year": 2025,
@@ -294,10 +265,7 @@
         "venue": "Kunstenfestivaldesarts",
         "city": "Brussels",
         "country": "Belgium",
-        "collaborators": [
-            "Noé Soulier",
-            "CNDC Angers"
-        ],
+        "collaborators": ["Noé Soulier", "CNDC Angers"],
         "note": "In collaboration with choreographer Noé Soulier and CNDC, Angers. Sits outside the eight long-term themes (see open questions).",
         "needsReview": true
     },
@@ -310,10 +278,7 @@
         "venue": "Festival d'Automne",
         "city": "Paris",
         "country": "France",
-        "collaborators": [
-            "Noé Soulier",
-            "CNDC Angers"
-        ],
+        "collaborators": ["Noé Soulier", "CNDC Angers"],
         "note": "In collaboration with choreographer Noé Soulier and CNDC, Angers. Sits outside the eight long-term themes (see open questions).",
         "needsReview": true
     },
@@ -349,9 +314,7 @@
         "city": "Ljubljana",
         "country": "Slovenia",
         "url": "https://cukrarna.art/en/program/exhibitions/29/tarek-atoui/",
-        "themeIds": [
-            "the-wave"
-        ],
+        "themeIds": ["the-wave"],
         "title": "Standing Waves",
         "dateStart": "2024-02-29",
         "dateEnd": "2024-06-02",
@@ -385,9 +348,7 @@
     },
     {
         "id": "diriyah-biennale-2024",
-        "themeIds": [
-            "at-tariq"
-        ],
+        "themeIds": ["at-tariq"],
         "kind": "performance",
         "title": "At-Tāriq",
         "year": 2024,
@@ -406,9 +367,7 @@
     },
     {
         "id": "art-sonje-seoul-2023",
-        "themeIds": [
-            "the-rain"
-        ],
+        "themeIds": ["the-rain"],
         "kind": "solo",
         "title": "The Rain",
         "year": 2023,
@@ -419,9 +378,7 @@
     },
     {
         "id": "mca-sydney-2023",
-        "themeIds": [
-            "waters-witness"
-        ],
+        "themeIds": ["waters-witness"],
         "kind": "solo",
         "title": "Waters' Witness",
         "year": 2023,
@@ -440,9 +397,7 @@
     },
     {
         "id": "luma-westbau-zurich-2023",
-        "themeIds": [
-            "the-whisperers"
-        ],
+        "themeIds": ["the-whisperers"],
         "kind": "solo",
         "title": "The Whisperers",
         "year": 2023,
@@ -479,9 +434,7 @@
     },
     {
         "id": "serralves-porto-2022",
-        "themeIds": [
-            "waters-witness"
-        ],
+        "themeIds": ["waters-witness"],
         "kind": "solo",
         "title": "Waters' Witness",
         "year": 2022,
@@ -491,10 +444,7 @@
     },
     {
         "id": "contemporary-austin-2022",
-        "themeIds": [
-            "the-whisperers",
-            "the-wave"
-        ],
+        "themeIds": ["the-whisperers", "the-wave"],
         "kind": "solo",
         "title": "The Whisperers",
         "year": 2022,
@@ -513,9 +463,7 @@
     },
     {
         "id": "flag-art-foundation-2022",
-        "themeIds": [
-            "the-whisperers"
-        ],
+        "themeIds": ["the-whisperers"],
         "kind": "solo",
         "title": "The Whisperers",
         "year": 2022,
@@ -525,9 +473,7 @@
     },
     {
         "id": "mudam-luxembourg-2022",
-        "themeIds": [
-            "waters-witness"
-        ],
+        "themeIds": ["waters-witness"],
         "kind": "solo",
         "title": "Waters' Witness",
         "year": 2022,
@@ -555,9 +501,7 @@
     },
     {
         "id": "bourse-de-commerce-2021",
-        "themeIds": [
-            "the-ground"
-        ],
+        "themeIds": ["the-ground"],
         "kind": "solo",
         "title": "THE GROUND Sessions",
         "year": 2021,
@@ -567,9 +511,7 @@
     },
     {
         "id": "crousel-whisperers-2021",
-        "themeIds": [
-            "the-whisperers"
-        ],
+        "themeIds": ["the-whisperers"],
         "kind": "solo",
         "title": "The Whisperers",
         "year": 2021,
@@ -619,9 +561,7 @@
     },
     {
         "id": "fridericianum-kassel-2020",
-        "themeIds": [
-            "waters-witness"
-        ],
+        "themeIds": ["waters-witness"],
         "kind": "solo",
         "title": "Waters' Witness",
         "year": 2020,
@@ -633,9 +573,7 @@
     },
     {
         "id": "sharjah-cycle-in-11-2020",
-        "themeIds": [
-            "within"
-        ],
+        "themeIds": ["within"],
         "kind": "solo",
         "title": "Cycle in 11",
         "year": 2020,
@@ -662,9 +600,7 @@
     },
     {
         "id": "kurimanzutto-organ-within-2019",
-        "themeIds": [
-            "within"
-        ],
+        "themeIds": ["within"],
         "kind": "solo",
         "title": "Organ Within",
         "year": 2019,
@@ -692,9 +628,7 @@
     },
     {
         "id": "centrocentro-madrid-2019",
-        "themeIds": [
-            "within"
-        ],
+        "themeIds": ["within"],
         "kind": "group",
         "title": "Oído Infinito / Infinite Ear",
         "year": 2019,
@@ -711,9 +645,7 @@
         "city": "Okayama",
         "country": "Japan",
         "note": "Showed The Wave (2019).",
-        "themeIds": [
-            "the-wave"
-        ]
+        "themeIds": ["the-wave"]
     },
     {
         "id": "yorkshire-sculpture-international-2019",
@@ -744,9 +676,7 @@
     },
     {
         "id": "herrenhausen-hanover-2019",
-        "themeIds": [
-            "within"
-        ],
+        "themeIds": ["within"],
         "kind": "group",
         "title": "WITHIN",
         "year": 2019,
@@ -765,9 +695,7 @@
     },
     {
         "id": "venice-biennale-2019",
-        "themeIds": [
-            "the-ground"
-        ],
+        "themeIds": ["the-ground"],
         "kind": "group",
         "title": "The Ground",
         "year": 2019,
@@ -786,9 +714,7 @@
     },
     {
         "id": "serralves-ie-porto-2018",
-        "themeIds": [
-            "waters-witness"
-        ],
+        "themeIds": ["waters-witness"],
         "kind": "solo",
         "title": "I/E",
         "year": 2018,
@@ -808,9 +734,7 @@
     },
     {
         "id": "ntu-cca-singapore-2018",
-        "themeIds": [
-            "the-ground"
-        ],
+        "themeIds": ["the-ground"],
         "kind": "solo",
         "title": "The Ground: From the Land to the Sea",
         "year": 2018,
@@ -847,9 +771,7 @@
     },
     {
         "id": "garage-moscow-2018",
-        "themeIds": [
-            "within"
-        ],
+        "themeIds": ["within"],
         "kind": "group",
         "title": "Infinite Ear",
         "year": 2018,
@@ -868,9 +790,7 @@
     },
     {
         "id": "mirrored-gardens-guangzhou-2017",
-        "themeIds": [
-            "the-ground"
-        ],
+        "themeIds": ["the-ground"],
         "kind": "solo",
         "title": "The Ground",
         "year": 2017,
@@ -882,9 +802,7 @@
     },
     {
         "id": "kfda-brussels-2017",
-        "themeIds": [
-            "within"
-        ],
+        "themeIds": ["within"],
         "kind": "solo",
         "title": "WITHIN",
         "year": 2017,
@@ -902,9 +820,7 @@
     },
     {
         "id": "crousel-within-2017",
-        "themeIds": [
-            "within"
-        ],
+        "themeIds": ["within"],
         "kind": "solo",
         "title": "WITHIN",
         "year": 2017,
@@ -931,9 +847,7 @@
     },
     {
         "id": "ie-abu-dhabi-2017",
-        "themeIds": [
-            "waters-witness"
-        ],
+        "themeIds": ["waters-witness"],
         "kind": "performance",
         "title": "I/E Abu Dhabi",
         "year": 2017,
@@ -977,18 +891,14 @@
     },
     {
         "id": "bergen-assembly-2016",
-        "themeIds": [
-            "within"
-        ],
+        "themeIds": ["within"],
         "kind": "solo",
         "title": "WITHIN / Infinite Ear",
         "year": 2016,
         "venue": "Bergen Assembly (Sentralbadet)",
         "city": "Bergen",
         "country": "Norway",
-        "collaborators": [
-            "Council"
-        ],
+        "collaborators": ["Council"],
         "note": "First time the WITHIN instruments were brought together, in an abandoned swimming pool.",
         "url": "https://en.bergenassembly.no/2016-en",
         "media": [
@@ -1021,9 +931,7 @@
     },
     {
         "id": "tate-modern-reverse-2016",
-        "themeIds": [
-            "the-reverse-collection"
-        ],
+        "themeIds": ["the-reverse-collection"],
         "kind": "solo",
         "title": "The Reverse Collection",
         "year": 2016,
@@ -1075,9 +983,7 @@
     },
     {
         "id": "zkm-karlsruhe-2016",
-        "themeIds": [
-            "within"
-        ],
+        "themeIds": ["within"],
         "kind": "group",
         "title": "GLOBALE: New Sensorium",
         "year": 2016,
@@ -1129,9 +1035,7 @@
     },
     {
         "id": "ie-elefsina-2015",
-        "themeIds": [
-            "waters-witness"
-        ],
+        "themeIds": ["waters-witness"],
         "kind": "solo",
         "title": "I/E Elefsina",
         "year": 2015,
@@ -1143,9 +1047,7 @@
     },
     {
         "id": "bampfa-matrix-258-2015",
-        "themeIds": [
-            "within"
-        ],
+        "themeIds": ["within"],
         "kind": "solo",
         "title": "Matrix 258",
         "year": 2015,
@@ -1171,9 +1073,7 @@
     },
     {
         "id": "kurimanzutto-reverse-sessions-2014",
-        "themeIds": [
-            "the-reverse-collection"
-        ],
+        "themeIds": ["the-reverse-collection"],
         "kind": "solo",
         "title": "The Reverse Sessions",
         "year": 2014,
@@ -1222,9 +1122,7 @@
     },
     {
         "id": "berlin-biennale-dahlem-sessions-2014",
-        "themeIds": [
-            "the-reverse-collection"
-        ],
+        "themeIds": ["the-reverse-collection"],
         "kind": "performance",
         "title": "Dahlem Sessions",
         "year": 2014,
@@ -1262,9 +1160,7 @@
     },
     {
         "id": "fiac-ie-paris-2013",
-        "themeIds": [
-            "waters-witness"
-        ],
+        "themeIds": ["waters-witness"],
         "kind": "solo",
         "title": "I/E",
         "year": 2013,
@@ -1316,9 +1212,7 @@
     },
     {
         "id": "sharjah-biennial-11-within-2013",
-        "themeIds": [
-            "within"
-        ],
+        "themeIds": ["within"],
         "kind": "performance",
         "title": "WITHIN",
         "year": 2013,
@@ -1377,9 +1271,7 @@
     },
     {
         "id": "sharjah-revisiting-tarab-2012",
-        "themeIds": [
-            "on-and-from-tarab"
-        ],
+        "themeIds": ["on-and-from-tarab"],
         "kind": "solo",
         "title": "Re-Visiting Tarab",
         "year": 2012,
@@ -1397,9 +1289,7 @@
     },
     {
         "id": "nuit-blanche-tarab-2012",
-        "themeIds": [
-            "on-and-from-tarab"
-        ],
+        "themeIds": ["on-and-from-tarab"],
         "kind": "performance",
         "title": "Tarab",
         "year": 2012,
@@ -1477,9 +1367,7 @@
     },
     {
         "id": "serpentine-la-suite-2012",
-        "themeIds": [
-            "on-and-from-tarab"
-        ],
+        "themeIds": ["on-and-from-tarab"],
         "kind": "group",
         "title": "La Suite",
         "year": 2012,
@@ -1497,9 +1385,7 @@
     },
     {
         "id": "performa-11-visiting-tarab-2011",
-        "themeIds": [
-            "on-and-from-tarab"
-        ],
+        "themeIds": ["on-and-from-tarab"],
         "kind": "performance",
         "title": "Visiting Tarab",
         "year": 2011,

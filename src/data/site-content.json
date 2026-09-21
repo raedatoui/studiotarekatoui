@@ -92,6 +92,892 @@
         "email": "studio@tarekatoui.com",
         "text": "For any inquiries or collaborations, please don't hesitate to reach out at"
     },
+    "researchEvents": [
+        {
+            "id": "imma-dublin-2026",
+            "themeIds": [
+                "within",
+                "the-rain",
+                "the-whisperers"
+            ],
+            "kind": "solo",
+            "title": "Sunflowers / Souffle Continu",
+            "year": 2026,
+            "dateStart": "2026-02-21",
+            "dateDisplay": "February 21 – July 19, 2026",
+            "status": "past",
+            "venue": "IMMA — Irish Museum of Modern Art",
+            "city": "Dublin",
+            "country": "Ireland",
+            "url": "https://imma.ie/whats-on/tarek-atoui-exhibition/",
+            "media": [
+                {
+                    "type": "image",
+                    "url": "https://www.dropbox.com/scl/fi/7dm8738f72pir6wnajv1w/202602_TarekAtoui_Souffle-Continu_Exhibition-view_IMMA_Dublin_Ros-Kavanagh1.jpg?rlkey=os6bsdfvqvrt6vt9d15g4aiq1&dl=0",
+                    "label": "Souffle Continu, exhibition view — Photo: Ros Kavanagh"
+                }
+            ]
+        },
+        {
+            "id": "phonolites-alwarsha-2026",
+            "themeIds": [
+                "the-whisperers",
+                "the-reverse-collection"
+            ],
+            "kind": "solo",
+            "title": "Phonolites",
+            "year": 2026,
+            "dateStart": "2026-02-01",
+            "dateDisplay": "February 1 – April 15, 2026",
+            "status": "past",
+            "venue": "AlWarsha",
+            "city": "AlUla",
+            "country": "Saudi Arabia",
+            "media": [
+                {
+                    "type": "image",
+                    "url": "https://www.dropbox.com/scl/fi/viqxtgpbw3vfxwepeeapo/202602__Phonolites_Litophone-details_AlWarsha-AlUla-Saudi-Arabia-image-credit-Nick-Jackson38.jpg?rlkey=dqvh51tzxb0zly68y8lyfqg4z&dl=0",
+                    "label": "Litophone details — Photo: Nick Jackson"
+                }
+            ]
+        },
+        {
+            "id": "thomaskerk-amsterdam-2026",
+            "themeIds": [
+                "at-tariq"
+            ],
+            "kind": "performance",
+            "title": "Concert at Thomaskerk",
+            "year": 2026,
+            "dateStart": "2026-03-07",
+            "dateDisplay": "March 7, 2026",
+            "status": "past",
+            "venue": "Thomaskerk",
+            "city": "Amsterdam",
+            "country": "Netherlands",
+            "url": "https://www.hartwigartfoundation.nl/en/programmes/tarek-atoui2026/"
+        },
+        {
+            "id": "bukhara-biennial-2025",
+            "themeIds": [
+                "the-reverse-collection"
+            ],
+            "kind": "commission",
+            "title": "untitled",
+            "year": 2025,
+            "dateDisplay": "2025",
+            "status": "past",
+            "venue": "Bukhara Biennial",
+            "city": "Bukhara",
+            "country": "Uzbekistan"
+        },
+        {
+            "id": "mathaf-doha-2025",
+            "themeIds": [
+                "waters-witness"
+            ],
+            "kind": "solo",
+            "title": "Waters' Witness",
+            "year": 2025,
+            "dateStart": "2025-12-16",
+            "dateDisplay": "December 16, 2025 – May 18, 2026",
+            "status": "past",
+            "venue": "Mathaf: Arab Museum of Modern Art",
+            "city": "Doha",
+            "country": "Qatar",
+            "url": "https://mathaf.org.qa/en/calendar/waters-witness-by-tarek-atoui/"
+        },
+        {
+            "id": "tba21-madrid-2025",
+            "themeIds": [
+                "at-tariq"
+            ],
+            "kind": "solo",
+            "title": "At-Tāriq. A Journey into the Rural Music Traditions of North Africa and the Arab World",
+            "year": 2025,
+            "dateDisplay": "2025",
+            "status": "past",
+            "venue": "TBA21 – Thyssen-Bornemisza Art Contemporary",
+            "city": "Madrid",
+            "country": "Spain",
+            "url": "https://www.museothyssen.org/en/exhibitions/tarek-atoui-tariq",
+            "media": [
+                {
+                    "type": "image",
+                    "url": "https://www.dropbox.com/scl/fi/b7fbk0behz0yva0wk4q2s/202502_TBA-Madrid-EXHIBITION-VIEW-Lourdes-Cabrera-27.jpg?rlkey=o7scucvmtuexwrma1vesd1hci&dl=0",
+                    "label": "Exhibition view — Photo: Lourdes Cabrera"
+                },
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=0em36gqFE0E",
+                    "label": "Exhibition film"
+                }
+            ]
+        },
+        {
+            "id": "hangarbicocca-milan-2025",
+            "themeIds": [
+                "waters-witness",
+                "the-rain",
+                "within"
+            ],
+            "kind": "solo",
+            "title": "Improvisation in 10 Days",
+            "year": 2025,
+            "dateDisplay": "2025",
+            "status": "past",
+            "venue": "Pirelli HangarBicocca",
+            "city": "Milan",
+            "country": "Italy"
+        },
+        {
+            "id": "bayt-al-hams-alwarsha-2025",
+            "themeIds": [
+                "the-whisperers",
+                "the-reverse-collection",
+                "within"
+            ],
+            "kind": "solo",
+            "title": "Bayt Al Hams",
+            "year": 2025,
+            "dateDisplay": "2025",
+            "status": "past",
+            "venue": "AlWarsha",
+            "city": "AlUla",
+            "country": "Saudi Arabia"
+        },
+        {
+            "id": "afrosonica-geneva-2025",
+            "themeIds": [
+                "the-reverse-collection"
+            ],
+            "kind": "group",
+            "title": "Afrosonica – Soundscapes",
+            "year": 2025,
+            "dateDisplay": "2025",
+            "status": "past",
+            "venue": "Musée d'Ethnographie de Genève (MEG)",
+            "city": "Geneva",
+            "country": "Switzerland"
+        },
+        {
+            "id": "de-balie-amsterdam-2025",
+            "themeIds": [
+                "at-tariq"
+            ],
+            "kind": "performance",
+            "title": "Forgotten Tales Through Time",
+            "year": 2025,
+            "dateDisplay": "2025",
+            "status": "past",
+            "venue": "De Balie",
+            "city": "Amsterdam",
+            "country": "Netherlands"
+        },
+        {
+            "id": "marrakesh-parure-2025",
+            "themeIds": [
+                "at-tariq"
+            ],
+            "kind": "performance",
+            "title": "Forgotten Tales Through Time",
+            "year": 2025,
+            "dateDisplay": "2025",
+            "status": "past",
+            "venue": "Le Monde des Arts de la Parure",
+            "city": "Marrakesh",
+            "country": "Morocco"
+        },
+        {
+            "id": "cukrarna-ljubljana-2024",
+            "themeIds": [
+                "the-wave"
+            ],
+            "kind": "solo",
+            "title": "Standing Waves",
+            "year": 2024,
+            "dateStart": "2024-02-29",
+            "dateDisplay": "February 29 – June 2, 2024",
+            "venue": "Cukrarna Gallery",
+            "city": "Ljubljana",
+            "country": "Slovenia",
+            "url": "https://cukrarna.art/en/program/exhibitions/29/tarek-atoui/",
+            "media": [
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=Hgtr1qIK2KM",
+                    "label": "Standing Waves — exhibition film",
+                    "publisher": "Cukrarna"
+                }
+            ]
+        },
+        {
+            "id": "diriyah-biennale-2024",
+            "themeIds": [
+                "at-tariq"
+            ],
+            "kind": "performance",
+            "title": "At-Tāriq",
+            "year": 2024,
+            "dateDisplay": "2024",
+            "venue": "Diriyah Contemporary Art Biennale",
+            "city": "Riyadh",
+            "country": "Saudi Arabia",
+            "media": [
+                {
+                    "type": "image",
+                    "url": "/portfolio/at-tariq/performance-diriyah-biennale-2024.jpg",
+                    "label": "At-Tāriq, performance, Diriyah Biennale, Riyadh, 2024"
+                }
+            ]
+        },
+        {
+            "id": "art-sonje-seoul-2023",
+            "themeIds": [
+                "the-rain"
+            ],
+            "kind": "solo",
+            "title": "The Rain",
+            "year": 2023,
+            "venue": "Art Sonje Center",
+            "city": "Seoul",
+            "country": "South Korea",
+            "url": "https://artsonje.org/en/exhibition/tarek-atoui-the-rain/"
+        },
+        {
+            "id": "mca-sydney-2023",
+            "themeIds": [
+                "waters-witness"
+            ],
+            "kind": "solo",
+            "title": "Waters' Witness",
+            "year": 2023,
+            "venue": "MCA — Museum of Contemporary Art Australia",
+            "city": "Sydney",
+            "country": "Australia"
+        },
+        {
+            "id": "luma-westbau-zurich-2023",
+            "themeIds": [
+                "the-whisperers"
+            ],
+            "kind": "solo",
+            "title": "The Whisperers",
+            "year": 2023,
+            "venue": "Luma Westbau",
+            "city": "Zurich",
+            "country": "Switzerland"
+        },
+        {
+            "id": "serralves-porto-2022",
+            "themeIds": [
+                "waters-witness"
+            ],
+            "kind": "solo",
+            "title": "Waters' Witness",
+            "year": 2022,
+            "venue": "Serralves Foundation",
+            "city": "Porto",
+            "country": "Portugal"
+        },
+        {
+            "id": "contemporary-austin-2022",
+            "themeIds": [
+                "the-whisperers",
+                "the-wave"
+            ],
+            "kind": "solo",
+            "title": "The Whisperers",
+            "year": 2022,
+            "venue": "The Contemporary Austin – Jones Center on Congress Avenue",
+            "city": "Austin",
+            "country": "USA",
+            "url": "https://thecontemporaryaustin.org/exhibitions/tarek-atoui-the-whisperers/",
+            "media": [
+                {
+                    "type": "press",
+                    "url": "https://www.e-flux.com/criticism/464837/tarek-atoui-s-the-whisperers",
+                    "label": "The Whisperers and The Wave — exhibition review",
+                    "publisher": "e-flux"
+                }
+            ]
+        },
+        {
+            "id": "flag-art-foundation-2022",
+            "themeIds": [
+                "the-whisperers"
+            ],
+            "kind": "solo",
+            "title": "The Whisperers",
+            "year": 2022,
+            "venue": "The FLAG Art Foundation",
+            "city": "New York",
+            "country": "USA"
+        },
+        {
+            "id": "mudam-luxembourg-2022",
+            "themeIds": [
+                "waters-witness"
+            ],
+            "kind": "solo",
+            "title": "Waters' Witness",
+            "year": 2022,
+            "venue": "Mudam Luxembourg",
+            "city": "Luxembourg",
+            "country": "Luxembourg",
+            "url": "https://www.mudam.com/whats-on/exhibitions/waters-witness"
+        },
+        {
+            "id": "bourse-de-commerce-2021",
+            "themeIds": [
+                "the-ground"
+            ],
+            "kind": "solo",
+            "title": "THE GROUND Sessions",
+            "year": 2021,
+            "venue": "Bourse de Commerce — Pinault Collection",
+            "city": "Paris",
+            "country": "France"
+        },
+        {
+            "id": "crousel-whisperers-2021",
+            "themeIds": [
+                "the-whisperers"
+            ],
+            "kind": "solo",
+            "title": "The Whisperers",
+            "year": 2021,
+            "venue": "Galerie Chantal Crousel",
+            "city": "Paris",
+            "country": "France",
+            "url": "https://www.crousel.com/en/exhibition/tarek-atoui-2021-yxqatc/",
+            "media": [
+                {
+                    "type": "video",
+                    "url": "https://vimeo.com/912886608",
+                    "label": "The Whisperers / Whispering Playground, 2021"
+                }
+            ]
+        },
+        {
+            "id": "fridericianum-kassel-2020",
+            "themeIds": [
+                "waters-witness"
+            ],
+            "kind": "solo",
+            "title": "Waters' Witness",
+            "year": 2020,
+            "venue": "Fridericianum",
+            "city": "Kassel",
+            "country": "Germany",
+            "url": "https://fridericianum.org/de/ausstellungen/tarek-atoui/"
+        },
+        {
+            "id": "sharjah-cycle-in-11-2020",
+            "themeIds": [
+                "within"
+            ],
+            "kind": "solo",
+            "title": "Cycle in 11",
+            "year": 2020,
+            "venue": "Sharjah Art Foundation",
+            "city": "Sharjah",
+            "country": "UAE",
+            "media": [
+                {
+                    "type": "interview",
+                    "url": "https://www.sharjahart.org/en/resources/saf-online/details/tarek-atoui-and-the-realm-of-sound",
+                    "label": "Tarek Atoui and the Realm of Sound (SAF Online)"
+                }
+            ]
+        },
+        {
+            "id": "kurimanzutto-organ-within-2019",
+            "themeIds": [
+                "within"
+            ],
+            "kind": "solo",
+            "title": "Organ Within",
+            "year": 2019,
+            "venue": "Kurimanzutto",
+            "city": "New York",
+            "country": "USA"
+        },
+        {
+            "id": "centrocentro-madrid-2019",
+            "themeIds": [
+                "within"
+            ],
+            "kind": "group",
+            "title": "Oído Infinito / Infinite Ear",
+            "year": 2019,
+            "venue": "CentroCentro",
+            "city": "Madrid",
+            "country": "Spain"
+        },
+        {
+            "id": "okayama-art-summit-2019",
+            "themeIds": [
+                "the-wave"
+            ],
+            "kind": "group",
+            "title": "IF THE SNAKE",
+            "year": 2019,
+            "venue": "Okayama Art Summit",
+            "city": "Okayama",
+            "country": "Japan"
+        },
+        {
+            "id": "herrenhausen-hanover-2019",
+            "themeIds": [
+                "within"
+            ],
+            "kind": "group",
+            "title": "WITHIN",
+            "year": 2019,
+            "venue": "Kunstfestspiele Herrenhausen",
+            "city": "Hanover",
+            "country": "Germany"
+        },
+        {
+            "id": "venice-biennale-2019",
+            "themeIds": [
+                "the-ground"
+            ],
+            "kind": "group",
+            "title": "The Ground",
+            "year": 2019,
+            "venue": "58th Venice Biennale — May You Live in Interesting Times",
+            "city": "Venice",
+            "country": "Italy"
+        },
+        {
+            "id": "serralves-ie-porto-2018",
+            "themeIds": [
+                "waters-witness"
+            ],
+            "kind": "solo",
+            "title": "I/E",
+            "year": 2018,
+            "venue": "Serralves Foundation",
+            "city": "Porto",
+            "country": "Portugal"
+        },
+        {
+            "id": "ntu-cca-singapore-2018",
+            "themeIds": [
+                "the-ground"
+            ],
+            "kind": "solo",
+            "title": "The Ground: From the Land to the Sea",
+            "year": 2018,
+            "venue": "NTU Centre for Contemporary Art Singapore",
+            "city": "Singapore",
+            "country": "Singapore",
+            "url": "https://ntu.ccasingapore.org/exhibition/tarek-atoui-the-ground-from-the-land-to-the-sea/"
+        },
+        {
+            "id": "garage-moscow-2018",
+            "themeIds": [
+                "within"
+            ],
+            "kind": "group",
+            "title": "Infinite Ear",
+            "year": 2018,
+            "venue": "Garage Museum of Contemporary Art",
+            "city": "Moscow",
+            "country": "Russia"
+        },
+        {
+            "id": "mirrored-gardens-guangzhou-2017",
+            "themeIds": [
+                "the-ground"
+            ],
+            "kind": "solo",
+            "title": "The Ground",
+            "year": 2017,
+            "venue": "Mirrored Gardens",
+            "city": "Guangzhou",
+            "country": "China",
+            "url": "https://vitamincreativespace.com/en/?project=tarek-atoui-the-ground"
+        },
+        {
+            "id": "kfda-brussels-2017",
+            "themeIds": [
+                "within"
+            ],
+            "kind": "solo",
+            "title": "WITHIN",
+            "year": 2017,
+            "venue": "Kunstenfestivaldesarts",
+            "city": "Brussels",
+            "country": "Belgium",
+            "url": "https://kfda.be/en/festivals/2017-edition/programme/within-exhibition/",
+            "media": [
+                {
+                    "type": "external",
+                    "url": "https://kfda.be/en/festivals/2017-edition/programme/within-concerts/",
+                    "label": "Performance videos & photos"
+                }
+            ]
+        },
+        {
+            "id": "crousel-within-2017",
+            "themeIds": [
+                "within"
+            ],
+            "kind": "solo",
+            "title": "WITHIN",
+            "year": 2017,
+            "venue": "Galerie Chantal Crousel",
+            "city": "Paris",
+            "country": "France",
+            "url": "https://www.crousel.com/exposition/tarek-atoui-within-2017-cin96v/",
+            "media": [
+                {
+                    "type": "video",
+                    "url": "https://vimeo.com/206039804",
+                    "label": "Video"
+                }
+            ]
+        },
+        {
+            "id": "ie-abu-dhabi-2017",
+            "themeIds": [
+                "waters-witness"
+            ],
+            "kind": "performance",
+            "title": "I/E Abu Dhabi",
+            "year": 2017,
+            "venue": "Durub Al Tawaya Programme, Abu Dhabi Art",
+            "city": "Abu Dhabi",
+            "country": "UAE",
+            "media": [
+                {
+                    "type": "image",
+                    "url": "https://www.dropbox.com/scl/fi/ujho39mrywbi805v2tqa6/Durub-Al-Tawaya-3.jpg?rlkey=gd09t3fshmy1uonowtrdgmkws&st=orn9qjs1&dl=0",
+                    "label": "Performance photo (Dropbox)"
+                }
+            ]
+        },
+        {
+            "id": "bergen-assembly-2016",
+            "themeIds": [
+                "within"
+            ],
+            "kind": "solo",
+            "title": "WITHIN / Infinite Ear",
+            "year": 2016,
+            "venue": "Bergen Assembly (Sentralbadet)",
+            "city": "Bergen",
+            "country": "Norway",
+            "url": "https://en.bergenassembly.no/2016-en",
+            "media": [
+                {
+                    "type": "image",
+                    "url": "https://www.dropbox.com/scl/fo/qwywf4hn8e1gxfwbcdh7z/AG8eBDYtOKZYF3RteX0-S3I?rlkey=bherx0ikc3ygus1mrlaocztgw&st=la7tzcyf&dl=0",
+                    "label": "Exhibition images (Dropbox)"
+                },
+                {
+                    "type": "video",
+                    "url": "/media/projects/bergen-assembly-2016/within-2016-the-bergen-assembly-bergen-norway-performance-02-09-2016-b-a86ad2cd03df-web.mp4",
+                    "label": "Performance — 2 September 2016 (black and white)"
+                },
+                {
+                    "type": "video",
+                    "url": "/media/projects/bergen-assembly-2016/within-2016-the-bergen-assembly-bergen-norway-performance-02-09-2016-e7975585bf56-web.mp4",
+                    "label": "Performance — 2 September 2016"
+                },
+                {
+                    "type": "video",
+                    "url": "https://vimeo.com/186105719",
+                    "label": "Video"
+                },
+                {
+                    "type": "video",
+                    "url": "https://youtu.be/kJcU5_7c8sQ?si=ePEw9N-Uyc-uglU8",
+                    "label": "Tarek Atoui and Council Explore Hearing Diversities at Bergen Assembly"
+                }
+            ]
+        },
+        {
+            "id": "tate-modern-reverse-2016",
+            "themeIds": [
+                "the-reverse-collection"
+            ],
+            "kind": "solo",
+            "title": "The Reverse Collection",
+            "year": 2016,
+            "venue": "Tate Modern",
+            "city": "London",
+            "country": "UK",
+            "media": [
+                {
+                    "type": "image",
+                    "url": "https://www.dropbox.com/scl/fo/p55h5bnwi5if454wdt9vx/AE-laJ6sqBhXhOuEwf2y-Xk?rlkey=gev0iywyde6bcop5l0t588uou&st=3iaml5mh&dl=0",
+                    "label": "Exhibition images (Dropbox)"
+                },
+                {
+                    "type": "video",
+                    "url": "/media/projects/tate-modern-reverse-2016/reverse-collection-tate-modern-2016-1-6c166a2b7ee3-web.mp4",
+                    "label": "The Reverse Collection — performance 1"
+                },
+                {
+                    "type": "video",
+                    "url": "/media/projects/tate-modern-reverse-2016/reverse-collection-tate-modern-2016-2-3907db2c3e25-web.mp4",
+                    "label": "The Reverse Collection — performance 2"
+                },
+                {
+                    "type": "video",
+                    "url": "/media/projects/tate-modern-reverse-2016/reverse-collection-tate-modern-2016-3-cf65e8bd8511-web.mp4",
+                    "label": "The Reverse Collection — performance 3"
+                },
+                {
+                    "type": "video",
+                    "url": "/media/projects/tate-modern-reverse-2016/reverse-collection-tate-modern-2016-4-66d9a1f1e11d-web.mp4",
+                    "label": "The Reverse Collection — performance 4"
+                },
+                {
+                    "type": "video",
+                    "url": "https://youtu.be/M-gIT9gCZgU?si=WG9NU98Bvy8ESkUc",
+                    "label": "Performance video"
+                }
+            ]
+        },
+        {
+            "id": "zkm-karlsruhe-2016",
+            "themeIds": [
+                "within"
+            ],
+            "kind": "group",
+            "title": "GLOBALE: New Sensorium",
+            "year": 2016,
+            "venue": "ZKM | Center for Art and Media",
+            "city": "Karlsruhe",
+            "country": "Germany",
+            "media": [
+                {
+                    "type": "image",
+                    "url": "https://www.dropbox.com/scl/fi/m552o87q9pw2phpsao6fj/WITHIN_-2016-_The-Bergen-Assembly-Norway-Thor-Br-dreskif-01.JPG?rlkey=yt35kmnnvufo2r10nymfdtl2w&st=7qurxj6a&dl=0",
+                    "label": "Performance photo (Dropbox)"
+                },
+                {
+                    "type": "video",
+                    "url": "/media/projects/zkm-karlsruhe-2016/within-2016-the-bergen-assembly-bergen-norway-performance-02-09-2016-b-a86ad2cd03df-web.mp4",
+                    "label": "Performance video (black and white)"
+                },
+                {
+                    "type": "image",
+                    "url": "https://www.dropbox.com/scl/fi/b23qb1eybje9yk0yjdz0s/WHITIN_-2016-_Workshop-New-Sensorium-_ZKM-Center-for-Art-and-Media_-Harald-Voelkl-09.jpeg?rlkey=5xlqeuzbkhooy5f5s8l4m8jxm&st=icd17kty&dl=0",
+                    "label": "Workshop photo (Dropbox)"
+                }
+            ]
+        },
+        {
+            "id": "ie-elefsina-2015",
+            "themeIds": [
+                "waters-witness"
+            ],
+            "kind": "solo",
+            "title": "I/E Elefsina",
+            "year": 2015,
+            "venue": "Aisxylia Festival (with locus Athens)",
+            "city": "Elefsina",
+            "country": "Greece",
+            "url": "https://www.crousel.com/artiste/tarek-atoui-r90lmw/projets/ie-elefsina-2015/"
+        },
+        {
+            "id": "bampfa-matrix-258-2015",
+            "themeIds": [
+                "within"
+            ],
+            "kind": "solo",
+            "title": "Matrix 258",
+            "year": 2015,
+            "venue": "Berkeley Art Museum and Pacific Film Archive (BAMPFA)",
+            "city": "Berkeley",
+            "country": "USA",
+            "url": "https://bampfa.org/press/tarek-atoui-matrix-258-march-2–november-7-2015"
+        },
+        {
+            "id": "kurimanzutto-reverse-sessions-2014",
+            "themeIds": [
+                "the-reverse-collection"
+            ],
+            "kind": "solo",
+            "title": "The Reverse Sessions",
+            "year": 2014,
+            "venue": "Kurimanzutto",
+            "city": "Mexico City",
+            "country": "Mexico",
+            "url": "https://www.kurimanzutto.com/exhibitions/tarek-atoui3#tab:slideshow;slide:9",
+            "media": [
+                {
+                    "type": "image",
+                    "url": "https://www.dropbox.com/scl/fo/l0d38anh3ilbnerxvfop8/AAXC87O026AKuJXx57MjMr4?rlkey=z2aq4tjvcfuysnmtzbwhyortl&st=qs63dqzg&dl=0",
+                    "label": "Exhibition images (Dropbox)"
+                },
+                {
+                    "type": "video",
+                    "url": "/media/projects/kurimanzutto-reverse-sessions-2014/aimee-babasse-57a24d059dd5-web.mp4",
+                    "label": "Performance — Aimee Babasse"
+                },
+                {
+                    "type": "video",
+                    "url": "/media/projects/kurimanzutto-reverse-sessions-2014/aimee-bow-22c2c06ad513-web.mp4",
+                    "label": "Performance — Aimee Bow"
+                },
+                {
+                    "type": "video",
+                    "url": "/media/projects/kurimanzutto-reverse-sessions-2014/chris-bow-f02b37cf3225-web.mp4",
+                    "label": "Performance — Chris Bow"
+                },
+                {
+                    "type": "video",
+                    "url": "https://vimeo.com/219382666",
+                    "label": "The Reverse Sessions — performance"
+                }
+            ]
+        },
+        {
+            "id": "berlin-biennale-dahlem-sessions-2014",
+            "themeIds": [
+                "the-reverse-collection"
+            ],
+            "kind": "performance",
+            "title": "Dahlem Sessions",
+            "year": 2014,
+            "venue": "8th Berlin Biennale",
+            "city": "Berlin",
+            "country": "Germany",
+            "media": [
+                {
+                    "type": "external",
+                    "url": "https://www.berlinbiennale.de/en/personen/65/tarek-atoui",
+                    "label": "Berlin Biennale page"
+                },
+                {
+                    "type": "image",
+                    "url": "https://www.dropbox.com/scl/fo/splhh2jnm3fnsrq31y9hv/AEwBNL3-d9sTuYRFCJifCgw?rlkey=xiwu9qcdo2wrv39l9ogk34pjp&st=0149yp1e&dl=0",
+                    "label": "Images (Dropbox)"
+                },
+                {
+                    "type": "video",
+                    "url": "https://vimeo.com/100364735",
+                    "label": "Video"
+                }
+            ]
+        },
+        {
+            "id": "fiac-ie-paris-2013",
+            "themeIds": [
+                "waters-witness"
+            ],
+            "kind": "solo",
+            "title": "I/E",
+            "year": 2013,
+            "venue": "Hors-les-Murs Programme, FIAC",
+            "city": "Paris",
+            "country": "France"
+        },
+        {
+            "id": "sharjah-biennial-11-within-2013",
+            "themeIds": [
+                "within"
+            ],
+            "kind": "performance",
+            "title": "WITHIN",
+            "year": 2013,
+            "venue": "Sharjah Biennial 11",
+            "city": "Sharjah",
+            "country": "UAE",
+            "url": "https://www.crousel.com/en/artist/tarek-atoui-r90lmw/projects/within-sharjah-biennal-11-2013/",
+            "media": [
+                {
+                    "type": "image",
+                    "url": "https://www.dropbox.com/scl/fo/0u9ayaq4p3nhyadvusrld/AKISGs4Bjgzhz100Rt12YaY?rlkey=serkpieal115mwb0iw89jqtct&st=o5v7tu0g&dl=0",
+                    "label": "Images (Dropbox)"
+                },
+                {
+                    "type": "video",
+                    "url": "https://vimeo.com/102746092",
+                    "label": "Video"
+                }
+            ]
+        },
+        {
+            "id": "sharjah-revisiting-tarab-2012",
+            "themeIds": [
+                "on-and-from-tarab"
+            ],
+            "kind": "solo",
+            "title": "Re-Visiting Tarab",
+            "year": 2012,
+            "venue": "Sharjah Art Foundation",
+            "city": "Sharjah",
+            "country": "UAE",
+            "url": "https://www.sharjahart.org/en/press/details/saf-announces-the-premiere-of-revisiting-tarab",
+            "media": [
+                {
+                    "type": "external",
+                    "url": "https://www.amar-foundation.org/visiting-tarab-event-2011/",
+                    "label": "AMAR Foundation"
+                }
+            ]
+        },
+        {
+            "id": "nuit-blanche-tarab-2012",
+            "themeIds": [
+                "on-and-from-tarab"
+            ],
+            "kind": "performance",
+            "title": "Tarab",
+            "year": 2012,
+            "venue": "Nuit Blanche",
+            "city": "Paris",
+            "country": "France",
+            "url": "https://www.crousel.com/artiste/tarek-atoui-r90lmw/projets/tarab-pour-une-nuit-blanche/"
+        },
+        {
+            "id": "serpentine-la-suite-2012",
+            "themeIds": [
+                "on-and-from-tarab"
+            ],
+            "kind": "group",
+            "title": "La Suite",
+            "year": 2012,
+            "venue": "Serpentine Gallery (Memory Marathon)",
+            "city": "London",
+            "country": "UK",
+            "url": "https://www.serpentinegalleries.org/whats-on/tarek-atouis-la-suite-opening-memory-marathon/",
+            "media": [
+                {
+                    "type": "image",
+                    "url": "https://www.dropbox.com/scl/fo/5ppq90t3w7o5vbb2b6r9s/AFcGQHR97ipKcO75sXWYUqk?rlkey=xgvx18wmpu3lqdiyhalse7zna&st=cydzgzla&dl=0",
+                    "label": "Images (Dropbox)"
+                }
+            ]
+        },
+        {
+            "id": "performa-11-visiting-tarab-2011",
+            "themeIds": [
+                "on-and-from-tarab"
+            ],
+            "kind": "performance",
+            "title": "Visiting Tarab",
+            "year": 2011,
+            "venue": "Performa 11",
+            "city": "New York",
+            "country": "USA",
+            "media": [
+                {
+                    "type": "video",
+                    "url": "https://www.youtube.com/watch?v=szoiwBB2EYk",
+                    "label": "Performance video"
+                }
+            ]
+        }
+    ],
     "themes": [
         {
             "id": "at-tariq",
@@ -171,6 +1057,12 @@
                     "url": "https://www.thenationalnews.com/arts-culture/art-design/2025/04/06/tarek-atouli-lebanon-atlas-mountains-madrid-tba21/",
                     "label": "Lebanese artist Tarek Atoui opens a door to musical heritage of Atlas Mountains in Madrid show",
                     "publisher": "The National"
+                },
+                {
+                    "type": "press",
+                    "url": "https://www.kurimanzutto.com/news/exhibition-tarek-atoui-at-tariq",
+                    "label": "Tarek Atoui: At-Tāriq — Museo Thyssen-Bornemisza",
+                    "publisher": "Kurimanzutto"
                 },
                 {
                     "type": "external",

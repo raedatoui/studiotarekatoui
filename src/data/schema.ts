@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-/** Active long-term research themes. Shelved events and source text live in ./old. */
+/** Active research content. Full archived event records and source text live in ./old. */
 const mediaTypeSchema = z.enum(['image', 'video', 'audio', 'press', 'interview', 'external']);
 
 export const mediaSchema = z.strictObject({
@@ -36,6 +36,23 @@ export const themeSchema = z.strictObject({
 });
 
 const exhibitionStatusSchema = z.enum(['current', 'upcoming', 'past']);
+
+/** Dated appearances shown on research timelines and presentation lists. */
+export const researchEventSchema = z.strictObject({
+    id: z.string(),
+    themeIds: z.array(z.string()).min(1),
+    kind: z.enum(['solo', 'group', 'performance', 'commission', 'curation', 'collaboration', 'residency', 'workshop']),
+    title: z.string().optional(),
+    year: z.number().int(),
+    dateStart: z.string().optional(),
+    dateDisplay: z.string().optional(),
+    status: exhibitionStatusSchema.optional(),
+    venue: z.string(),
+    city: z.string().optional(),
+    country: z.string().optional(),
+    url: z.string().optional(),
+    media: z.array(mediaSchema).optional(),
+});
 
 export const subExhibitionSchema = z.strictObject({
     title: z.string(),
@@ -98,6 +115,7 @@ export const siteContentSchema = z.strictObject({
         group: z.array(exhibitionSchema),
     }),
     contact: contactSchema,
+    researchEvents: z.array(researchEventSchema),
     themes: z.array(themeSchema),
 });
 
@@ -108,3 +126,4 @@ export type SiteContent = z.infer<typeof siteContentSchema>;
 
 export type Media = z.infer<typeof mediaSchema>;
 export type Theme = z.infer<typeof themeSchema>;
+export type ResearchEvent = z.infer<typeof researchEventSchema>;

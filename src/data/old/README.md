@@ -9,6 +9,8 @@ This directory is outside the active site data. It preserves content for future 
 
 The active research themes now live in `../site-content.json`, alongside all other editorial content, with one schema, loader, and shared provider. Each matching theme owns its former portfolio gallery images and captions; the `portfolioId` join is gone. Active research pages use theme descriptions and media without importing these archives.
 
+Theme-linked event summaries also live in `../site-content.json` under `researchEvents`, including their media and external URLs. They preserve the research hub's timeline marks, hover details, place and presentation counts, “Where & when” instance lists, and event contributions to each research gallery and reference list. The full event records remain archived here; active pages read their summaries through the shared site data provider.
+
 ## Portfolio text provenance
 
 The existing research descriptions remain the canonical published text. Most portfolio descriptions already match them; original wording is retained here rather than appended as repetitive paragraphs.

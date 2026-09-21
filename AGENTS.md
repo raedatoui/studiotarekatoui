@@ -23,7 +23,7 @@ No test framework.
 - `main` — trimmed production site (`/`, `/about`, `/contact`, `/news`) served at tarekatoui.com
 - `dev` — preparing `/research` and `/research/[slug]` for production; `/portfolio` and `/chronology` are excluded from routing and static exports via private folders (`src/app/_portfolio`, `src/app/_chronology`)
 
-When deploying production: run `pnpm deploy:prod` from `main`. Upload new media with `pnpm media:upload` before deploying. Media is served from `https://storage.googleapis.com/typedef/tarekatoui.com`, configured via `NEXT_PUBLIC_MEDIA_BASE_URL` in `.env`; copy `.env.example` for a fresh checkout. The corresponding GCS objects must be publicly readable. Firebase Hosting excludes `images/**`, `portfolio/**`, and `media/**` for both targets. Local files remain in `public/` for imports and uploads; `out/portfolio` contains shared media, not an exported portfolio page. Production builds require the media base URL.
+When deploying production: run `pnpm deploy:prod` from `main`. Upload new media with `pnpm media:upload` before deploying. Media is configured to use the shared Google Cloud CDN at `https://cdn.typedefinc.com/tarekatoui.com` via `NEXT_PUBLIC_MEDIA_BASE_URL` in `.env`; copy `.env.example` for a fresh checkout. Uploads continue to `gs://typedef/tarekatoui.com`. A rebuild and deployment are required for media URL changes to reach the live site. The corresponding GCS objects must be publicly readable. Firebase Hosting excludes `images/**`, `portfolio/**`, and `media/**` for both targets. Local files remain in `public/` for imports and uploads; `out/portfolio` contains shared media, not an exported portfolio page. Production builds require the media base URL. Shared CDN resources and rollback are recorded in `cdn-plan.md`.
 
 ## Tech Stack
 
@@ -48,7 +48,7 @@ Routes (all statically exported; server pages compose `'use client'` components)
 
 All content lives in JSON under `src/data/`, validated with zod **strictObject** schemas at module load — adding a key to the JSON fails the build until the schema is updated (and `scripts/verify.mjs`, which duplicates the key lists independently).
 
-- `site-content.json` ↔ `schema.ts`, parsed once by `siteContent.ts` — all active editorial content: site meta, navigation, bio, portrait, news, contact, and research `themes` with descriptions, gallery images/captions, and media.
+- `site-content.json` ↔ `schema.ts`, parsed once by `siteContent.ts` — all active editorial content: site meta, navigation, bio, portrait, news, contact, research `themes` with descriptions, gallery images/captions and media, and `researchEvents` linked by `themeIds` for timeline marks, hover details, place counts, thread instance lists, and presentation media/URLs included in research galleries and reference links.
 - Client components share the single `useSiteData()` context (`SiteDataProvider` wraps the app in `layout.tsx`). Server pages use `siteContent` and `getTheme` from `siteContent.ts` for research routes and metadata.
 - `media-assets.json` — generated media download lookup, separate from editorial content.
 - `src/data/old/` — shelved dated `projects`, `openQuestions`, and the original `portfolio` records (including every description and image caption). Only the disabled portfolio and chronology pages consume this archive; active research pages do not import it. See `src/data/old/README.md` for text provenance.

@@ -1,5 +1,5 @@
 import mediaAssets from '@/data/media-assets.json';
-import type { Media } from '@/data/schema';
+import type { Media, ResearchEvent } from '@/data/schema';
 
 export interface GallerySlide {
     type?: 'image' | 'embed' | 'video';
@@ -55,38 +55,54 @@ function videoSlide(media: Media, caption: string): GallerySlide | undefined {
     }
 }
 
-/** Resolve and deduplicate research images and media for the shared gallery. */
-export function collectGalleryMedia(images: GallerySlide[], themeMedia: Media[] = []) {
+/** Resolve and deduplicate portfolio, presentation, and theme media for the shared gallery. */
+export function collectGalleryMedia(images: GallerySlide[], projects: ResearchEvent[], themeMedia: Media[] = []) {
     const slides: GallerySlide[] = [...images];
     const references: { src: string; caption: string; publisher: string; type: Media['type'] }[] = [];
-    for (const media of publicMedia(themeMedia)) {
-        const caption = media.label?.replace(/\s*\(Dropbox\)/g, '') ?? '';
-        if (media.type === 'image') {
-            const assets = media.url.startsWith('/') ? [{ src: media.url, name: '' }] : localAssets[media.url];
-            if (assets?.length) {
-                slides.push(
-                    ...assets.map((asset) => ({
-                        type: 'image' as const,
-                        src: asset.src,
-                        caption: assets.length > 1 ? `${caption} — ${asset.name.replace(/_/g, ' ')}` : caption,
-                    }))
-                );
-                continue;
+    const sources = [
+        { media: themeMedia, context: '' },
+        ...projects.map((project) => ({
+            media: [
+                ...(project.media ?? []),
+                ...(project.url
+                    ? [{ type: 'external' as const, url: project.url, label: project.title ?? project.venue, publisher: project.venue }]
+                    : []),
+            ],
+            context: `${project.venue}, ${project.year}`,
+        })),
+    ];
+
+    for (const source of sources) {
+        for (const media of publicMedia(source.media)) {
+            const label = media.label?.replace(/\s*\(Dropbox\)/g, '');
+            const caption = [label, source.context].filter(Boolean).join(' — ');
+            if (media.type === 'image') {
+                const assets = media.url.startsWith('/') ? [{ src: media.url, name: '' }] : localAssets[media.url];
+                if (assets?.length) {
+                    slides.push(
+                        ...assets.map((asset) => ({
+                            type: 'image' as const,
+                            src: asset.src,
+                            caption: assets.length > 1 ? `${caption} — ${asset.name.replace(/_/g, ' ')}` : caption,
+                        }))
+                    );
+                    continue;
+                }
             }
-        }
-        if (media.type === 'video') {
-            const slide = videoSlide(media, caption);
-            if (slide) {
-                slides.push(slide);
-                continue;
+            if (media.type === 'video') {
+                const slide = videoSlide(media, caption);
+                if (slide) {
+                    slides.push(slide);
+                    continue;
+                }
             }
+            references.push({
+                src: media.url,
+                caption,
+                publisher: media.publisher ?? new URL(media.url, 'https://tarekatoui.com').hostname.replace(/^www\./, ''),
+                type: media.type,
+            });
         }
-        references.push({
-            src: media.url,
-            caption,
-            publisher: media.publisher ?? new URL(media.url, 'https://tarekatoui.com').hostname.replace(/^www\./, ''),
-            type: media.type,
-        });
     }
 
     const seen = new Set<string>();

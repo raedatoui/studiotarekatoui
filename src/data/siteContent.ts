@@ -1,5 +1,5 @@
-import rawSiteContent from './site-content.json';
 import { type SiteContent, siteContentSchema, type Theme } from './schema';
+import rawSiteContent from './site-content.json';
 
 export const siteContent: SiteContent = siteContentSchema.parse(rawSiteContent);
 

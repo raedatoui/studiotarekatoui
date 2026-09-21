@@ -1,8 +1,8 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
 import MediaSlider from '@/components/MediaSlider';
 import portfolioWorks from '@/data/old/portfolio.json';
-import { useEffect, useRef, useState } from 'react';
 
 export default function PortfolioContent() {
     const [activeId, setActiveId] = useState<string>('');
@@ -32,7 +32,7 @@ export default function PortfolioContent() {
 
         for (const section of sections) observer.observe(section);
         return () => observer.disconnect();
-    }, [portfolioWorks]);
+    }, []);
 
     useEffect(() => {
         if (!activeId || !navRef.current) return;
