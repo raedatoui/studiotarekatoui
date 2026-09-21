@@ -27,3 +27,6 @@ try {
     console.error(error instanceof Error ? error.message : 'Content export failed');
     process.exitCode = 1;
 }
+
+// File writes and Payload teardown are complete; do not wait on framework background timers.
+process.exit(process.exitCode ?? 0);

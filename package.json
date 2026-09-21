@@ -3,17 +3,23 @@
     "private": true,
     "type": "module",
     "packageManager": "pnpm@11.27.1",
-    "engines": { "node": ">=22.13 <23", "pnpm": "11.27.1" },
+    "engines": {
+        "node": ">=22.13 <23",
+        "pnpm": "11.27.1"
+    },
     "scripts": {
         "dev": "pnpm --parallel --filter @tarek/website --filter @tarek/cms run dev",
         "dev:web": "pnpm --filter @tarek/website run dev",
         "dev:cms": "pnpm --filter @tarek/cms run dev",
         "build:web": "pnpm --filter @tarek/website run build",
         "build:cms": "pnpm --filter @tarek/cms run build",
+        "deploy:web:staging": "NEXT_PUBLIC_SITE_ENV=staging NEXT_PUBLIC_CMS_ORIGIN=https://cms.tarekatoui.com pnpm build:web && firebase deploy --only hosting:staging --project=studio-tarekatoui-cms",
+        "deploy:web:prod": "NEXT_PUBLIC_SITE_ENV=production pnpm build:web && firebase deploy --only hosting:prod --project=studio-tarekatoui-cms",
         "deploy:cms": "pnpm --filter @tarek/cms run deploy",
         "content:export": "tsx cms/scripts/export-content.ts",
         "content:validate": "tsx packages/content/src/validate.ts",
         "content:import": "tsx cms/scripts/import-content.ts",
+        "content:import:news": "tsx cms/scripts/import-news.ts",
         "media:upload": "pnpm --filter @tarek/website run media:upload",
         "lint": "biome lint .",
         "format": "biome format --write .",
@@ -24,6 +30,7 @@
         "@biomejs/biome": "catalog:",
         "@types/node": "catalog:",
         "tsx": "4.21.0",
+        "turbo": "2.11.2",
         "typescript": "catalog:"
     }
 }

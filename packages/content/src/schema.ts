@@ -90,10 +90,34 @@ export const aboutSchema = z.strictObject({
 });
 export const contactSchema = z.strictObject({ heading: text, text: z.string(), email: z.email() });
 
+const exhibitionDate = z.union([z.iso.date(), z.iso.datetime({ offset: true })]);
+export const subExhibitionSchema = z.strictObject({ title: text, dateDisplay: text, location: text });
+export const exhibitionSchema = z.strictObject({
+    venue: text,
+    title: text.optional(),
+    dateDisplay: text.optional(),
+    dateStart: exhibitionDate.optional(),
+    dateEnd: exhibitionDate.optional(),
+    organization: text.optional(),
+    location: text.optional(),
+    work: text.optional(),
+    url: linkSchema.optional(),
+    status: z.enum(INSTANCE_STATUSES).optional(),
+    subExhibitions: z.array(subExhibitionSchema),
+});
+export const newsSchema = z.strictObject({
+    soloHeading: text,
+    solo: z.array(exhibitionSchema),
+    groupHeading: text,
+    group: z.array(exhibitionSchema),
+});
+export type Exhibition = z.infer<typeof exhibitionSchema>;
+
 export const contentSnapshotSchema = z.strictObject({
     schemaVersion: z.literal(SCHEMA_VERSION),
     exportedAt: z.iso.datetime(),
     navigation: navigationSchema,
+    news: newsSchema,
     researchPage: researchPageSchema,
     research: z.array(researchSchema),
     about: aboutSchema,

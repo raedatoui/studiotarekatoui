@@ -2,7 +2,7 @@
 
 Local pnpm monorepo: Payload CMS in `cms/`, Next.js static website in `website/`, and the browser-safe JSON contract in `packages/content/`.
 
-Use Node 22 (at least 22.13) and pnpm 11.27.1. Install from this directory with `pnpm install`. Shared versions live in `pnpm-workspace.yaml`; there is one lockfile and one Biome configuration. TypeScript 7 integration is implemented but has not yet been build-verified.
+Use Node 22 (at least 22.13) and pnpm 11.27.1. Install from this directory with `pnpm install`. Shared versions live in `pnpm-workspace.yaml`; there is one lockfile and one Biome configuration. The owner confirmed successful website builds and the CMS App Hosting rollout with TypeScript 7.
 
 ## Local content → website
 
@@ -15,13 +15,13 @@ pnpm content:export --output website/src/data/generated/content.json
 pnpm build:web
 ```
 
-Before the first export, open **Website → Navigation** in the CMS and publish its initial menu. Defaults include Research, About, Editions (the original Galerie Chantal Crousel link), and Contact. Edit labels, links, new-tab behavior, and drag rows to reorder. The menu is shared by desktop and mobile.
+Before the first export, open **Website → Navigation** in the CMS and publish its initial menu. Defaults include Research, News, About, Editions (the original Galerie Chantal Crousel link), and Contact. Edit labels, links, new-tab behavior, and drag rows to reorder. The menu is shared by desktop and mobile.
 
-The first command reads published CMS documents and globals, including Navigation, validates them, and writes JSON atomically. It does not publish drafts or modify editorial content. The second command consumes that exact file and writes the static website to `website/out`. Neither command deploys. They have not been run as part of the implementation.
+The first command reads published CMS documents and globals, including Navigation, validates them, and writes JSON atomically. It does not publish drafts or modify editorial content. The second command consumes that exact file and writes the static website to `website/out`. Neither command deploys. The owner confirmed this export-to-build flow, including a downloaded CMS Export JSON snapshot saved at the same generated input path.
 
 The website fails with a setup error if the snapshot is missing. Invalid snapshots fail shared validation; there is no bundled legacy fallback, database connection, or runtime editorial fetch. A new research slug becomes a public page on the next build. Metadata, canonicals, and sitemap entries come from the same snapshot; preview pages are noindex and excluded from the sitemap. Unknown research URLs use the static 404.
 
-Public routes are `/`, `/research`, `/research/[slug]`, `/about`, and `/contact`. Both `/` and `/research` render the Research hub. Staging builds use `NEXT_PUBLIC_SITE_ENV=staging` to emit noindex metadata and robots rules; all public canonicals point to the production domain.
+Public routes are `/`, `/research`, `/research/[slug]`, `/news`, `/about`, and `/contact`. Both `/` and `/news` render News, matching the old homepage. `/research` renders the Research hub. Staging builds use `NEXT_PUBLIC_SITE_ENV=staging` to emit noindex metadata and robots rules; all public canonicals point to the production domain.
 
 ## Development and previews
 
@@ -31,15 +31,15 @@ pnpm dev:web
 pnpm dev:cms
 ```
 
-Export a published baseline before starting the website. In local CMS configuration, `WEBSITE_PREVIEW_URL=http://localhost:3000`; in website configuration, `NEXT_PUBLIC_CMS_ORIGIN=http://localhost:3001`. These defaults support local development. Configure the actual trusted origins before any hosted preview rollout; hosted preview deployment is deferred.
+Export a published baseline before starting the website. In local CMS configuration, `WEBSITE_PREVIEW_URL=http://localhost:3000`; in website configuration, `NEXT_PUBLIC_CMS_ORIGIN=http://localhost:3001`. These defaults support local development. For hosted previews, `cms/apphosting.yaml` sets `WEBSITE_PREVIEW_URL=https://staging.tarekatoui.com`, and `pnpm deploy:web:staging` builds with `NEXT_PUBLIC_CMS_ORIGIN=https://cms.tarekatoui.com` so staging accepts preview messages from the hosted CMS. Deploy both apps to activate these settings.
 
-Payload Live Preview opens `/preview/research`, `/preview/research-page`, `/preview/about`, `/preview/contact`, or `/preview/navigation`. Initial form state and unsaved edits arrive through Payload's [client-side preview messaging](https://payloadcms.com/docs/live-preview/client). The preview overlays only the active document on the published baseline and uses the public renderers. It also handles new research documents with no public route. Messages must match the configured CMS origin and the parent/opener window. Drafts stay in browser memory; preview links are disabled to keep the editor in the frame.
+Payload Live Preview opens `/preview/research`, `/preview/research-page`, `/preview/about`, `/preview/contact`, `/preview/navigation`, or `/preview/news`. Initial form state and unsaved edits arrive through Payload's [client-side preview messaging](https://payloadcms.com/docs/live-preview/client). The preview overlays only the active document on the published baseline and uses the public renderers. It also handles new research documents with no public route. Messages must match the configured CMS origin and the parent/opener window. Drafts stay in browser memory; preview links are disabled to keep the editor in the frame.
 
 The CMS navigation's **Export JSON** action downloads the same published snapshot through an authenticated endpoint. Validation errors identify the research document and field. Exporting does not deploy.
 
 ## Content contract and recovery
 
-`@tarek/content` owns schema version 2 and inferred website types. Version 2 adds required published navigation; re-export older snapshots after publishing Navigation. There is no hardcoded website menu fallback. CMS documents retain Payload-generated types; typed serializers use an explicit allowlist. The package includes no Payload, database, or authentication code.
+`@tarek/content` owns schema version 3 and inferred website types. Version 2 added required published navigation; version 3 restores the News page. Publish News and Navigation, then re-export older snapshots to use the current contract. There is no hardcoded website menu fallback. CMS documents retain Payload-generated types; typed serializers use an explicit allowlist. The package includes no Payload, database, or authentication code.
 
 - Research order is `sortOrder`, then slug as a stable tie-breaker. Nested instances, gallery, and press retain editor order. The timeline is derived from nested instances, not a second stored dataset.
 - Empty optional strings become omitted values; optional arrays become empty arrays. Research dates fall back to start/end years or “ongoing”. Instance display dates fall back to the ISO date portion of `dateStart`, then the year.
@@ -57,15 +57,36 @@ Import validates the whole input before any writes, matches existing research by
 
 Firestore compatibility disables transactions: partial import progress is retained, reported, and can be rerun after resolving the error. Imports do not restore users, revision history, indexes, or credentials. The private pre-import backup is recovery data, not a public snapshot or an automatic database restore. Historical migration backups remain untouched and require an explicit converter if reused.
 
+## News recovery
+
+The CMS **Pages → News** global owns the two ordered exhibition lists, headings, venue/title, display and start/end dates, organizations, locations, featured works, links, statuses, and nested shows. `/news` reuses the original website layout and is included in the sitemap. Navigation and News support drafts, published exports, imports, and live previews.
+
+The targeted recovery command reads only the old website's News content:
+
+```sh
+pnpm content:import:news ../website/src/data/site-content.json --apply
+```
+
+Without `--apply` it reports the recovered content without opening a database connection. With `--apply`, it saves private backups under `~/tmp/tarek-news-recovery-*/`, imports the six original exhibition entries as a News draft, and adds a missing `/news` link to the navigation draft. It preserves existing News content and other navigation links on reruns, and decodes the old file's literal Unicode escapes. It does not publish or deploy. Review and publish both globals, then export a new snapshot before building the website. The website never reads the legacy source file.
+
 ## Commands and deployment
 
 `pnpm build:cms` builds only the CMS. `pnpm typecheck`, `pnpm lint`, and `pnpm check` do not rewrite files; `pnpm format` does. Generated files and SCSS are excluded from Biome. Existing CMS formatting has not been bulk-rewritten with the behavior changes.
 
 `pnpm media:upload` retains the existing CDN upload workflow; local media stays in ignored `website/public/`. No public GCS objects are deleted by this migration.
 
-`pnpm deploy:cms` runs the app's deploy script through `pnpm run deploy`. Root `firebase.json` uploads the workspace context and builds only application root `cms` for the existing backend. Nested environment files, local media, generated content, credentials, caches, and build output are excluded. Website Hosting targets serve `website/out` from the same root configuration. No deployment was performed.
+`pnpm deploy:cms` runs the app's deploy script through `pnpm run deploy`. Root `firebase.json` uploads the workspace context and builds only application root `cms` for the existing backend. The root `turbo.json` enables [App Hosting's Turborepo detection](https://firebase.blog/posts/2026/01/apphosting-turborepo), so dependency installation uses the workspace lockfile and the cloud build targets only `@tarek/cms`. Build caching is disabled; local pnpm commands remain unchanged. Nested environment files, local media, generated content, credentials, caches, and build output are excluded. Website Hosting targets serve `website/out` from the same root configuration. The owner confirmed successful CMS and staging website deployments.
 
-Cloud Build, GitHub setup, website publishing wrappers, and Payload staging/production controls remain deferred to Phases 2 and 4. There are no GitHub Actions workflows.
+Deploy the website from the workspace root using the installed, authenticated Firebase CLI:
+
+```sh
+pnpm deploy:web:staging
+pnpm deploy:web:prod
+```
+
+Each command builds the local checkout using the existing `website/src/data/generated/content.json`, then deploys only its Hosting target in `studio-tarekatoui-cms`. Staging sets `NEXT_PUBLIC_SITE_ENV=staging` for noindex output; production explicitly sets it to `production`. A failed build stops deployment. Run `content:export` first when you want fresh published CMS content; deploy commands do not re-export it.
+
+Cloud Build, GitHub setup, and Payload staging/production controls remain deferred to Phases 2 and 4. These commands deploy local code, including uncommitted changes. There are no GitHub Actions workflows.
 
 ## Repository history
 

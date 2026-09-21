@@ -1,4 +1,4 @@
-import type { ContentSnapshot, Research, ResearchInstance } from './schema';
+import type { ContentSnapshot, Exhibition, Research, ResearchInstance } from './schema';
 
 type NullableFields<T> = { [K in keyof T]?: T[K] | null };
 export type ResearchInput = NullableFields<Omit<Research, 'description' | 'instances' | 'gallery' | 'press'>> & {
@@ -9,6 +9,33 @@ export type ResearchInput = NullableFields<Omit<Research, 'description' | 'insta
 };
 
 const optional = (value: string | null | undefined) => value?.trim() || undefined;
+
+type ExhibitionInput = NullableFields<Omit<Exhibition, 'subExhibitions'>> & {
+    subExhibitions?: NullableFields<Exhibition['subExhibitions'][number]>[] | null;
+};
+
+function normalizeExhibition(doc: ExhibitionInput): Exhibition {
+    return {
+        venue: doc.venue?.trim() ?? '',
+        title: optional(doc.title), dateDisplay: optional(doc.dateDisplay),
+        dateStart: optional(doc.dateStart), dateEnd: optional(doc.dateEnd),
+        organization: optional(doc.organization), location: optional(doc.location), work: optional(doc.work),
+        url: optional(doc.url), status: doc.status ?? undefined,
+        subExhibitions: (doc.subExhibitions ?? []).map((show) => ({
+            title: show.title?.trim() ?? '', dateDisplay: show.dateDisplay?.trim() ?? '', location: show.location?.trim() ?? '',
+        })),
+    };
+}
+
+export function normalizeNews(doc: {
+    soloHeading?: string | null; groupHeading?: string | null;
+    solo?: ExhibitionInput[] | null; group?: ExhibitionInput[] | null;
+}): ContentSnapshot['news'] {
+    return {
+        soloHeading: doc.soloHeading ?? '', groupHeading: doc.groupHeading ?? '',
+        solo: (doc.solo ?? []).map(normalizeExhibition), group: (doc.group ?? []).map(normalizeExhibition),
+    };
+}
 
 export function normalizeNavigation(doc: { items?: NullableFields<ContentSnapshot['navigation']['items'][number]>[] | null }): ContentSnapshot['navigation'] {
     return {

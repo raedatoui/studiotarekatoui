@@ -89,12 +89,14 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     'research-page': ResearchPage;
+    news: News;
     about: About;
     contact: Contact;
     navigation: Navigation;
   };
   globalsSelect: {
     'research-page': ResearchPageSelect<false> | ResearchPageSelect<true>;
+    news: NewsSelect<false> | NewsSelect<true>;
     about: AboutSelect<false> | AboutSelect<true>;
     contact: ContactSelect<false> | ContactSelect<true>;
     navigation: NavigationSelect<false> | NavigationSelect<true>;
@@ -405,6 +407,64 @@ export interface ResearchPage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news".
+ */
+export interface News {
+  id: string;
+  soloHeading: string;
+  solo?:
+    | {
+        venue: string;
+        title?: string | null;
+        dateDisplay?: string | null;
+        dateStart?: string | null;
+        dateEnd?: string | null;
+        organization?: string | null;
+        location?: string | null;
+        work?: string | null;
+        url?: string | null;
+        status?: ('current' | 'upcoming' | 'past') | null;
+        subExhibitions?:
+          | {
+              title: string;
+              dateDisplay: string;
+              location: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  groupHeading: string;
+  group?:
+    | {
+        venue: string;
+        title?: string | null;
+        dateDisplay?: string | null;
+        dateStart?: string | null;
+        dateEnd?: string | null;
+        organization?: string | null;
+        location?: string | null;
+        work?: string | null;
+        url?: string | null;
+        status?: ('current' | 'upcoming' | 'past') | null;
+        subExhibitions?:
+          | {
+              title: string;
+              dateDisplay: string;
+              location: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "about".
  */
 export interface About {
@@ -464,6 +524,64 @@ export interface ResearchPageSelect<T extends boolean = true> {
   eyebrow?: T;
   heading?: T;
   introduction?: T;
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news_select".
+ */
+export interface NewsSelect<T extends boolean = true> {
+  soloHeading?: T;
+  solo?:
+    | T
+    | {
+        venue?: T;
+        title?: T;
+        dateDisplay?: T;
+        dateStart?: T;
+        dateEnd?: T;
+        organization?: T;
+        location?: T;
+        work?: T;
+        url?: T;
+        status?: T;
+        subExhibitions?:
+          | T
+          | {
+              title?: T;
+              dateDisplay?: T;
+              location?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  groupHeading?: T;
+  group?:
+    | T
+    | {
+        venue?: T;
+        title?: T;
+        dateDisplay?: T;
+        dateStart?: T;
+        dateEnd?: T;
+        organization?: T;
+        location?: T;
+        work?: T;
+        url?: T;
+        status?: T;
+        subExhibitions?:
+          | T
+          | {
+              title?: T;
+              dateDisplay?: T;
+              location?: T;
+              id?: T;
+            };
+        id?: T;
+      };
   _status?: T;
   updatedAt?: T;
   createdAt?: T;

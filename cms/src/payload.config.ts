@@ -11,6 +11,7 @@ import { About } from './globals/About'
 import { Contact } from './globals/Contact'
 import { ResearchPage } from './globals/ResearchPage'
 import { Navigation } from './globals/Navigation'
+import { News } from './globals/News'
 import { exportEndpoint } from './content/exportEndpoint'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -26,7 +27,7 @@ export default buildConfig({
     importMap: { baseDir: path.resolve(dirname) },
     livePreview: {
       collections: ['research'],
-      globals: ['research-page', 'about', 'contact', 'navigation'],
+      globals: ['research-page', 'about', 'contact', 'navigation', 'news'],
       url: ({ collectionConfig, globalConfig }) => {
         const kind = collectionConfig?.slug ?? globalConfig?.slug
         const websiteURL = process.env.WEBSITE_PREVIEW_URL || 'http://localhost:3000'
@@ -44,7 +45,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Research],
-  globals: [ResearchPage, About, Contact, Navigation],
+  globals: [ResearchPage, News, About, Contact, Navigation],
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: { outputFile: path.resolve(dirname, 'payload-types.ts') },
   db: mongooseAdapter({

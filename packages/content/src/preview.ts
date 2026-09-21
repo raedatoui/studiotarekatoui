@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { normalizeAbout, normalizeContact, normalizeNavigation, normalizeResearch, normalizeResearchPage } from './normalize';
-import { aboutSchema, contactSchema, gallerySchema, instanceSchema, navigationItemSchema, pressSchema, researchPageSchema, researchSchema } from './schema';
+import { normalizeAbout, normalizeContact, normalizeNavigation, normalizeNews, normalizeResearch, normalizeResearchPage } from './normalize';
+import { aboutSchema, contactSchema, exhibitionSchema, gallerySchema, instanceSchema, navigationItemSchema, pressSchema, researchPageSchema, researchSchema } from './schema';
 
 // Invalid or unfinished fields are cleared for rendering, never accepted by the publication schema.
 const string = z.string().catch('');
@@ -53,8 +53,23 @@ const navigationInput = z.object({
     })).nullish().catch([]),
 });
 
+const exhibitionInput = z.object({
+    venue: string, title: optionalString, dateDisplay: optionalString,
+    dateStart: exhibitionSchema.shape.dateStart.nullish().catch(undefined),
+    dateEnd: exhibitionSchema.shape.dateEnd.nullish().catch(undefined),
+    organization: optionalString, location: optionalString, work: optionalString,
+    url: exhibitionSchema.shape.url.nullish().catch(undefined),
+    status: exhibitionSchema.shape.status.nullish().catch(undefined),
+    subExhibitions: z.array(z.object({ title: string, dateDisplay: string, location: string })).nullish().catch([]),
+});
+const newsInput = z.object({
+    soloHeading: string, groupHeading: string,
+    solo: z.array(exhibitionInput).nullish().catch([]), group: z.array(exhibitionInput).nullish().catch([]),
+});
+
 export const previewResearch = (value: unknown) => normalizeResearch(researchInput.parse(value));
 export const previewResearchPage = (value: unknown) => normalizeResearchPage(researchPageInput.parse(value));
 export const previewAbout = (value: unknown) => normalizeAbout(aboutInput.parse(value));
 export const previewContact = (value: unknown) => normalizeContact(contactInput.parse(value));
 export const previewNavigation = (value: unknown) => normalizeNavigation(navigationInput.parse(value));
+export const previewNews = (value: unknown) => normalizeNews(newsInput.parse(value));

@@ -24,17 +24,18 @@ export async function exportContent(payload: Payload) {
         if (!result.hasNextPage) break;
         page += 1;
     }
-    const [researchPage, about, contact, navigation] = await Promise.all([
+    const [researchPage, about, contact, navigation, news] = await Promise.all([
         payload.findGlobal({ slug: 'research-page', draft: false, depth: 0, overrideAccess: true }),
         payload.findGlobal({ slug: 'about', draft: false, depth: 0, overrideAccess: true }),
         payload.findGlobal({ slug: 'contact', draft: false, depth: 0, overrideAccess: true }),
         payload.findGlobal({ slug: 'navigation', draft: false, depth: 0, overrideAccess: true }),
+        payload.findGlobal({ slug: 'news', draft: false, depth: 0, overrideAccess: true }),
     ]);
-    for (const [name, doc] of Object.entries({ 'Research page': researchPage, About: about, Contact: contact, Navigation: navigation })) {
+    for (const [name, doc] of Object.entries({ 'Research page': researchPage, About: about, Contact: contact, Navigation: navigation, News: news })) {
         if (doc._status !== 'published') throw new ContentExportError(`${name} has no published content. Publish it in the CMS before exporting.`);
     }
     try {
-        return parseContentSnapshot(serializeContent(research, researchPage, about, contact, navigation));
+        return parseContentSnapshot(serializeContent(research, researchPage, about, contact, navigation, news));
     } catch (error) {
         throw new ContentExportError(error instanceof Error ? error.message : 'Invalid content snapshot');
     }

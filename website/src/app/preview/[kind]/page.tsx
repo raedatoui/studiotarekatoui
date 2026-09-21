@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import ContentPreview, { type PreviewKind } from '@/components/ContentPreview';
 
-const kinds: PreviewKind[] = ['research', 'research-page', 'about', 'contact', 'navigation'];
+const kinds: PreviewKind[] = ['research', 'research-page', 'about', 'contact', 'navigation', 'news'];
 export const dynamicParams = false;
 export const metadata: Metadata = {
     title: 'CMS preview — Studio Tarek Atoui',

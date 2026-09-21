@@ -23,7 +23,7 @@
         "@payloadcms/ui": "catalog:",
         "cross-env": "^7.0.3",
         "graphql": "^16.8.1",
-        "next": "catalog:",
+        "next": "16.3.5",
         "next-auth": "5.0.0-beta.32",
         "payload": "catalog:",
         "react": "catalog:",

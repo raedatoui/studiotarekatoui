@@ -4,6 +4,7 @@ packages:
   - packages/*
 
 catalog:
+  # Keep cms/package.json's explicit Next version aligned; App Hosting cannot parse catalog:.
   next: 16.3.5
   react: 19.2.6
   react-dom: 19.2.6

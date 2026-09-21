@@ -18,6 +18,7 @@ export const Navigation: GlobalConfig = {
             admin: { description: 'Drag to reorder. The same menu appears on desktop and mobile.' },
             defaultValue: [
                 { label: 'Research', href: '/research', external: false },
+                { label: 'News', href: '/news', external: false },
                 { label: 'About', href: '/about', external: false },
                 { label: 'Editions', href: 'https://www.crousel.com/artiste/tarek-atoui-r90lmw/#items', external: true },
                 { label: 'Contact', href: '/contact', external: false },
@@ -30,7 +31,7 @@ export const Navigation: GlobalConfig = {
                     type: 'text',
                     required: true,
                     admin: { description: 'A website path such as /research, or a full https:// URL.' },
-                    validate: (value) => navigationLinkSchema.safeParse(value).success || 'Enter a website path beginning with / or a valid HTTP(S) URL.',
+                    validate: (value: unknown) => navigationLinkSchema.safeParse(value).success || 'Enter a website path beginning with / or a valid HTTP(S) URL.',
                 },
                 { name: 'external', label: 'Open in a new tab', type: 'checkbox', defaultValue: false },
             ],

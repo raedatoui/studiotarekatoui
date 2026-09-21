@@ -51,6 +51,7 @@
                 "**/node_modules/**",
                 "**/.git/**",
                 "**/.next/**",
+                "**/.turbo/**",
                 "**/out/**",
                 "**/.firebase/**",
                 "**/.env",

@@ -29,7 +29,13 @@ Implementation is in `/Users/raed/play/tarek/studiotarekatoui`, on its `dev` bra
 
 The local workspace, root lockfile/catalog/toolchain, shared Zod contract, CMS published-content export/import commands, authenticated Export JSON action, website CMS data integration/cleanup, metadata/sitemap, and client-side live previews are implemented. Dependencies were installed with pnpm 11.27.1. Root Firebase configuration carries the existing targets and includes the workspace for CMS source uploads. Cloud publishing infrastructure and workflows were not added.
 
-No CMS export, import, build, lint, type check, test, browser check, or deployment has been run. No editorial content or cloud resources were changed. Phase 3's local proof and full completion gates therefore remain pending. The next explicitly requested local verification is `pnpm content:export --output website/src/data/generated/content.json` followed by `pnpm build:web`, from the new monorepo directory. TypeScript 7 with Payload/Next.js and the moved App Hosting context remain unverified checkpoints.
+Phase 3 is complete based on the owner's confirmation: local JSON export and the CMS Export JSON download work, the website builds from that snapshot saved at `website/src/data/generated/content.json`, staging website deployment and the CMS App Hosting rollout succeeded, and hosted Live Preview works. The general JSON importer is implemented but has not been exercised end to end; the targeted News recovery below was applied. No additional verification was run when recording this status. Phase 2's cloud website build pipeline and Phase 4's editor-facing publishing controls remain pending.
+
+**News recovery — September 21, 2026**
+
+News was restored at the owner's request. The CMS News global and `/news` route now retain the original exhibition/group-exhibition structure, including nested shows, with export/import and live-preview support. The snapshot contract is version 3. Six entries (three exhibitions and three group exhibitions, including two nested IMMA shows) were recovered from the original `website/src/data/site-content.json` and saved to the CMS as a draft. The missing `/news` navigation link was added to the existing navigation draft. Other content and links were preserved. The pre-change backup is `~/tmp/tarek-news-recovery-2026-09-21T18-28-19-496Z/`.
+
+Review and publish News and Navigation, then export a schema-v3 snapshot before building. Payload types were regenerated. No build, test, lint, browser check, publication, or deployment was performed for this change.
 
 **Agreed outcome**
 
@@ -197,7 +203,7 @@ Do not claim a database-wide atomic export: the compatibility setup disables tra
 
 Phase 2 completion criteria: a developer can trigger staging from the monorepo's GitHub revision plus a fixed private CMS JSON export in the shared format, then build production from the same candidate; service accounts authenticate without keys; build failures retain the last live site; deployment target and noindex settings are explicit.
 
-**Phase 3 — Next: monorepo, website data cleanup, and local CMS export-to-build**
+**Phase 3 — Complete: monorepo, website data cleanup, and local CMS export-to-build**
 
 Implement the local path first:
 
@@ -291,6 +297,7 @@ ContentSnapshot
 │   └── press[]: { title, url, publisher, type }
 ├── about
 │   └── biography sections, portraitURL, portraitAlt, portraitCredit
+├── news: { soloHeading, groupHeading, solo[], group[] }
 ├── contact: { heading, text, email }
 └── navigation: { items[]: { label, href, external } }
 ```
@@ -299,7 +306,7 @@ Export stable content identifiers where needed; never expose authentication iden
 
 `schemaVersion` describes the JSON contract, not a Git revision or database schema. Each build uses the validator from its recorded Git SHA. Breaking schema changes require coordinated CMS/website deployment and a version bump; an incompatible snapshot fails the build with a clear error.
 
-**Payload export.** Create a server-side export function that reads all published research records and published Research-page/About/Contact/Navigation globals through the Payload API, handling pagination. Explicitly request published content rather than latest draft versions. Fail when required globals have no published content. Construct output from an allowlist; exclude users, preferences, document locks, versions, hidden auth data, and internal database metadata. Validate the complete export before persisting a snapshot. [Payload Local API](https://payloadcms.com/docs/local-api/overview)
+**Payload export.** Create a server-side export function that reads all published research records and published Research-page/About/Contact/Navigation/News globals through the Payload API, handling pagination. Explicitly request published content rather than latest draft versions. Fail when required globals have no published content. Construct output from an allowlist; exclude users, preferences, document locks, versions, hidden auth data, and internal database metadata. Validate the complete export before persisting a snapshot. [Payload Local API](https://payloadcms.com/docs/local-api/overview)
 
 Provide an authenticated Export JSON action and a local export command. Exporting alone does not deploy. Show actionable field errors such as `Research “The Ground”: gallery[3].url is invalid`. Use the same serializer for CLI export, staging publication, and preview normalization, without allowing draft flags on public publishing requests.
 
@@ -317,11 +324,11 @@ Supply content during local development through an explicit export/download comm
 
 Use the Research-page global for its eyebrow, heading, and introduction. Preserve CMS research ordering and gallery/press ordering. Render explicit gallery types and links instead of rediscovering them from Dropbox mappings and instance URLs. Render organizations, collaborators, materials, dates, optional images, and empty arrays intentionally. About uses its CMS biography and portrait fields, including absolute CDN URLs without adding a leading slash. Contact uses its CMS heading, text, and email.
 
-**Website cleanup.** Remove the legacy editorial JSON and schemas, `src/data/old/`, flat events/themes sources, News and its route, disabled portfolio/chronology routes and their exclusive components, and duplicate handwritten JSON validation. Replace the News-based homepage with the Research hub; retain `/research`, `/research/[slug]`, `/about`, and `/contact`. Keep styling, theme switching, useful media sliders, and presentation components still used by CMS-owned content.
+**Website cleanup.** Remove the legacy editorial JSON and schemas, `src/data/old/`, flat events/themes sources, disabled portfolio/chronology routes and their exclusive components, and duplicate handwritten JSON validation. Keep News as the default homepage, matching the old site; retain `/research`, `/research/[slug]`, `/news`, `/about`, and `/contact`. News is CMS-owned, recovered from the old website with its exhibition/group-exhibition lists and nested shows; preserve the original rendering. Keep styling, theme switching, useful media sliders, and presentation components still used by CMS-owned content.
 
 Remove Dropbox/media lookup files and one-time import scripts after identifying all active consumers. Keep working media-upload tooling if it remains the route for placing new media on the CDN. Do not delete public GCS media objects as part of repository cleanup. Navigation is a CMS global with ordered menu labels, URLs, and new-tab settings. Preserve the original Editions link to https://www.crousel.com/artiste/tarek-atoui-r90lmw/#items in its initial defaults alongside Research/About/Contact. Include published navigation in the JSON snapshot and render it in desktop and mobile menus. Site name, domain, and technical metadata remain application configuration. Do not add new editorial collections merely to preserve abandoned website content.
 
-**Payload previews.** Add static preview routes in the website for Research, Research page, About, Contact, and Navigation, and configure Payload `admin.livePreview` URLs. Reuse the actual website components and shared data definitions. The preview iframe receives initial form state and subsequent unsaved edits through Payload's live-preview messaging; it does not need a website rebuild. [Payload client-side Live Preview](https://payloadcms.com/docs/live-preview/client)
+**Payload previews.** Add static preview routes in the website for Research, Research page, About, Contact, Navigation, and News, and configure Payload `admin.livePreview` URLs. Reuse the actual website components and shared data definitions. The preview iframe receives initial form state and subsequent unsaved edits through Payload's live-preview messaging; it does not need a website rebuild. [Payload client-side Live Preview](https://payloadcms.com/docs/live-preview/client)
 
 Use a preview-specific content provider that overlays the active document on the bundled published baseline. Allow new research records to preview before they have generated public routes. Derive tolerant preview validation from shared field definitions so a temporarily blank field while typing does not crash rendering. Strict publication validation remains unchanged. Restrict message origins and window sources, mark preview routes noindex, and never embed drafts or reusable secrets in query strings or static output. Preview data remains in memory. Avoid navigation that accidentally leaves the preview frame.
 
@@ -332,8 +339,8 @@ Use a preview-specific content provider that overlays the active document on the
 | `pnpm dev` | Start website on 3000 and CMS on 3001 |
 | `pnpm dev:web` / `pnpm dev:cms` | Start one app |
 | `pnpm build:web` / `pnpm build:cms` | Explicit local build of one app |
-| `pnpm deploy:web:staging --release <id>` | Invoke/wait for the staging cloud publishing job |
-| `pnpm deploy:web --release <id>` | Invoke the production job for a successful staging candidate |
+| `pnpm deploy:web:staging` | Build the local checkout with the existing snapshot and staging settings, then deploy only staging Hosting |
+| `pnpm deploy:web:prod` | Build the local checkout with the existing snapshot and production settings, then deploy only production Hosting |
 | `pnpm deploy:cms` | Deploy only the CMS through Firebase App Hosting |
 | `pnpm content:export --output <file>` | Export published content to validated JSON |
 | `pnpm content:validate <file>` | Validate a snapshot |
@@ -345,7 +352,7 @@ Use a preview-specific content provider that overlays the active document on the
 | `pnpm typecheck` | Explicit workspace type checking |
 | `pnpm media:upload` | Retained media upload workflow, if still needed |
 
-The cloud website deployment commands in this table are deferred to Phase 2. Do not add placeholder cloud wrappers or workflows for the local milestone.
+The website deployment commands now run locally at the owner’s request. They use the existing generated snapshot without re-exporting, explicitly set the build environment, and stop before deployment if the build fails. Cloud release orchestration remains deferred to Phase 2; no workflow is added.
 
 **Local export-to-build milestone.** From the monorepo root, the intended sequence is:
 
@@ -356,7 +363,7 @@ pnpm build:web
 
 The exporter validates before writing and reports the output path and exported research count. The website consumes that exact generated file through `@tarek/content`; missing or invalid input stops the build with an actionable error. Keep database credentials in the CMS's private local environment, and keep the exported content ignored by Git. A successful local export followed by a successful Next.js static export to `website/out` proves this milestone. These commands do not deploy or write editorial content to the database. They are planned commands, not results of this document update.
 
-`deploy:web` must clearly report that it deploys GitHub source at a recorded revision, not arbitrary uncommitted local code. The CLI wrappers and later CMS controls share the same release-request logic. CMS deploys still include the whole workspace build context while targeting only the CMS backend. No command deploys all Firebase products by default.
+The current `deploy:web:staging` and `deploy:web:prod` commands deploy the local checkout, including uncommitted changes. When Phase 2 introduces cloud release commands, distinguish them explicitly: those commands will deploy GitHub source at a recorded revision and share release-request logic with later CMS controls. CMS deploys still include the whole workspace build context while targeting only the CMS backend. No command deploys all Firebase products by default.
 
 Phase 3 local milestone criteria: one local repository and lockfile; shared toolchain/schema; obsolete website content is removed; public content derives from the CMS hierarchy; the local CMS command emits validated published-content JSON; the local website static build consumes that exact file successfully. Full Phase 3 completion additionally includes strict JSON import without SQLite and previews using the same renderers. Cloud build configuration is deferred to Phase 2 and will use the established monorepo paths and JSON format.
 

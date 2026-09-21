@@ -60,7 +60,7 @@ async function importContent() {
             return { doc, target, match: idMatch ? 'ID' : slugMatch ? 'slug' : 'new' };
         });
         for (const item of plan) console.log(`${item.target ? 'UPDATE' : 'CREATE'} research/${item.doc.slug} (${item.match}) as draft`);
-        console.log('UPDATE research-page, about, contact, navigation as drafts. Absent research documents are retained.');
+        console.log('UPDATE research-page, about, contact, navigation, news as drafts. Absent research documents are retained.');
         if (!values.apply) {
             console.log('Dry run: no content was written. Use --apply to import.');
             return;
@@ -68,7 +68,7 @@ async function importContent() {
 
         // Private recovery data includes both the current published records and latest drafts.
         const globals = {};
-        for (const slug of ['research-page', 'about', 'contact', 'navigation'] as const) {
+        for (const slug of ['research-page', 'about', 'contact', 'navigation', 'news'] as const) {
             Object.assign(globals, { [slug]: {
                 published: await payload.findGlobal({ slug, draft: false, depth: 0, overrideAccess: true }),
                 latest: await payload.findGlobal({ slug, draft: true, depth: 0, overrideAccess: true }),
@@ -106,6 +106,8 @@ async function importContent() {
             await record('contact');
             await payload.updateGlobal({ slug: 'navigation', data: { ...snapshot.navigation, _status: 'draft' }, draft: true, overrideAccess: true });
             await record('navigation');
+            await payload.updateGlobal({ slug: 'news', data: { ...snapshot.news, _status: 'draft' }, draft: true, overrideAccess: true });
+            await record('news');
         } catch (error) {
             throw new Error(`Import stopped after ${completed.length} recorded operations; changes are not rolled back. Backup/progress: ${backupDir}. Resolve the error and rerun; ID/slug matching avoids duplicate records. ${error instanceof Error ? error.message : ''}`);
         }

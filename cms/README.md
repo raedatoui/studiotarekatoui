@@ -62,7 +62,8 @@ For future rotations, keep the downloaded client JSON outside this repository. S
 - **Research page:** section title, heading, and introduction.
 - **About:** biography and portrait.
 - **Contact:** heading, introductory text, and email.
-- **Navigation** (under Website): ordered menu labels, URLs, and new-tab settings for desktop and mobile. Initial defaults include Research, About, Editions linking to Galerie Chantal Crousel, and Contact. Publish this global before exporting schema-v2 content.
+- **News:** original exhibition and group-exhibition lists, display dates, links, and nested shows. The targeted `content:import:news` command recovers content from the old website into drafts; see the workspace README.
+- **Navigation** (under Website): ordered menu labels, URLs, and new-tab settings for desktop and mobile. Initial defaults include Research, About, Editions linking to Galerie Chantal Crousel, and Contact. Publish this global before exporting schema-v3 content.
 
 Content supports drafts and up to 30 revisions. Content APIs require a signed-in editor. Text fields use plain text; media and press links use dedicated URL and caption fields. There is no separate media library or local upload storage.
 
@@ -82,7 +83,7 @@ pnpm deploy:cms # from the workspace root
 
 This deploys the local checkout with `firebase deploy --only apphosting:cms --project=studio-tarekatoui-cms`. Temporary source archives are written under `~/tmp`. GitHub auto-deployment is not configured.
 
-Firebase App Hosting builds the full Next.js/Payload container and manages Cloud Run in `us-east4` (Virginia). `apphosting.yaml` sets 1 CPU, 1 GiB RAM, concurrency 20, zero minimum instances, and a one-instance maximum. The root `firebase.json` includes workspace manifests and the shared package, sets the application root to `cms`, and excludes nested credentials, dependencies, caches, local media, snapshots, and build output from source uploads. Monorepo deployment has not yet been verified.
+Firebase App Hosting builds the full Next.js/Payload container and manages Cloud Run in `us-east4` (Virginia). `apphosting.yaml` sets 1 CPU, 1 GiB RAM, concurrency 20, zero minimum instances, and a one-instance maximum. The root `firebase.json` includes workspace manifests and the shared package, sets the application root to `cms`, and excludes nested credentials, dependencies, caches, local media, snapshots, and build output from source uploads. Root `turbo.json` enables App Hosting's monorepo detection: dependencies use the root lockfile, and the build filters to `@tarek/cms`. Without it, App Hosting looks for a separate lockfile inside `cms/`. The owner confirmed a successful monorepo rollout and hosted Live Preview using staging.tarekatoui.com.
 
 The backend service account is `firebase-app-hosting-compute@studio-tarekatoui-cms.iam.gserviceaccount.com`. Secret references are pinned in `apphosting.yaml`; Google client credentials use version `2`, and the remaining secrets use version `1`:
 

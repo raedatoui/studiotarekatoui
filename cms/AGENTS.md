@@ -5,7 +5,7 @@
 This repository contains Studio Tarek Atoui’s Payload 3 CMS, built with Next.js and React and deployed through Firebase App Hosting. Local and hosted instances share Firestore content. Publishing content does not update the studio website. The website consumes an explicit published-content export from the shared @tarek/content schema.
 
 - `src/payload.config.ts` registers collections, globals, authentication components, and Firestore storage through Payload’s MongoDB adapter.
-- `src/collections/` defines content schemas; `src/globals/` defines About, Contact, the Research page, and Navigation. Navigation lives under the Website admin group and includes the original Editions link in its initial menu defaults.
+- `src/collections/` defines content schemas; `src/globals/` defines About, Contact, the Research page, News, and Navigation. News contains ordered exhibition and group-exhibition arrays, including nested shows. Navigation lives under the Website admin group and includes the original Editions link in its initial menu defaults.
 - `src/components/` contains custom admin components, including Export JSON; `src/content/` contains the typed serializer and authenticated export endpoint.
 - `scripts/export-content.ts` and `scripts/import-content.ts` implement the root content commands. Import is dry-run unless --apply; writes are drafts and require explicit user authorization.
 - Live Preview sends unsaved forms to static website preview routes. Configure WEBSITE_PREVIEW_URL; keep the website trusted CMS origin aligned.
