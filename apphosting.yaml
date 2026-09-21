@@ -7,7 +7,7 @@ runConfig:
 
 env:
   - variable: AUTH_URL
-    value: https://cms--studio-tarekatoui-cms.us-east4.hosted.app
+    value: https://cms.tarekatoui.com
   - variable: AUTH_TRUST_HOST
     value: 'true'
   - variable: DATABASE_URL
@@ -21,11 +21,11 @@ env:
     availability:
       - RUNTIME
   - variable: AUTH_GOOGLE_ID
-    secret: cms-google-client-id@1
+    secret: cms-google-client-id@2
     availability:
       - RUNTIME
   - variable: AUTH_GOOGLE_SECRET
-    secret: cms-google-client-secret@1
+    secret: cms-google-client-secret@2
     availability:
       - RUNTIME
   - variable: CMS_ALLOWED_EMAILS
