@@ -4,7 +4,7 @@ This file provides guidance to Codex (Codex.ai/code) when working with code in t
 
 ## Project Overview
 
-Artist portfolio website for Tarek Atoui (electroacoustic composer/artist). Static site deployed to Firebase Hosting (site `studiotarekatoui`), production domain tarekatoui.com.
+Artist portfolio website for Tarek Atoui (electroacoustic composer/artist). Static site deployed to Firebase Hosting in project `studio-tarekatoui-cms` (production site `studio-tarekatoui-web`, staging site `studio-tarekatoui-staging`). Production domain: tarekatoui.com. Both deployment scripts explicitly target the new project. The old Hosting sites were deleted after their deployed releases were copied; the personal GCP project remains active.
 
 ## Commands
 

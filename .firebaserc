@@ -1,15 +1,15 @@
 {
   "projects": {
-    "default": "api-project-992432653598"
+    "default": "studio-tarekatoui-cms"
   },
   "targets": {
-    "api-project-992432653598": {
+    "studio-tarekatoui-cms": {
       "hosting": {
         "prod": [
-          "studiotarekatoui"
+          "studio-tarekatoui-web"
         ],
         "staging": [
-          "tarekatoui-dev"
+          "studio-tarekatoui-staging"
         ]
       }
     }
