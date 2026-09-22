@@ -13,13 +13,14 @@ import { ResearchPage } from './globals/ResearchPage'
 import { Navigation } from './globals/Navigation'
 import { News } from './globals/News'
 import { exportEndpoint } from './content/exportEndpoint'
+import { uploadEndpoint } from './media/uploadEndpoint'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export default buildConfig({
   serverURL,
   csrf: [serverURL],
-  endpoints: [exportEndpoint],
+  endpoints: [exportEndpoint, uploadEndpoint],
   admin: {
     user: Users.slug,
     autoRefresh: false,

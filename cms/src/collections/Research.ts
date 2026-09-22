@@ -28,7 +28,7 @@ export const Research: CollectionConfig = {
         components: {
           Field: {
             path: '/components/MediaPreview#MediaPreview',
-            clientProps: { urlField: 'heroImageURL', labelField: 'title' },
+            clientProps: { urlField: 'heroImageURL', labelField: 'title', allowUpload: true },
           },
         },
       },
@@ -83,7 +83,11 @@ export const Research: CollectionConfig = {
         { name: 'url', type: 'text', required: true, label: 'Media URL' },
         {
           name: 'preview', type: 'ui',
-          admin: { components: { Field: '/components/MediaPreview#MediaPreview' } },
+          admin: {
+            components: {
+              Field: { path: '/components/MediaPreview#MediaPreview', clientProps: { allowUpload: true } },
+            },
+          },
         },
         { name: 'caption', type: 'textarea' },
       ],

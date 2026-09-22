@@ -67,6 +67,12 @@ For future rotations, keep the downloaded client JSON outside this repository. S
 
 Content supports drafts and up to 30 revisions. Content APIs require a signed-in editor. Text fields use plain text; media and press links use dedicated URL and caption fields. There is no separate media library or local upload storage.
 
+### Research image uploads
+
+Research cover images and image gallery items include an **Upload image** picker. It accepts JPEG, PNG, WebP, and GIF files up to 20 MB, sends multipart form data to the authenticated CMS endpoint, and uploads the image and metadata to `gs://typedef/tarekatoui.com/`. Each file has a unique name to avoid overwriting existing media. The returned `https://cdn.typedefinc.com/tarekatoui.com/…` URL fills the existing URL field; save the research entry to persist it. Uploads happen immediately and remain in storage if the editor discards the entry.
+
+Storage uses Google Application Default Credentials. For local development, run `gcloud auth application-default login` with an account permitted to create objects in the destination. Hosted uploads use `firebase-app-hosting-compute@studio-tarekatoui-cms.iam.gserviceaccount.com`; this identity needs `storage.objects.create` on the `typedef` bucket, scoped to `tarekatoui.com/` where possible (for example, a conditional Storage Object Creator role). The existing CDN must be able to read the uploaded objects. No browser credentials or bucket CORS changes are needed because the CMS uploads server-side.
+
 ## Firestore
 
 Project `studio-tarekatoui-cms` contains database `cms-content` in `us-east1`, with deletion protection enabled. Payload uses its MongoDB adapter and Firestore compatibility preset. Its declared indexes were provisioned separately; automatic index creation and transactions are disabled by the compatibility setup.
