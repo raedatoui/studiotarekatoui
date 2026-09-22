@@ -24,7 +24,14 @@ export default buildConfig({
   admin: {
     user: Users.slug,
     autoRefresh: false,
-    meta: { titleSuffix: '— Studio Tarek Atoui' },
+    meta: {
+      titleSuffix: '— Studio Tarek Atoui',
+      description: 'Studio Tarek Atoui CMS',
+      openGraph: {
+        description: 'Studio Tarek Atoui CMS',
+        siteName: 'Studio Tarek Atoui CMS',
+      },
+    },
     importMap: { baseDir: path.resolve(dirname) },
     livePreview: {
       collections: ['research'],
