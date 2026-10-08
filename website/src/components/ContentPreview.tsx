@@ -12,7 +12,7 @@ import Header from './Header';
 import News from './News';
 
 export type PreviewKind = 'research' | 'research-page' | 'about' | 'contact' | 'navigation' | 'news';
-const cmsOrigin = process.env.NEXT_PUBLIC_CMS_ORIGIN || 'http://localhost:3001';
+const cmsOrigin = process.env.NEXT_PUBLIC_CMS_ORIGIN || 'https://cms.tarekatoui.com';
 
 export default function ContentPreview({ kind }: { kind: PreviewKind }) {
     const baseline = useSiteData();
@@ -31,8 +31,12 @@ export default function ContentPreview({ kind }: { kind: PreviewKind }) {
             if (kind === 'research') {
                 const doc = previewResearch(message.data);
                 setResearch(doc);
-                const others = baseline.research.filter((item) => item.id !== doc.id);
-                setContent({ ...baseline, research: [...others, doc].sort((a, b) => a.sortOrder - b.sortOrder || a.slug.localeCompare(b.slug, 'en')) });
+                const index = baseline.research.findIndex((item) => item.id === doc.id || item.slug === doc.slug);
+                const research = [...baseline.research];
+                // Ordering belongs to the collection list; form edits keep the exported position.
+                if (index < 0) research.push(doc);
+                else research[index] = { ...doc, sortOrder: baseline.research[index].sortOrder };
+                setContent({ ...baseline, research });
             } else if (kind === 'research-page') {
                 setContent({ ...baseline, researchPage: previewResearchPage(message.data) });
             } else if (kind === 'about') {

@@ -1,12 +1,14 @@
 import type { GlobalConfig } from 'payload'
 import { signedIn } from '../access'
+import { publishedByField } from '../fields/publishedBy'
 
 export const About: GlobalConfig = {
   slug: 'about',
-  admin: { group: 'Pages' },
+  admin: { group: false },
   access: { read: signedIn, update: signedIn, readVersions: signedIn },
   versions: { drafts: true, max: 30 },
   fields: [
+    publishedByField(),
     { name: 'text', type: 'textarea', label: 'Biography' },
     { name: 'exhibitions', type: 'textarea' },
     { name: 'performances', type: 'textarea' },

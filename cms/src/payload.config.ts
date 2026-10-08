@@ -39,12 +39,14 @@ export default buildConfig({
       url: ({ collectionConfig, globalConfig }) => {
         const kind = collectionConfig?.slug ?? globalConfig?.slug
         const websiteURL = process.env.WEBSITE_PREVIEW_URL || 'http://localhost:3000'
-        return new URL(`/preview/${kind}`, websiteURL).href
+        // Use a fresh URL for preview routes that were previously cached as 404s.
+        return new URL(`/preview/${kind}?preview=1`, websiteURL).href
       },
     },
     components: {
-      afterNavLinks: ['/components/ExportContent#ExportContent'],
+      afterNavLinks: ['/components/PagesNav#PagesNav', '/components/ExportContent#ExportContent'],
       views: {
+        pages: { Component: '/components/PagesView#PagesView', path: '/pages', exact: true, meta: { title: 'Pages' } },
         login: { Component: '/components/GoogleLogin#GoogleLogin', path: '/login' },
         logout: { Component: '/components/GoogleLogout#GoogleLogout', path: '/logout' },
         inactivity: { Component: '/components/GoogleLogout#GoogleLogout', path: '/logout-inactivity' },

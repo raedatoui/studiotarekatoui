@@ -1,6 +1,7 @@
 import { INSTANCE_STATUSES, linkSchema } from '@tarek/content';
 import type { Field, GlobalConfig } from 'payload';
 import { signedIn } from '../access';
+import { publishedByField } from '../fields/publishedBy';
 
 const exhibitionFields = (): Field[] => [
     { name: 'venue', type: 'text', required: true },
@@ -29,10 +30,11 @@ const exhibitionFields = (): Field[] => [
 export const News: GlobalConfig = {
     slug: 'news',
     label: 'News',
-    admin: { group: 'Pages' },
+    admin: { group: false },
     access: { read: signedIn, update: signedIn, readVersions: signedIn },
     versions: { drafts: true, max: 30 },
     fields: [
+        publishedByField(),
         { name: 'soloHeading', type: 'text', required: true, defaultValue: 'Exhibitions' },
         { name: 'solo', label: 'Exhibitions', type: 'array', fields: exhibitionFields() },
         { name: 'groupHeading', type: 'text', required: true, defaultValue: 'Group exhibitions' },

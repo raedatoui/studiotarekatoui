@@ -34,6 +34,6 @@ env:
     availability:
       - RUNTIME
   - variable: CMS_ALLOWED_EMAILS
-    secret: cms-allowed-emails@2
+    secret: cms-allowed-emails@3
     availability:
       - RUNTIME

@@ -67,7 +67,14 @@ const newsInput = z.object({
     solo: z.array(exhibitionInput).nullish().catch([]), group: z.array(exhibitionInput).nullish().catch([]),
 });
 
-export const previewResearch = (value: unknown) => normalizeResearch(researchInput.parse(value));
+export function previewResearch(value: unknown) {
+    const research = normalizeResearch(researchInput.parse(value));
+    return {
+        ...research,
+        gallery: research.gallery.filter((item) => gallerySchema.safeParse(item).success),
+        press: research.press.filter((item) => pressSchema.shape.url.safeParse(item.url).success),
+    };
+}
 export const previewResearchPage = (value: unknown) => normalizeResearchPage(researchPageInput.parse(value));
 export const previewAbout = (value: unknown) => normalizeAbout(aboutInput.parse(value));
 export const previewContact = (value: unknown) => normalizeContact(contactInput.parse(value));

@@ -13,7 +13,13 @@ export function serializeContent(research: Research[], researchPage: ResearchPag
         exportedAt: new Date().toISOString(),
         navigation: normalizeNavigation(navigation),
         news: normalizeNews(news),
-        research: research.map(serializeResearch).sort((a, b) => a.sortOrder - b.sortOrder || a.slug.localeCompare(b.slug, 'en')),
+        research: [...research].sort((a, b) => {
+            const aOrder = a._order ?? '';
+            const bOrder = b._order ?? '';
+            // Fractional keys are case-sensitive; localeCompare would change their order.
+            if (aOrder !== bOrder) return aOrder < bOrder ? -1 : 1;
+            return (a.sortOrder ?? 0) - (b.sortOrder ?? 0) || a.slug.localeCompare(b.slug, 'en');
+        }).map((doc, sortOrder) => ({ ...serializeResearch(doc), sortOrder })),
         researchPage: normalizeResearchPage(researchPage),
         about: normalizeAbout(about),
         contact: normalizeContact(contact),

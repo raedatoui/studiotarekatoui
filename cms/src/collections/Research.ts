@@ -1,11 +1,25 @@
 import type { CollectionConfig } from 'payload'
 import { contentAccess } from '../access'
+import { publishedByField } from '../fields/publishedBy'
 import { INSTANCE_KINDS, INSTANCE_STATUSES, PRESS_TYPES } from '@tarek/content'
 
 export const Research: CollectionConfig = {
   slug: 'research',
   labels: { singular: 'Research theme', plural: 'Research themes' },
-  admin: { useAsTitle: 'title', group: 'Content', defaultColumns: ['title', 'slug', 'ongoing', '_status'] },
+  admin: {
+    useAsTitle: 'title', group: 'Content',
+    defaultColumns: ['title', 'slug', 'ongoing', '_status', 'updatedAt', 'updatedBy', 'lastPublishedAt', 'publishedBy'],
+  },
+  orderable: true,
+  hooks: {
+    beforeOperation: [({ args, operation }) => {
+      if (operation === 'read' && (!args.sort || args.sort === '_order')) {
+        // Preserve the existing order until Payload assigns drag-and-drop order keys.
+        args.sort = ['_order', 'sortOrder', 'slug']
+      }
+      return args
+    }],
+  },
   access: contentAccess,
   versions: { drafts: true, maxPerDoc: 30 },
   fields: [
@@ -117,6 +131,39 @@ export const Research: CollectionConfig = {
         },
       ],
     },
-    { name: 'sortOrder', type: 'number', defaultValue: 0, admin: { position: 'sidebar' } },
+    {
+      name: 'lastPublishedAt', type: 'date', label: 'Last published', virtual: true,
+      admin: { readOnly: true, position: 'sidebar', disableListFilter: true, disableGroupBy: true },
+      hooks: {
+        afterRead: [async ({ data, req }) => {
+          if (!data?.id) return null
+          // Drafts live in versions; the main document keeps the last published timestamp.
+          const published = await req.payload.db.findOne<{ id: string; _status?: string; updatedAt: string }>({
+            collection: 'research',
+            req,
+            where: { id: { equals: data.id } },
+            select: { _status: true, updatedAt: true },
+          })
+          return published?._status === 'published' ? published.updatedAt : null
+        }],
+      },
+    },
+    publishedByField(),
+    {
+      name: 'updatedAt', type: 'date', label: 'Last updated at', index: true,
+      admin: { readOnly: true, hidden: true, disableBulkEdit: true },
+    },
+    {
+      name: 'updatedBy', type: 'text', label: 'Last updated by', disableDuplicate: true,
+      access: { create: () => false, update: () => false },
+      admin: {
+        readOnly: true, position: 'sidebar', disableBulkEdit: true,
+        components: { Cell: '/components/PublicationCells#UpdatedByCell' },
+      },
+      hooks: {
+        beforeChange: [({ req }) => req.user?.name || req.user?.email || null],
+      },
+    },
+    { name: 'sortOrder', type: 'number', defaultValue: 0, admin: { hidden: true, disableBulkEdit: true } },
   ],
 }

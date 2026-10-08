@@ -4,6 +4,7 @@ import { homedir } from 'node:os';
 import path from 'node:path';
 import { parseArgs } from 'node:util';
 import type { Payload } from 'payload';
+import { generateNKeysBetween } from 'payload/shared';
 import type { Research } from '../src/payload-types';
 import { localPayload } from './local-payload';
 
@@ -50,14 +51,16 @@ async function importContent() {
             bySlug.set(doc.slug, doc);
         }
         const targets = new Set<string>();
-        const plan = snapshot.research.map((doc) => {
+        const orderedResearch = [...snapshot.research].sort((a, b) => a.sortOrder - b.sortOrder || a.slug.localeCompare(b.slug, 'en'));
+        const orderKeys = generateNKeysBetween(null, null, orderedResearch.length);
+        const plan = orderedResearch.map((doc, index) => {
             const idMatch = byID.get(doc.id);
             const slugMatch = bySlug.get(doc.slug);
             if (idMatch && slugMatch && idMatch.id !== slugMatch.id) throw new Error(`Identity conflict for “${doc.slug}”: ID and slug match different documents.`);
             const target = idMatch ?? slugMatch;
             if (target && targets.has(target.id)) throw new Error(`Multiple input documents target “${target.slug}”.`);
             if (target) targets.add(target.id);
-            return { doc, target, match: idMatch ? 'ID' : slugMatch ? 'slug' : 'new' };
+            return { doc, target, orderKey: orderKeys[index], match: idMatch ? 'ID' : slugMatch ? 'slug' : 'new' };
         });
         for (const item of plan) console.log(`${item.target ? 'UPDATE' : 'CREATE'} research/${item.doc.slug} (${item.match}) as draft`);
         console.log('UPDATE research-page, about, contact, navigation, news as drafts. Absent research documents are retained.');
@@ -88,8 +91,8 @@ async function importContent() {
         }
         console.log(`Pre-import backup: ${backupDir}`);
         try {
-            for (const { doc, target } of plan) {
-                const data = researchData(doc);
+            for (const { doc, target, orderKey } of plan) {
+                const data = { ...researchData(doc), _order: orderKey };
                 if (target) {
                     await payload.update({ collection: 'research', id: target.id, data, draft: true, overrideAccess: true, overrideLock: false });
                 } else {

@@ -18,6 +18,8 @@ Run workspace commands from the root:
 - `pnpm dev:web` (port 3000), `pnpm build:web` (static export)
 - `pnpm media:upload` (only when requested)
 
+Alternatively, download **Export JSON** from the CMS and replace `website/src/data/generated/content.json` with that file. This is the monorepo equivalent of the standalone website’s `src/data/site-content.json`; the snapshot remains ignored by Git.
+
 Export requires configured `cms/.env`; website media and preview origins are configured in `website/.env`. Preserve configured local environment files. A missing snapshot fails with a setup error. Do not run export/build/verification just to check a change unless requested in the current turn.
 
 ## Styling and media
@@ -29,3 +31,5 @@ Local media working files remain in ignored `public/`. Hosting excludes images, 
 ## Deployment
 
 Root Firebase configuration maps production and staging to studio-tarekatoui-web and studio-tarekatoui-staging in studio-tarekatoui-cms. From the workspace root, `pnpm deploy:web:staging` and `pnpm deploy:web:prod` build the local checkout with its existing generated snapshot, then deploy only the named Hosting target. They explicitly set NEXT_PUBLIC_SITE_ENV to staging or production and stop if the build fails. Export fresh CMS content separately when needed. Cloud Build publishing remains deferred; there is no GitHub workflow. Production canonicals always use tarekatoui.com. Never deploy without the user's request.
+
+CMS Live Preview defaults to `https://cms.tarekatoui.com` as the trusted origin; set `NEXT_PUBLIC_CMS_ORIGIN=http://localhost:3001` for a local CMS. Staging preview routes are served with `Cache-Control: no-store`. Incomplete gallery and press URLs are omitted from preview rendering while the published schema stays strict.

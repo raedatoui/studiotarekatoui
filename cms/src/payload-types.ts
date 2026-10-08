@@ -150,6 +150,7 @@ export interface User {
  */
 export interface Research {
   id: string;
+  _order?: string | null;
   title: string;
   slug: string;
   subtitle?: string | null;
@@ -201,8 +202,11 @@ export interface Research {
         id?: string | null;
       }[]
     | null;
-  sortOrder?: number | null;
+  lastPublishedAt?: string | null;
+  publishedBy?: string | null;
   updatedAt: string;
+  updatedBy?: string | null;
+  sortOrder?: number | null;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
 }
@@ -296,6 +300,7 @@ export interface UsersSelect<T extends boolean = true> {
  * via the `definition` "research_select".
  */
 export interface ResearchSelect<T extends boolean = true> {
+  _order?: T;
   title?: T;
   slug?: T;
   subtitle?: T;
@@ -347,8 +352,11 @@ export interface ResearchSelect<T extends boolean = true> {
         type?: T;
         id?: T;
       };
-  sortOrder?: T;
+  lastPublishedAt?: T;
+  publishedBy?: T;
   updatedAt?: T;
+  updatedBy?: T;
+  sortOrder?: T;
   createdAt?: T;
   _status?: T;
 }
@@ -398,6 +406,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface ResearchPage {
   id: string;
+  publishedBy?: string | null;
   eyebrow?: string | null;
   heading: string;
   introduction: string;
@@ -411,6 +420,7 @@ export interface ResearchPage {
  */
 export interface News {
   id: string;
+  publishedBy?: string | null;
   soloHeading: string;
   solo?:
     | {
@@ -469,6 +479,7 @@ export interface News {
  */
 export interface About {
   id: string;
+  publishedBy?: string | null;
   text?: string | null;
   exhibitions?: string | null;
   performances?: string | null;
@@ -487,6 +498,7 @@ export interface About {
  */
 export interface Contact {
   id: string;
+  publishedBy?: string | null;
   heading?: string | null;
   text?: string | null;
   email?: string | null;
@@ -521,6 +533,7 @@ export interface Navigation {
  * via the `definition` "research-page_select".
  */
 export interface ResearchPageSelect<T extends boolean = true> {
+  publishedBy?: T;
   eyebrow?: T;
   heading?: T;
   introduction?: T;
@@ -534,6 +547,7 @@ export interface ResearchPageSelect<T extends boolean = true> {
  * via the `definition` "news_select".
  */
 export interface NewsSelect<T extends boolean = true> {
+  publishedBy?: T;
   soloHeading?: T;
   solo?:
     | T
@@ -592,6 +606,7 @@ export interface NewsSelect<T extends boolean = true> {
  * via the `definition` "about_select".
  */
 export interface AboutSelect<T extends boolean = true> {
+  publishedBy?: T;
   text?: T;
   exhibitions?: T;
   performances?: T;
@@ -610,6 +625,7 @@ export interface AboutSelect<T extends boolean = true> {
  * via the `definition` "contact_select".
  */
 export interface ContactSelect<T extends boolean = true> {
+  publishedBy?: T;
   heading?: T;
   text?: T;
   email?: T;

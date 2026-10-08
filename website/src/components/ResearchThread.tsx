@@ -161,7 +161,7 @@ export default function ResearchThread({ research }: { research: Research }) {
                                 >
                                     <span>
                                         <span className="block font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.18em] text-[var(--color-text-secondary)]">
-                                            {reference.publisher ? `${reference.publisher} · ` : ''}
+                                            {reference.publisher ?? new URL(reference.url).hostname.replace(/^www\./, '')} ·{' '}
                                             {reference.type === 'external' ? 'Reference' : reference.type === 'press' ? 'Article' : reference.type}
                                         </span>
                                         <span className="mt-2 block text-[length:calc(clamp(14px,1.2vw,18px)*var(--copy-scale))] font-light leading-relaxed group-hover:text-[var(--color-accent)]">

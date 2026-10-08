@@ -15,6 +15,8 @@ pnpm content:export --output website/src/data/generated/content.json
 pnpm build:web
 ```
 
+To use the CMS download instead, save **Export JSON** as `website/src/data/generated/content.json`, replacing the previous snapshot, then run `pnpm build:web` or a website deployment command. This is the monorepo input path; `../website/src/data/site-content.json` belongs to the standalone checkout.
+
 Before the first export, open **Website → Navigation** in the CMS and publish its initial menu. Defaults include Research, News, About, Editions (the original Galerie Chantal Crousel link), and Contact. Edit labels, links, new-tab behavior, and drag rows to reorder. The menu is shared by desktop and mobile.
 
 The first command reads published CMS documents and globals, including Navigation, validates them, and writes JSON atomically. It does not publish drafts or modify editorial content. The second command consumes that exact file and writes the static website to `website/out`. Neither command deploys. The owner confirmed this export-to-build flow, including a downloaded CMS Export JSON snapshot saved at the same generated input path.
@@ -41,7 +43,7 @@ The CMS navigation's **Export JSON** action downloads the same published snapsho
 
 `@tarek/content` owns schema version 3 and inferred website types. Version 2 added required published navigation; version 3 restores the News page. Publish News and Navigation, then re-export older snapshots to use the current contract. There is no hardcoded website menu fallback. CMS documents retain Payload-generated types; typed serializers use an explicit allowlist. The package includes no Payload, database, or authentication code.
 
-- Research order is `sortOrder`, then slug as a stable tie-breaker. Nested instances, gallery, and press retain editor order. The timeline is derived from nested instances, not a second stored dataset.
+- Research themes can be dragged into order in the CMS collection list while sorted by **Order**. Export converts Payload's saved order into numeric `sortOrder` positions for the website; existing numeric ordering is retained for themes without a drag order yet. Publish any reordered drafts, then export and rebuild the website to update both the timeline and reading panels. Nested instances, gallery, and press retain editor order. The timeline is derived from nested instances, not a second stored dataset.
 - Empty optional strings become omitted values; optional arrays become empty arrays. Research dates fall back to start/end years or “ongoing”. Instance display dates fall back to the ISO date portion of `dateStart`, then the year.
 - Instance IDs use the saved row ID, then slug, then a document/position fallback for older rows without either identifier. Saving those rows in Payload gives them persistent IDs.
 - Publication validates required fields, unique research IDs/slugs and instance IDs/slugs, years, safe URL schemes, and media types. Embed media accepts supported YouTube/Vimeo URLs only.

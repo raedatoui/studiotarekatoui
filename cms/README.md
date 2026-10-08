@@ -67,6 +67,8 @@ For future rotations, keep the downloaded client JSON outside this repository. S
 
 Content supports drafts and up to 30 revisions. Content APIs require a signed-in editor. Text fields use plain text; media and press links use dedicated URL and caption fields. There is no separate media library or local upload storage.
 
+Drag the handles in the **Research themes** collection list to change the website order. The list must be sorted by **Order**. When ordering existing themes for the first time, Payload initializes their order and asks you to refresh and drag again. Reordered drafts must be published before export. Export fresh JSON and rebuild the website to apply the saved order; dragging does not deploy the site.
+
 ### Research image uploads
 
 Research cover images and image gallery items include an **Upload image** picker. It accepts JPEG, PNG, WebP, and GIF files up to 20 MB, sends multipart form data to the authenticated CMS endpoint, and uploads the image and metadata to `gs://typedef/tarekatoui.com/`. Each file has a unique name to avoid overwriting existing media. The returned `https://cdn.typedefinc.com/tarekatoui.com/…` URL fills the existing URL field; save the research entry to persist it. Uploads happen immediately and remain in storage if the editor discards the entry.
