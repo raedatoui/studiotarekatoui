@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSiteData } from '@/data/SiteDataProvider';
 import type { ResearchInstance } from '@tarek/content';
 import { mediaUrl } from '@/lib/mediaUrl';
@@ -88,6 +88,8 @@ export default function ProjectsHub() {
     const allInstances = research.flatMap((document) => document.instances);
     const [hovered, setHovered] = useState('');
     const [mark, setMark] = useState<{ researchId: string; m: ResearchInstance } | null>(null);
+    const [showBackToTop, setShowBackToTop] = useState(false);
+    const mainRef = useRef<HTMLElement>(null);
 
     const THIS_YEAR = new Date(exportedAt).getUTCFullYear();
     const allYears = allInstances.map((event) => event.year);
@@ -128,12 +130,24 @@ export default function ProjectsHub() {
         }
     }, []);
 
+    useEffect(() => {
+        const updateBackToTop = () => setShowBackToTop(window.scrollY > window.innerHeight);
+        updateBackToTop();
+        window.addEventListener('scroll', updateBackToTop, { passive: true });
+        return () => window.removeEventListener('scroll', updateBackToTop);
+    }, []);
+
     const goToThread = (id: string) => {
         document.getElementById(`thread-${id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
 
+    const goToTop = () => {
+        mainRef.current?.focus({ preventScroll: true });
+        window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+    };
+
     return (
-        <main className="bg-[var(--color-bg)] text-[var(--color-text)]">
+        <main ref={mainRef} tabIndex={-1} className="bg-[var(--color-bg)] text-[var(--color-text)] outline-none">
             {/* ── Hero ───────────────────────────────────────────────── */}
             <section className="max-w-[1400px] mx-auto px-[clamp(24px,4vw,64px)] pt-[clamp(40px,8vh,104px)] max-sm:pt-6 pb-[clamp(36px,5vw,64px)]">
                 <p className="thread-rise font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.3em] text-[var(--color-accent)]">
@@ -163,7 +177,7 @@ export default function ProjectsHub() {
                     </h2>
                     <p className="hidden gap-5 font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.18em] text-[var(--color-text-secondary)] sm:flex">
                         <span className="flex items-center gap-2">
-                            <span className="h-[7px] w-[7px] rounded-full bg-[var(--color-accent)]" />
+                            <span className="h-px w-5 bg-[var(--color-accent)]" />
                             ongoing
                         </span>
                         <span className="flex items-center gap-2">
@@ -186,9 +200,6 @@ export default function ProjectsHub() {
                                 {y}
                             </span>
                         ))}
-                        <span className="absolute right-0 bottom-full mb-1 hidden whitespace-nowrap font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.15em] text-[var(--color-accent)] sm:block">
-                            ongoing →
-                        </span>
                     </div>
                 </div>
 
@@ -444,6 +455,29 @@ export default function ProjectsHub() {
                     );
                 })}
             </section>
+            {showBackToTop && (
+                <button
+                    type="button"
+                    onClick={goToTop}
+                    aria-label="Back to top"
+                    title="Back to top"
+                    className="fixed bottom-6 right-6 z-40 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-header-bg)] text-[var(--color-text)] opacity-90 transition-[color,opacity] hover:text-[var(--color-text)] hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-accent)] motion-reduce:transition-none"
+                >
+                    <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden="true"
+                    >
+                        <path d="M12 19V5m-6 6 6-6 6 6" />
+                    </svg>
+                </button>
+            )}
         </main>
     );
 }

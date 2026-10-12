@@ -9,6 +9,16 @@ export const metadata: Metadata = {
     title: site.title,
     description: 'Tarek Atoui — artist and electroacoustic composer. Research, biography and contact.',
     robots: isStaging ? { index: false, follow: false } : { index: true, follow: true },
+    // Social titles and descriptions inherit each page's metadata.
+    openGraph: {
+        type: 'website',
+        siteName: site.title,
+        url: './',
+        images: [{ url: '/apple-icon.png', width: 180, height: 180, alt: site.title, type: 'image/png' }],
+    },
+    twitter: {
+        card: 'summary',
+    },
 };
 
 const initScript = `
