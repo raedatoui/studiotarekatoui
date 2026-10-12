@@ -1,11 +1,11 @@
 import type { MetadataRoute } from 'next';
-import { researchEnabled, site } from '@/config/site';
+import { site } from '@/config/site';
 import { siteContent } from '@/data/siteContent';
 
 export const dynamic = 'force-static';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const researchPaths = researchEnabled ? ['/research', ...siteContent.research.map((research) => `/research/${research.slug}`)] : [];
+    const researchPaths = ['/research', ...siteContent.research.map((research) => `/research/${research.slug}`)];
     return ['/', '/news', '/about', '/contact', ...researchPaths]
         .map((pathname) => ({ url: `${site.url}${pathname}` }));
 }

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { GALLERY_TYPES, INSTANCE_KINDS, INSTANCE_STATUSES, PRESS_TYPES, SCHEMA_VERSION } from './constants';
+import { GALLERY_TYPES, INSTANCE_KINDS, INSTANCE_STATUSES, NEWS_SECTIONS, PRESS_TYPES, SCHEMA_VERSION } from './constants';
 import { videoEmbedURL } from './media';
 
 const text = z.string().trim().min(1, 'Required');
@@ -105,11 +105,19 @@ export const exhibitionSchema = z.strictObject({
     status: z.enum(INSTANCE_STATUSES).optional(),
     subExhibitions: z.array(subExhibitionSchema),
 });
+export const newsSectionOrderSchema = z.array(z.strictObject({ section: z.enum(NEWS_SECTIONS) }))
+    .length(NEWS_SECTIONS.length)
+    .refine((rows) => new Set(rows.map((row) => row.section)).size === NEWS_SECTIONS.length, 'Include each news section exactly once');
 export const newsSchema = z.strictObject({
+    sectionOrder: newsSectionOrderSchema.default(NEWS_SECTIONS.map((section) => ({ section }))),
     soloHeading: text,
     solo: z.array(exhibitionSchema),
     groupHeading: text,
     group: z.array(exhibitionSchema),
+    installationsHeading: text.default('Permanent installations'),
+    installations: z.array(exhibitionSchema).default([]),
+    performancesHeading: text.default('Performances'),
+    performances: z.array(exhibitionSchema).default([]),
 });
 export type Exhibition = z.infer<typeof exhibitionSchema>;
 

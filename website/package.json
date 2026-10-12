@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "dev": "next dev",
-        "build": "next build && node --env-file-if-exists=.env scripts/exclude-research.mjs",
+        "build": "next build",
         "start": "next start",
         "lint": "biome lint .",
         "format": "biome format --write .",

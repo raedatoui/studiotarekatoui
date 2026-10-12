@@ -1,3 +1,4 @@
+import { NEWS_SECTIONS } from './constants';
 import type { ContentSnapshot, Exhibition, Research, ResearchInstance } from './schema';
 
 type NullableFields<T> = { [K in keyof T]?: T[K] | null };
@@ -28,12 +29,20 @@ function normalizeExhibition(doc: ExhibitionInput): Exhibition {
 }
 
 export function normalizeNews(doc: {
+    sectionOrder?: ContentSnapshot['news']['sectionOrder'] | null;
     soloHeading?: string | null; groupHeading?: string | null;
     solo?: ExhibitionInput[] | null; group?: ExhibitionInput[] | null;
+    installationsHeading?: string | null; performancesHeading?: string | null;
+    installations?: ExhibitionInput[] | null; performances?: ExhibitionInput[] | null;
 }): ContentSnapshot['news'] {
     return {
+        sectionOrder: (doc.sectionOrder ?? NEWS_SECTIONS.map((section) => ({ section }))).map(({ section }) => ({ section })),
         soloHeading: doc.soloHeading ?? '', groupHeading: doc.groupHeading ?? '',
         solo: (doc.solo ?? []).map(normalizeExhibition), group: (doc.group ?? []).map(normalizeExhibition),
+        installationsHeading: doc.installationsHeading ?? 'Permanent installations',
+        installations: (doc.installations ?? []).map(normalizeExhibition),
+        performancesHeading: doc.performancesHeading ?? 'Performances',
+        performances: (doc.performances ?? []).map(normalizeExhibition),
     };
 }
 

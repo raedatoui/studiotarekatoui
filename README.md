@@ -61,7 +61,7 @@ Firestore compatibility disables transactions: partial import progress is retain
 
 ## News recovery
 
-The CMS **Pages → News** global owns the two ordered exhibition lists, headings, venue/title, display and start/end dates, organizations, locations, featured works, links, statuses, and nested shows. `/news` reuses the original website layout and is included in the sitemap. Navigation and News support drafts, published exports, imports, and live previews.
+The CMS **Pages → News** global owns four ordered lists: Exhibitions, Group exhibitions, Permanent installations, and Performances. Each has an editable heading and entries with venue/title, display and start/end dates, organizations, locations, featured works, links, statuses, and nested shows. Drag the **Section order** rows to reorder all four sections on `/` and `/news`; each section must appear exactly once. Publish News and export fresh JSON before rebuilding the website to apply the saved order. Existing content defaults to the order listed above, with empty installation and performance lists. `/news` reuses the original website layout and is included in the sitemap. Navigation and News support drafts, published exports, imports, and live previews.
 
 The targeted recovery command reads only the old website's News content:
 

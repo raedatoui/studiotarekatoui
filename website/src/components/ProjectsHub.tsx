@@ -136,7 +136,7 @@ export default function ProjectsHub() {
                     </p>
                     <ul className="flex flex-wrap gap-x-[clamp(22px,3vw,48px)] gap-y-5 md:justify-end">
                         <Figure value={research.length ? `${MIN_YEAR}→` : '—'} label="spanning" />
-                        <Figure value={String(research.length)} label="threads" />
+                        <Figure value={String(research.length)} label="projects" />
                         <Figure value={String(allInstances.length)} label="presentations" />
                         <Figure value={String(distinctCities.size)} label="places" />
                     </ul>
@@ -147,7 +147,7 @@ export default function ProjectsHub() {
             <section className="max-w-[1400px] mx-auto px-[clamp(24px,4vw,64px)]">
                 <div className="thread-rise flex items-baseline justify-between border-t border-[var(--color-border)] pt-5">
                     <h2 className="font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.3em] text-[var(--color-text-secondary)]">
-                        The threads
+                        Projects
                     </h2>
                     <p className="hidden gap-5 font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.18em] text-[var(--color-text-secondary)] sm:flex">
                         <span className="flex items-center gap-2">
@@ -174,7 +174,7 @@ export default function ProjectsHub() {
                                 {y}
                             </span>
                         ))}
-                        <span className="absolute right-0 hidden font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.15em] text-[var(--color-accent)] sm:block">
+                        <span className="absolute right-0 bottom-full mb-1 hidden whitespace-nowrap font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.15em] text-[var(--color-accent)] sm:block">
                             ongoing →
                         </span>
                     </div>
@@ -422,7 +422,7 @@ export default function ProjectsHub() {
                                         href={`/research/${document.slug}`}
                                         className="mt-7 inline-block font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.18em] text-[var(--color-accent)] hover:underline underline-offset-4"
                                     >
-                                        Explore the thread →
+                                        Explore the project →
                                     </a>
                                 </aside>
                             </div>

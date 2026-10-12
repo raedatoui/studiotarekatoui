@@ -421,6 +421,13 @@ export interface ResearchPage {
 export interface News {
   id: string;
   publishedBy?: string | null;
+  /**
+   * Drag to reorder the four news sections. Include each section once. Publish and export to update the website.
+   */
+  sectionOrder: {
+    section: 'solo' | 'group' | 'installations' | 'performances';
+    id?: string | null;
+  }[];
   soloHeading: string;
   solo?:
     | {
@@ -447,6 +454,54 @@ export interface News {
     | null;
   groupHeading: string;
   group?:
+    | {
+        venue: string;
+        title?: string | null;
+        dateDisplay?: string | null;
+        dateStart?: string | null;
+        dateEnd?: string | null;
+        organization?: string | null;
+        location?: string | null;
+        work?: string | null;
+        url?: string | null;
+        status?: ('current' | 'upcoming' | 'past') | null;
+        subExhibitions?:
+          | {
+              title: string;
+              dateDisplay: string;
+              location: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  installationsHeading: string;
+  installations?:
+    | {
+        venue: string;
+        title?: string | null;
+        dateDisplay?: string | null;
+        dateStart?: string | null;
+        dateEnd?: string | null;
+        organization?: string | null;
+        location?: string | null;
+        work?: string | null;
+        url?: string | null;
+        status?: ('current' | 'upcoming' | 'past') | null;
+        subExhibitions?:
+          | {
+              title: string;
+              dateDisplay: string;
+              location: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  performancesHeading: string;
+  performances?:
     | {
         venue: string;
         title?: string | null;
@@ -548,6 +603,12 @@ export interface ResearchPageSelect<T extends boolean = true> {
  */
 export interface NewsSelect<T extends boolean = true> {
   publishedBy?: T;
+  sectionOrder?:
+    | T
+    | {
+        section?: T;
+        id?: T;
+      };
   soloHeading?: T;
   solo?:
     | T
@@ -574,6 +635,54 @@ export interface NewsSelect<T extends boolean = true> {
       };
   groupHeading?: T;
   group?:
+    | T
+    | {
+        venue?: T;
+        title?: T;
+        dateDisplay?: T;
+        dateStart?: T;
+        dateEnd?: T;
+        organization?: T;
+        location?: T;
+        work?: T;
+        url?: T;
+        status?: T;
+        subExhibitions?:
+          | T
+          | {
+              title?: T;
+              dateDisplay?: T;
+              location?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  installationsHeading?: T;
+  installations?:
+    | T
+    | {
+        venue?: T;
+        title?: T;
+        dateDisplay?: T;
+        dateStart?: T;
+        dateEnd?: T;
+        organization?: T;
+        location?: T;
+        work?: T;
+        url?: T;
+        status?: T;
+        subExhibitions?:
+          | T
+          | {
+              title?: T;
+              dateDisplay?: T;
+              location?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  performancesHeading?: T;
+  performances?:
     | T
     | {
         venue?: T;

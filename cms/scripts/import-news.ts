@@ -42,7 +42,7 @@ try {
             await mkdir(backupDir, { recursive: true, mode: 0o700 });
             await writeFile(path.join(backupDir, 'before.json'), JSON.stringify({ latestNews, publishedNews, navigation, publishedNavigation }, null, 2), { mode: 0o600, flag: 'wx' });
             console.log(`Backup: ${backupDir}`);
-            if (latestNews.solo?.length || latestNews.group?.length) {
+            if (latestNews.solo?.length || latestNews.group?.length || latestNews.installations?.length || latestNews.performances?.length) {
                 console.log('Existing News content retained; recovery will not overwrite editor changes.');
             } else {
                 await payload.updateGlobal({ slug: 'news', data: { ...news, _status: 'draft' }, draft: true, overrideAccess: true });

@@ -13,7 +13,7 @@ export const Research: CollectionConfig = {
   orderable: true,
   hooks: {
     beforeOperation: [({ args, operation }) => {
-      if (operation === 'read' && (!args.sort || args.sort === '_order')) {
+      if (operation === 'read' && !('id' in args) && (!args.sort || args.sort === '_order')) {
         // Preserve the existing order until Payload assigns drag-and-drop order keys.
         args.sort = ['_order', 'sortOrder', 'slug']
       }

@@ -1,6 +1,7 @@
 import { z } from 'zod';
+import { NEWS_SECTIONS } from './constants';
 import { normalizeAbout, normalizeContact, normalizeNavigation, normalizeNews, normalizeResearch, normalizeResearchPage } from './normalize';
-import { aboutSchema, contactSchema, exhibitionSchema, gallerySchema, instanceSchema, navigationItemSchema, pressSchema, researchPageSchema, researchSchema } from './schema';
+import { aboutSchema, contactSchema, exhibitionSchema, gallerySchema, instanceSchema, navigationItemSchema, newsSectionOrderSchema, pressSchema, researchPageSchema, researchSchema } from './schema';
 
 // Invalid or unfinished fields are cleared for rendering, never accepted by the publication schema.
 const string = z.string().catch('');
@@ -63,8 +64,12 @@ const exhibitionInput = z.object({
     subExhibitions: z.array(z.object({ title: string, dateDisplay: string, location: string })).nullish().catch([]),
 });
 const newsInput = z.object({
+    sectionOrder: z.array(z.object({ section: z.enum(NEWS_SECTIONS) })).pipe(newsSectionOrderSchema).nullish().catch(undefined),
     soloHeading: string, groupHeading: string,
     solo: z.array(exhibitionInput).nullish().catch([]), group: z.array(exhibitionInput).nullish().catch([]),
+    installationsHeading: optionalString, performancesHeading: optionalString,
+    installations: z.array(exhibitionInput).nullish().catch([]),
+    performances: z.array(exhibitionInput).nullish().catch([]),
 });
 
 export function previewResearch(value: unknown) {
