@@ -11,8 +11,14 @@ import { mediaUrl } from '@/lib/mediaUrl';
 // Marks sharing a year fan out around it, otherwise they stack into what reads as one dot.
 // The gap is that year's own share of the axis, floored in px by CSS max() so a crowded
 // year stays countable on a narrow track without having to measure it.
+// A concluded project's final-year marks fan inward and stay before its end marker.
 const MARK_GAP_PX = 12;
-const fanMarks = (ms: ResearchInstance[], span: number, pos: (year: number) => number): Map<string, string> => {
+const fanMarks = (
+    ms: ResearchInstance[],
+    span: number,
+    pos: (year: number) => number,
+    concludedRange?: { startYear: number; endYear: number }
+): Map<string, string> => {
     const byYear = new Map<number, ResearchInstance[]>();
     for (const m of ms) {
         byYear.set(m.year, [...(byYear.get(m.year) ?? []), m]);
@@ -20,9 +26,15 @@ const fanMarks = (ms: ResearchInstance[], span: number, pos: (year: number) => n
     const left = new Map<string, string>();
     for (const [year, group] of byYear) {
         const gap = 92 / span / (group.length + 1);
+        const finalYear = concludedRange && year === concludedRange.endYear;
+        let spacing = `max(${gap.toFixed(3)}%, ${MARK_GAP_PX}px)`;
+        if (finalYear) {
+            const maxGap = (pos(concludedRange.endYear) - pos(concludedRange.startYear)) / (group.length + 1);
+            spacing = `min(${spacing}, ${maxGap.toFixed(3)}%)`;
+        }
         group.forEach((m, i) => {
-            const k = i - (group.length - 1) / 2;
-            const offset = `${Math.abs(k)} * max(${gap.toFixed(3)}%, ${MARK_GAP_PX}px)`;
+            const k = finalYear ? i - group.length : i - (group.length - 1) / 2;
+            const offset = `${Math.abs(k)} * ${spacing}`;
             left.set(m.id, k === 0 ? `${pos(year)}%` : `calc(${pos(year)}% ${k < 0 ? '-' : '+'} ${offset})`);
         });
     }
@@ -97,7 +109,7 @@ export default function ProjectsHub() {
         return {
             document,
             ms,
-            marks: fanMarks(ms, SPAN, pos),
+            marks: fanMarks(ms, SPAN, pos, document.ongoing ? undefined : { startYear, endYear }),
             startYear,
             endYear,
             places,
@@ -269,10 +281,12 @@ export default function ProjectsHub() {
 
                                         {/* end state */}
                                         {t.document.ongoing ? (
-                                            <span
-                                                className={`absolute top-1/2 h-[7px] w-[7px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--color-accent)] ${t.live ? 'thread-pulse' : ''}`}
-                                                style={{ left: `${pos(t.endYear)}%` }}
-                                            />
+                                            t.ms.some((m) => m.year === THIS_YEAR) && (
+                                                <span
+                                                    className={`absolute top-1/2 h-[7px] w-[7px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--color-accent)] ${t.live ? 'thread-pulse' : ''}`}
+                                                    style={{ left: `${pos(t.endYear)}%` }}
+                                                />
+                                            )
                                         ) : (
                                             <span
                                                 className="absolute top-1/2 h-[12px] w-[2px] -translate-x-1/2 -translate-y-1/2 bg-[var(--color-text-secondary)]"
