@@ -63,22 +63,24 @@ function MarkCard({ m, left }: { m: ResearchInstance; left: number }) {
     return (
         <div
             aria-hidden
-            className="pointer-events-none absolute bottom-[calc(100%+10px)] z-30 w-[min(268px,62vw)] border border-[var(--color-border)] bg-[var(--color-bg)] px-3.5 py-3 shadow-[0_10px_30px_rgba(0,0,0,0.12)]"
+            className="absolute bottom-full z-30 w-[min(268px,62vw)] pb-2.5"
             style={{ left: `${left}%`, transform: anchor }}
         >
-            <p className="font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-accent)]">
-                {m.kind} · {m.year}
-            </p>
-            {m.title && (
-                <p className="mt-2 font-[family-name:var(--font-display)] text-[length:calc(17px*var(--copy-scale))] leading-tight">{m.title}</p>
-            )}
-            <p className="mt-1.5 text-[length:calc(12.5px*var(--copy-scale))] font-light leading-snug">{m.organization}</p>
-            {place && (
-                <p className="text-[length:calc(12.5px*var(--copy-scale))] font-light leading-snug text-[var(--color-text-secondary)]">{place}</p>
-            )}
-            {m.dateDisplay && (
-                <p className="mt-2 font-mono text-[length:calc(10px*var(--copy-scale))] text-[var(--color-text-secondary)]">{m.dateDisplay}</p>
-            )}
+            <div className="border border-[var(--color-border)] bg-[var(--color-bg)] px-3.5 py-3 shadow-[0_10px_30px_rgba(0,0,0,0.12)]">
+                <p className="font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-accent)]">
+                    {m.kind} · {m.year}
+                </p>
+                {m.title && (
+                    <p className="mt-2 font-[family-name:var(--font-display)] text-[length:calc(17px*var(--copy-scale))] leading-tight">{m.title}</p>
+                )}
+                <p className="mt-1.5 text-[length:calc(12.5px*var(--copy-scale))] font-light leading-snug">{m.organization}</p>
+                {place && (
+                    <p className="text-[length:calc(12.5px*var(--copy-scale))] font-light leading-snug text-[var(--color-text-secondary)]">{place}</p>
+                )}
+                {m.dateDisplay && (
+                    <p className="mt-2 font-mono text-[length:calc(10px*var(--copy-scale))] text-[var(--color-text-secondary)]">{m.dateDisplay}</p>
+                )}
+            </div>
         </div>
     );
 }
@@ -125,9 +127,13 @@ export default function ProjectsHub() {
 
     useEffect(() => {
         const header = document.querySelector('header');
-        if (header) {
-            document.documentElement.style.setProperty('--header-height', `${header.offsetHeight}px`);
-        }
+        if (!header) return;
+
+        const updateHeaderHeight = () => document.documentElement.style.setProperty('--header-height', `${header.offsetHeight}px`);
+        updateHeaderHeight();
+        const observer = new ResizeObserver(updateHeaderHeight);
+        observer.observe(header);
+        return () => observer.disconnect();
     }, []);
 
     useEffect(() => {
@@ -137,9 +143,15 @@ export default function ProjectsHub() {
         return () => window.removeEventListener('scroll', updateBackToTop);
     }, []);
 
-    const goToThread = (id: string) => {
-        document.getElementById(`thread-${id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    };
+    useEffect(() => {
+        if (!mark) return;
+
+        const dismissMark = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') setMark(null);
+        };
+        document.addEventListener('keydown', dismissMark);
+        return () => document.removeEventListener('keydown', dismissMark);
+    }, [mark]);
 
     const goToTop = () => {
         mainRef.current?.focus({ preventScroll: true });
@@ -147,7 +159,7 @@ export default function ProjectsHub() {
     };
 
     return (
-        <main ref={mainRef} tabIndex={-1} className="bg-[var(--color-bg)] text-[var(--color-text)] outline-none">
+        <main ref={mainRef} tabIndex={-1} className="research-hub bg-[var(--color-bg)] text-[var(--color-text)] outline-none">
             {/* ── Hero ───────────────────────────────────────────────── */}
             <section className="max-w-[1400px] mx-auto px-[clamp(24px,4vw,64px)] pt-[clamp(40px,8vh,104px)] max-sm:pt-6 pb-[clamp(36px,5vw,64px)]">
                 <p className="thread-rise font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.3em] text-[var(--color-accent)]">
@@ -156,8 +168,8 @@ export default function ProjectsHub() {
                 <h1 className="thread-rise mt-[clamp(16px,2vw,28px)] whitespace-nowrap max-sm:whitespace-normal max-sm:text-balance font-[family-name:var(--font-display)] text-[min(3.25vw,47px)] max-sm:text-[clamp(32px,8vw,44px)] font-normal leading-[0.96] max-sm:leading-[1.1] tracking-[-0.01em] [animation-delay:80ms]">
                     {researchPage.heading}
                 </h1>
-                <div className="thread-rise mt-[clamp(24px,3vw,44px)] grid gap-[clamp(24px,4vw,72px)] md:grid-cols-[1fr_auto] md:items-end [animation-delay:160ms]">
-                    <p className="max-w-[62ch] text-[length:calc(clamp(15px,1.3vw,18px)*var(--copy-scale))] font-light leading-[1.7] text-[var(--color-text-secondary)]">
+                <div className="thread-rise mt-[clamp(24px,3vw,44px)] grid gap-[clamp(24px,4vw,72px)] max-sm:gap-8 md:grid-cols-[1fr_auto] md:items-end [animation-delay:160ms]">
+                    <p className="max-w-[62ch] max-sm:max-w-[38ch] text-[length:calc(clamp(15px,1.3vw,18px)*var(--copy-scale))] font-light leading-[1.7] text-[var(--color-text-secondary)] max-sm:text-[var(--color-text)]">
                         {researchPage.introduction}
                     </p>
                     <ul className="flex flex-wrap gap-x-[clamp(22px,3vw,48px)] gap-y-5 md:justify-end">
@@ -170,18 +182,27 @@ export default function ProjectsHub() {
             </section>
 
             {/* ── The score ──────────────────────────────────────────── */}
-            <section className="max-w-[1400px] mx-auto px-[clamp(24px,4vw,64px)]">
-                <div className="thread-rise flex items-baseline justify-between border-t border-[var(--color-border)] pt-5">
-                    <h2 className="font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.3em] text-[var(--color-text-secondary)]">
+            <section
+                id="projects"
+                tabIndex={-1}
+                aria-labelledby="projects-heading"
+                className="max-w-[1400px] mx-auto scroll-mt-[calc(var(--header-height,64px)+16px)] px-[clamp(24px,4vw,64px)] outline-none"
+            >
+                <div className="thread-rise flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3 border-t border-[var(--color-border)] pt-5">
+                    <h2 id="projects-heading" className="font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.3em] text-[var(--color-text-secondary)]">
                         Projects
                     </h2>
-                    <p className="hidden gap-5 font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.18em] text-[var(--color-text-secondary)] sm:flex">
+                    <p className="hidden flex-wrap gap-x-5 gap-y-2 font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.18em] text-[var(--color-text-secondary)] sm:flex">
                         <span className="flex items-center gap-2">
-                            <span className="h-px w-5 bg-[var(--color-accent)]" />
+                            <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-[var(--color-text-secondary)]" />
+                            presentation
+                        </span>
+                        <span className="flex items-center gap-2">
+                            <span aria-hidden="true" className="h-px w-5 bg-[var(--color-accent)]" />
                             ongoing
                         </span>
                         <span className="flex items-center gap-2">
-                            <span className="h-[10px] w-[2px] bg-[var(--color-text-secondary)]" />
+                            <span aria-hidden="true" className="h-[10px] w-[2px] bg-[var(--color-text-secondary)]" />
                             concluded
                         </span>
                     </p>
@@ -210,36 +231,37 @@ export default function ProjectsHub() {
                         const left = pos(t.startYear);
                         const width = pos(t.endYear) - left;
                         return (
-                            <button
+                            <a
                                 key={t.document.id}
-                                type="button"
-                                onClick={() => goToThread(t.document.id)}
+                                href={`#thread-${t.document.id}`}
                                 onMouseEnter={() => setHovered(t.document.id)}
-                                onMouseLeave={() => setHovered('')}
+                                onMouseLeave={() => {
+                                    setHovered('');
+                                    setMark(null);
+                                }}
                                 onFocus={() => setHovered(t.document.id)}
                                 onBlur={() => setHovered('')}
-                                className={`relative block w-full cursor-pointer border-b border-[var(--color-border)] py-2 max-sm:py-3.5 text-left transition-colors ${SCORE_GRID} sm:items-center hover:bg-[var(--color-hover-bg)] ${active ? 'z-20' : ''}`}
+                                className={`group relative w-full border-b border-[var(--color-border)] py-2 max-sm:py-3.5 text-left transition-colors motion-reduce:transition-none ${SCORE_GRID} sm:items-center hover:bg-[var(--color-hover-bg)] focus-visible:bg-[var(--color-hover-bg)] ${active ? 'z-20' : ''}`}
                             >
                                 {/* label */}
-                                <div className="thread-rise flex flex-col items-start gap-1 sm:block" style={{ animationDelay: `${i * 55}ms` }}>
+                                <div className="thread-rise flex min-w-0 flex-col items-start gap-1 sm:block" style={{ animationDelay: `${i * 55}ms` }}>
                                     <span
-                                        className={`font-[family-name:var(--font-display)] text-[clamp(17px,1.5vw,23px)] max-sm:text-[clamp(22px,6vw,26px)] leading-tight transition-colors ${active ? 'text-[var(--color-accent)]' : ''}`}
+                                        className={`font-[family-name:var(--font-display)] text-[clamp(17px,1.5vw,23px)] max-sm:text-[clamp(22px,6vw,26px)] leading-tight underline-offset-4 transition-colors motion-reduce:transition-none group-hover:underline group-focus-visible:underline group-focus-visible:text-[var(--color-accent)] ${active ? 'text-[var(--color-accent)]' : ''}`}
                                     >
                                         {t.document.title}
                                     </span>
-                                    <span className="flex items-center gap-2 font-mono text-[length:calc(10px*var(--copy-scale))] max-sm:text-[length:calc(11px*var(--copy-scale))] tracking-[0.1em] max-sm:tracking-[0.03em] text-[var(--color-text-secondary)] sm:mt-1 sm:block">
-                                        {t.document.ongoing && (
-                                            <span
-                                                aria-hidden="true"
-                                                className="h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-accent)] sm:hidden"
-                                            />
-                                        )}
+                                    <span className="block font-mono text-[length:calc(10px*var(--copy-scale))] max-sm:text-[length:calc(11px*var(--copy-scale))] tracking-[0.1em] max-sm:tracking-[0.03em] text-[var(--color-text-secondary)] sm:mt-1">
+                                        <span className="sm:sr-only">{t.document.ongoing ? 'Ongoing' : 'Concluded'} · </span>
                                         {t.document.yearsDisplay}
                                     </span>
                                 </div>
 
                                 {/* track */}
-                                <div className="relative mt-2 h-[clamp(28px,4.5vh,44px)] max-sm:hidden sm:mt-0">
+                                <div
+                                    aria-hidden="true"
+                                    onMouseLeave={() => setMark(null)}
+                                    className="relative mt-2 h-[clamp(28px,4.5vh,44px)] max-sm:hidden sm:mt-0"
+                                >
                                     {/* gridlines (static, shared across rows) */}
                                     {ticks.map((y) => (
                                         <span
@@ -254,14 +276,14 @@ export default function ProjectsHub() {
                                     <div className="thread-draw absolute inset-0" style={{ animationDelay: `${i * 55 + 120}ms` }}>
                                         {/* base line */}
                                         <span
-                                            className={`absolute top-1/2 h-px -translate-y-1/2 transition-colors ${active ? 'bg-[var(--color-accent)]' : 'bg-[var(--color-text)] opacity-30'}`}
+                                            className={`absolute top-1/2 h-px -translate-y-1/2 transition-colors motion-reduce:transition-none ${active ? 'bg-[var(--color-accent)]' : 'bg-[var(--color-text-secondary)]'}`}
                                             style={{ left: `${left}%`, width: `${width}%` }}
                                         />
 
                                         {/* ongoing tail → dissolves off the edge */}
                                         {t.document.ongoing && (
                                             <span
-                                                className={`absolute top-1/2 h-px -translate-y-1/2 transition-opacity ${active ? 'opacity-100' : 'opacity-60'}`}
+                                                className="absolute top-1/2 h-px -translate-y-1/2"
                                                 style={{
                                                     left: `${pos(t.endYear)}%`,
                                                     right: 0,
@@ -277,14 +299,14 @@ export default function ProjectsHub() {
                                             const color = lit
                                                 ? 'bg-[var(--color-accent)]'
                                                 : m.year === THIS_YEAR
-                                                  ? 'bg-[var(--color-recent)]'
+                                                  ? 'bg-[var(--color-recent)] outline outline-[var(--color-accent)]'
                                                   : active
                                                     ? 'bg-[var(--color-accent)]'
-                                                    : 'bg-[var(--color-text)] opacity-55';
+                                                    : 'bg-[var(--color-text-secondary)]';
                                             return (
                                                 <span
                                                     key={m.id}
-                                                    className={`absolute top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full transition-all ${size} ${color}`}
+                                                    className={`absolute top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full transition-all motion-reduce:transition-none ${size} ${color}`}
                                                     style={{ left: t.marks.get(m.id) ?? `${pos(m.year)}%` }}
                                                 />
                                             );
@@ -312,14 +334,13 @@ export default function ProjectsHub() {
                                             key={`hit-${m.id}`}
                                             aria-hidden="true"
                                             onMouseEnter={() => setMark({ researchId: t.document.id, m })}
-                                            onMouseLeave={() => setMark(null)}
                                             className="absolute top-0 bottom-0 z-20 w-[12px] -translate-x-1/2"
                                             style={{ left: t.marks.get(m.id) ?? `${pos(m.year)}%` }}
                                         />
                                     ))}
                                     {mark?.researchId === t.document.id && <MarkCard m={mark.m} left={pos(mark.m.year)} />}
                                 </div>
-                            </button>
+                            </a>
                         );
                     })}
                 </div>
@@ -333,7 +354,9 @@ export default function ProjectsHub() {
                         <article
                             key={document.id}
                             id={`thread-${document.id}`}
-                            className="scroll-mt-[calc(var(--header-height,64px)+16px)] border-t border-[var(--color-border)] py-[clamp(40px,7vw,104px)] max-sm:last:pb-6 first:border-t-0 first:pt-[clamp(28px,4vw,48px)]"
+                            tabIndex={-1}
+                            aria-labelledby={`thread-heading-${document.id}`}
+                            className="scroll-mt-[calc(var(--header-height,64px)+16px)] border-t border-[var(--color-border)] py-[clamp(40px,7vw,104px)] max-sm:last:pb-6 first:border-t-0 first:pt-[clamp(28px,4vw,48px)] outline-none"
                         >
                             <div className="flex items-center gap-3 font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.22em]">
                                 {document.ongoing ? (
@@ -347,8 +370,8 @@ export default function ProjectsHub() {
                                 <span className="text-[var(--color-text-secondary)]">{document.yearsDisplay}</span>
                             </div>
 
-                            <h3 className="mt-4 font-[family-name:var(--font-display)] text-[clamp(36px,5.6vw,80px)] font-normal leading-[0.98] tracking-[-0.01em]">
-                                <a href={`/research/${document.slug}`} className="transition-colors hover:text-[var(--color-accent)]">
+                            <h3 id={`thread-heading-${document.id}`} className="mt-4 font-[family-name:var(--font-display)] text-[clamp(36px,5.6vw,80px)] font-normal leading-[0.98] tracking-[-0.01em]">
+                                <a href={`/research/${document.slug}`} className="research-title-link transition-colors motion-reduce:transition-none">
                                     {document.title}
                                 </a>
                             </h3>
@@ -423,34 +446,39 @@ export default function ProjectsHub() {
                                             Where &amp; when
                                         </p>
                                         <ol className="space-y-3">
-                                            {t.ms.map((m) => (
-                                                <li key={m.id} className="grid grid-cols-[40px_1fr] items-baseline gap-3">
-                                                    <span className="font-mono text-[length:calc(12px*var(--copy-scale))] text-[var(--color-accent)]">
-                                                        {m.year}
-                                                    </span>
-                                                    <span className="text-[length:calc(13px*var(--copy-scale))] leading-snug">
-                                                        {m.organization}
-                                                        {m.city && (
-                                                            <span className="text-[var(--color-text-secondary)]">
-                                                                {' — '}
-                                                                {m.city}
-                                                                {m.country ? `, ${m.country}` : ''}
+                                            {t.ms.map((m) => {
+                                                const place = [m.city, m.country].filter(Boolean).join(', ');
+                                                return (
+                                                    <li key={m.id} className="grid grid-cols-[40px_1fr] items-baseline gap-3">
+                                                        <span className="font-mono text-[length:calc(12px*var(--copy-scale))] text-[var(--color-accent)]">
+                                                            {m.year}
+                                                        </span>
+                                                        <span className="text-[length:calc(13px*var(--copy-scale))] leading-snug">
+                                                            {m.title ?? m.organization}
+                                                            <span className="mt-1 block text-[length:calc(12px*var(--copy-scale))] leading-relaxed text-[var(--color-text-secondary)]">
+                                                                {m.kind}{m.status ? ` · ${m.status}` : ''}
+                                                                {m.title && ` · ${m.organization}`}
+                                                                {place && ` — ${place}`}
+                                                                {` · ${m.dateDisplay}`}
                                                             </span>
-                                                        )}
-                                                    </span>
-                                                </li>
-                                            ))}
+                                                        </span>
+                                                    </li>
+                                                );
+                                            })}
                                         </ol>
                                     </div>
 
                                     <a
                                         href={`/research/${document.slug}`}
-                                        className="mt-7 inline-block font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.18em] text-[var(--color-accent)] hover:underline underline-offset-4"
+                                        className="research-jump-link mt-7 inline-block font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.18em]"
                                     >
                                         Explore the project →
                                     </a>
                                 </aside>
                             </div>
+                            <a href="#projects" className="research-jump-link mt-8 inline-block py-1 text-[length:calc(12px*var(--copy-scale))]">
+                                Back to projects <span aria-hidden="true">↑</span>
+                            </a>
                         </article>
                     );
                 })}

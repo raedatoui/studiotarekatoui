@@ -31,7 +31,7 @@ export default function ResearchThread({ research }: { research: Research }) {
             {/* ── Hero ───────────────────────────────────────────────── */}
             <section className="max-w-[1400px] mx-auto px-[clamp(24px,4vw,64px)] pt-[clamp(32px,6vh,72px)] max-sm:pt-6 pb-[clamp(32px,5vw,56px)]">
                 <a
-                    className="thread-rise font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.3em] text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-accent)]"
+                    className="research-jump-link thread-rise font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.3em]"
                     href="/research"
                 >
                     ← Long-term research
@@ -114,7 +114,7 @@ export default function ResearchThread({ research }: { research: Research }) {
                                     <span className="font-mono text-[length:calc(12px*var(--copy-scale))] text-[var(--color-accent)]">{m.year}</span>
                                     <span>
                                         <span className="text-[length:calc(15px*var(--copy-scale))] leading-snug">
-                                            {m.url ? <a href={m.url} target="_blank" rel="noreferrer" className="hover:underline">{m.title ?? m.organization} ↗</a> : (m.title ?? m.organization)}
+                                            {m.url ? <a href={m.url} target="_blank" rel="noreferrer" className="research-title-link">{m.title ?? m.organization} ↗</a> : (m.title ?? m.organization)}
                                         </span>
                                         <span className="mt-1 block text-[length:calc(12.5px*var(--copy-scale))] font-light text-[var(--color-text-secondary)]">
                                             {m.kind}{m.status ? ` · ${m.status}` : ''}

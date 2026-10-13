@@ -58,6 +58,37 @@ a {
     text-decoration: none;
 }
 
+.site-header :is(a, button):focus-visible,
+.research-hub :is(a, button):focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+}
+
+.site-nav-link {
+    color: var(--color-text-secondary);
+    text-underline-offset: 0.3em;
+}
+
+.site-nav-link[aria-current],
+.site-nav-link:hover,
+.site-nav-link:focus-visible {
+    color: var(--color-text);
+    text-decoration: underline;
+}
+
+.research-jump-link {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.research-title-link:hover,
+.research-title-link:focus-visible {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 0.12em;
+}
+
 .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -113,6 +144,10 @@ a {
 }
 
 @media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
     .thread-rise,
     .thread-draw,
     .thread-pulse {
