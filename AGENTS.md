@@ -1,6 +1,6 @@
 # Repository instructions
 
-Studio Tarek Atoui is a pnpm monorepo: `cms/` (Payload), `website/` (static Next.js), and `packages/content/` (shared Zod contract). See README.md and cms-migration.md.
+Studio Tarek Atoui is a pnpm monorepo: `cms/` (Payload), `website/` (static Next.js), and `packages/content/` (shared Zod contract). See README.md. Private migration notes are retained locally but excluded from Git.
 
 - Make surgical changes, state assumptions, and avoid speculative features or unrelated cleanup.
 - Never run verification unless explicitly requested for the current turn: no builds, lint, type checks, tests, browser tools, or smoke checks. Implementation permission alone is not verification permission.

@@ -42,14 +42,19 @@
                 },
                 {
                     "source": "/preview/**",
-                    "headers": [{ "key": "Cache-Control", "value": "no-store" }]
+                    "headers": [
+                        {
+                            "key": "Cache-Control",
+                            "value": "no-store"
+                        }
+                    ]
                 }
             ]
         }
     ],
     "apphosting": [
         {
-            "backendId": "cms",
+            "backendId": "${FIREBASE_APPHOSTING_BACKEND_ID}",
             "rootDir": "cms",
             "ignore": [
                 "**/node_modules/**",
@@ -77,7 +82,11 @@
                 "**/*.pdf",
                 "**/*.docx",
                 "**/*.zip",
-                "cms-migration.md"
+                "cms-migration.md",
+                "**/.playwright-mcp/**",
+                ".firebase.deploy-*.json",
+                ".firebaserc",
+                "website/cdn-plan.md"
             ]
         }
     ]

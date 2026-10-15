@@ -12,6 +12,10 @@ if (process.env.NODE_ENV === 'production' && !process.env.NEXT_PUBLIC_MEDIA_BASE
     throw new Error('Set NEXT_PUBLIC_MEDIA_BASE_URL in .env before building; media is excluded from Firebase Hosting.');
 }
 
+if (process.env.NODE_ENV === 'production' && !process.env.NEXT_PUBLIC_SITE_URL) {
+    throw new Error('Set NEXT_PUBLIC_SITE_URL in .env before building canonical URLs.');
+}
+
 const nextConfig: NextConfig = {
     output: 'export',
     transpilePackages: ['@tarek/content'],

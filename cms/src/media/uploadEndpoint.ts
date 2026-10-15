@@ -55,16 +55,24 @@ export const uploadEndpoint: Endpoint = {
             return Response.json({ error: 'Choose a JPEG, PNG, WebP, or GIF image.' }, { status: 415 });
         }
 
+        const bucket = process.env.MEDIA_BUCKET?.replace(/^gs:\/\//, '').replace(/\/+$/, '');
+        const prefix = process.env.MEDIA_PREFIX?.replace(/^\/+|\/+$/g, '');
+        const mediaBaseUrl = process.env.MEDIA_BASE_URL?.replace(/\/+$/, '');
+        if (!bucket || !prefix || !mediaBaseUrl) {
+            return Response.json({ error: 'Image uploads are not configured.' }, { status: 503 });
+        }
+
         const basename = path.parse(file.name).name.replace(/[^a-zA-Z0-9_-]+/g, '-').slice(0, 100) || 'image';
-        const objectName = `tarekatoui.com/${randomUUID()}-${basename}.${format}`;
+        const filename = `${randomUUID()}-${basename}.${format}`;
+        const objectName = `${prefix}/${filename}`;
         try {
-            await storage.bucket('typedef').file(objectName).save(data, {
+            await storage.bucket(bucket).file(objectName).save(data, {
                 resumable: false,
                 preconditionOpts: { ifGenerationMatch: 0 },
                 metadata: { contentType, cacheControl: 'public, max-age=31536000, immutable' },
             });
             return Response.json(
-                { url: `https://cdn.typedefinc.com/${objectName}` },
+                { url: `${mediaBaseUrl}/${filename}` },
                 { status: 201, headers: { 'Cache-Control': 'no-store' } }
             );
         } catch (error) {

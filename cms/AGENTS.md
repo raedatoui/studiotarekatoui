@@ -12,7 +12,7 @@ This repository contains Studio Tarek Atoui’s Payload 3 CMS, built with Next.j
 - Live Preview sends unsaved forms to static website preview routes. Configure WEBSITE_PREVIEW_URL; keep the website trusted CMS origin aligned.
 - `src/auth.ts`, `src/auth/`, and `src/access.ts` handle authentication and permissions.
 - `src/app/(payload)/` contains admin and API routes; `src/app/(frontend)/` contains frontend routes.
-- `apphosting.yaml` configures hosting and secret references; the root `firebase.json` configures workspace source deployment; `scripts/deploy.sh` deploys the CMS. Media stays on the existing GCS-backed CDN.
+- `apphosting.template.yaml` defines hosting and environment bindings; deployment renders ignored `apphosting.yaml` from the workspace `.env`; the root `firebase.json` configures workspace source deployment; `scripts/deploy.sh` deploys the CMS. Media stays on the existing GCS-backed CDN.
 
 ## Build, Test, and Development Commands
 

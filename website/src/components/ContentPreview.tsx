@@ -12,7 +12,7 @@ import Header from './Header';
 import News from './News';
 
 export type PreviewKind = 'research' | 'research-page' | 'about' | 'contact' | 'navigation' | 'news';
-const cmsOrigin = process.env.NEXT_PUBLIC_CMS_ORIGIN || 'https://cms.tarekatoui.com';
+const cmsOrigin = process.env.NEXT_PUBLIC_CMS_ORIGIN || 'http://localhost:3001';
 
 export default function ContentPreview({ kind }: { kind: PreviewKind }) {
     const baseline = useSiteData();

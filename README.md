@@ -6,7 +6,7 @@ Use Node 22 (at least 22.13) and pnpm 11.27.1. Install from this directory with 
 
 ## Local content → website
 
-Keep configured `cms/.env` and `website/.env` files. On a fresh checkout, copy each app's `.env.example` to `.env` and fill in the CMS credentials. `DATABASE_URL` points to the existing Firestore MongoDB-compatible database; no local database is required. These files and exported snapshots are ignored by Git.
+Keep configured `cms/.env` and `website/.env` files. On a fresh checkout, copy each app's `.env.example` to `.env` and configure your own CMS credentials, media destination, and public website URL. Copy the workspace `.env.example` to `.env` separately when configuring deployments. `DATABASE_URL` points to the existing Firestore MongoDB-compatible database; no local database is required. These files and exported snapshots are ignored by Git.
 
 From this directory:
 
@@ -33,7 +33,7 @@ pnpm dev:web
 pnpm dev:cms
 ```
 
-Export a published baseline before starting the website. In local CMS configuration, `WEBSITE_PREVIEW_URL=http://localhost:3000`; in website configuration, `NEXT_PUBLIC_CMS_ORIGIN=http://localhost:3001`. These defaults support local development. For hosted previews, `cms/apphosting.yaml` sets `WEBSITE_PREVIEW_URL=https://staging.tarekatoui.com`, and `pnpm deploy:web:staging` builds with `NEXT_PUBLIC_CMS_ORIGIN=https://cms.tarekatoui.com` so staging accepts preview messages from the hosted CMS. Deploy both apps to activate these settings.
+Export a published baseline before starting the website. In local CMS configuration, `WEBSITE_PREVIEW_URL=http://localhost:3000`; in website configuration, `NEXT_PUBLIC_CMS_ORIGIN=http://localhost:3001`. These defaults support local development. For hosted previews, deployment reads `CMS_WEBSITE_PREVIEW_URL` and `CMS_AUTH_URL` from the workspace `.env`. It generates the CMS environment configuration and sets the website's trusted `NEXT_PUBLIC_CMS_ORIGIN` for both Hosting environments. Deploy both apps to activate these settings.
 
 Payload Live Preview opens `/preview/research`, `/preview/research-page`, `/preview/about`, `/preview/contact`, `/preview/navigation`, or `/preview/news`. Initial form state and unsaved edits arrive through Payload's [client-side preview messaging](https://payloadcms.com/docs/live-preview/client). The preview overlays only the active document on the published baseline and uses the public renderers. It also handles new research documents with no public route. Messages must match the configured CMS origin and the parent/opener window. Drafts stay in browser memory; preview links are disabled to keep the editor in the frame.
 
@@ -78,11 +78,11 @@ Without `--apply` it reports the recovered content without opening a database co
 `/chronology` and its menu entry are available in local development (`pnpm dev` / `pnpm dev:web`) and with `NEXT_PUBLIC_SITE_ENV=staging`. Production returns the static 404, excludes chronology content from the client provider, and never lists it in the sitemap. The Chronology heading supplies the temporary menu label; the shared Navigation global is unchanged.
 
 ```sh
-pnpm content:import:chronology ~/tmp/tarek-chronology-source-20261014/chronology.json --apply --publish
+pnpm content:import:chronology ~/tmp/chronology-source/chronology.json --apply --publish
 pnpm content:export --output website/src/data/generated/content.json
 ```
 
-The targeted importer validates input as part of importing, backs up the current global under `~/tmp/tarek-chronology-import-*/`, and writes only Chronology through Payload to Firestore. Omit `--publish` to save a draft; omit `--apply` for a dry run. Source JSON and the paragraph mapping were prepared from `PROJECTS Tarek Atoui.docx` and live under `~/tmp/tarek-chronology-source-20261014/`. Editorial questions and links with conflicting years are recorded for review. Media remains linked; importing does not upload or deploy anything.
+The targeted importer validates input as part of importing, backs up the current global under `~/tmp/tarek-chronology-import-*/`, and writes only Chronology through Payload to Firestore. Omit `--publish` to save a draft; omit `--apply` for a dry run. Keep source JSON, paragraph mappings, and editorial review notes outside the repository. Media remains linked; importing does not upload or deploy anything.
 
 Until the CMS is deployed with this schema, edit Chronology in the local CMS and export using the local command. The existing hosted CMS cannot edit or export the new global yet. Staging website deployment remains a separate `pnpm deploy:web:staging` action.
 
@@ -92,7 +92,7 @@ Until the CMS is deployed with this schema, edit Chronology in the local CMS and
 
 `pnpm media:upload` retains the existing CDN upload workflow; local media stays in ignored `website/public/`. No public GCS objects are deleted by this migration.
 
-`pnpm deploy:cms` runs the app's deploy script through `pnpm run deploy`. Root `firebase.json` uploads the workspace context and builds only application root `cms` for the existing backend. The root `turbo.json` enables [App Hosting's Turborepo detection](https://firebase.blog/posts/2026/01/apphosting-turborepo), so dependency installation uses the workspace lockfile and the cloud build targets only `@tarek/cms`. Build caching is disabled; local pnpm commands remain unchanged. Nested environment files, local media, generated content, credentials, caches, and build output are excluded. Website Hosting targets serve `website/out` from the same root configuration. The owner confirmed successful CMS and staging website deployments.
+`pnpm deploy:cms` runs the app's deploy script through `pnpm run deploy`. All deployment commands use `scripts/deploy.mjs` and the ignored workspace `.env`. The script generates a temporary Firebase configuration for only the selected service; CMS deployment also renders ignored `cms/apphosting.yaml` from `cms/apphosting.template.yaml`. Secret bindings are references to existing Secret Manager versions, never credential values. Root `firebase.json` uploads the workspace context and builds only application root `cms` for the existing backend. The root `turbo.json` enables [App Hosting's Turborepo detection](https://firebase.blog/posts/2026/01/apphosting-turborepo), so dependency installation uses the workspace lockfile and the cloud build targets only `@tarek/cms`. Build caching is disabled; local pnpm commands remain unchanged. Nested environment files, local media, generated content, credentials, caches, and build output are excluded. Website Hosting targets serve `website/out` from the same root configuration. The owner confirmed successful CMS and staging website deployments.
 
 Deploy the website from the workspace root using the installed, authenticated Firebase CLI:
 
@@ -101,14 +101,14 @@ pnpm deploy:web:staging
 pnpm deploy:web:prod
 ```
 
-Each command builds the local checkout using the existing `website/src/data/generated/content.json`, then deploys only its Hosting target in `studio-tarekatoui-cms`. Staging sets `NEXT_PUBLIC_SITE_ENV=staging` for noindex output; production explicitly sets it to `production`. A failed build stops deployment. Run `content:export` first when you want fresh published CMS content; deploy commands do not re-export it.
+Each command builds the local checkout using the existing `website/src/data/generated/content.json`, then deploys only its configured Hosting site in `FIREBASE_PROJECT_ID`. Site IDs come from `FIREBASE_HOSTING_SITE_PROD` and `FIREBASE_HOSTING_SITE_STAGING`; the CMS backend comes from `FIREBASE_APPHOSTING_BACKEND_ID`. Staging sets `NEXT_PUBLIC_SITE_ENV=staging` for noindex output; production explicitly sets it to `production`. A failed build stops deployment. Run `content:export` first when you want fresh published CMS content; deploy commands do not re-export it.
 
 Cloud Build, GitHub setup, and Payload staging/production controls remain deferred to Phases 2 and 4. These commands deploy local code, including uncommitted changes. There are no GitHub Actions workflows.
 
-## Repository history
+## Sharing source
 
-This repository was created in `/Users/raed/play/tarek/studiotarekatoui`, leaving the original sibling `cms/` and `website/` repositories intact. The active branch is `dev`. Integration commits place the original trees under their app directories and retain the original commits as parents, without rewriting their hashes or authors.
+The repository contains application code and configuration templates. Real environment files, generated CMS snapshots, media, browser captures, private migration notes, and generated deployment configuration stay outside Git. The site needs a published CMS snapshot before it can run; no studio content or credentials are bundled for a fresh checkout.
 
-`main` retains the original website production baseline plus the CMS; `dev` includes the website development baseline and Phase 3 implementation. Original branch tips remain under `archive/website/main`, `archive/website/dev`, and `archive/cms/main`.
+`NEXT_PUBLIC_*` values are included in browser assets. Use them for public URLs only. Database credentials, OAuth secrets, session secrets, editor email allowlists, and cloud credentials must stay server-side. Firebase resource identifiers are configuration, not an access-control mechanism.
 
-Git bundles and private working-tree backups were saved to `~/tmp/tarek-monorepo-20260921-125556/` before consolidation. No remote was configured.
+The private development history includes former infrastructure identifiers and local artifacts. Publish a fresh source snapshot without the existing `.git` directory or archive branches. Removing files from the current tree does not remove old commits. Preserve the private repository and its author history separately.

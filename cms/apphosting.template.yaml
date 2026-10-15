@@ -7,33 +7,45 @@ runConfig:
 
 env:
   - variable: WEBSITE_PREVIEW_URL
-    value: https://staging.tarekatoui.com
+    value: ${CMS_WEBSITE_PREVIEW_URL}
     availability:
       - BUILD
       - RUNTIME
   - variable: AUTH_URL
-    value: https://cms.tarekatoui.com
+    value: ${CMS_AUTH_URL}
   - variable: AUTH_TRUST_HOST
     value: 'true'
   - variable: DATABASE_URL
-    secret: cms-firestore-database-url@1
+    secret: ${CMS_DATABASE_URL_REF}
     availability:
       - RUNTIME
   - variable: PAYLOAD_SECRET
-    secret: cms-payload-secret@1
+    secret: ${CMS_PAYLOAD_SECRET_REF}
   - variable: AUTH_SECRET
-    secret: cms-auth-secret@1
+    secret: ${CMS_AUTH_SECRET_REF}
     availability:
       - RUNTIME
   - variable: AUTH_GOOGLE_ID
-    secret: cms-google-client-id@2
+    secret: ${CMS_AUTH_GOOGLE_ID_REF}
     availability:
       - RUNTIME
   - variable: AUTH_GOOGLE_SECRET
-    secret: cms-google-client-secret@2
+    secret: ${CMS_AUTH_GOOGLE_SECRET_REF}
     availability:
       - RUNTIME
   - variable: CMS_ALLOWED_EMAILS
-    secret: cms-allowed-emails@3
+    secret: ${CMS_ALLOWED_EMAILS_REF}
+    availability:
+      - RUNTIME
+  - variable: MEDIA_BUCKET
+    value: ${CMS_MEDIA_BUCKET}
+    availability:
+      - RUNTIME
+  - variable: MEDIA_PREFIX
+    value: ${CMS_MEDIA_PREFIX}
+    availability:
+      - RUNTIME
+  - variable: MEDIA_BASE_URL
+    value: ${CMS_MEDIA_BASE_URL}
     availability:
       - RUNTIME

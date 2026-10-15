@@ -1,0 +1,57 @@
+import { spawnSync } from 'node:child_process';
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { homedir } from 'node:os';
+import path from 'node:path';
+import { loadEnvFile } from 'node:process';
+import { fileURLToPath } from 'node:url';
+
+const root = fileURLToPath(new URL('../', import.meta.url));
+const target = process.argv[2];
+if (!['cms', 'prod', 'staging'].includes(target)) throw new Error('Usage: node scripts/deploy.mjs cms|prod|staging');
+if (existsSync(path.join(root, '.env'))) loadEnvFile(path.join(root, '.env'));
+
+function required(name) {
+    const value = process.env[name]?.trim();
+    if (!value) throw new Error(`Set ${name} in the workspace .env before deploying.`);
+    return value;
+}
+
+function run(command, args, env) {
+    const result = spawnSync(command, args, { cwd: root, env, stdio: 'inherit' });
+    if (result.error) throw result.error;
+    if (result.status !== 0) throw new Error(`${command} failed (${result.status ?? result.signal}).`);
+}
+
+const project = required('FIREBASE_PROJECT_ID');
+const template = JSON.parse(readFileSync(path.join(root, 'firebase.json'), 'utf8'));
+const scratch = path.join(homedir(), 'tmp');
+mkdirSync(scratch, { recursive: true });
+const env = { ...process.env, TMPDIR: scratch };
+let config;
+let only;
+if (target === 'cms') {
+    const backendId = required('FIREBASE_APPHOSTING_BACKEND_ID');
+    const apphosting = readFileSync(path.join(root, 'cms/apphosting.template.yaml'), 'utf8')
+        .replace(/\$\{([A-Z_]+)\}/g, (_, name) => JSON.stringify(required(name)));
+    writeFileSync(path.join(root, 'cms/apphosting.yaml'), apphosting, { mode: 0o600 });
+    config = { apphosting: [{ ...template.apphosting[0], backendId }] };
+    only = `apphosting:${backendId}`;
+} else {
+    const site = required(`FIREBASE_HOSTING_SITE_${target.toUpperCase()}`);
+    const hosting = { ...template.hosting.find((entry) => entry.target === target), site };
+    delete hosting.target;
+    config = { hosting: [hosting] };
+    only = 'hosting';
+    env.NEXT_PUBLIC_SITE_ENV = target === 'staging' ? 'staging' : 'production';
+    env.NEXT_PUBLIC_CMS_ORIGIN = required('CMS_AUTH_URL');
+    run('pnpm', ['build:web'], env);
+}
+
+// Firebase resolves source paths relative to this file, so keep it at the workspace root.
+const configPath = path.join(root, `.firebase.deploy-${process.pid}.json`);
+try {
+    writeFileSync(configPath, `${JSON.stringify(config, null, 4)}\n`, { mode: 0o600, flag: 'wx' });
+    run('firebase', ['deploy', '--config', configPath, '--only', only, '--project', project], env);
+} finally {
+    rmSync(configPath, { force: true });
+}

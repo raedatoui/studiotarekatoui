@@ -1,6 +1,6 @@
 export const site = {
     title: 'Studio Tarek Atoui',
-    url: 'https://tarekatoui.com',
+    url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
     copyright: 'Studio Tarek Atoui',
 };
 
