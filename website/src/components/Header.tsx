@@ -2,12 +2,12 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { site } from '@/config/site';
+import { showChronology, site } from '@/config/site';
 import { useSiteData } from '@/data/SiteDataProvider';
 import ThemeToggle from './ThemeToggle';
 
 export default function Header() {
-    const { navigation } = useSiteData();
+    const { navigation, chronology } = useSiteData();
     const pathname = usePathname().replace(/\/+$/, '') || '/';
     const currentPath = pathname === '/' ? '/news' : pathname;
     const [menuOpen, setMenuOpen] = useState(false);
@@ -42,7 +42,9 @@ export default function Header() {
         };
     }, [menuOpen]);
 
-    const navLinks = navigation.items.map((link, index) => {
+    const items = navigation.items.filter((link) => new URL(link.href, site.url).pathname.replace(/\/+$/, '') !== '/chronology');
+    if (showChronology && chronology) items.push({ label: chronology.heading, href: '/chronology', external: false });
+    const navLinks = items.map((link, index) => {
         const url = new URL(link.href, site.url);
         const path = url.pathname.replace(/\/+$/, '') || '/';
         const linkPath = path === '/' ? '/news' : path;

@@ -5,3 +5,4 @@ export const site = {
 };
 
 export const isStaging = process.env.NEXT_PUBLIC_SITE_ENV === 'staging';
+export const showChronology = isStaging || process.env.NODE_ENV === 'development';

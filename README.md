@@ -41,7 +41,7 @@ The CMS navigation's **Export JSON** action downloads the same published snapsho
 
 ## Content contract and recovery
 
-`@tarek/content` owns schema version 3 and inferred website types. Version 2 added required published navigation; version 3 restores the News page. Publish News and Navigation, then re-export older snapshots to use the current contract. There is no hardcoded website menu fallback. CMS documents retain Payload-generated types; typed serializers use an explicit allowlist. The package includes no Payload, database, or authentication code.
+`@tarek/content` owns schema version 3 and inferred website types. Version 2 added required published navigation; version 3 restores the News page. The staging-only Chronology is optional so exports from the hosted CMS before its deployment remain compatible. Publish News and Navigation, then re-export older snapshots to use the current contract. There is no hardcoded website menu fallback. CMS documents retain Payload-generated types; typed serializers use an explicit allowlist. The package includes no Payload, database, or authentication code.
 
 - Research themes can be dragged into order in the CMS collection list while sorted by **Order**. Export converts Payload's saved order into numeric `sortOrder` positions for the website; existing numeric ordering is retained for themes without a drag order yet. Publish any reordered drafts, then export and rebuild the website to update both the timeline and reading panels. Nested instances, gallery, and press retain editor order. The timeline is derived from nested instances, not a second stored dataset.
 - Empty optional strings become omitted values; optional arrays become empty arrays. Research dates fall back to start/end years or “ongoing”. Instance display dates fall back to the ISO date portion of `dateStart`, then the year.
@@ -70,6 +70,21 @@ pnpm content:import:news ../website/src/data/site-content.json --apply
 ```
 
 Without `--apply` it reports the recovered content without opening a database connection. With `--apply`, it saves private backups under `~/tmp/tarek-news-recovery-*/`, imports the six original exhibition entries as a News draft, and adds a missing `/news` link to the navigation draft. It preserves existing News content and other navigation links on reruns, and decodes the old file's literal Unicode escapes. It does not publish or deploy. Review and publish both globals, then export a new snapshot before building the website. The website never reads the legacy source file.
+
+## Staging chronology
+
+**Pages → Chronology** owns the full project timeline using the former `projects.json` fields: stable ID, research slugs, kind, title, year, dates/status, venue/location, organization, collaborators, public note, URL, media, and review flag. Private editorial notes never enter the website snapshot. The website shares the research page's vertical timeline and preserves CMS ordering within each year, newest year first, with year/kind filters and expandable documentation links.
+
+`/chronology` and its menu entry are available in local development (`pnpm dev` / `pnpm dev:web`) and with `NEXT_PUBLIC_SITE_ENV=staging`. Production returns the static 404, excludes chronology content from the client provider, and never lists it in the sitemap. The Chronology heading supplies the temporary menu label; the shared Navigation global is unchanged.
+
+```sh
+pnpm content:import:chronology ~/tmp/tarek-chronology-source-20261014/chronology.json --apply --publish
+pnpm content:export --output website/src/data/generated/content.json
+```
+
+The targeted importer validates input as part of importing, backs up the current global under `~/tmp/tarek-chronology-import-*/`, and writes only Chronology through Payload to Firestore. Omit `--publish` to save a draft; omit `--apply` for a dry run. Source JSON and the paragraph mapping were prepared from `PROJECTS Tarek Atoui.docx` and live under `~/tmp/tarek-chronology-source-20261014/`. Editorial questions and links with conflicting years are recorded for review. Media remains linked; importing does not upload or deploy anything.
+
+Until the CMS is deployed with this schema, edit Chronology in the local CMS and export using the local command. The existing hosted CMS cannot edit or export the new global yet. Staging website deployment remains a separate `pnpm deploy:web:staging` action.
 
 ## Commands and deployment
 
