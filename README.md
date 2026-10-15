@@ -17,7 +17,7 @@ pnpm build:web
 
 To use the CMS download instead, save **Export JSON** as `website/src/data/generated/content.json`, replacing the previous snapshot, then run `pnpm build:web` or a website deployment command. This is the monorepo input path; `../website/src/data/site-content.json` belongs to the standalone checkout.
 
-Before the first export, open **Website → Navigation** in the CMS and publish its initial menu. Defaults include Research, News, About, Editions (the original Galerie Chantal Crousel link), and Contact. Edit labels, links, new-tab behavior, and drag rows to reorder. The menu is shared by desktop and mobile.
+Before the first export, open **Website → Navigation** in the CMS and publish its initial menu. Defaults include Research, News, About, Publications (the original Galerie Chantal Crousel link), and Contact. Edit labels, links, new-tab behavior, and drag rows to reorder. The menu is shared by desktop and mobile. Existing menus retain their saved labels; rename Editions to Publications in the CMS and publish before the next export.
 
 The first command reads published CMS documents and globals, including Navigation, validates them, and writes JSON atomically. It does not publish drafts or modify editorial content. The second command consumes that exact file and writes the static website to `website/out`. Neither command deploys. The owner confirmed this export-to-build flow, including a downloaded CMS Export JSON snapshot saved at the same generated input path.
 

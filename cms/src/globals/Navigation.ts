@@ -20,7 +20,7 @@ export const Navigation: GlobalConfig = {
                 { label: 'Research', href: '/research', external: false },
                 { label: 'News', href: '/news', external: false },
                 { label: 'About', href: '/about', external: false },
-                { label: 'Editions', href: 'https://www.crousel.com/artiste/tarek-atoui-r90lmw/#items', external: true },
+                { label: 'Publications', href: 'https://www.crousel.com/artiste/tarek-atoui-r90lmw/#items', external: true },
                 { label: 'Contact', href: '/contact', external: false },
             ],
             fields: [

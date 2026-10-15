@@ -63,7 +63,7 @@ For future rotations, keep the downloaded client JSON outside this repository. S
 - **About:** biography and portrait.
 - **Contact:** heading, introductory text, and email.
 - **News:** original exhibition and group-exhibition lists, display dates, links, and nested shows. The targeted `content:import:news` command recovers content from the old website into drafts; see the workspace README.
-- **Navigation** (under Website): ordered menu labels, URLs, and new-tab settings for desktop and mobile. Initial defaults include Research, About, Editions linking to Galerie Chantal Crousel, and Contact. Publish this global before exporting schema-v3 content.
+- **Navigation** (under Website): ordered menu labels, URLs, and new-tab settings for desktop and mobile. Initial defaults include Research, About, Publications linking to Galerie Chantal Crousel, and Contact. Publish this global before exporting schema-v3 content. For an existing menu, rename Editions to Publications and publish before exporting again.
 
 Content supports drafts and up to 30 revisions. Content APIs require a signed-in editor. Text fields use plain text; media and press links use dedicated URL and caption fields. There is no separate media library or local upload storage.
 
