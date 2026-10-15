@@ -1,11 +1,10 @@
 'use client';
 
 import MediaSlider from '@/components/MediaSlider';
+import VerticalTimeline from '@/components/VerticalTimeline';
 import type { Research } from '@tarek/content';
 import { gallerySlides } from '@/lib/media';
 import { mediaUrl } from '@/lib/mediaUrl';
-
-const THIS_YEAR = new Date().getFullYear();
 
 /** One fact in the horizontal meta row under the description. */
 function MetaItem({ label, value }: { label: string; value: string }) {
@@ -92,42 +91,7 @@ export default function ResearchThread({ research }: { research: Research }) {
                     </p>
                 </div>
 
-                <ol className="mt-2 [--timeline-mark-y:calc(1rem+0.8rem*var(--copy-scale))]">
-                    {ms.map((m, index) => {
-                        const place = [m.city, m.country].filter(Boolean).join(', ');
-                        return (
-                            <li key={m.id} id={`project-${m.id}`} className="relative">
-                                {index < ms.length - 1 && (
-                                    <span
-                                        aria-hidden
-                                        className="pointer-events-none absolute top-[var(--timeline-mark-y)] bottom-[calc(-1*var(--timeline-mark-y))] left-[48px] w-px bg-[var(--color-text)] opacity-30"
-                                    />
-                                )}
-                                <span aria-hidden className="absolute right-0 bottom-0 left-[64px] h-px bg-[var(--color-border)]" />
-                                <div className="relative grid grid-cols-[48px_minmax(0,1fr)] items-baseline gap-4 py-4">
-                                    <span
-                                        aria-hidden
-                                        className={`absolute top-[var(--timeline-mark-y)] left-[48px] h-[9px] w-[9px] -translate-x-1/2 -translate-y-1/2 rounded-full ${
-                                            m.year === THIS_YEAR ? 'bg-[var(--color-recent)]' : 'bg-[var(--color-text)] opacity-55'
-                                        }`}
-                                    />
-                                    <span className="font-mono text-[length:calc(12px*var(--copy-scale))] text-[var(--color-accent)]">{m.year}</span>
-                                    <span>
-                                        <span className="text-[length:calc(15px*var(--copy-scale))] leading-snug">
-                                            {m.url ? <a href={m.url} target="_blank" rel="noreferrer" className="research-title-link">{m.title ?? m.organization} ↗</a> : (m.title ?? m.organization)}
-                                        </span>
-                                        <span className="mt-1 block text-[length:calc(12.5px*var(--copy-scale))] font-light text-[var(--color-text-secondary)]">
-                                            {m.kind}{m.status ? ` · ${m.status}` : ''}
-                                            {m.title && ` · ${m.organization}`}
-                                            {place && ` — ${place}`}
-                                            {` · ${m.dateDisplay}`}
-                                        </span>
-                                    </span>
-                                </div>
-                            </li>
-                        );
-                    })}
-                </ol>
+                <VerticalTimeline entries={ms} />
             </section>
 
             {/* ── Gallery — research and presentation images and films ────── */}
