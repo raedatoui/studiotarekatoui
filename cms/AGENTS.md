@@ -6,6 +6,7 @@ This repository contains Studio Tarek Atoui’s Payload 3 CMS, built with Next.j
 
 - `src/payload.config.ts` registers collections, globals, authentication components, and Firestore storage through Payload’s MongoDB adapter.
 - `src/collections/` defines content schemas; `src/globals/` defines About, Contact, the Research page, News, and Navigation. News contains ordered exhibition and group-exhibition arrays, including nested shows. Navigation lives under the Website admin group and includes the original Editions link in its initial menu defaults.
+- The Chronology global restores the old projects schema for staging only. `content:import:chronology` imports converted document content into Firestore with a private backup; `--apply --publish` makes it available to the published snapshot. Its editorial notes stay private. The hosted CMS needs a separate deployment before its admin/export supports Chronology.
 - `src/components/` contains custom admin components, including Export JSON; `src/content/` contains the typed serializer and authenticated export endpoint.
 - `scripts/export-content.ts` and `scripts/import-content.ts` implement the root content commands. Import is dry-run unless --apply; writes are drafts and require explicit user authorization.
 - Live Preview sends unsaved forms to static website preview routes. Configure WEBSITE_PREVIEW_URL; keep the website trusted CMS origin aligned.

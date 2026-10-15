@@ -10,3 +10,4 @@ export const NEWS_SECTION_LABELS = {
 } as const;
 export const GALLERY_TYPES = ['image', 'video', 'embed'] as const;
 export const PRESS_TYPES = ['press', 'interview', 'external', 'audio', 'video', 'image'] as const;
+export const PROJECT_MEDIA_TYPES = ['image', 'video', 'audio', 'press', 'interview', 'external'] as const;

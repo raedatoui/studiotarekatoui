@@ -1,5 +1,5 @@
 import { NEWS_SECTIONS } from './constants';
-import type { ContentSnapshot, Exhibition, Research, ResearchInstance } from './schema';
+import type { Chronology, ContentSnapshot, Exhibition, Project, Research, ResearchInstance } from './schema';
 
 type NullableFields<T> = { [K in keyof T]?: T[K] | null };
 export type ResearchInput = NullableFields<Omit<Research, 'description' | 'instances' | 'gallery' | 'press'>> & {
@@ -10,6 +10,31 @@ export type ResearchInput = NullableFields<Omit<Research, 'description' | 'insta
 };
 
 const optional = (value: string | null | undefined) => value?.trim() || undefined;
+
+export function normalizeChronology(doc: {
+    heading?: string | null;
+    introduction?: string | null;
+    projects?: (NullableFields<Omit<Project, 'id' | 'media'>> & {
+        projectId?: string | null;
+        media?: NullableFields<Project['media'][number]>[] | null;
+    })[] | null;
+}): Chronology {
+    return {
+        heading: doc.heading?.trim() ?? '',
+        introduction: doc.introduction ?? '',
+        projects: (doc.projects ?? []).map((project) => ({
+            id: project.projectId?.trim() ?? '',
+            themeIds: project.themeIds ?? [], kind: project.kind ?? 'solo', title: optional(project.title), year: project.year ?? 0,
+            dateStart: optional(project.dateStart), dateEnd: optional(project.dateEnd), dateDisplay: optional(project.dateDisplay),
+            status: project.status ?? undefined, venue: project.venue?.trim() ?? '', city: optional(project.city), country: optional(project.country),
+            organization: optional(project.organization), collaborators: project.collaborators ?? [], note: optional(project.note), url: optional(project.url),
+            media: (project.media ?? []).map((item) => ({
+                type: item.type ?? 'external', url: item.url?.trim() ?? '', label: optional(item.label), publisher: optional(item.publisher),
+            })),
+            needsReview: project.needsReview ?? false,
+        })),
+    };
+}
 
 type ExhibitionInput = NullableFields<Omit<Exhibition, 'subExhibitions'>> & {
     subExhibitions?: NullableFields<Exhibition['subExhibitions'][number]>[] | null;

@@ -71,7 +71,7 @@ async function importContent() {
 
         // Private recovery data includes both the current published records and latest drafts.
         const globals = {};
-        for (const slug of ['research-page', 'about', 'contact', 'navigation', 'news'] as const) {
+        for (const slug of ['research-page', 'about', 'contact', 'navigation', 'news', 'chronology'] as const) {
             Object.assign(globals, { [slug]: {
                 published: await payload.findGlobal({ slug, draft: false, depth: 0, overrideAccess: true }),
                 latest: await payload.findGlobal({ slug, draft: true, depth: 0, overrideAccess: true }),
@@ -111,6 +111,17 @@ async function importContent() {
             await record('navigation');
             await payload.updateGlobal({ slug: 'news', data: { ...snapshot.news, _status: 'draft' }, draft: true, overrideAccess: true });
             await record('news');
+            if (snapshot.chronology) {
+                await payload.updateGlobal({
+                    slug: 'chronology', draft: true, overrideAccess: true,
+                    data: {
+                        ...snapshot.chronology,
+                        projects: snapshot.chronology.projects.map(({ id, ...project }) => ({ ...project, projectId: id })),
+                        _status: 'draft',
+                    },
+                });
+                await record('chronology');
+            }
         } catch (error) {
             throw new Error(`Import stopped after ${completed.length} recorded operations; changes are not rolled back. Backup/progress: ${backupDir}. Resolve the error and rerun; ID/slug matching avoids duplicate records. ${error instanceof Error ? error.message : ''}`);
         }

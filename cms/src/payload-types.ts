@@ -90,6 +90,7 @@ export interface Config {
   globals: {
     'research-page': ResearchPage;
     news: News;
+    chronology: Chronology;
     about: About;
     contact: Contact;
     navigation: Navigation;
@@ -97,6 +98,7 @@ export interface Config {
   globalsSelect: {
     'research-page': ResearchPageSelect<false> | ResearchPageSelect<true>;
     news: NewsSelect<false> | NewsSelect<true>;
+    chronology: ChronologySelect<false> | ChronologySelect<true>;
     about: AboutSelect<false> | AboutSelect<true>;
     contact: ContactSelect<false> | ContactSelect<true>;
     navigation: NavigationSelect<false> | NavigationSelect<true>;
@@ -529,6 +531,65 @@ export interface News {
   createdAt?: string | null;
 }
 /**
+ * The full project timeline. Currently visible in local development and on the staging website.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "chronology".
+ */
+export interface Chronology {
+  id: string;
+  publishedBy?: string | null;
+  heading: string;
+  introduction?: string | null;
+  /**
+   * Private source questions and follow-up notes. Never exported to the website.
+   */
+  editorialNotes?: string | null;
+  /**
+   * Newest year first on the website; drag to order entries within each year.
+   */
+  projects?:
+    | {
+        /**
+         * Stable ID from projects.json; lowercase words separated by hyphens.
+         */
+        projectId: string;
+        title?: string | null;
+        kind: 'solo' | 'group' | 'performance' | 'commission' | 'curation' | 'collaboration' | 'residency' | 'workshop';
+        year: number;
+        dateStart?: string | null;
+        dateEnd?: string | null;
+        dateDisplay?: string | null;
+        status?: ('current' | 'upcoming' | 'past') | null;
+        venue: string;
+        city?: string | null;
+        country?: string | null;
+        organization?: string | null;
+        collaborators?: string[] | null;
+        /**
+         * Confirmed research associations only. Use the research page slugs.
+         */
+        themeIds?: string[] | null;
+        note?: string | null;
+        needsReview?: boolean | null;
+        url?: string | null;
+        media?:
+          | {
+              type: 'image' | 'video' | 'audio' | 'press' | 'interview' | 'external';
+              url: string;
+              label?: string | null;
+              publisher?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "about".
  */
@@ -701,6 +762,51 @@ export interface NewsSelect<T extends boolean = true> {
               title?: T;
               dateDisplay?: T;
               location?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "chronology_select".
+ */
+export interface ChronologySelect<T extends boolean = true> {
+  publishedBy?: T;
+  heading?: T;
+  introduction?: T;
+  editorialNotes?: T;
+  projects?:
+    | T
+    | {
+        projectId?: T;
+        title?: T;
+        kind?: T;
+        year?: T;
+        dateStart?: T;
+        dateEnd?: T;
+        dateDisplay?: T;
+        status?: T;
+        venue?: T;
+        city?: T;
+        country?: T;
+        organization?: T;
+        collaborators?: T;
+        themeIds?: T;
+        note?: T;
+        needsReview?: T;
+        url?: T;
+        media?:
+          | T
+          | {
+              type?: T;
+              url?: T;
+              label?: T;
+              publisher?: T;
               id?: T;
             };
         id?: T;

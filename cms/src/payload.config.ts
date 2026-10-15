@@ -12,6 +12,7 @@ import { Contact } from './globals/Contact'
 import { ResearchPage } from './globals/ResearchPage'
 import { Navigation } from './globals/Navigation'
 import { News } from './globals/News'
+import { Chronology } from './globals/Chronology'
 import { exportEndpoint } from './content/exportEndpoint'
 import { uploadEndpoint } from './media/uploadEndpoint'
 
@@ -55,7 +56,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Research],
-  globals: [ResearchPage, News, About, Contact, Navigation],
+  globals: [ResearchPage, News, Chronology, About, Contact, Navigation],
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: { outputFile: path.resolve(dirname, 'payload-types.ts') },
   db: mongooseAdapter({

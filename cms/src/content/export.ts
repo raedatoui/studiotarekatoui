@@ -1,4 +1,4 @@
-import { parseContentSnapshot } from '@tarek/content';
+import { normalizeChronology, parseContentSnapshot } from '@tarek/content';
 import type { Payload } from 'payload';
 import type { Research } from '../payload-types';
 import { serializeContent } from './serialize';
@@ -35,7 +35,11 @@ export async function exportContent(payload: Payload) {
         if (doc._status !== 'published') throw new ContentExportError(`${name} has no published content. Publish it in the CMS before exporting.`);
     }
     try {
-        return parseContentSnapshot(serializeContent(research, researchPage, about, contact, navigation, news));
+        const chronology = await payload.findGlobal({ slug: 'chronology', draft: false, depth: 0, overrideAccess: true });
+        return parseContentSnapshot({
+            ...serializeContent(research, researchPage, about, contact, navigation, news),
+            ...(chronology._status === 'published' ? { chronology: normalizeChronology(chronology) } : {}),
+        });
     } catch (error) {
         throw new ContentExportError(error instanceof Error ? error.message : 'Invalid content snapshot');
     }

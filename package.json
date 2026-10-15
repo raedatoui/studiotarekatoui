@@ -20,6 +20,7 @@
         "content:validate": "tsx packages/content/src/validate.ts",
         "content:import": "tsx cms/scripts/import-content.ts",
         "content:import:news": "tsx cms/scripts/import-news.ts",
+        "content:import:chronology": "tsx cms/scripts/import-chronology.ts",
         "media:upload": "pnpm --filter @tarek/website run media:upload",
         "lint": "biome lint .",
         "format": "biome format --write .",

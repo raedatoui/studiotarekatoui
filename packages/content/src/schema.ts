@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { GALLERY_TYPES, INSTANCE_KINDS, INSTANCE_STATUSES, NEWS_SECTIONS, PRESS_TYPES, SCHEMA_VERSION } from './constants';
+import { GALLERY_TYPES, INSTANCE_KINDS, INSTANCE_STATUSES, NEWS_SECTIONS, PRESS_TYPES, PROJECT_MEDIA_TYPES, SCHEMA_VERSION } from './constants';
 import { videoEmbedURL } from './media';
 
 const text = z.string().trim().min(1, 'Required');
@@ -121,11 +121,54 @@ export const newsSchema = z.strictObject({
 });
 export type Exhibition = z.infer<typeof exhibitionSchema>;
 
+// The former projects.json contract, now owned by the CMS chronology.
+export const projectSchema = z.strictObject({
+    id: slug,
+    themeIds: z.array(slug).default([]),
+    kind: z.enum(INSTANCE_KINDS),
+    title: text.optional(),
+    year,
+    dateStart: exhibitionDate.optional(),
+    dateEnd: exhibitionDate.optional(),
+    dateDisplay: text.optional(),
+    status: z.enum(INSTANCE_STATUSES).optional(),
+    venue: text,
+    city: text.optional(),
+    country: text.optional(),
+    organization: text.optional(),
+    collaborators: z.array(text).default([]),
+    note: text.optional(),
+    url: linkSchema.optional(),
+    media: z.array(z.strictObject({
+        type: z.enum(PROJECT_MEDIA_TYPES), url: mediaURLSchema, label: text.optional(), publisher: text.optional(),
+    })).default([]),
+    needsReview: z.boolean().default(false),
+}).superRefine((project, ctx) => {
+    if (project.dateStart && project.dateEnd && Date.parse(project.dateEnd) < Date.parse(project.dateStart)) {
+        ctx.addIssue({ code: 'custom', path: ['dateEnd'], message: 'Must not precede dateStart' });
+    }
+});
+export const chronologySchema = z.strictObject({
+    heading: text,
+    introduction: z.string(),
+    projects: z.array(projectSchema),
+}).superRefine((chronology, ctx) => {
+    const seen = new Set<string>();
+    chronology.projects.forEach((project, index) => {
+        if (seen.has(project.id)) ctx.addIssue({ code: 'custom', path: ['projects', index, 'id'], message: `Duplicate project ID: ${project.id}` });
+        seen.add(project.id);
+    });
+});
+export type Project = z.infer<typeof projectSchema>;
+export type Chronology = z.infer<typeof chronologySchema>;
+
 export const contentSnapshotSchema = z.strictObject({
     schemaVersion: z.literal(SCHEMA_VERSION),
     exportedAt: z.iso.datetime(),
     navigation: navigationSchema,
     news: newsSchema,
+    // Optional while the hosted CMS still exports the pre-chronology version.
+    chronology: chronologySchema.optional(),
     researchPage: researchPageSchema,
     research: z.array(researchSchema),
     about: aboutSchema,
