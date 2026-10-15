@@ -1,9 +1,10 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import MediaSlider from '@/components/MediaSlider';
 import { useSiteData } from '@/data/SiteDataProvider';
 import type { ResearchInstance } from '@tarek/content';
-import { mediaUrl } from '@/lib/mediaUrl';
+import { gallerySlides } from '@/lib/media';
 
 /** Research lifelines and their dated appearances, followed by each thread in full. */
 
@@ -350,6 +351,10 @@ export default function ProjectsHub() {
             <section className="max-w-[1400px] mx-auto px-[clamp(24px,4vw,64px)]">
                 {threads.map((t) => {
                     const { document } = t;
+                    const slides = gallerySlides(document.gallery);
+                    if (slides.length === 0 && document.heroImageURL) {
+                        slides.push({ type: 'image', src: document.heroImageURL, caption: '' });
+                    }
                     return (
                         <article
                             key={document.id}
@@ -385,17 +390,16 @@ export default function ProjectsHub() {
                             </p>
 
                             <div className="mt-[clamp(28px,4vw,56px)] grid items-start gap-[clamp(28px,4vw,56px)] lg:grid-cols-[1.45fr_1fr]">
-                                <div>
-                                    {document.heroImageURL && (
-                                        <a href={`/research/${document.slug}`} className="block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-accent)]">
-                                            <img
-                                                src={mediaUrl(document.heroImageURL)}
-                                                alt={document.title}
-                                                loading="lazy"
-                                                className="w-full object-cover aspect-[3/2]"
-                                            />
-                                        </a>
-                                    )}
+                                <div className="min-w-0">
+                                    <MediaSlider
+                                        key={JSON.stringify(slides)}
+                                        items={slides}
+                                        title={document.title}
+                                        showDots={false}
+                                        showCount={false}
+                                        aspectRatio={3 / 2}
+                                        imageFit="cover"
+                                    />
                                 </div>
 
                                 <aside>

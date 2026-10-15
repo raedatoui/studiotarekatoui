@@ -7,10 +7,24 @@ import { mediaUrl } from '@/lib/mediaUrl';
 interface MediaSliderProps {
     items: GallerySlide[];
     title: string;
+    showArrows?: boolean;
+    showDots?: boolean;
+    showCount?: boolean;
+    showCaption?: boolean;
+    aspectRatio?: number;
+    imageFit?: 'contain' | 'cover';
 }
 
-export default function MediaSlider({ items: media, title }: MediaSliderProps) {
-    const items = media;
+export default function MediaSlider({
+    items,
+    title,
+    showArrows = true,
+    showDots = true,
+    showCount = true,
+    showCaption = true,
+    aspectRatio,
+    imageFit = 'contain',
+}: MediaSliderProps) {
     const [current, setCurrent] = useState(0);
     const [isDragging, setIsDragging] = useState(false);
     const [dragOffset, setDragOffset] = useState(0);
@@ -64,13 +78,14 @@ export default function MediaSlider({ items: media, title }: MediaSliderProps) {
         >
             <div
                 className={`relative overflow-hidden ${currentIsImage ? 'cursor-grab active:cursor-grabbing touch-pan-y' : ''}`}
+                style={aspectRatio ? { aspectRatio } : undefined}
                 onPointerDown={onPointerDown}
                 onPointerMove={onPointerMove}
                 onPointerUp={onPointerUp}
                 onPointerCancel={onPointerUp}
             >
                 <div
-                    className="flex"
+                    className={`flex ${aspectRatio ? 'h-full' : ''}`}
                     style={{
                         transform: `translateX(calc(-${current * 100}% + ${isDragging ? dragOffset : 0}px))`,
                         transition: isDragging ? 'none' : 'transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1)',
@@ -80,18 +95,18 @@ export default function MediaSlider({ items: media, title }: MediaSliderProps) {
                         <div
                             key={item.src}
                             aria-hidden={idx !== current}
-                            className="w-full flex-shrink-0 flex items-center justify-center max-h-[70vh]"
+                            className={`w-full flex-shrink-0 flex items-center justify-center ${aspectRatio ? 'h-full' : 'max-h-[70vh]'}`}
                         >
                             {!item.type || item.type === 'image' ? (
                                 <img
                                     src={mediaUrl(item.src)}
                                     alt={`${title} — ${item.caption}`}
-                                    className="max-w-full max-h-[70vh] w-auto h-auto object-contain pointer-events-none"
+                                    className={`${aspectRatio ? 'h-full w-full' : 'max-w-full max-h-[70vh] w-auto h-auto'} ${imageFit === 'cover' ? 'object-cover' : 'object-contain'} pointer-events-none`}
                                     loading={idx === 0 ? 'eager' : 'lazy'}
                                     draggable={false}
                                 />
                             ) : (
-                                <div className="aspect-video min-h-[200px] max-h-[70vh] w-full bg-black">
+                                <div className={`w-full bg-black ${aspectRatio ? 'h-full' : 'aspect-video min-h-[200px] max-h-[70vh]'}`}>
                                     {idx === current &&
                                         (item.type === 'embed' ? (
                                             <iframe
@@ -119,7 +134,7 @@ export default function MediaSlider({ items: media, title }: MediaSliderProps) {
                     ))}
                 </div>
 
-                {total > 1 && (
+                {showArrows && total > 1 && (
                     <>
                         <button
                             type="button"
@@ -145,31 +160,33 @@ export default function MediaSlider({ items: media, title }: MediaSliderProps) {
                 )}
             </div>
 
-            <figcaption className="mt-3 text-[length:calc(11px*var(--copy-scale))] text-[var(--color-text-secondary)] font-light tracking-[0.02em] text-center">
-                {items[current].caption}
-            </figcaption>
+            {showCaption && items[current].caption && (
+                <figcaption className="mt-3 text-[length:calc(11px*var(--copy-scale))] text-[var(--color-text-secondary)] font-light tracking-[0.02em] text-center">
+                    {items[current].caption}
+                </figcaption>
+            )}
 
-            {total > 1 && (
-                <>
-                    <div className="flex flex-wrap justify-center gap-1.5 mt-3">
-                        {items.map((item, idx) => (
-                            <button
-                                key={item.src}
-                                type="button"
-                                onClick={() => setCurrent(idx)}
-                                className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                                    idx === current ? 'bg-[var(--color-text)] w-3' : 'bg-[var(--color-text-secondary)] opacity-40 hover:opacity-70'
-                                }`}
-                                aria-label={`Go to slide ${idx + 1}`}
-                                aria-current={idx === current ? 'true' : undefined}
-                            />
-                        ))}
-                    </div>
+            {showDots && total > 1 && (
+                <div className="flex flex-wrap justify-center gap-1.5 mt-3">
+                    {items.map((item, idx) => (
+                        <button
+                            key={item.src}
+                            type="button"
+                            onClick={() => setCurrent(idx)}
+                            className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+                                idx === current ? 'bg-[var(--color-text)] w-3' : 'bg-[var(--color-text-secondary)] opacity-40 hover:opacity-70'
+                            }`}
+                            aria-label={`Go to slide ${idx + 1}`}
+                            aria-current={idx === current ? 'true' : undefined}
+                        />
+                    ))}
+                </div>
+            )}
 
-                    <p className="text-center text-[length:calc(11px*var(--copy-scale))] text-[var(--color-text-secondary)] mt-2 font-light">
-                        {current + 1} / {total}
-                    </p>
-                </>
+            {showCount && total > 1 && (
+                <p className="text-center text-[length:calc(11px*var(--copy-scale))] text-[var(--color-text-secondary)] mt-2 font-light">
+                    {current + 1} / {total}
+                </p>
             )}
         </figure>
     );
