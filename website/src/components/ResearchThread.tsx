@@ -1,5 +1,6 @@
 'use client';
 
+import { useId, useState } from 'react';
 import MediaSlider from '@/components/MediaSlider';
 import VerticalTimeline from '@/components/VerticalTimeline';
 import type { Research } from '@tarek/content';
@@ -19,6 +20,8 @@ function MetaItem({ label, value }: { label: string; value: string }) {
 }
 
 export default function ResearchThread({ research }: { research: Research }) {
+    const [descriptionExpanded, setDescriptionExpanded] = useState(false);
+    const descriptionId = useId();
     const ms = research.instances;
     const live = ms.some((event) => event.status === 'current');
     const places = Array.from(new Set(ms.flatMap((event) => (event.city ? [event.country ? `${event.city}, ${event.country}` : event.city] : []))));
@@ -62,12 +65,30 @@ export default function ResearchThread({ research }: { research: Research }) {
                     {/* lede — first paragraph carries the width on its own */}
                     <p className="text-[length:calc(clamp(17px,1.9vw,27px)*var(--copy-scale))] font-light leading-[1.55]">{research.description[0] ?? research.summary}</p>
                     {research.description.length > 1 && (
-                        <div className="mt-[clamp(24px,3vw,40px)] space-y-5">
-                            {research.description.slice(1).map((paragraph) => (
-                                <p key={paragraph} className="text-[length:calc(clamp(14px,1.05vw,16px)*var(--copy-scale))] font-light leading-[1.8]">
-                                    {paragraph}
-                                </p>
-                            ))}
+                        <div className="mt-[clamp(24px,3vw,40px)]">
+                            <p className="text-[length:calc(clamp(14px,1.05vw,16px)*var(--copy-scale))] font-light leading-[1.8]">
+                                {research.description[1]}
+                            </p>
+                            {research.description.length > 2 && (
+                                <>
+                                    <div id={descriptionId} className={`mt-5 space-y-5 ${descriptionExpanded ? '' : 'hidden sm:block'}`}>
+                                        {research.description.slice(2).map((paragraph) => (
+                                            <p key={paragraph} className="text-[length:calc(clamp(14px,1.05vw,16px)*var(--copy-scale))] font-light leading-[1.8]">
+                                                {paragraph}
+                                            </p>
+                                        ))}
+                                    </div>
+                                    <button
+                                        type="button"
+                                        aria-expanded={descriptionExpanded}
+                                        aria-controls={descriptionId}
+                                        onClick={() => setDescriptionExpanded((expanded) => !expanded)}
+                                        className="research-jump-link mt-5 cursor-pointer font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.18em] sm:hidden"
+                                    >
+                                        {descriptionExpanded ? 'Read less' : 'Read more'}
+                                    </button>
+                                </>
+                            )}
                         </div>
                     )}
                 </div>
