@@ -14,6 +14,9 @@ next-env.d.ts
 !.env.example
 *.pem
 
+# Keep this rule here: Firebase source uploads also use the root .gitignore.
+/apphosting.yaml
+
 # Logs and Firebase local state
 *.log
 .firebase/

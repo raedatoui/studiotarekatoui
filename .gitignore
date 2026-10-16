@@ -25,7 +25,6 @@ backups/
 # Local deployment configuration and private operational records
 .firebaserc
 .firebase.deploy-*.json
-cms/apphosting.yaml
 cms-migration.md
 website/cdn-plan.md
 .playwright-mcp/
