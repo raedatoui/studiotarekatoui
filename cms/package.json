@@ -31,7 +31,7 @@
         "payload": "catalog:",
         "react": "catalog:",
         "react-dom": "catalog:",
-        "sharp": "0.35.4"
+        "sharp": "0.35.5"
     },
     "devDependencies": {
         "@types/node": "catalog:",
