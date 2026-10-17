@@ -6,6 +6,7 @@ import { PublishedByCell as PublishedByCell_e3c3c53dc478e919e494823754238cee } f
 import { UpdatedByCell as UpdatedByCell_e3c3c53dc478e919e494823754238cee } from '../../../components/PublicationCells'
 import { NewsSectionRowLabel as NewsSectionRowLabel_7e1f83cbde081f307968364654593340 } from '../../../components/NewsSectionRowLabel'
 import { ChronologyRowLabel as ChronologyRowLabel_a9c0c4ae9d5bc1f63e79d5a6a0d499ae } from '../../../components/ChronologyRowLabel'
+import { ChronologyProjectsField } from '../../../components/ChronologyProjectsField'
 import { GoogleLogout as GoogleLogout_aa6fac0737322a8012c2dd30990175ec } from '../../../components/GoogleLogout'
 import { PagesNav as PagesNav_aa89768a78829948eadfcae6e6562bc6 } from '../../../components/PagesNav'
 import { ExportContent as ExportContent_1c81066f5b50115a5ed7d2d5bc5bd39f } from '../../../components/ExportContent'
@@ -23,6 +24,7 @@ export const importMap = {
   "/components/PublicationCells#UpdatedByCell": UpdatedByCell_e3c3c53dc478e919e494823754238cee,
   "/components/NewsSectionRowLabel#NewsSectionRowLabel": NewsSectionRowLabel_7e1f83cbde081f307968364654593340,
   "/components/ChronologyRowLabel#ChronologyRowLabel": ChronologyRowLabel_a9c0c4ae9d5bc1f63e79d5a6a0d499ae,
+  "/components/ChronologyProjectsField#ChronologyProjectsField": ChronologyProjectsField,
   "/components/GoogleLogout#GoogleLogout": GoogleLogout_aa6fac0737322a8012c2dd30990175ec,
   "/components/PagesNav#PagesNav": PagesNav_aa89768a78829948eadfcae6e6562bc6,
   "/components/ExportContent#ExportContent": ExportContent_1c81066f5b50115a5ed7d2d5bc5bd39f,
