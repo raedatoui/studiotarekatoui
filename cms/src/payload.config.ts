@@ -7,6 +7,7 @@ import sharp from 'sharp'
 import { serverURL } from './auth/settings'
 import { Users } from './collections/Users'
 import { Research } from './collections/Research'
+import { Publications } from './collections/Publications'
 import { About } from './globals/About'
 import { Contact } from './globals/Contact'
 import { ResearchPage } from './globals/ResearchPage'
@@ -55,7 +56,7 @@ export default buildConfig({
       logout: { Button: '/components/GoogleLogout#GoogleLogout' },
     },
   },
-  collections: [Users, Research],
+  collections: [Users, Research, Publications],
   globals: [ResearchPage, News, Chronology, About, Contact, Navigation],
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: { outputFile: path.resolve(dirname, 'payload-types.ts') },

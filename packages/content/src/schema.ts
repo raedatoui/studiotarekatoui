@@ -162,6 +162,18 @@ export const chronologySchema = z.strictObject({
 export type Project = z.infer<typeof projectSchema>;
 export type Chronology = z.infer<typeof chronologySchema>;
 
+export const publicationSchema = z.strictObject({
+    id: text,
+    title: text,
+    year,
+    price: z.number().finite().nonnegative().optional(),
+    availability: z.enum(['available', 'out-of-print']),
+    imageURL: mediaURLSchema,
+    imageCredit: z.string(),
+    body: text,
+});
+export type Publication = z.infer<typeof publicationSchema>;
+
 export const contentSnapshotSchema = z.strictObject({
     schemaVersion: z.literal(SCHEMA_VERSION),
     exportedAt: z.iso.datetime(),
@@ -169,6 +181,8 @@ export const contentSnapshotSchema = z.strictObject({
     news: newsSchema,
     // Optional while the hosted CMS still exports the pre-chronology version.
     chronology: chronologySchema.optional(),
+    // Older hosted CMS exports do not contain the publications collection yet.
+    publications: z.array(publicationSchema).default([]),
     researchPage: researchPageSchema,
     research: z.array(researchSchema),
     about: aboutSchema,

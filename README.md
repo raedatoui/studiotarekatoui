@@ -17,13 +17,13 @@ pnpm build:web
 
 To use the CMS download instead, save **Export JSON** as `website/src/data/generated/content.json`, replacing the previous snapshot, then run `pnpm build:web` or a website deployment command. This is the monorepo input path; `../website/src/data/site-content.json` belongs to the standalone checkout.
 
-Before the first export, open **Website → Navigation** in the CMS and publish its initial menu. Defaults include Research, News, About, Publications (the original Galerie Chantal Crousel link), and Contact. Edit labels, links, new-tab behavior, and drag rows to reorder. The menu is shared by desktop and mobile. Existing menus retain their saved labels; rename Editions to Publications in the CMS and publish before the next export.
+Before the first export, open **Website → Navigation** in the CMS and publish its initial menu. Defaults include Research, News, About, Publications (`/publications`), and Contact. Edit labels, links, new-tab behavior, and drag rows to reorder. The menu is shared by desktop and mobile. Existing menus retain their saved values; change the original Galerie Chantal Crousel link to `/publications`, disable opening in a new tab, and publish before the next export.
 
 The first command reads published CMS documents and globals, including Navigation, validates them, and writes JSON atomically. It does not publish drafts or modify editorial content. The second command consumes that exact file and writes the static website to `website/out`. Neither command deploys. The owner confirmed this export-to-build flow, including a downloaded CMS Export JSON snapshot saved at the same generated input path.
 
 The website fails with a setup error if the snapshot is missing. Invalid snapshots fail shared validation; there is no bundled legacy fallback, database connection, or runtime editorial fetch. A new research slug becomes a public page on the next build. Metadata, canonicals, and sitemap entries come from the same snapshot; preview pages are noindex and excluded from the sitemap. Unknown research URLs use the static 404.
 
-Public routes are `/`, `/research`, `/research/[slug]`, `/news`, `/about`, and `/contact`. Both `/` and `/news` render News, matching the old homepage. `/research` renders the Research hub. Staging builds use `NEXT_PUBLIC_SITE_ENV=staging` to emit noindex metadata and robots rules; all public canonicals point to the production domain.
+Public routes are `/`, `/research`, `/research/[slug]`, `/news`, `/about`, `/publications`, and `/contact`. Both `/` and `/news` render News, matching the old homepage. `/research` renders the Research hub. Staging builds use `NEXT_PUBLIC_SITE_ENV=staging` to emit noindex metadata and robots rules; all public canonicals point to the production domain.
 
 ## Development and previews
 
@@ -70,6 +70,12 @@ pnpm content:import:news ../website/src/data/site-content.json --apply
 ```
 
 Without `--apply` it reports the recovered content without opening a database connection. With `--apply`, it saves private backups under `~/tmp/tarek-news-recovery-*/`, imports the six original exhibition entries as a News draft, and adds a missing `/news` link to the navigation draft. It preserves existing News content and other navigation links on reruns, and decodes the old file's literal Unicode escapes. It does not publish or deploy. Review and publish both globals, then export a new snapshot before building the website. The website never reads the legacy source file.
+
+## Publications
+
+**Content → Publications** stores publication titles, years, euro prices, availability, cover image URLs and credits, body copy, source links, and private editorial notes. `/publications` displays published entries from the snapshot, newest year first, with cover images alongside their descriptions. Out-of-print entries retain their status, and missing prices are omitted. Checkout is not configured.
+
+Publish the entries and the `/publications` Navigation link in the CMS, then export a new snapshot to update local website content. Drafts, source links, and editorial notes are excluded from the public export. Older snapshots without publications remain compatible and show an empty publications page. The hosted CMS requires a separate deployment before it can edit or export this collection.
 
 ## Staging chronology
 

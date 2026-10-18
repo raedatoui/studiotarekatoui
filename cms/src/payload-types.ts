@@ -69,6 +69,7 @@ export interface Config {
   collections: {
     users: User;
     research: Research;
+    publications: Publication;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -78,6 +79,7 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     research: ResearchSelect<false> | ResearchSelect<true>;
+    publications: PublicationsSelect<false> | PublicationsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -213,6 +215,33 @@ export interface Research {
   _status?: ('draft' | 'published') | null;
 }
 /**
+ * Books and records on the Publications page. Prices are in euros; checkout is not configured.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "publications".
+ */
+export interface Publication {
+  id: string;
+  title: string;
+  year: number;
+  /**
+   * Leave empty when no price is listed.
+   */
+  price?: number | null;
+  availability: 'available' | 'out-of-print';
+  imageURL: string;
+  imageCredit?: string | null;
+  body: string;
+  sourceURL: string;
+  /**
+   * Private source notes for editorial review.
+   */
+  editorialNotes?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -243,6 +272,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'research';
         value: string | Research;
+      } | null)
+    | ({
+        relationTo: 'publications';
+        value: string | Publication;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -359,6 +392,24 @@ export interface ResearchSelect<T extends boolean = true> {
   updatedAt?: T;
   updatedBy?: T;
   sortOrder?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "publications_select".
+ */
+export interface PublicationsSelect<T extends boolean = true> {
+  title?: T;
+  year?: T;
+  price?: T;
+  availability?: T;
+  imageURL?: T;
+  imageCredit?: T;
+  body?: T;
+  sourceURL?: T;
+  editorialNotes?: T;
+  updatedAt?: T;
   createdAt?: T;
   _status?: T;
 }

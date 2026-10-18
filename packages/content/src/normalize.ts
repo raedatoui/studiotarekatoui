@@ -1,5 +1,5 @@
 import { NEWS_SECTIONS } from './constants';
-import type { Chronology, ContentSnapshot, Exhibition, Project, Research, ResearchInstance } from './schema';
+import type { Chronology, ContentSnapshot, Exhibition, Project, Publication, Research, ResearchInstance } from './schema';
 
 type NullableFields<T> = { [K in keyof T]?: T[K] | null };
 export type ResearchInput = NullableFields<Omit<Research, 'description' | 'instances' | 'gallery' | 'press'>> & {
@@ -10,6 +10,19 @@ export type ResearchInput = NullableFields<Omit<Research, 'description' | 'insta
 };
 
 const optional = (value: string | null | undefined) => value?.trim() || undefined;
+
+export function normalizePublication(doc: NullableFields<Publication>): Publication {
+    return {
+        id: doc.id ?? '',
+        title: doc.title?.trim() ?? '',
+        year: doc.year ?? 0,
+        price: doc.price ?? undefined,
+        availability: doc.availability ?? 'available',
+        imageURL: doc.imageURL?.trim() ?? '',
+        imageCredit: doc.imageCredit?.trim() ?? '',
+        body: doc.body?.trim() ?? '',
+    };
+}
 
 export function normalizeChronology(doc: {
     heading?: string | null;
