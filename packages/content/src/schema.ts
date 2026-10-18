@@ -9,7 +9,7 @@ export const navigationLinkSchema = z.union([linkSchema, z.string().regex(/^\/(?
 export const navigationItemSchema = z.strictObject({ label: text, href: navigationLinkSchema, external: z.boolean() });
 export const navigationSchema = z.strictObject({ items: z.array(navigationItemSchema).min(1, 'Add at least one menu item') });
 export const mediaURLSchema = z.union([linkSchema, z.string().regex(/^\/(?!\/)[^\s\\]+$/, 'Use an HTTP(S) URL or a root-relative media path')]);
-const slug = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'Use lowercase letters, numbers, and single hyphens');
+const slug = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'Use lowercase letters or numbers, with one hyphen between words, e.g. the-whisperers.');
 
 export const instanceSchema = z.strictObject({
     id: text,
@@ -75,7 +75,12 @@ export const researchSchema = z
             research.instances.forEach((instance, index) => {
                 const value = instance[key];
                 if (!value) return;
-                if (seen.has(value)) ctx.addIssue({ code: 'custom', path: ['instances', index, key], message: `Duplicate ${key}: ${value}` });
+                if (seen.has(value))
+                    ctx.addIssue({
+                        code: 'custom',
+                        path: ['instances', index, key],
+                        message: `${key === 'slug' ? 'URL ID' : 'ID'} "${value}" is already used by another entry.`,
+                    });
                 seen.add(value);
             });
         }
@@ -172,7 +177,11 @@ export const chronologySchema = z
         const seen = new Set<string>();
         chronology.projects.forEach((project, index) => {
             if (seen.has(project.id))
-                ctx.addIssue({ code: 'custom', path: ['projects', index, 'id'], message: `Duplicate project ID: ${project.id}` });
+                ctx.addIssue({
+                    code: 'custom',
+                    path: ['projects', index, 'id'],
+                    message: `URL ID "${project.id}" is already used by another project. Choose a different name.`,
+                });
             seen.add(project.id);
         });
     });
@@ -211,7 +220,11 @@ export const contentSnapshotSchema = z
             const seen = new Set<string>();
             snapshot.research.forEach((research, index) => {
                 if (seen.has(research[key]))
-                    ctx.addIssue({ code: 'custom', path: ['research', index, key], message: `Duplicate ${key}: ${research[key]}` });
+                    ctx.addIssue({
+                        code: 'custom',
+                        path: ['research', index, key],
+                        message: `${key === 'slug' ? 'URL ID' : 'ID'} "${research[key]}" is already used by another Research theme.`,
+                    });
                 seen.add(research[key]);
             });
         }

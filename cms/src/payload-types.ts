@@ -156,6 +156,9 @@ export interface Research {
   id: string;
   _order?: string | null;
   title: string;
+  /**
+   * The short name in the page address, e.g. the-whisperers in /research/the-whisperers. Use lowercase letters, numbers and hyphens. Keep it unchanged after publishing so existing links still work.
+   */
   slug: string;
   subtitle?: string | null;
   summary: string;
@@ -602,7 +605,7 @@ export interface Chronology {
   projects?:
     | {
         /**
-         * Stable ID from projects.json; lowercase words separated by hyphens.
+         * A unique name for this entry in website links, e.g. whispering-playground-2025. Use lowercase letters, numbers and hyphens. Keep it unchanged after publishing.
          */
         projectId: string;
         title?: string | null;
@@ -618,7 +621,7 @@ export interface Chronology {
         organization?: string | null;
         collaborators?: string[] | null;
         /**
-         * Confirmed research associations only. Use the research page slugs.
+         * Copy the URL ID from each related Research theme. Add only confirmed connections; leave blank if unsure.
          */
         themeIds?: string[] | null;
         note?: string | null;

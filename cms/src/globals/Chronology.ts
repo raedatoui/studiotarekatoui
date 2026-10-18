@@ -74,10 +74,14 @@ export const Chronology: GlobalConfig = {
                     fields: [
                         {
                             name: 'projectId',
-                            label: 'Project ID',
+                            label: 'URL ID',
                             type: 'text',
                             required: true,
-                            admin: { description: 'Stable ID from projects.json; lowercase words separated by hyphens.' },
+                            admin: {
+                                description:
+                                    'A unique name for this entry in website links, e.g. whispering-playground-2025. '
+                                    + 'Use lowercase letters, numbers and hyphens. Keep it unchanged after publishing.',
+                            },
                         },
                         { name: 'title', type: 'text' },
                         { name: 'kind', type: 'select', required: true, options: [...INSTANCE_KINDS] },
@@ -111,10 +115,13 @@ export const Chronology: GlobalConfig = {
                         { name: 'collaborators', type: 'text', hasMany: true },
                         {
                             name: 'themeIds',
-                            label: 'Research slugs',
+                            label: 'Related research (URL IDs)',
                             type: 'text',
                             hasMany: true,
-                            admin: { description: 'Confirmed research associations only. Use the research page slugs.' },
+                            admin: {
+                                description:
+                                    'Copy the URL ID from each related Research theme. Add only confirmed connections; leave blank if unsure.',
+                            },
                         },
                         { name: 'note', label: 'Public note', type: 'textarea' },
                         { name: 'needsReview', label: 'Needs editorial review', type: 'checkbox', defaultValue: false },

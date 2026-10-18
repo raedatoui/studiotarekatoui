@@ -74,7 +74,7 @@ export function ChronologyProjectsField(props: ArrayFieldClientProps) {
                         id={`${id}-search`}
                         type="search"
                         value={filters.search}
-                        placeholder="Title, venue, city, organization or ID"
+                        placeholder="Title, venue, city, organization or URL ID"
                         onChange={(event) => updateFilter('search', event.target.value)}
                         onKeyDown={(event) => {
                             if (event.key === 'Enter') event.preventDefault();

@@ -27,7 +27,19 @@ export const Research: CollectionConfig = {
     versions: { drafts: true, maxPerDoc: 30 },
     fields: [
         { name: 'title', type: 'text', required: true },
-        { name: 'slug', type: 'text', required: true, unique: true, index: true },
+        {
+            name: 'slug',
+            label: 'URL ID',
+            type: 'text',
+            required: true,
+            unique: true,
+            index: true,
+            admin: {
+                description:
+                    'The short name in the page address, e.g. the-whisperers in /research/the-whisperers. '
+                    + 'Use lowercase letters, numbers and hyphens. Keep it unchanged after publishing so existing links still work.',
+            },
+        },
         { name: 'subtitle', type: 'text' },
         { name: 'summary', type: 'textarea', required: true },
         {
@@ -65,7 +77,7 @@ export const Research: CollectionConfig = {
                 components: { RowLabel: '/components/ResearchRowLabels#InstanceRowLabel' },
             },
             fields: [
-                { name: 'slug', type: 'text', admin: { hidden: true } },
+                { name: 'slug', label: 'URL ID', type: 'text', admin: { hidden: true } },
                 { name: 'title', type: 'text' },
                 {
                     name: 'kind',
