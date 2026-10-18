@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { showChronology, site } from '@/config/site';
+import { showChronology, showPublications, site } from '@/config/site';
 import { useSiteData } from '@/data/SiteDataProvider';
 import ThemeToggle from './ThemeToggle';
 
@@ -44,7 +44,10 @@ export default function Header() {
 
     const items = navigation.items.filter((link) => new URL(link.href, site.url).pathname.replace(/\/+$/, '') !== '/chronology');
     if (showChronology && chronology) items.push({ label: chronology.heading, href: '/chronology', external: false });
-    const navLinks = items.map((link, index) => {
+    const navLinks = items.map((item, index) => {
+        const link = !showPublications && new URL(item.href, site.url).pathname.replace(/\/+$/, '') === '/publications'
+            ? { ...item, href: 'https://www.crousel.com/artiste/tarek-atoui-r90lmw/#items', external: true }
+            : item;
         const url = new URL(link.href, site.url);
         const path = url.pathname.replace(/\/+$/, '') || '/';
         const linkPath = path === '/' ? '/news' : path;
@@ -65,6 +68,8 @@ export default function Header() {
                 onClick={() => setMenuOpen(false)}
             >
                 {link.label}
+                {!internal && <span aria-hidden="true"> ↗</span>}
+                {!internal && <span className="sr-only"> (external link)</span>}
             </a>
         );
     });
