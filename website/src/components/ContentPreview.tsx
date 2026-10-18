@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { previewAbout, previewContact, previewNavigation, previewNews, previewResearch, previewResearchPage } from '@tarek/content/preview';
+import { previewAbout, previewChronology, previewContact, previewNavigation, previewNews, previewResearch, previewResearchPage } from '@tarek/content/preview';
 import type { Research } from '@tarek/content';
 import { SiteDataProvider, useSiteData } from '@/data/SiteDataProvider';
 import Bio from './Bio';
@@ -10,8 +10,9 @@ import ProjectsHub from './ProjectsHub';
 import ResearchThread from './ResearchThread';
 import Header from './Header';
 import News from './News';
+import Chronology from './Chronology';
 
-export type PreviewKind = 'research' | 'research-page' | 'about' | 'contact' | 'navigation' | 'news';
+export type PreviewKind = 'research' | 'research-page' | 'about' | 'contact' | 'navigation' | 'news' | 'chronology';
 const cmsOrigin = process.env.NEXT_PUBLIC_CMS_ORIGIN || 'http://localhost:3001';
 
 export default function ContentPreview({ kind }: { kind: PreviewKind }) {
@@ -45,6 +46,8 @@ export default function ContentPreview({ kind }: { kind: PreviewKind }) {
                 setContent({ ...baseline, navigation: previewNavigation(message.data) });
             } else if (kind === 'news') {
                 setContent({ ...baseline, news: previewNews(message.data) });
+            } else if (kind === 'chronology') {
+                setContent({ ...baseline, chronology: previewChronology(message.data) });
             } else {
                 setContent({ ...baseline, contact: previewContact(message.data) });
             }
@@ -68,6 +71,7 @@ export default function ContentPreview({ kind }: { kind: PreviewKind }) {
                 {kind === 'about' && <Bio />}
                 {kind === 'contact' && <Contact />}
                 {kind === 'news' && <News />}
+                {kind === 'chronology' && content.chronology && <Chronology content={content.chronology} research={content.research} />}
             </div>
         </SiteDataProvider>
     );

@@ -37,7 +37,7 @@ export default buildConfig({
     importMap: { baseDir: path.resolve(dirname) },
     livePreview: {
       collections: ['research'],
-      globals: ['research-page', 'about', 'contact', 'navigation', 'news'],
+      globals: ['research-page', 'about', 'contact', 'navigation', 'news', 'chronology'],
       url: ({ collectionConfig, globalConfig }) => {
         const kind = collectionConfig?.slug ?? globalConfig?.slug
         const websiteURL = process.env.WEBSITE_PREVIEW_URL || 'http://localhost:3000'

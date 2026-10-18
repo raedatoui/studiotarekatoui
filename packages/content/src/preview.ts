@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { NEWS_SECTIONS } from './constants';
-import { normalizeAbout, normalizeContact, normalizeNavigation, normalizeNews, normalizeResearch, normalizeResearchPage } from './normalize';
-import { aboutSchema, contactSchema, exhibitionSchema, gallerySchema, instanceSchema, navigationItemSchema, newsSectionOrderSchema, pressSchema, researchPageSchema, researchSchema } from './schema';
+import { NEWS_SECTIONS, PROJECT_MEDIA_TYPES } from './constants';
+import { normalizeAbout, normalizeChronology, normalizeContact, normalizeNavigation, normalizeNews, normalizeResearch, normalizeResearchPage } from './normalize';
+import { aboutSchema, contactSchema, exhibitionSchema, gallerySchema, instanceSchema, mediaURLSchema, navigationItemSchema, newsSectionOrderSchema, pressSchema, projectSchema, researchPageSchema, researchSchema } from './schema';
 
 // Invalid or unfinished fields are cleared for rendering, never accepted by the publication schema.
 const string = z.string().catch('');
@@ -72,6 +72,25 @@ const newsInput = z.object({
     performances: z.array(exhibitionInput).nullish().catch([]),
 });
 
+const chronologyInput = z.object({
+    heading: string, introduction: string,
+    projects: z.array(z.object({
+        id: optionalString, projectId: optionalString, title: optionalString,
+        kind: projectSchema.shape.kind.catch('solo'), year: projectSchema.shape.year.catch(0),
+        dateStart: projectSchema.shape.dateStart.nullish().catch(undefined),
+        dateEnd: projectSchema.shape.dateEnd.nullish().catch(undefined),
+        dateDisplay: optionalString, status: projectSchema.shape.status.nullish().catch(undefined),
+        venue: string, city: optionalString, country: optionalString, organization: optionalString,
+        themeIds: list, collaborators: list, note: optionalString,
+        url: projectSchema.shape.url.nullish().catch(undefined),
+        needsReview: z.boolean().catch(false),
+        media: z.array(z.object({
+            type: z.enum(PROJECT_MEDIA_TYPES).catch('external'), url: mediaURLSchema.catch(''),
+            label: optionalString, publisher: optionalString,
+        })).nullish().catch([]),
+    })).nullish().catch([]),
+});
+
 export function previewResearch(value: unknown) {
     const research = normalizeResearch(researchInput.parse(value));
     return {
@@ -85,3 +104,18 @@ export const previewAbout = (value: unknown) => normalizeAbout(aboutInput.parse(
 export const previewContact = (value: unknown) => normalizeContact(contactInput.parse(value));
 export const previewNavigation = (value: unknown) => normalizeNavigation(navigationInput.parse(value));
 export const previewNews = (value: unknown) => normalizeNews(newsInput.parse(value));
+export function previewChronology(value: unknown) {
+    const input = chronologyInput.parse(value);
+    const chronology = normalizeChronology(input);
+    const ids = new Set<string>();
+    return {
+        ...chronology,
+        projects: chronology.projects.map((project, index) => {
+            // New rows and temporarily duplicated IDs must still render while an editor is typing.
+            let id = project.id || input.projects?.[index].id || `preview-project-${index}`;
+            while (ids.has(id)) id = `${id}-preview-${index}`;
+            ids.add(id);
+            return { ...project, id, media: project.media.filter((item) => mediaURLSchema.safeParse(item.url).success) };
+        }),
+    };
+}
