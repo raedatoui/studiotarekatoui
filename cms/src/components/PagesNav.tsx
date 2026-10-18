@@ -13,7 +13,7 @@ export function PagesNav() {
     const pathname = usePathname();
     const links = [
         { href: `${admin}/pages`, label: 'All pages' },
-        ...cmsPages.map(({ slug, label }) => ({ href: `${admin}/globals/${slug}`, label })),
+        ...cmsPages.map((page) => ({ href: `${admin}${'path' in page ? page.path : `/globals/${page.slug}`}`, label: page.label })),
     ];
 
     return (

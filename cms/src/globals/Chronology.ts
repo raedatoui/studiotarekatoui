@@ -14,7 +14,22 @@ import { publishedByField } from '../fields/publishedBy';
 export const Chronology: GlobalConfig = {
     slug: 'chronology',
     label: 'Chronology',
-    admin: { group: false, description: 'The full project timeline. Currently visible in local development and on the staging website.' },
+    admin: {
+        group: 'Content',
+        description: 'The full project timeline. Currently visible in local development and on the staging website.',
+        components: {
+            views: {
+                edit: {
+                    default: { Component: '/components/ChronologyEditView#ChronologyEditView' },
+                    introduction: {
+                        Component: '/components/ChronologyEditView#ChronologyEditView',
+                        path: '/introduction',
+                        meta: { title: 'Chronology page' },
+                    },
+                },
+            },
+        },
+    },
     access: { read: signedIn, update: signedIn, readVersions: signedIn },
     versions: { drafts: true, max: 30 },
     hooks: {

@@ -12,7 +12,8 @@ export async function PagesView(props: AdminViewServerProps) {
     const pages = await Promise.all(
         cmsPages
             .filter(({ slug }) => permissions.globals?.[slug]?.read)
-            .map(async ({ slug, label }) => {
+            .map(async (page) => {
+                const { slug, label } = page;
                 const [published, latest] = await Promise.all([
                     payload.findGlobal({
                         slug,
@@ -28,7 +29,7 @@ export async function PagesView(props: AdminViewServerProps) {
                 return {
                     id: slug,
                     label,
-                    href: `${payload.config.routes.admin}/globals/${slug}`,
+                    href: `${payload.config.routes.admin}${'path' in page ? page.path : `/globals/${slug}`}`,
                     status: latest._status === 'published' ? 'Published' : 'Draft',
                     lastPublishedAt: isPublished ? published.updatedAt : null,
                     publishedBy: isPublished ? published.publishedBy : null,
