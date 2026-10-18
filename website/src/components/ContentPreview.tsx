@@ -7,6 +7,7 @@ import {
     previewContact,
     previewNavigation,
     previewNews,
+    previewPublicationsPage,
     previewResearch,
     previewResearchPage,
 } from '@tarek/content/preview';
@@ -19,8 +20,9 @@ import ResearchThread from './ResearchThread';
 import Header from './Header';
 import News from './News';
 import Chronology from './Chronology';
+import Publications from './Publications';
 
-export type PreviewKind = 'research' | 'research-page' | 'about' | 'contact' | 'navigation' | 'news' | 'chronology';
+export type PreviewKind = 'research' | 'research-page' | 'publications-page' | 'about' | 'contact' | 'navigation' | 'news' | 'chronology';
 const cmsOrigin = process.env.NEXT_PUBLIC_CMS_ORIGIN || 'http://localhost:3001';
 
 export default function ContentPreview({ kind }: { kind: PreviewKind }) {
@@ -48,6 +50,8 @@ export default function ContentPreview({ kind }: { kind: PreviewKind }) {
                 setContent({ ...baseline, research });
             } else if (kind === 'research-page') {
                 setContent({ ...baseline, researchPage: previewResearchPage(message.data) });
+            } else if (kind === 'publications-page') {
+                setContent({ ...baseline, publicationsPage: previewPublicationsPage(message.data) });
             } else if (kind === 'about') {
                 setContent({ ...baseline, about: previewAbout(message.data) });
             } else if (kind === 'navigation') {
@@ -82,6 +86,7 @@ export default function ContentPreview({ kind }: { kind: PreviewKind }) {
                 {kind === 'contact' && <Contact />}
                 {kind === 'news' && <News />}
                 {kind === 'chronology' && content.chronology && <Chronology content={content.chronology} research={content.research} />}
+                {kind === 'publications-page' && <Publications />}
             </div>
         </SiteDataProvider>
     );

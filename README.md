@@ -73,6 +73,8 @@ Without `--apply` it reports the recovered content without opening a database co
 
 ## Publications
 
+**Pages → Publications page (staging)** edits the page heading and optional introduction separately from the publication entries. The introduction can stay blank. Live Preview shows unsaved page edits alongside the published publication list; published page copy is included in the next content export.
+
 **Content → Publications** stores publication titles, years, euro prices, availability, cover image URLs and credits, body copy, source links, and private editorial notes. In local development and staging, `/publications` displays published entries from the snapshot, newest year first, with cover images alongside their descriptions. Production returns the static 404, excludes publications content from the client provider, and never lists the page in the sitemap. Out-of-print entries retain their status, and missing prices are omitted. Checkout is not configured.
 
 Publish the entries and the `/publications` Navigation link in the CMS, then export a new snapshot to update local website content. Drafts, source links, and editorial notes are excluded from the public export. Older snapshots without publications remain compatible and show an empty publications page. The hosted CMS requires a separate deployment before it can edit or export this collection.

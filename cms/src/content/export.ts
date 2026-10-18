@@ -1,4 +1,4 @@
-import { normalizeChronology, normalizePublication, parseContentSnapshot } from '@tarek/content';
+import { normalizeChronology, normalizePublication, normalizePublicationsPage, parseContentSnapshot } from '@tarek/content';
 import type { Payload } from 'payload';
 import type { Research } from '../payload-types';
 import { serializeContent } from './serialize';
@@ -24,7 +24,7 @@ export async function exportContent(payload: Payload) {
         if (!result.hasNextPage) break;
         page += 1;
     }
-    const [researchPage, about, contact, navigation, news, publications] = await Promise.all([
+    const [researchPage, about, contact, navigation, news, publications, publicationsPage] = await Promise.all([
         payload.findGlobal({ slug: 'research-page', draft: false, depth: 0, overrideAccess: true }),
         payload.findGlobal({ slug: 'about', draft: false, depth: 0, overrideAccess: true }),
         payload.findGlobal({ slug: 'contact', draft: false, depth: 0, overrideAccess: true }),
@@ -39,6 +39,7 @@ export async function exportContent(payload: Payload) {
             pagination: false,
             sort: ['-year', 'title'],
         }),
+        payload.findGlobal({ slug: 'publications-page', draft: false, depth: 0, overrideAccess: true }),
     ]);
     for (const [name, doc] of Object.entries({ 'Research page': researchPage, About: about, Contact: contact, Navigation: navigation, News: news })) {
         if (doc._status !== 'published') throw new ContentExportError(`${name} has no published content. Publish it in the CMS before exporting.`);
@@ -48,6 +49,7 @@ export async function exportContent(payload: Payload) {
         return parseContentSnapshot({
             ...serializeContent(research, researchPage, about, contact, navigation, news),
             publications: publications.docs.map(normalizePublication),
+            ...(publicationsPage._status === 'published' ? { publicationsPage: normalizePublicationsPage(publicationsPage) } : {}),
             ...(chronology._status === 'published' ? { chronology: normalizeChronology(chronology) } : {}),
         });
     } catch (error) {

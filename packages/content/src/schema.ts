@@ -200,6 +200,9 @@ export const publicationSchema = z.strictObject({
 });
 export type Publication = z.infer<typeof publicationSchema>;
 
+export const publicationsPageSchema = z.strictObject({ heading: text, introduction: z.string() });
+export type PublicationsPage = z.infer<typeof publicationsPageSchema>;
+
 export const contentSnapshotSchema = z
     .strictObject({
         schemaVersion: z.literal(SCHEMA_VERSION),
@@ -210,6 +213,7 @@ export const contentSnapshotSchema = z
         chronology: chronologySchema.optional(),
         // Older hosted CMS exports do not contain the publications collection yet.
         publications: z.array(publicationSchema).default([]),
+        publicationsPage: publicationsPageSchema.optional(),
         researchPage: researchPageSchema,
         research: z.array(researchSchema),
         about: aboutSchema,

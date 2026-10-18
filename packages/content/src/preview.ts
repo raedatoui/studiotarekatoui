@@ -6,6 +6,7 @@ import {
     normalizeContact,
     normalizeNavigation,
     normalizeNews,
+    normalizePublicationsPage,
     normalizeResearch,
     normalizeResearchPage,
 } from './normalize';
@@ -90,6 +91,7 @@ const researchPageInput = z.object({
     heading: researchPageSchema.shape.heading.catch(''),
     introduction: string,
 });
+const publicationsPageInput = z.object({ heading: string, introduction: string });
 const aboutInput = z.object({
     text: aboutSchema.shape.text.catch(''),
     exhibitions: string,
@@ -196,6 +198,7 @@ export function previewResearch(value: unknown) {
     };
 }
 export const previewResearchPage = (value: unknown) => normalizeResearchPage(researchPageInput.parse(value));
+export const previewPublicationsPage = (value: unknown) => normalizePublicationsPage(publicationsPageInput.parse(value));
 export const previewAbout = (value: unknown) => normalizeAbout(aboutInput.parse(value));
 export const previewContact = (value: unknown) => normalizeContact(contactInput.parse(value));
 export const previewNavigation = (value: unknown) => normalizeNavigation(navigationInput.parse(value));

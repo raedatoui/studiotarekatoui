@@ -8,6 +8,7 @@ export const siteContent = {
     ...snapshot,
     chronology: showChronology ? snapshot.chronology : undefined,
     publications: showPublications ? snapshot.publications : [],
+    publicationsPage: showPublications ? snapshot.publicationsPage : undefined,
 };
 
 export function getResearch(slug: string): Research | undefined {

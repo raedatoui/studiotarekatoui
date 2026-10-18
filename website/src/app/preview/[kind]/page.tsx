@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import ContentPreview, { type PreviewKind } from '@/components/ContentPreview';
-import { showChronology } from '@/config/site';
+import { showChronology, showPublications } from '@/config/site';
 
 const kinds: PreviewKind[] = ['research', 'research-page', 'about', 'contact', 'navigation', 'news'];
 if (showChronology) kinds.push('chronology');
+if (showPublications) kinds.push('publications-page');
 export const dynamicParams = false;
 export const metadata: Metadata = {
     title: 'CMS preview — Studio Tarek Atoui',

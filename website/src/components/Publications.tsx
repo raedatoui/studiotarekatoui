@@ -6,13 +6,18 @@ import { mediaUrl } from '@/lib/mediaUrl';
 const priceFormatter = new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'EUR' });
 
 export default function Publications() {
-    const { publications } = useSiteData();
+    const { publications, publicationsPage } = useSiteData();
 
     return (
         <section id="publications" aria-labelledby="publications-heading" className="px-[clamp(24px,4vw,64px)] py-[clamp(48px,6vw,80px)]">
             <h1 id="publications-heading" className="text-[clamp(20px,2vw,28px)] font-bold mb-[clamp(40px,5vw,64px)]">
-                Publications
+                {publicationsPage?.heading ?? 'Publications'}
             </h1>
+            {publicationsPage?.introduction && (
+                <p className="max-w-[65ch] mb-[clamp(40px,5vw,64px)] whitespace-pre-line font-light leading-[1.8]">
+                    {publicationsPage.introduction}
+                </p>
+            )}
             {publications.length === 0 ? (
                 <p className="text-[var(--color-text-secondary)]">Publications will be available here soon.</p>
             ) : (

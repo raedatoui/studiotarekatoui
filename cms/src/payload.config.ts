@@ -11,6 +11,7 @@ import { Publications } from './collections/Publications';
 import { About } from './globals/About';
 import { Contact } from './globals/Contact';
 import { ResearchPage } from './globals/ResearchPage';
+import { PublicationsPage } from './globals/PublicationsPage';
 import { Navigation } from './globals/Navigation';
 import { News } from './globals/News';
 import { Chronology } from './globals/Chronology';
@@ -37,7 +38,7 @@ export default buildConfig({
         importMap: { baseDir: path.resolve(dirname) },
         livePreview: {
             collections: ['research'],
-            globals: ['research-page', 'about', 'contact', 'navigation', 'news', 'chronology'],
+            globals: ['research-page', 'publications-page', 'about', 'contact', 'navigation', 'news', 'chronology'],
             url: ({ collectionConfig, globalConfig }) => {
                 const kind = collectionConfig?.slug ?? globalConfig?.slug;
                 const websiteURL = process.env.WEBSITE_PREVIEW_URL || 'http://localhost:3000';
@@ -58,7 +59,7 @@ export default buildConfig({
         },
     },
     collections: [Users, Research, Publications],
-    globals: [ResearchPage, News, Chronology, About, Contact, Navigation],
+    globals: [ResearchPage, News, Chronology, PublicationsPage, About, Contact, Navigation],
     secret: process.env.PAYLOAD_SECRET || '',
     typescript: { outputFile: path.resolve(dirname, 'payload-types.ts') },
     db: mongooseAdapter({

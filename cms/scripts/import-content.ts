@@ -80,6 +80,7 @@ async function importContent() {
         });
         for (const item of plan) console.log(`${item.target ? 'UPDATE' : 'CREATE'} research/${item.doc.slug} (${item.match}) as draft`);
         console.log('UPDATE research-page, about, contact, navigation, news as drafts. Absent research documents are retained.');
+        if (snapshot.publicationsPage) console.log('UPDATE publications-page as draft.');
         if (!values.apply) {
             console.log('Dry run: no content was written. Use --apply to import.');
             return;
@@ -87,7 +88,7 @@ async function importContent() {
 
         // Private recovery data includes both the current published records and latest drafts.
         const globals = {};
-        for (const slug of ['research-page', 'about', 'contact', 'navigation', 'news', 'chronology'] as const) {
+        for (const slug of ['research-page', 'publications-page', 'about', 'contact', 'navigation', 'news', 'chronology'] as const) {
             Object.assign(globals, {
                 [slug]: {
                     published: await payload.findGlobal({ slug, draft: false, depth: 0, overrideAccess: true }),
@@ -136,6 +137,15 @@ async function importContent() {
                 overrideAccess: true,
             });
             await record('research-page');
+            if (snapshot.publicationsPage) {
+                await payload.updateGlobal({
+                    slug: 'publications-page',
+                    data: { ...snapshot.publicationsPage, _status: 'draft' },
+                    draft: true,
+                    overrideAccess: true,
+                });
+                await record('publications-page');
+            }
             await payload.updateGlobal({
                 slug: 'about',
                 data: { ...snapshot.about, portraitURL: snapshot.about.portraitURL ?? null, _status: 'draft' },

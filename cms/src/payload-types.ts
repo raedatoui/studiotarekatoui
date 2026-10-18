@@ -93,6 +93,7 @@ export interface Config {
     'research-page': ResearchPage;
     news: News;
     chronology: Chronology;
+    'publications-page': PublicationsPage;
     about: About;
     contact: Contact;
     navigation: Navigation;
@@ -101,6 +102,7 @@ export interface Config {
     'research-page': ResearchPageSelect<false> | ResearchPageSelect<true>;
     news: NewsSelect<false> | NewsSelect<true>;
     chronology: ChronologySelect<false> | ChronologySelect<true>;
+    'publications-page': PublicationsPageSelect<false> | PublicationsPageSelect<true>;
     about: AboutSelect<false> | AboutSelect<true>;
     contact: ContactSelect<false> | ContactSelect<true>;
     navigation: NavigationSelect<false> | NavigationSelect<true>;
@@ -218,7 +220,7 @@ export interface Research {
   _status?: ('draft' | 'published') | null;
 }
 /**
- * Books and records on the Publications page. Prices are in euros; checkout is not configured.
+ * Books and records on the staging Publications page. Prices are in euros; checkout is not configured.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "publications".
@@ -644,6 +646,24 @@ export interface Chronology {
   createdAt?: string | null;
 }
 /**
+ * The heading and introduction above the publications list. Currently visible in local development and on the staging website.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "publications-page".
+ */
+export interface PublicationsPage {
+  id: string;
+  publishedBy?: string | null;
+  heading: string;
+  /**
+   * Optional text above the publications list. Leave blank to show only the heading.
+   */
+  introduction?: string | null;
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "about".
  */
@@ -865,6 +885,19 @@ export interface ChronologySelect<T extends boolean = true> {
             };
         id?: T;
       };
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "publications-page_select".
+ */
+export interface PublicationsPageSelect<T extends boolean = true> {
+  publishedBy?: T;
+  heading?: T;
+  introduction?: T;
   _status?: T;
   updatedAt?: T;
   createdAt?: T;

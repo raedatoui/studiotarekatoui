@@ -8,7 +8,7 @@ export const Publications: CollectionConfig = {
         useAsTitle: 'title',
         group: 'Content',
         defaultColumns: ['title', 'year', 'price', 'availability', '_status'],
-        description: 'Books and records on the Publications page. Prices are in euros; checkout is not configured.',
+        description: 'Books and records on the staging Publications page. Prices are in euros; checkout is not configured.',
     },
     access: contentAccess,
     versions: { drafts: true, maxPerDoc: 30 },
