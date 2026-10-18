@@ -1,18 +1,33 @@
 'use client';
 
-import { ArrayField, useFormFields, useFormSubmitted } from '@payloadcms/ui';
+import { ArrayField, useDocumentInfo, useForm, useFormFields, useFormSubmitted } from '@payloadcms/ui';
 import { INSTANCE_KINDS } from '@tarek/content';
+import { useSearchParams } from 'next/navigation';
 import type { ArrayFieldClientProps } from 'payload';
-import { useId, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 
 export function ChronologyProjectsField(props: ArrayFieldClientProps) {
-    const { path, field } = props;
+    const { path, field, readOnly, schemaPath = field.name } = props;
     const id = useId();
+    const { addFieldRow, disabled } = useForm();
+    const { isInitializing, hasSavePermission } = useDocumentInfo();
+    const addProject = useSearchParams().get('addProject') === '1';
+    const addedProject = useRef(false);
     const fields = useFormFields(([formFields]) => formFields);
     const submitted = useFormSubmitted();
     const [filters, setFilters] = useState({ search: '', year: '', kind: '', review: '' });
     const [filteredRowIDs, setFilteredRowIDs] = useState<Set<string>>(new Set());
     const rows = fields[path]?.rows ?? [];
+
+    useEffect(() => {
+        if (!addProject || addedProject.current || isInitializing || disabled || readOnly || !hasSavePermission) return;
+        addedProject.current = true;
+        addFieldRow({ path, schemaPath, rowIndex: 0 });
+        const url = new URL(window.location.href);
+        url.searchParams.delete('addProject');
+        window.history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`);
+    }, [addProject, addFieldRow, disabled, hasSavePermission, isInitializing, path, readOnly, schemaPath]);
+
     const query = filters.search.trim().toLowerCase();
     const filtering = Boolean(query || filters.year || filters.kind || filters.review);
     const invalidRows = new Set<number>();

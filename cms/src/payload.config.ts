@@ -46,6 +46,7 @@ export default buildConfig({
             },
         },
         components: {
+            afterDashboard: ['/components/ChronologyCreateButton#ChronologyCreateButton'],
             afterNavLinks: ['/components/PagesNav#PagesNav', '/components/ExportContent#ExportContent'],
             views: {
                 pages: { Component: '/components/PagesView#PagesView', path: '/pages', exact: true, meta: { title: 'Pages' } },
