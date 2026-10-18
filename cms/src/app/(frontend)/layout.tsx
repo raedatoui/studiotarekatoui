@@ -1,7 +1,11 @@
-import type { ReactNode } from 'react'
+import type { ReactNode } from 'react';
 
-export const metadata = { title: 'Studio Tarek Atoui — CMS' }
+export const metadata = { title: 'Studio Tarek Atoui — CMS' };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
-  return <html lang="en"><body>{children}</body></html>
+    return (
+        <html lang="en">
+            <body>{children}</body>
+        </html>
+    );
 }

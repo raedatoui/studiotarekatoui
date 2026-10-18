@@ -29,11 +29,16 @@ export default function VerticalTimeline({ entries }: { entries: TimelineEntry[]
                             <div>
                                 <span className="text-[length:calc(15px*var(--copy-scale))] leading-snug">
                                     {entry.url ? (
-                                        <a href={entry.url} target="_blank" rel="noreferrer" className="research-title-link">{entry.title ?? entry.organization} ↗</a>
-                                    ) : (entry.title ?? entry.organization)}
+                                        <a href={entry.url} target="_blank" rel="noreferrer" className="research-title-link">
+                                            {entry.title ?? entry.organization} ↗
+                                        </a>
+                                    ) : (
+                                        (entry.title ?? entry.organization)
+                                    )}
                                 </span>
                                 <span className="mt-1 block text-[length:calc(12.5px*var(--copy-scale))] font-light text-[var(--color-text-secondary)]">
-                                    {entry.kind}{entry.status ? ` · ${entry.status}` : ''}
+                                    {entry.kind}
+                                    {entry.status ? ` · ${entry.status}` : ''}
                                     {entry.title && ` · ${entry.organization}`}
                                     {place && ` — ${place}`}
                                     {entry.dateDisplay && ` · ${entry.dateDisplay}`}

@@ -33,7 +33,11 @@ export function ExportContent() {
             <button type="button" className="btn btn--style-secondary btn--size-small" disabled={busy} onClick={download}>
                 {busy ? 'Exporting…' : 'Export JSON'}
             </button>
-            {error && <p role="alert" style={{ whiteSpace: 'pre-wrap' }}>{error}</p>}
+            {error && (
+                <p role="alert" style={{ whiteSpace: 'pre-wrap' }}>
+                    {error}
+                </p>
+            )}
         </div>
     );
 }

@@ -31,8 +31,9 @@ let config;
 let only;
 if (target === 'cms') {
     const backendId = required('FIREBASE_APPHOSTING_BACKEND_ID');
-    const apphosting = readFileSync(path.join(root, 'cms/apphosting.template.yaml'), 'utf8')
-        .replace(/\$\{([A-Z_]+)\}/g, (_, name) => JSON.stringify(required(name)));
+    const apphosting = readFileSync(path.join(root, 'cms/apphosting.template.yaml'), 'utf8').replace(/\$\{([A-Z_]+)\}/g, (_, name) =>
+        JSON.stringify(required(name))
+    );
     writeFileSync(path.join(root, 'cms/apphosting.yaml'), apphosting, { mode: 0o600 });
     config = { apphosting: [{ ...template.apphosting[0], backendId }] };
     only = `apphosting:${backendId}`;

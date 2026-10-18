@@ -1,4 +1,12 @@
-import { chronologySchema, INSTANCE_KINDS, INSTANCE_STATUSES, linkSchema, mediaURLSchema, normalizeChronology, PROJECT_MEDIA_TYPES } from '@tarek/content';
+import {
+    chronologySchema,
+    INSTANCE_KINDS,
+    INSTANCE_STATUSES,
+    linkSchema,
+    mediaURLSchema,
+    normalizeChronology,
+    PROJECT_MEDIA_TYPES,
+} from '@tarek/content';
 import type { GlobalConfig } from 'payload';
 import { signedIn } from '../access';
 import { publishedByField } from '../fields/publishedBy';
@@ -10,25 +18,35 @@ export const Chronology: GlobalConfig = {
     access: { read: signedIn, update: signedIn, readVersions: signedIn },
     versions: { drafts: true, max: 30 },
     hooks: {
-        beforeChange: [({ data, originalDoc }) => {
-            if (data._status === 'published') chronologySchema.parse(normalizeChronology({ ...originalDoc, ...data }));
-            return data;
-        }],
+        beforeChange: [
+            ({ data, originalDoc }) => {
+                if (data._status === 'published') chronologySchema.parse(normalizeChronology({ ...originalDoc, ...data }));
+                return data;
+            },
+        ],
     },
     fields: [
         publishedByField(),
         {
-            type: 'collapsible', label: 'Page introduction',
+            type: 'collapsible',
+            label: 'Page introduction',
             fields: [
                 { name: 'heading', type: 'text', required: true, defaultValue: 'Chronology' },
                 { name: 'introduction', type: 'textarea' },
-                { name: 'editorialNotes', type: 'textarea', admin: { description: 'Private source questions and follow-up notes. Never exported to the website.' } },
+                {
+                    name: 'editorialNotes',
+                    type: 'textarea',
+                    admin: { description: 'Private source questions and follow-up notes. Never exported to the website.' },
+                },
             ],
         },
         {
-            name: 'projects', type: 'array', labels: { singular: 'Project', plural: 'Projects' },
+            name: 'projects',
+            type: 'array',
+            labels: { singular: 'Project', plural: 'Projects' },
             admin: {
-                initCollapsed: true, description: 'Newest year first on the website; drag to order entries within each year.',
+                initCollapsed: true,
+                description: 'Newest year first on the website; drag to order entries within each year.',
                 components: {
                     Field: '/components/ChronologyProjectsField#ChronologyProjectsField',
                     RowLabel: '/components/ChronologyRowLabel#ChronologyRowLabel',
@@ -36,15 +54,23 @@ export const Chronology: GlobalConfig = {
             },
             fields: [
                 {
-                    type: 'collapsible', label: 'Project details',
+                    type: 'collapsible',
+                    label: 'Project details',
                     fields: [
-                        { name: 'projectId', label: 'Project ID', type: 'text', required: true, admin: { description: 'Stable ID from projects.json; lowercase words separated by hyphens.' } },
+                        {
+                            name: 'projectId',
+                            label: 'Project ID',
+                            type: 'text',
+                            required: true,
+                            admin: { description: 'Stable ID from projects.json; lowercase words separated by hyphens.' },
+                        },
                         { name: 'title', type: 'text' },
                         { name: 'kind', type: 'select', required: true, options: [...INSTANCE_KINDS] },
                     ],
                 },
                 {
-                    type: 'collapsible', label: 'Dates and status',
+                    type: 'collapsible',
+                    label: 'Dates and status',
                     fields: [
                         { name: 'year', type: 'number', required: true, min: 1, max: 9999 },
                         { name: 'dateStart', type: 'date' },
@@ -54,7 +80,8 @@ export const Chronology: GlobalConfig = {
                     ],
                 },
                 {
-                    type: 'collapsible', label: 'Location and organization',
+                    type: 'collapsible',
+                    label: 'Location and organization',
                     fields: [
                         { name: 'venue', type: 'text', required: true },
                         { name: 'city', type: 'text' },
@@ -63,22 +90,43 @@ export const Chronology: GlobalConfig = {
                     ],
                 },
                 {
-                    type: 'collapsible', label: 'Research and editorial',
+                    type: 'collapsible',
+                    label: 'Research and editorial',
                     fields: [
                         { name: 'collaborators', type: 'text', hasMany: true },
-                        { name: 'themeIds', label: 'Research slugs', type: 'text', hasMany: true, admin: { description: 'Confirmed research associations only. Use the research page slugs.' } },
+                        {
+                            name: 'themeIds',
+                            label: 'Research slugs',
+                            type: 'text',
+                            hasMany: true,
+                            admin: { description: 'Confirmed research associations only. Use the research page slugs.' },
+                        },
                         { name: 'note', label: 'Public note', type: 'textarea' },
                         { name: 'needsReview', label: 'Needs editorial review', type: 'checkbox', defaultValue: false },
                     ],
                 },
                 {
-                    type: 'collapsible', label: 'Links and media',
+                    type: 'collapsible',
+                    label: 'Links and media',
                     fields: [
-                        { name: 'url', label: 'Project link', type: 'text', validate: (value: unknown) => !value || linkSchema.safeParse(value).success || 'Enter an HTTP(S) URL.' },
                         {
-                            name: 'media', type: 'array', fields: [
+                            name: 'url',
+                            label: 'Project link',
+                            type: 'text',
+                            validate: (value: unknown) => !value || linkSchema.safeParse(value).success || 'Enter an HTTP(S) URL.',
+                        },
+                        {
+                            name: 'media',
+                            type: 'array',
+                            fields: [
                                 { name: 'type', type: 'select', required: true, options: [...PROJECT_MEDIA_TYPES] },
-                                { name: 'url', type: 'text', required: true, validate: (value: unknown) => mediaURLSchema.safeParse(value).success || 'Enter an HTTP(S) URL or root-relative media path.' },
+                                {
+                                    name: 'url',
+                                    type: 'text',
+                                    required: true,
+                                    validate: (value: unknown) =>
+                                        mediaURLSchema.safeParse(value).success || 'Enter an HTTP(S) URL or root-relative media path.',
+                                },
                                 { name: 'label', type: 'text' },
                                 { name: 'publisher', type: 'text' },
                             ],

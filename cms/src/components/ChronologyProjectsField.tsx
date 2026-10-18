@@ -28,12 +28,15 @@ export function ChronologyProjectsField(props: ArrayFieldClientProps) {
         const prefix = `${path}.${index}`;
         const year = fields[`${prefix}.year`]?.value;
         const searchText = ['projectId', 'title', 'venue', 'city', 'country', 'organization']
-            .map((key) => fields[`${prefix}.${key}`]?.value ?? '').join(' ').toLowerCase();
+            .map((key) => fields[`${prefix}.${key}`]?.value ?? '')
+            .join(' ')
+            .toLowerCase();
         const needsReview = fields[`${prefix}.needsReview`]?.value === true;
-        const matches = (!query || searchText.includes(query))
-            && (!filters.year || String(year) === filters.year)
-            && (!filters.kind || fields[`${prefix}.kind`]?.value === filters.kind)
-            && (!filters.review || needsReview === (filters.review === 'needs-review'));
+        const matches =
+            (!query || searchText.includes(query)) &&
+            (!filters.year || String(year) === filters.year) &&
+            (!filters.kind || fields[`${prefix}.kind`]?.value === filters.kind) &&
+            (!filters.review || needsReview === (filters.review === 'needs-review'));
         return {
             index,
             year: typeof year === 'number' && Number.isFinite(year) ? year : undefined,
@@ -50,15 +53,17 @@ export function ChronologyProjectsField(props: ArrayFieldClientProps) {
     // Keep every row mounted in Payload's form; filtering must never replace the saved array.
     const rowSelector = `[data-chronology="${id}"] > .array-field > .array-field__draggable-rows > `;
     let previousYear: string | undefined;
-    const rowStyles = projects.map((project) => {
-        const selector = `${rowSelector}[id="${path.replaceAll('.', '-')}-row-${project.index}"]`;
-        if (!project.visible) return `${selector} { display: none; }`;
-        const year = project.year === undefined ? 'Year not set' : String(project.year);
-        if (year === previousYear) return '';
-        previousYear = year;
-        return `${selector}::before { content: "${year}"; display: block; margin: 1rem 0 0.75rem;
+    const rowStyles = projects
+        .map((project) => {
+            const selector = `${rowSelector}[id="${path.replaceAll('.', '-')}-row-${project.index}"]`;
+            if (!project.visible) return `${selector} { display: none; }`;
+            const year = project.year === undefined ? 'Year not set' : String(project.year);
+            if (year === previousYear) return '';
+            previousYear = year;
+            return `${selector}::before { content: "${year}"; display: block; margin: 1rem 0 0.75rem;
             padding-top: 1rem; border-top: 1px solid var(--theme-elevation-200); font-size: 1.25rem; font-weight: 600; }`;
-    }).join('\n');
+        })
+        .join('\n');
 
     return (
         <div className="studio-chronology" data-chronology={id}>
@@ -66,23 +71,36 @@ export function ChronologyProjectsField(props: ArrayFieldClientProps) {
                 <label className="studio-chronology__search" htmlFor={`${id}-search`}>
                     Search projects
                     <input
-                        id={`${id}-search`} type="search" value={filters.search} placeholder="Title, venue, city, organization or ID"
+                        id={`${id}-search`}
+                        type="search"
+                        value={filters.search}
+                        placeholder="Title, venue, city, organization or ID"
                         onChange={(event) => updateFilter('search', event.target.value)}
-                        onKeyDown={(event) => { if (event.key === 'Enter') event.preventDefault(); }}
+                        onKeyDown={(event) => {
+                            if (event.key === 'Enter') event.preventDefault();
+                        }}
                     />
                 </label>
                 <label htmlFor={`${id}-year`}>
                     Year
                     <select id={`${id}-year`} value={filters.year} onChange={(event) => updateFilter('year', event.target.value)}>
                         <option value="">All years</option>
-                        {years.map((year) => <option key={year} value={year}>{year}</option>)}
+                        {years.map((year) => (
+                            <option key={year} value={year}>
+                                {year}
+                            </option>
+                        ))}
                     </select>
                 </label>
                 <label htmlFor={`${id}-kind`}>
                     Project type
                     <select id={`${id}-kind`} value={filters.kind} onChange={(event) => updateFilter('kind', event.target.value)}>
                         <option value="">All types</option>
-                        {INSTANCE_KINDS.map((kind) => <option key={kind} value={kind}>{kind[0].toUpperCase() + kind.slice(1)}</option>)}
+                        {INSTANCE_KINDS.map((kind) => (
+                            <option key={kind} value={kind}>
+                                {kind[0].toUpperCase() + kind.slice(1)}
+                            </option>
+                        ))}
                     </select>
                 </label>
                 <label htmlFor={`${id}-review`}>
@@ -103,10 +121,13 @@ export function ChronologyProjectsField(props: ArrayFieldClientProps) {
                 {filtering && ' Clear filters to reorder projects. New entries and entries with errors stay visible.'}
             </p>
             <style>{rowStyles}</style>
-            <ArrayField {...props} field={{
-                ...field,
-                admin: { ...field.admin, initCollapsed: field.admin?.initCollapsed, isSortable: filtering ? false : field.admin?.isSortable },
-            }} />
+            <ArrayField
+                {...props}
+                field={{
+                    ...field,
+                    admin: { ...field.admin, initCollapsed: field.admin?.initCollapsed, isSortable: filtering ? false : field.admin?.isSortable },
+                }}
+            />
         </div>
     );
 }

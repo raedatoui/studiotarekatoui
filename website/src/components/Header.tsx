@@ -45,18 +45,15 @@ export default function Header() {
     const items = navigation.items.filter((link) => new URL(link.href, site.url).pathname.replace(/\/+$/, '') !== '/chronology');
     if (showChronology && chronology) items.push({ label: chronology.heading, href: '/chronology', external: false });
     const navLinks = items.map((item, index) => {
-        const link = !showPublications && new URL(item.href, site.url).pathname.replace(/\/+$/, '') === '/publications'
-            ? { ...item, href: 'https://www.crousel.com/artiste/tarek-atoui-r90lmw/#items', external: true }
-            : item;
+        const link =
+            !showPublications && new URL(item.href, site.url).pathname.replace(/\/+$/, '') === '/publications'
+                ? { ...item, href: 'https://www.crousel.com/artiste/tarek-atoui-r90lmw/#items', external: true }
+                : item;
         const url = new URL(link.href, site.url);
         const path = url.pathname.replace(/\/+$/, '') || '/';
         const linkPath = path === '/' ? '/news' : path;
         const internal = url.origin === new URL(site.url).origin;
-        const current = internal && currentPath === linkPath
-            ? 'page'
-            : internal && currentPath.startsWith(`${linkPath}/`)
-              ? 'location'
-              : undefined;
+        const current = internal && currentPath === linkPath ? 'page' : internal && currentPath.startsWith(`${linkPath}/`) ? 'location' : undefined;
 
         return (
             <a

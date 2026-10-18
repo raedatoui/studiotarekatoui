@@ -6,6 +6,5 @@ export const dynamic = 'force-static';
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const researchPaths = ['/research', ...siteContent.research.map((research) => `/research/${research.slug}`)];
-    return ['/', '/news', '/about', '/contact', ...researchPaths]
-        .map((pathname) => ({ url: `${site.url}${pathname}` }));
+    return ['/', '/news', '/about', '/contact', ...researchPaths].map((pathname) => ({ url: `${site.url}${pathname}` }));
 }

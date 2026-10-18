@@ -14,12 +14,14 @@ export function publishedByField(): Field {
             components: { Cell: '/components/PublicationCells#PublishedByCell' },
         },
         hooks: {
-            beforeChange: [({ data, originalDoc, operation, req }) => {
-                if ((data?._status ?? originalDoc?._status) === 'published') {
-                    return req.user?.name || req.user?.email || null;
-                }
-                return operation === 'create' ? null : originalDoc?.publishedBy ?? null;
-            }],
+            beforeChange: [
+                ({ data, originalDoc, operation, req }) => {
+                    if ((data?._status ?? originalDoc?._status) === 'published') {
+                        return req.user?.name || req.user?.email || null;
+                    }
+                    return operation === 'create' ? null : (originalDoc?.publishedBy ?? null);
+                },
+            ],
         },
     };
 }

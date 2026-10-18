@@ -30,7 +30,9 @@ try {
             const status = values.publish ? 'published' : 'draft';
             const previousIDs = new Map((latest.projects ?? []).map((project) => [project.projectId, project.id]));
             await payload.updateGlobal({
-                slug: 'chronology', draft: !values.publish, overrideAccess: true,
+                slug: 'chronology',
+                draft: !values.publish,
+                overrideAccess: true,
                 data: {
                     ...chronology,
                     editorialNotes: typeof editorialNotes === 'string' ? editorialNotes : latest.editorialNotes,

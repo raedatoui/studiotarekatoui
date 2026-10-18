@@ -13,12 +13,16 @@ const exhibitionFields = (): Field[] => [
     { name: 'location', type: 'text' },
     { name: 'work', label: 'Featured work', type: 'text' },
     {
-        name: 'url', label: 'Exhibition link', type: 'text',
+        name: 'url',
+        label: 'Exhibition link',
+        type: 'text',
         validate: (value: unknown) => !value || linkSchema.safeParse(value).success || 'Enter a valid HTTP(S) URL.',
     },
     { name: 'status', type: 'select', options: [...INSTANCE_STATUSES] },
     {
-        name: 'subExhibitions', label: 'Shows at this venue', type: 'array',
+        name: 'subExhibitions',
+        label: 'Shows at this venue',
+        type: 'array',
         fields: [
             { name: 'title', type: 'text', required: true },
             { name: 'dateDisplay', label: 'Display dates', type: 'text', required: true },
@@ -36,33 +40,46 @@ export const News: GlobalConfig = {
     fields: [
         publishedByField(),
         {
-            name: 'sectionOrder', label: 'Section order', type: 'array', required: true,
-            minRows: NEWS_SECTIONS.length, maxRows: NEWS_SECTIONS.length,
+            name: 'sectionOrder',
+            label: 'Section order',
+            type: 'array',
+            required: true,
+            minRows: NEWS_SECTIONS.length,
+            maxRows: NEWS_SECTIONS.length,
             labels: { singular: 'Section', plural: 'Sections' },
             defaultValue: NEWS_SECTIONS.map((section) => ({ section })),
             admin: {
                 description: 'Drag to reorder the four news sections. Include each section once. Publish and export to update the website.',
                 components: { RowLabel: '/components/NewsSectionRowLabel#NewsSectionRowLabel' },
             },
-            validate: (value: unknown) => newsSectionOrderSchema.safeParse(
-                Array.isArray(value) ? value.map((row) => ({ section: row?.section })) : value
-            ).success || 'Include each news section exactly once.',
-            fields: [{
-                name: 'section', type: 'select', required: true,
-                options: NEWS_SECTIONS.map((section) => ({ label: NEWS_SECTION_LABELS[section], value: section })),
-            }],
+            validate: (value: unknown) =>
+                newsSectionOrderSchema.safeParse(Array.isArray(value) ? value.map((row) => ({ section: row?.section })) : value).success ||
+                'Include each news section exactly once.',
+            fields: [
+                {
+                    name: 'section',
+                    type: 'select',
+                    required: true,
+                    options: NEWS_SECTIONS.map((section) => ({ label: NEWS_SECTION_LABELS[section], value: section })),
+                },
+            ],
         },
         { name: 'soloHeading', type: 'text', required: true, defaultValue: 'Exhibitions' },
         { name: 'solo', label: 'Exhibitions', type: 'array', fields: exhibitionFields() },
         { name: 'groupHeading', type: 'text', required: true, defaultValue: 'Group exhibitions' },
         { name: 'group', label: 'Group exhibitions', type: 'array', fields: exhibitionFields() },
         {
-            name: 'installationsHeading', label: 'Permanent installations heading',
-            type: 'text', required: true, defaultValue: 'Permanent installations',
+            name: 'installationsHeading',
+            label: 'Permanent installations heading',
+            type: 'text',
+            required: true,
+            defaultValue: 'Permanent installations',
         },
         {
-            name: 'installations', label: 'Permanent installations',
-            type: 'array', fields: exhibitionFields(),
+            name: 'installations',
+            label: 'Permanent installations',
+            type: 'array',
+            fields: exhibitionFields(),
         },
         { name: 'performancesHeading', label: 'Performances heading', type: 'text', required: true, defaultValue: 'Performances' },
         { name: 'performances', label: 'Performances', type: 'array', fields: exhibitionFields() },

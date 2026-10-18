@@ -62,11 +62,7 @@ function MarkCard({ m, left }: { m: ResearchInstance; left: number }) {
     const place = [m.city, m.country].filter(Boolean).join(', ');
 
     return (
-        <div
-            aria-hidden
-            className="absolute bottom-full z-30 w-[min(268px,62vw)] pb-2.5"
-            style={{ left: `${left}%`, transform: anchor }}
-        >
+        <div aria-hidden className="absolute bottom-full z-30 w-[min(268px,62vw)] pb-2.5" style={{ left: `${left}%`, transform: anchor }}>
             <div className="border border-[var(--color-border)] bg-[var(--color-bg)] px-3.5 py-3 shadow-[0_10px_30px_rgba(0,0,0,0.12)]">
                 <p className="font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-accent)]">
                     {m.kind} · {m.year}
@@ -190,7 +186,10 @@ export default function ProjectsHub() {
                 className="max-w-[1400px] mx-auto scroll-mt-[calc(var(--header-height,64px)+16px)] px-[clamp(24px,4vw,64px)] outline-none"
             >
                 <div className="thread-rise flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3 border-t border-[var(--color-border)] pt-5">
-                    <h2 id="projects-heading" className="font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.3em] text-[var(--color-text-secondary)]">
+                    <h2
+                        id="projects-heading"
+                        className="font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.3em] text-[var(--color-text-secondary)]"
+                    >
                         Projects
                     </h2>
                     <p className="hidden flex-wrap gap-x-5 gap-y-2 font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.18em] text-[var(--color-text-secondary)] sm:flex">
@@ -245,7 +244,10 @@ export default function ProjectsHub() {
                                 className={`group relative w-full border-b border-[var(--color-border)] py-2 max-sm:py-3.5 text-left transition-colors motion-reduce:transition-none ${SCORE_GRID} sm:items-center hover:bg-[var(--color-hover-bg)] focus-visible:bg-[var(--color-hover-bg)] ${active ? 'z-20' : ''}`}
                             >
                                 {/* label */}
-                                <div className="thread-rise flex min-w-0 flex-col items-start gap-1 sm:block" style={{ animationDelay: `${i * 55}ms` }}>
+                                <div
+                                    className="thread-rise flex min-w-0 flex-col items-start gap-1 sm:block"
+                                    style={{ animationDelay: `${i * 55}ms` }}
+                                >
                                     <span
                                         className={`font-[family-name:var(--font-display)] text-[clamp(17px,1.5vw,23px)] max-sm:text-[clamp(22px,6vw,26px)] leading-tight underline-offset-4 transition-colors motion-reduce:transition-none group-hover:underline group-focus-visible:underline group-focus-visible:text-[var(--color-accent)] ${active ? 'text-[var(--color-accent)]' : ''}`}
                                     >
@@ -375,8 +377,14 @@ export default function ProjectsHub() {
                                 <span className="text-[var(--color-text-secondary)]">{document.yearsDisplay}</span>
                             </div>
 
-                            <h3 id={`thread-heading-${document.id}`} className="mt-4 font-[family-name:var(--font-display)] text-[clamp(36px,5.6vw,80px)] font-normal leading-[0.98] tracking-[-0.01em]">
-                                <a href={`/research/${document.slug}`} className="research-title-link transition-colors motion-reduce:transition-none">
+                            <h3
+                                id={`thread-heading-${document.id}`}
+                                className="mt-4 font-[family-name:var(--font-display)] text-[clamp(36px,5.6vw,80px)] font-normal leading-[0.98] tracking-[-0.01em]"
+                            >
+                                <a
+                                    href={`/research/${document.slug}`}
+                                    className="research-title-link transition-colors motion-reduce:transition-none"
+                                >
                                     {document.title}
                                 </a>
                             </h3>
@@ -460,7 +468,8 @@ export default function ProjectsHub() {
                                                         <span className="text-[length:calc(13px*var(--copy-scale))] leading-snug">
                                                             {m.title ?? m.organization}
                                                             <span className="mt-1 block text-[length:calc(12px*var(--copy-scale))] leading-relaxed text-[var(--color-text-secondary)]">
-                                                                {m.kind}{m.status ? ` · ${m.status}` : ''}
+                                                                {m.kind}
+                                                                {m.status ? ` · ${m.status}` : ''}
                                                                 {m.title && ` · ${m.organization}`}
                                                                 {place && ` — ${place}`}
                                                                 {` · ${m.dateDisplay}`}

@@ -21,14 +21,29 @@ async function readResearch(payload: Payload, draft: boolean) {
 
 function researchData(doc: SnapshotResearch) {
     return {
-        title: doc.title, slug: doc.slug, subtitle: doc.subtitle ?? null, summary: doc.summary,
+        title: doc.title,
+        slug: doc.slug,
+        subtitle: doc.subtitle ?? null,
+        summary: doc.summary,
         description: doc.description.map((text) => ({ text })),
-        yearStart: doc.yearStart, yearEnd: doc.yearEnd ?? null, ongoing: doc.ongoing, yearsDisplay: doc.yearsDisplay,
-        sortOrder: doc.sortOrder, heroImageURL: doc.heroImageURL ?? null,
-        collaborators: doc.collaborators, organizations: doc.organizations, materials: doc.materials,
+        yearStart: doc.yearStart,
+        yearEnd: doc.yearEnd ?? null,
+        ongoing: doc.ongoing,
+        yearsDisplay: doc.yearsDisplay,
+        sortOrder: doc.sortOrder,
+        heroImageURL: doc.heroImageURL ?? null,
+        collaborators: doc.collaborators,
+        organizations: doc.organizations,
+        materials: doc.materials,
         instances: doc.instances.map((item) => ({
-            ...item, slug: item.slug ?? null, title: item.title ?? null, city: item.city ?? null, country: item.country ?? null,
-            dateStart: item.dateStart ?? null, status: item.status ?? null, url: item.url ?? null,
+            ...item,
+            slug: item.slug ?? null,
+            title: item.title ?? null,
+            city: item.city ?? null,
+            country: item.country ?? null,
+            dateStart: item.dateStart ?? null,
+            status: item.status ?? null,
+            url: item.url ?? null,
         })),
         gallery: doc.gallery,
         press: doc.press.map((item) => ({ ...item, publisher: item.publisher ?? null })),
@@ -56,7 +71,8 @@ async function importContent() {
         const plan = orderedResearch.map((doc, index) => {
             const idMatch = byID.get(doc.id);
             const slugMatch = bySlug.get(doc.slug);
-            if (idMatch && slugMatch && idMatch.id !== slugMatch.id) throw new Error(`Identity conflict for “${doc.slug}”: ID and slug match different documents.`);
+            if (idMatch && slugMatch && idMatch.id !== slugMatch.id)
+                throw new Error(`Identity conflict for “${doc.slug}”: ID and slug match different documents.`);
             const target = idMatch ?? slugMatch;
             if (target && targets.has(target.id)) throw new Error(`Multiple input documents target “${target.slug}”.`);
             if (target) targets.add(target.id);
@@ -72,16 +88,28 @@ async function importContent() {
         // Private recovery data includes both the current published records and latest drafts.
         const globals = {};
         for (const slug of ['research-page', 'about', 'contact', 'navigation', 'news', 'chronology'] as const) {
-            Object.assign(globals, { [slug]: {
-                published: await payload.findGlobal({ slug, draft: false, depth: 0, overrideAccess: true }),
-                latest: await payload.findGlobal({ slug, draft: true, depth: 0, overrideAccess: true }),
-            } });
+            Object.assign(globals, {
+                [slug]: {
+                    published: await payload.findGlobal({ slug, draft: false, depth: 0, overrideAccess: true }),
+                    latest: await payload.findGlobal({ slug, draft: true, depth: 0, overrideAccess: true }),
+                },
+            });
         }
         const backupDir = path.join(homedir(), 'tmp', `tarek-content-import-${new Date().toISOString().replace(/[:.]/g, '-')}`);
         await mkdir(backupDir, { recursive: true, mode: 0o700 });
-        await writeFile(path.join(backupDir, 'before.json'), JSON.stringify({
-            exportedAt: new Date().toISOString(), research: { published: await readResearch(payload, false), latest: existing }, globals,
-        }, null, 2), { mode: 0o600, flag: 'wx' });
+        await writeFile(
+            path.join(backupDir, 'before.json'),
+            JSON.stringify(
+                {
+                    exportedAt: new Date().toISOString(),
+                    research: { published: await readResearch(payload, false), latest: existing },
+                    globals,
+                },
+                null,
+                2
+            ),
+            { mode: 0o600, flag: 'wx' }
+        );
         const completed: string[] = [];
         const progressFile = path.join(backupDir, 'progress.json');
         async function record(step: string) {
@@ -101,9 +129,19 @@ async function importContent() {
                 }
                 await record(`research/${doc.slug}`);
             }
-            await payload.updateGlobal({ slug: 'research-page', data: { ...snapshot.researchPage, _status: 'draft' }, draft: true, overrideAccess: true });
+            await payload.updateGlobal({
+                slug: 'research-page',
+                data: { ...snapshot.researchPage, _status: 'draft' },
+                draft: true,
+                overrideAccess: true,
+            });
             await record('research-page');
-            await payload.updateGlobal({ slug: 'about', data: { ...snapshot.about, portraitURL: snapshot.about.portraitURL ?? null, _status: 'draft' }, draft: true, overrideAccess: true });
+            await payload.updateGlobal({
+                slug: 'about',
+                data: { ...snapshot.about, portraitURL: snapshot.about.portraitURL ?? null, _status: 'draft' },
+                draft: true,
+                overrideAccess: true,
+            });
             await record('about');
             await payload.updateGlobal({ slug: 'contact', data: { ...snapshot.contact, _status: 'draft' }, draft: true, overrideAccess: true });
             await record('contact');
@@ -113,7 +151,9 @@ async function importContent() {
             await record('news');
             if (snapshot.chronology) {
                 await payload.updateGlobal({
-                    slug: 'chronology', draft: true, overrideAccess: true,
+                    slug: 'chronology',
+                    draft: true,
+                    overrideAccess: true,
                     data: {
                         ...snapshot.chronology,
                         projects: snapshot.chronology.projects.map(({ id, ...project }) => ({ ...project, projectId: id })),
@@ -123,7 +163,9 @@ async function importContent() {
                 await record('chronology');
             }
         } catch (error) {
-            throw new Error(`Import stopped after ${completed.length} recorded operations; changes are not rolled back. Backup/progress: ${backupDir}. Resolve the error and rerun; ID/slug matching avoids duplicate records. ${error instanceof Error ? error.message : ''}`);
+            throw new Error(
+                `Import stopped after ${completed.length} recorded operations; changes are not rolled back. Backup/progress: ${backupDir}. Resolve the error and rerun; ID/slug matching avoids duplicate records. ${error instanceof Error ? error.message : ''}`
+            );
         }
         console.log('Import complete. Review and publish the drafts in the CMS before exporting.');
     } finally {

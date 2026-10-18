@@ -17,13 +17,19 @@ export const Publications: CollectionConfig = {
         { name: 'year', type: 'number', required: true, min: 1, max: 9999 },
         { name: 'price', label: 'Price (EUR)', type: 'number', min: 0, admin: { description: 'Leave empty when no price is listed.' } },
         {
-            name: 'availability', type: 'select', required: true,
-            options: [{ label: 'Available', value: 'available' }, { label: 'Out of print', value: 'out-of-print' }],
+            name: 'availability',
+            type: 'select',
+            required: true,
+            options: [
+                { label: 'Available', value: 'available' },
+                { label: 'Out of print', value: 'out-of-print' },
+            ],
         },
         { name: 'imageURL', label: 'Cover image URL', type: 'text', required: true },
         { name: 'imageCredit', type: 'text' },
         {
-            name: 'coverPreview', type: 'ui',
+            name: 'coverPreview',
+            type: 'ui',
             admin: {
                 components: {
                     Field: { path: '/components/MediaPreview#MediaPreview', clientProps: { urlField: 'imageURL', labelField: 'title' } },

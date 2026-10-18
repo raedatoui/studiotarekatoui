@@ -1,7 +1,15 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { previewAbout, previewChronology, previewContact, previewNavigation, previewNews, previewResearch, previewResearchPage } from '@tarek/content/preview';
+import {
+    previewAbout,
+    previewChronology,
+    previewContact,
+    previewNavigation,
+    previewNews,
+    previewResearch,
+    previewResearchPage,
+} from '@tarek/content/preview';
 import type { Research } from '@tarek/content';
 import { SiteDataProvider, useSiteData } from '@/data/SiteDataProvider';
 import Bio from './Bio';
@@ -61,10 +69,12 @@ export default function ContentPreview({ kind }: { kind: PreviewKind }) {
     if (!ready) return <p className="p-8 text-center">Open Live Preview in the CMS to view your changes.</p>;
     return (
         <SiteDataProvider content={content}>
-            <div onClickCapture={(event) => {
-                // Keep the editor in the preview, including when a new document has no public route.
-                if ((event.target as HTMLElement).closest('a')) event.preventDefault();
-            }}>
+            <div
+                onClickCapture={(event) => {
+                    // Keep the editor in the preview, including when a new document has no public route.
+                    if ((event.target as HTMLElement).closest('a')) event.preventDefault();
+                }}
+            >
                 {kind === 'navigation' && <Header />}
                 {kind === 'research' && research && <ResearchThread research={research} />}
                 {(kind === 'research-page' || kind === 'navigation') && <ProjectsHub />}

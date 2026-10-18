@@ -62,19 +62,23 @@ export const uploadEndpoint: Endpoint = {
             return Response.json({ error: 'Image uploads are not configured.' }, { status: 503 });
         }
 
-        const basename = path.parse(file.name).name.replace(/[^a-zA-Z0-9_-]+/g, '-').slice(0, 100) || 'image';
+        const basename =
+            path
+                .parse(file.name)
+                .name.replace(/[^a-zA-Z0-9_-]+/g, '-')
+                .slice(0, 100) || 'image';
         const filename = `${randomUUID()}-${basename}.${format}`;
         const objectName = `${prefix}/${filename}`;
         try {
-            await storage.bucket(bucket).file(objectName).save(data, {
-                resumable: false,
-                preconditionOpts: { ifGenerationMatch: 0 },
-                metadata: { contentType, cacheControl: 'public, max-age=31536000, immutable' },
-            });
-            return Response.json(
-                { url: `${mediaBaseUrl}/${filename}` },
-                { status: 201, headers: { 'Cache-Control': 'no-store' } }
-            );
+            await storage
+                .bucket(bucket)
+                .file(objectName)
+                .save(data, {
+                    resumable: false,
+                    preconditionOpts: { ifGenerationMatch: 0 },
+                    metadata: { contentType, cacheControl: 'public, max-age=31536000, immutable' },
+                });
+            return Response.json({ url: `${mediaBaseUrl}/${filename}` }, { status: 201, headers: { 'Cache-Control': 'no-store' } });
         } catch (error) {
             req.payload.logger.error({ err: error, msg: 'Research image upload failed' });
             return Response.json({ error: 'Image upload failed. Check the CMS storage access and try again.' }, { status: 500 });

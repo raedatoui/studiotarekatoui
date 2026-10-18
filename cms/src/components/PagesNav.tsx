@@ -5,7 +5,11 @@ import { usePathname } from 'next/navigation';
 import { cmsPages } from '../globals/pages';
 
 export function PagesNav() {
-    const { config: { routes: { admin } } } = useConfig();
+    const {
+        config: {
+            routes: { admin },
+        },
+    } = useConfig();
     const pathname = usePathname();
     const links = [
         { href: `${admin}/pages`, label: 'All pages' },

@@ -63,7 +63,9 @@ export default function ResearchThread({ research }: { research: Research }) {
             <section className="max-w-[1400px] mx-auto px-[clamp(24px,4vw,64px)] pb-[clamp(40px,6vw,80px)]">
                 <div className="border-t border-[var(--color-border)] pt-[clamp(28px,4vw,48px)]">
                     {/* lede — first paragraph carries the width on its own */}
-                    <p className="text-[length:calc(clamp(17px,1.9vw,27px)*var(--copy-scale))] font-light leading-[1.55]">{research.description[0] ?? research.summary}</p>
+                    <p className="text-[length:calc(clamp(17px,1.9vw,27px)*var(--copy-scale))] font-light leading-[1.55]">
+                        {research.description[0] ?? research.summary}
+                    </p>
                     {research.description.length > 1 && (
                         <div className="mt-[clamp(24px,3vw,40px)]">
                             <p className="text-[length:calc(clamp(14px,1.05vw,16px)*var(--copy-scale))] font-light leading-[1.8]">
@@ -73,7 +75,10 @@ export default function ResearchThread({ research }: { research: Research }) {
                                 <>
                                     <div id={descriptionId} className={`mt-5 space-y-5 ${descriptionExpanded ? '' : 'hidden sm:block'}`}>
                                         {research.description.slice(2).map((paragraph) => (
-                                            <p key={paragraph} className="text-[length:calc(clamp(14px,1.05vw,16px)*var(--copy-scale))] font-light leading-[1.8]">
+                                            <p
+                                                key={paragraph}
+                                                className="text-[length:calc(clamp(14px,1.05vw,16px)*var(--copy-scale))] font-light leading-[1.8]"
+                                            >
                                                 {paragraph}
                                             </p>
                                         ))}
@@ -97,7 +102,9 @@ export default function ResearchThread({ research }: { research: Research }) {
                     {research.organizations.length > 0 && <MetaItem label="Organizations" value={research.organizations.join(' · ')} />}
                     {places.length > 0 && <MetaItem label="Places" value={places.map((place) => place.split(',')[0]).join(' · ')} />}
                     {research.materials && research.materials.length > 0 && <MetaItem label="Material" value={research.materials.join(' · ')} />}
-                    {research.collaborators && research.collaborators.length > 0 && <MetaItem label="With" value={research.collaborators.join(', ')} />}
+                    {research.collaborators && research.collaborators.length > 0 && (
+                        <MetaItem label="With" value={research.collaborators.join(', ')} />
+                    )}
                 </dl>
             </section>
 

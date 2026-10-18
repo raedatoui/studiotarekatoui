@@ -20,7 +20,8 @@ const legacyExhibition = newsSchema.shape.solo.element.extend({
 const legacyNews = newsSchema.extend({
     soloHeading: newsSchema.shape.soloHeading.default('Exhibitions'),
     groupHeading: newsSchema.shape.groupHeading.default('Group exhibitions'),
-    solo: legacyExhibition.array(), group: legacyExhibition.array(),
+    solo: legacyExhibition.array(),
+    group: legacyExhibition.array(),
 });
 
 try {
@@ -40,7 +41,11 @@ try {
             ]);
             const backupDir = path.join(homedir(), 'tmp', `tarek-news-recovery-${new Date().toISOString().replace(/[:.]/g, '-')}`);
             await mkdir(backupDir, { recursive: true, mode: 0o700 });
-            await writeFile(path.join(backupDir, 'before.json'), JSON.stringify({ latestNews, publishedNews, navigation, publishedNavigation }, null, 2), { mode: 0o600, flag: 'wx' });
+            await writeFile(
+                path.join(backupDir, 'before.json'),
+                JSON.stringify({ latestNews, publishedNews, navigation, publishedNavigation }, null, 2),
+                { mode: 0o600, flag: 'wx' }
+            );
             console.log(`Backup: ${backupDir}`);
             if (latestNews.solo?.length || latestNews.group?.length || latestNews.installations?.length || latestNews.performances?.length) {
                 console.log('Existing News content retained; recovery will not overwrite editor changes.');
@@ -51,7 +56,11 @@ try {
             const items = navigation.items ?? [];
             if (items.length && !items.some((item) => item.href === '/news')) {
                 const nextItems = [...items];
-                nextItems.splice(Math.max(0, items.findIndex((item) => item.href === '/research') + 1), 0, { label: 'News', href: '/news', external: false });
+                nextItems.splice(Math.max(0, items.findIndex((item) => item.href === '/research') + 1), 0, {
+                    label: 'News',
+                    href: '/news',
+                    external: false,
+                });
                 await payload.updateGlobal({ slug: 'navigation', data: { items: nextItems, _status: 'draft' }, draft: true, overrideAccess: true });
                 console.log('Added News to the navigation draft, preserving the other links.');
             }

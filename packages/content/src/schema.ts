@@ -26,15 +26,17 @@ export const instanceSchema = z.strictObject({
     url: linkSchema.optional(),
 });
 
-export const gallerySchema = z.strictObject({
-    type: z.enum(GALLERY_TYPES),
-    url: mediaURLSchema,
-    caption: z.string(),
-}).superRefine((item, ctx) => {
-    if (item.type === 'embed' && !videoEmbedURL(item.url)) {
-        ctx.addIssue({ code: 'custom', path: ['url'], message: 'Use a supported YouTube or Vimeo video URL' });
-    }
-});
+export const gallerySchema = z
+    .strictObject({
+        type: z.enum(GALLERY_TYPES),
+        url: mediaURLSchema,
+        caption: z.string(),
+    })
+    .superRefine((item, ctx) => {
+        if (item.type === 'embed' && !videoEmbedURL(item.url)) {
+            ctx.addIssue({ code: 'custom', path: ['url'], message: 'Use a supported YouTube or Vimeo video URL' });
+        }
+    });
 
 export const pressSchema = z.strictObject({
     title: text,
@@ -43,39 +45,41 @@ export const pressSchema = z.strictObject({
     type: z.enum(PRESS_TYPES),
 });
 
-export const researchSchema = z.strictObject({
-    id: text,
-    slug,
-    title: text,
-    subtitle: text.optional(),
-    summary: text,
-    description: z.array(text),
-    yearStart: year,
-    yearEnd: year.optional(),
-    ongoing: z.boolean(),
-    yearsDisplay: text,
-    sortOrder: z.number().finite(),
-    heroImageURL: mediaURLSchema.optional(),
-    collaborators: z.array(text),
-    organizations: z.array(text),
-    materials: z.array(text),
-    instances: z.array(instanceSchema),
-    gallery: z.array(gallerySchema),
-    press: z.array(pressSchema),
-}).superRefine((research, ctx) => {
-    if (research.yearEnd !== undefined && research.yearEnd < research.yearStart) {
-        ctx.addIssue({ code: 'custom', path: ['yearEnd'], message: 'Must not precede yearStart' });
-    }
-    for (const key of ['id', 'slug'] as const) {
-        const seen = new Set<string>();
-        research.instances.forEach((instance, index) => {
-            const value = instance[key];
-            if (!value) return;
-            if (seen.has(value)) ctx.addIssue({ code: 'custom', path: ['instances', index, key], message: `Duplicate ${key}: ${value}` });
-            seen.add(value);
-        });
-    }
-});
+export const researchSchema = z
+    .strictObject({
+        id: text,
+        slug,
+        title: text,
+        subtitle: text.optional(),
+        summary: text,
+        description: z.array(text),
+        yearStart: year,
+        yearEnd: year.optional(),
+        ongoing: z.boolean(),
+        yearsDisplay: text,
+        sortOrder: z.number().finite(),
+        heroImageURL: mediaURLSchema.optional(),
+        collaborators: z.array(text),
+        organizations: z.array(text),
+        materials: z.array(text),
+        instances: z.array(instanceSchema),
+        gallery: z.array(gallerySchema),
+        press: z.array(pressSchema),
+    })
+    .superRefine((research, ctx) => {
+        if (research.yearEnd !== undefined && research.yearEnd < research.yearStart) {
+            ctx.addIssue({ code: 'custom', path: ['yearEnd'], message: 'Must not precede yearStart' });
+        }
+        for (const key of ['id', 'slug'] as const) {
+            const seen = new Set<string>();
+            research.instances.forEach((instance, index) => {
+                const value = instance[key];
+                if (!value) return;
+                if (seen.has(value)) ctx.addIssue({ code: 'custom', path: ['instances', index, key], message: `Duplicate ${key}: ${value}` });
+                seen.add(value);
+            });
+        }
+    });
 
 export const researchPageSchema = z.strictObject({ eyebrow: z.string(), heading: text, introduction: text });
 export const aboutSchema = z.strictObject({
@@ -105,7 +109,8 @@ export const exhibitionSchema = z.strictObject({
     status: z.enum(INSTANCE_STATUSES).optional(),
     subExhibitions: z.array(subExhibitionSchema),
 });
-export const newsSectionOrderSchema = z.array(z.strictObject({ section: z.enum(NEWS_SECTIONS) }))
+export const newsSectionOrderSchema = z
+    .array(z.strictObject({ section: z.enum(NEWS_SECTIONS) }))
     .length(NEWS_SECTIONS.length)
     .refine((rows) => new Set(rows.map((row) => row.section)).size === NEWS_SECTIONS.length, 'Include each news section exactly once');
 export const newsSchema = z.strictObject({
@@ -122,43 +127,55 @@ export const newsSchema = z.strictObject({
 export type Exhibition = z.infer<typeof exhibitionSchema>;
 
 // The former projects.json contract, now owned by the CMS chronology.
-export const projectSchema = z.strictObject({
-    id: slug,
-    themeIds: z.array(slug).default([]),
-    kind: z.enum(INSTANCE_KINDS),
-    title: text.optional(),
-    year,
-    dateStart: exhibitionDate.optional(),
-    dateEnd: exhibitionDate.optional(),
-    dateDisplay: text.optional(),
-    status: z.enum(INSTANCE_STATUSES).optional(),
-    venue: text,
-    city: text.optional(),
-    country: text.optional(),
-    organization: text.optional(),
-    collaborators: z.array(text).default([]),
-    note: text.optional(),
-    url: linkSchema.optional(),
-    media: z.array(z.strictObject({
-        type: z.enum(PROJECT_MEDIA_TYPES), url: mediaURLSchema, label: text.optional(), publisher: text.optional(),
-    })).default([]),
-    needsReview: z.boolean().default(false),
-}).superRefine((project, ctx) => {
-    if (project.dateStart && project.dateEnd && Date.parse(project.dateEnd) < Date.parse(project.dateStart)) {
-        ctx.addIssue({ code: 'custom', path: ['dateEnd'], message: 'Must not precede dateStart' });
-    }
-});
-export const chronologySchema = z.strictObject({
-    heading: text,
-    introduction: z.string(),
-    projects: z.array(projectSchema),
-}).superRefine((chronology, ctx) => {
-    const seen = new Set<string>();
-    chronology.projects.forEach((project, index) => {
-        if (seen.has(project.id)) ctx.addIssue({ code: 'custom', path: ['projects', index, 'id'], message: `Duplicate project ID: ${project.id}` });
-        seen.add(project.id);
+export const projectSchema = z
+    .strictObject({
+        id: slug,
+        themeIds: z.array(slug).default([]),
+        kind: z.enum(INSTANCE_KINDS),
+        title: text.optional(),
+        year,
+        dateStart: exhibitionDate.optional(),
+        dateEnd: exhibitionDate.optional(),
+        dateDisplay: text.optional(),
+        status: z.enum(INSTANCE_STATUSES).optional(),
+        venue: text,
+        city: text.optional(),
+        country: text.optional(),
+        organization: text.optional(),
+        collaborators: z.array(text).default([]),
+        note: text.optional(),
+        url: linkSchema.optional(),
+        media: z
+            .array(
+                z.strictObject({
+                    type: z.enum(PROJECT_MEDIA_TYPES),
+                    url: mediaURLSchema,
+                    label: text.optional(),
+                    publisher: text.optional(),
+                })
+            )
+            .default([]),
+        needsReview: z.boolean().default(false),
+    })
+    .superRefine((project, ctx) => {
+        if (project.dateStart && project.dateEnd && Date.parse(project.dateEnd) < Date.parse(project.dateStart)) {
+            ctx.addIssue({ code: 'custom', path: ['dateEnd'], message: 'Must not precede dateStart' });
+        }
     });
-});
+export const chronologySchema = z
+    .strictObject({
+        heading: text,
+        introduction: z.string(),
+        projects: z.array(projectSchema),
+    })
+    .superRefine((chronology, ctx) => {
+        const seen = new Set<string>();
+        chronology.projects.forEach((project, index) => {
+            if (seen.has(project.id))
+                ctx.addIssue({ code: 'custom', path: ['projects', index, 'id'], message: `Duplicate project ID: ${project.id}` });
+            seen.add(project.id);
+        });
+    });
 export type Project = z.infer<typeof projectSchema>;
 export type Chronology = z.infer<typeof chronologySchema>;
 
@@ -174,28 +191,31 @@ export const publicationSchema = z.strictObject({
 });
 export type Publication = z.infer<typeof publicationSchema>;
 
-export const contentSnapshotSchema = z.strictObject({
-    schemaVersion: z.literal(SCHEMA_VERSION),
-    exportedAt: z.iso.datetime(),
-    navigation: navigationSchema,
-    news: newsSchema,
-    // Optional while the hosted CMS still exports the pre-chronology version.
-    chronology: chronologySchema.optional(),
-    // Older hosted CMS exports do not contain the publications collection yet.
-    publications: z.array(publicationSchema).default([]),
-    researchPage: researchPageSchema,
-    research: z.array(researchSchema),
-    about: aboutSchema,
-    contact: contactSchema,
-}).superRefine((snapshot, ctx) => {
-    for (const key of ['id', 'slug'] as const) {
-        const seen = new Set<string>();
-        snapshot.research.forEach((research, index) => {
-            if (seen.has(research[key])) ctx.addIssue({ code: 'custom', path: ['research', index, key], message: `Duplicate ${key}: ${research[key]}` });
-            seen.add(research[key]);
-        });
-    }
-});
+export const contentSnapshotSchema = z
+    .strictObject({
+        schemaVersion: z.literal(SCHEMA_VERSION),
+        exportedAt: z.iso.datetime(),
+        navigation: navigationSchema,
+        news: newsSchema,
+        // Optional while the hosted CMS still exports the pre-chronology version.
+        chronology: chronologySchema.optional(),
+        // Older hosted CMS exports do not contain the publications collection yet.
+        publications: z.array(publicationSchema).default([]),
+        researchPage: researchPageSchema,
+        research: z.array(researchSchema),
+        about: aboutSchema,
+        contact: contactSchema,
+    })
+    .superRefine((snapshot, ctx) => {
+        for (const key of ['id', 'slug'] as const) {
+            const seen = new Set<string>();
+            snapshot.research.forEach((research, index) => {
+                if (seen.has(research[key]))
+                    ctx.addIssue({ code: 'custom', path: ['research', index, key], message: `Duplicate ${key}: ${research[key]}` });
+                seen.add(research[key]);
+            });
+        }
+    });
 
 export type Research = z.infer<typeof researchSchema>;
 export type ResearchInstance = z.infer<typeof instanceSchema>;

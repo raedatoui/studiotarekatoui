@@ -31,7 +31,8 @@ export const Navigation: GlobalConfig = {
                     type: 'text',
                     required: true,
                     admin: { description: 'A website path such as /research, or a full https:// URL.' },
-                    validate: (value: unknown) => navigationLinkSchema.safeParse(value).success || 'Enter a website path beginning with / or a valid HTTP(S) URL.',
+                    validate: (value: unknown) =>
+                        navigationLinkSchema.safeParse(value).success || 'Enter a website path beginning with / or a valid HTTP(S) URL.',
                 },
                 { name: 'external', label: 'Open in a new tab', type: 'checkbox', defaultValue: false },
             ],

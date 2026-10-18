@@ -27,22 +27,38 @@ export function normalizePublication(doc: NullableFields<Publication>): Publicat
 export function normalizeChronology(doc: {
     heading?: string | null;
     introduction?: string | null;
-    projects?: (NullableFields<Omit<Project, 'id' | 'media'>> & {
-        projectId?: string | null;
-        media?: NullableFields<Project['media'][number]>[] | null;
-    })[] | null;
+    projects?:
+        | (NullableFields<Omit<Project, 'id' | 'media'>> & {
+              projectId?: string | null;
+              media?: NullableFields<Project['media'][number]>[] | null;
+          })[]
+        | null;
 }): Chronology {
     return {
         heading: doc.heading?.trim() ?? '',
         introduction: doc.introduction ?? '',
         projects: (doc.projects ?? []).map((project) => ({
             id: project.projectId?.trim() ?? '',
-            themeIds: project.themeIds ?? [], kind: project.kind ?? 'solo', title: optional(project.title), year: project.year ?? 0,
-            dateStart: optional(project.dateStart), dateEnd: optional(project.dateEnd), dateDisplay: optional(project.dateDisplay),
-            status: project.status ?? undefined, venue: project.venue?.trim() ?? '', city: optional(project.city), country: optional(project.country),
-            organization: optional(project.organization), collaborators: project.collaborators ?? [], note: optional(project.note), url: optional(project.url),
+            themeIds: project.themeIds ?? [],
+            kind: project.kind ?? 'solo',
+            title: optional(project.title),
+            year: project.year ?? 0,
+            dateStart: optional(project.dateStart),
+            dateEnd: optional(project.dateEnd),
+            dateDisplay: optional(project.dateDisplay),
+            status: project.status ?? undefined,
+            venue: project.venue?.trim() ?? '',
+            city: optional(project.city),
+            country: optional(project.country),
+            organization: optional(project.organization),
+            collaborators: project.collaborators ?? [],
+            note: optional(project.note),
+            url: optional(project.url),
             media: (project.media ?? []).map((item) => ({
-                type: item.type ?? 'external', url: item.url?.trim() ?? '', label: optional(item.label), publisher: optional(item.publisher),
+                type: item.type ?? 'external',
+                url: item.url?.trim() ?? '',
+                label: optional(item.label),
+                publisher: optional(item.publisher),
             })),
             needsReview: project.needsReview ?? false,
         })),
@@ -56,27 +72,40 @@ type ExhibitionInput = NullableFields<Omit<Exhibition, 'subExhibitions'>> & {
 function normalizeExhibition(doc: ExhibitionInput): Exhibition {
     return {
         venue: doc.venue?.trim() ?? '',
-        title: optional(doc.title), dateDisplay: optional(doc.dateDisplay),
-        dateStart: optional(doc.dateStart), dateEnd: optional(doc.dateEnd),
-        organization: optional(doc.organization), location: optional(doc.location), work: optional(doc.work),
-        url: optional(doc.url), status: doc.status ?? undefined,
+        title: optional(doc.title),
+        dateDisplay: optional(doc.dateDisplay),
+        dateStart: optional(doc.dateStart),
+        dateEnd: optional(doc.dateEnd),
+        organization: optional(doc.organization),
+        location: optional(doc.location),
+        work: optional(doc.work),
+        url: optional(doc.url),
+        status: doc.status ?? undefined,
         subExhibitions: (doc.subExhibitions ?? []).map((show) => ({
-            title: show.title?.trim() ?? '', dateDisplay: show.dateDisplay?.trim() ?? '', location: show.location?.trim() ?? '',
+            title: show.title?.trim() ?? '',
+            dateDisplay: show.dateDisplay?.trim() ?? '',
+            location: show.location?.trim() ?? '',
         })),
     };
 }
 
 export function normalizeNews(doc: {
     sectionOrder?: ContentSnapshot['news']['sectionOrder'] | null;
-    soloHeading?: string | null; groupHeading?: string | null;
-    solo?: ExhibitionInput[] | null; group?: ExhibitionInput[] | null;
-    installationsHeading?: string | null; performancesHeading?: string | null;
-    installations?: ExhibitionInput[] | null; performances?: ExhibitionInput[] | null;
+    soloHeading?: string | null;
+    groupHeading?: string | null;
+    solo?: ExhibitionInput[] | null;
+    group?: ExhibitionInput[] | null;
+    installationsHeading?: string | null;
+    performancesHeading?: string | null;
+    installations?: ExhibitionInput[] | null;
+    performances?: ExhibitionInput[] | null;
 }): ContentSnapshot['news'] {
     return {
         sectionOrder: (doc.sectionOrder ?? NEWS_SECTIONS.map((section) => ({ section }))).map(({ section }) => ({ section })),
-        soloHeading: doc.soloHeading ?? '', groupHeading: doc.groupHeading ?? '',
-        solo: (doc.solo ?? []).map(normalizeExhibition), group: (doc.group ?? []).map(normalizeExhibition),
+        soloHeading: doc.soloHeading ?? '',
+        groupHeading: doc.groupHeading ?? '',
+        solo: (doc.solo ?? []).map(normalizeExhibition),
+        group: (doc.group ?? []).map(normalizeExhibition),
         installationsHeading: doc.installationsHeading ?? 'Permanent installations',
         installations: (doc.installations ?? []).map(normalizeExhibition),
         performancesHeading: doc.performancesHeading ?? 'Performances',
@@ -84,7 +113,9 @@ export function normalizeNews(doc: {
     };
 }
 
-export function normalizeNavigation(doc: { items?: NullableFields<ContentSnapshot['navigation']['items'][number]>[] | null }): ContentSnapshot['navigation'] {
+export function normalizeNavigation(doc: {
+    items?: NullableFields<ContentSnapshot['navigation']['items'][number]>[] | null;
+}): ContentSnapshot['navigation'] {
     return {
         items: (doc.items ?? []).map((item) => ({
             label: item.label?.trim() ?? '',
@@ -146,9 +177,14 @@ export function normalizeResearchPage(doc: NullableFields<ContentSnapshot['resea
 
 export function normalizeAbout(doc: NullableFields<ContentSnapshot['about']>): ContentSnapshot['about'] {
     return {
-        text: doc.text ?? '', exhibitions: doc.exhibitions ?? '', performances: doc.performances ?? '',
-        groupExhibitions: doc.groupExhibitions ?? '', collections: doc.collections ?? '',
-        portraitURL: optional(doc.portraitURL), portraitAlt: doc.portraitAlt ?? '', portraitCredit: doc.portraitCredit ?? '',
+        text: doc.text ?? '',
+        exhibitions: doc.exhibitions ?? '',
+        performances: doc.performances ?? '',
+        groupExhibitions: doc.groupExhibitions ?? '',
+        collections: doc.collections ?? '',
+        portraitURL: optional(doc.portraitURL),
+        portraitAlt: doc.portraitAlt ?? '',
+        portraitCredit: doc.portraitCredit ?? '',
     };
 }
 

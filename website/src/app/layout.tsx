@@ -41,7 +41,10 @@ gtag('config', 'G-FGMV1SXH2X');
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     const content = <SiteDataProvider content={siteContent}>{children}</SiteDataProvider>;
-    const allowedEmails = (process.env.STAGING_ALLOWED_EMAILS || '').split(',').map((email) => email.trim().toLowerCase()).filter(Boolean);
+    const allowedEmails = (process.env.STAGING_ALLOWED_EMAILS || '')
+        .split(',')
+        .map((email) => email.trim().toLowerCase())
+        .filter(Boolean);
 
     return (
         <html lang="en" suppressHydrationWarning>

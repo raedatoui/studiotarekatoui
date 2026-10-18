@@ -3,7 +3,9 @@
 import { useSiteData } from '@/data/SiteDataProvider';
 
 export default function Contact() {
-    const { contact: { heading, email, text } } = useSiteData();
+    const {
+        contact: { heading, email, text },
+    } = useSiteData();
 
     return (
         <section className="py-[clamp(48px,6vw,80px)] px-[clamp(24px,4vw,64px)] max-w-[650px] mx-auto text-center">

@@ -9,12 +9,10 @@ export default function Publications() {
     const { publications } = useSiteData();
 
     return (
-        <section
-            id="publications"
-            aria-labelledby="publications-heading"
-            className="px-[clamp(24px,4vw,64px)] py-[clamp(48px,6vw,80px)]"
-        >
-            <h1 id="publications-heading" className="text-[clamp(20px,2vw,28px)] font-bold mb-[clamp(40px,5vw,64px)]">Publications</h1>
+        <section id="publications" aria-labelledby="publications-heading" className="px-[clamp(24px,4vw,64px)] py-[clamp(48px,6vw,80px)]">
+            <h1 id="publications-heading" className="text-[clamp(20px,2vw,28px)] font-bold mb-[clamp(40px,5vw,64px)]">
+                Publications
+            </h1>
             {publications.length === 0 ? (
                 <p className="text-[var(--color-text-secondary)]">Publications will be available here soon.</p>
             ) : (
