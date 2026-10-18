@@ -16,7 +16,7 @@ This repository contains Studio Tarek Atoui’s Payload 3 CMS, built with Next.j
 
 ## Build, Test, and Development Commands
 
-Use Node.js 22 (at least 22.13) and pnpm 11.27.1 from the monorepo root. Shared versions are defined in `../pnpm-workspace.yaml`; use the single root lockfile.
+Use Node.js 24 (at least 24.15) and pnpm 12.14.0 from the monorepo root (`nvm install && nvm use`). Shared versions are defined in `../pnpm-workspace.yaml`; use the single root lockfile.
 
 - Run `pnpm install` from the workspace root to install dependencies.
 - `pnpm dev` starts the CMS at `http://localhost:3001/admin`.

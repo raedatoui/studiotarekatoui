@@ -4,7 +4,7 @@ Payload 3 on Next.js and React, deployed through Firebase App Hosting. Content l
 
 ## Local development
 
-Use Node.js 22 (at least 22.13) and pnpm 11.27.1. Install dependencies from the workspace root. Copy `cms/.env.example` to `cms/.env` on a fresh checkout and configure your own resources. Preserve existing configured environment files.
+Use Node.js 24 (at least 24.15) and pnpm 12.14.0. From the workspace root, run `nvm install && nvm use`, `corepack enable`, and `pnpm install`. Copy `cms/.env.example` to `cms/.env` on a fresh checkout and configure your own resources. Preserve existing configured environment files.
 
 | Variable | Purpose |
 | --- | --- |
@@ -46,7 +46,7 @@ Copy the workspace `.env.example` to `.env` and fill in your Firebase resource I
 
 Run `pnpm deploy:cms` from the workspace root. `scripts/deploy.mjs` renders `cms/apphosting.template.yaml` into the ignored `cms/apphosting.yaml`, then deploys only `FIREBASE_APPHOSTING_BACKEND_ID` in `FIREBASE_PROJECT_ID`. Do not pass the template directly to Firebase: the deployment script resolves its placeholders. Temporary source archives use `~/tmp`.
 
-The root Firebase configuration excludes credentials, snapshots, local media, caches, browser artifacts, and private operational records. App Hosting builds the full workspace with the root lockfile and targets `@tarek/cms` through Turborepo. Its runtime limits remain in the template.
+The root Firebase configuration excludes credentials, snapshots, local media, caches, browser artifacts, and private operational records. App Hosting builds the full workspace with the root lockfile and targets `@tarek/cms` through Turborepo. Its runtime limits remain in the template. Before the next CMS deployment, ensure the backend runtime is Node.js 24 in App Hosting Settings: a versioned runtime must match the Node 24 engine constraint in `package.json` ([Firebase runtime documentation](https://firebase.google.com/docs/app-hosting/frameworks-tooling#runtimes_for_app_hosting)).
 
 Database, Google authentication, session credentials, editor allowlists, and upload settings are runtime-only. The Payload secret is also available at build time to initialize its configuration. `AUTH_TRUST_HOST=true` supports the hosting proxy. Keep sensitive values in Secret Manager; template substitutions accept references, not secret values.
 

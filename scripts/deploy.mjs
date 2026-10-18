@@ -64,7 +64,7 @@ if (target === 'cms') {
 const configPath = path.join(root, `.firebase.deploy-${process.pid}.json`);
 try {
     writeFileSync(configPath, `${JSON.stringify(config, null, 4)}\n`, { mode: 0o600, flag: 'wx' });
-    run('firebase', ['deploy', '--config', configPath, '--only', only, '--project', project], env);
+    run('pnpm', ['exec', 'firebase', 'deploy', '--config', configPath, '--only', only, '--project', project], env);
 } finally {
     rmSync(configPath, { force: true });
 }

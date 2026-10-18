@@ -4,7 +4,7 @@ See ../AGENTS.md and ../README.md for workspace commands and constraints.
 
 ## Architecture
 
-Next.js 16.3.5 / React 19.2.6 with static export to `website/out`. Active public routes: `/` (News), `/research`, `/research/[slug]`, `/news`, `/about`, `/contact`. Fixed preview routes under `/preview/[kind]` are noindex and use the same renderers.
+Next.js 16.4.2 / React 19.3.1 with static export to `website/out`. Active public routes: `/` (News), `/research`, `/research/[slug]`, `/news`, `/about`, `/contact`. Fixed preview routes under `/preview/[kind]` are noindex and use the same renderers.
 
 `src/data/siteContent.ts` parses the ignored generated snapshot with `@tarek/content`. The server layout passes it into `SiteDataProvider`; client components use `useSiteData`. Research documents contain their own instances/gallery/press. `ResearchThread` receives a document directly. A flattened timeline is only a rendering calculation. CMS sortOrder and nested editor ordering are preserved.
 

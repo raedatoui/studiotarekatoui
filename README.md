@@ -2,7 +2,7 @@
 
 Local pnpm monorepo: Payload CMS in `cms/`, Next.js static website in `website/`, and the browser-safe JSON contract in `packages/content/`.
 
-Use Node 22 (at least 22.13) and pnpm 11.27.1. Install from this directory with `pnpm install`. Shared versions live in `pnpm-workspace.yaml`; there is one lockfile and one Biome configuration. The owner confirmed successful website builds and the CMS App Hosting rollout with TypeScript 7.
+Use Node 24 (at least 24.15) and pnpm 12.14.0. From this directory, run `nvm install && nvm use` to select the version pinned in `.nvmrc`, then `corepack enable` and `pnpm install`. Shared versions live in `pnpm-workspace.yaml`; there is one lockfile and one Biome configuration. TypeScript remains on 7.0.2; GraphQL stays on 16.x to match Payload's peer requirement, and Auth.js remains on the current v5 beta.
 
 ## Local content → website
 
@@ -104,7 +104,7 @@ Like the Leeft client gate, this checks the signed-in user's verified email befo
 
 `pnpm deploy:cms` runs the app's deploy script through `pnpm run deploy`. All deployment commands use `scripts/deploy.mjs` and the ignored workspace `.env`. The script generates a temporary Firebase configuration for only the selected service; CMS deployment also renders ignored `cms/apphosting.yaml` from `cms/apphosting.template.yaml`. Secret bindings are references to existing Secret Manager versions, never credential values. Root `firebase.json` uploads the workspace context and builds only application root `cms` for the existing backend. The root `turbo.json` enables [App Hosting's Turborepo detection](https://firebase.blog/posts/2026/01/apphosting-turborepo), so dependency installation uses the workspace lockfile and the cloud build targets only `@tarek/cms`. Build caching is disabled; local pnpm commands remain unchanged. Nested environment files, local media, generated content, credentials, caches, and build output are excluded. Website Hosting targets serve `website/out` from the same root configuration. The owner confirmed successful CMS and staging website deployments.
 
-Deploy the website from the workspace root using the installed, authenticated Firebase CLI:
+The Firebase CLI is pinned in the workspace; deployment scripts use that version. Authenticate with `pnpm exec firebase login`, then deploy the website from the workspace root:
 
 ```sh
 pnpm deploy:web:staging
