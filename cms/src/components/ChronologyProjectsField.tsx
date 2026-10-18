@@ -103,7 +103,10 @@ export function ChronologyProjectsField(props: ArrayFieldClientProps) {
                 {filtering && ' Clear filters to reorder projects. New entries and entries with errors stay visible.'}
             </p>
             <style>{rowStyles}</style>
-            <ArrayField {...props} field={{ ...field, admin: { ...field.admin, isSortable: filtering ? false : field.admin?.isSortable } }} />
+            <ArrayField {...props} field={{
+                ...field,
+                admin: { ...field.admin, initCollapsed: field.admin?.initCollapsed, isSortable: filtering ? false : field.admin?.isSortable },
+            }} />
         </div>
     );
 }
