@@ -44,6 +44,19 @@ if (target === 'cms') {
     only = 'hosting';
     env.NEXT_PUBLIC_SITE_ENV = target === 'staging' ? 'staging' : 'production';
     env.NEXT_PUBLIC_CMS_ORIGIN = required('CMS_AUTH_URL');
+    if (target === 'staging') {
+        // Share only the approved email list; staging uses its own Firebase Auth session.
+        const [secret, version = 'latest'] = required('CMS_ALLOWED_EMAILS_REF').split('@');
+        const result = spawnSync('gcloud', ['secrets', 'versions', 'access', version, '--secret', secret, '--project', project], {
+            cwd: root,
+            env,
+            encoding: 'utf8',
+            stdio: ['ignore', 'pipe', 'inherit'],
+        });
+        if (result.error) throw result.error;
+        if (result.status !== 0 || !result.stdout.trim()) throw new Error('Could not read the shared staging email list.');
+        env.STAGING_ALLOWED_EMAILS = result.stdout.trim();
+    }
     run('pnpm', ['build:web'], env);
 }
 

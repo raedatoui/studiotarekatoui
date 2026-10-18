@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import StagingAuthGate from '@/components/StagingAuthGate';
 import { SiteDataProvider } from '@/data/SiteDataProvider';
 import { siteContent } from '@/data/siteContent';
 import { isStaging, site } from '@/config/site';
@@ -39,6 +40,9 @@ gtag('config', 'G-FGMV1SXH2X');
 `;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+    const content = <SiteDataProvider content={siteContent}>{children}</SiteDataProvider>;
+    const allowedEmails = (process.env.STAGING_ALLOWED_EMAILS || '').split(',').map((email) => email.trim().toLowerCase()).filter(Boolean);
+
     return (
         <html lang="en" suppressHydrationWarning>
             <head>
@@ -53,7 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 />
             </head>
             <body className="min-h-screen overflow-x-hidden">
-                <SiteDataProvider content={siteContent}>{children}</SiteDataProvider>
+                {isStaging ? <StagingAuthGate allowedEmails={allowedEmails}>{content}</StagingAuthGate> : content}
             </body>
         </html>
     );

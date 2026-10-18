@@ -94,6 +94,10 @@ Until the CMS is deployed with this schema, edit Chronology in the local CMS and
 
 ## Commands and deployment
 
+Staging Google sign-in uses the existing Firebase web app, `GoogleAuthProvider`, and a browser-local Firebase session. Configure its public client settings in `website/.env`. The CMS retains its separate Auth.js login and cookies. Only the approved email list is shared: the staging deployment command reads the existing `CMS_ALLOWED_EMAILS_REF` secret into `STAGING_ALLOWED_EMAILS` at build time. Local staging runs use the same list copied into `website/.env`; list changes take effect on staging after rebuilding. Production and ordinary local development do not render the login gate.
+
+Like the Leeft client gate, this checks the signed-in user's verified email before rendering the site. The allowlist is serialized into staging browser assets, and exported static files remain publicly retrievable. Staging has no CMS authentication endpoint, session bridge, server proxy, or website database client.
+
 `pnpm build:cms` builds only the CMS. `pnpm typecheck`, `pnpm lint`, and `pnpm check` do not rewrite files; `pnpm format` does. Generated files and SCSS are excluded from Biome. Existing CMS formatting has not been bulk-rewritten with the behavior changes.
 
 `pnpm media:upload` retains the existing CDN upload workflow; local media stays in ignored `website/public/`. No public GCS objects are deleted by this migration.
@@ -115,6 +119,6 @@ Cloud Build, GitHub setup, and Payload staging/production controls remain deferr
 
 The repository contains application code and configuration templates. Real environment files, generated CMS snapshots, media, browser captures, private migration notes, and generated deployment configuration stay outside Git. The site needs a published CMS snapshot before it can run; no studio content or credentials are bundled for a fresh checkout.
 
-`NEXT_PUBLIC_*` values are included in browser assets. Use them for public URLs only. Database credentials, OAuth secrets, session secrets, editor email allowlists, and cloud credentials must stay server-side. Firebase resource identifiers are configuration, not an access-control mechanism.
+`NEXT_PUBLIC_*` values are included in browser assets. Use them for public URLs and Firebase client configuration only. The staging gate also serializes its shared email allowlist for the browser check described above. Database credentials, OAuth secrets, session secrets, and cloud credentials must stay server-side. Firebase resource identifiers are configuration, not an access-control mechanism.
 
 The private development history includes former infrastructure identifiers and local artifacts. Publish a fresh source snapshot without the existing `.git` directory or archive branches. Removing files from the current tree does not remove old commits. Preserve the private repository and its author history separately.

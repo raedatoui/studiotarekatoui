@@ -16,6 +16,18 @@ if (process.env.NODE_ENV === 'production' && !process.env.NEXT_PUBLIC_SITE_URL) 
     throw new Error('Set NEXT_PUBLIC_SITE_URL in .env before building canonical URLs.');
 }
 
+if (process.env.NEXT_PUBLIC_SITE_ENV === 'staging') {
+    for (const name of [
+        'NEXT_PUBLIC_FIREBASE_API_KEY',
+        'NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN',
+        'NEXT_PUBLIC_FIREBASE_PROJECT_ID',
+        'NEXT_PUBLIC_FIREBASE_APP_ID',
+        'STAGING_ALLOWED_EMAILS',
+    ]) {
+        if (!process.env[name]?.trim()) throw new Error(`Set ${name} before running the staging website.`);
+    }
+}
+
 const nextConfig: NextConfig = {
     output: 'export',
     transpilePackages: ['@tarek/content'],
