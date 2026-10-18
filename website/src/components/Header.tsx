@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { showChronology, showPublications, site } from '@/config/site';
 import { useSiteData } from '@/data/SiteDataProvider';
@@ -54,11 +55,13 @@ export default function Header() {
         const linkPath = path === '/' ? '/news' : path;
         const internal = url.origin === new URL(site.url).origin;
         const current = internal && currentPath === linkPath ? 'page' : internal && currentPath.startsWith(`${linkPath}/`) ? 'location' : undefined;
+        const navigateLocally = internal && !link.external;
+        const NavigationLink = navigateLocally ? Link : 'a';
 
         return (
-            <a
+            <NavigationLink
                 key={`${index}-${link.href}`}
-                href={link.href}
+                href={navigateLocally ? `${url.pathname}${url.search}${url.hash}` : link.href}
                 aria-current={current}
                 {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                 className="site-nav-link text-[length:calc(13px*var(--copy-scale))] max-md:text-[length:calc(18px*var(--copy-scale))] font-normal tracking-[0.04em] transition-colors duration-200 motion-reduce:transition-none"
@@ -67,7 +70,7 @@ export default function Header() {
                 {link.label}
                 {!internal && <span aria-hidden="true"> ↗</span>}
                 {!internal && <span className="sr-only"> (external link)</span>}
-            </a>
+            </NavigationLink>
         );
     });
 
@@ -75,7 +78,7 @@ export default function Header() {
         <header className="site-header sticky top-0 z-100 bg-[var(--color-header-bg)] backdrop-blur-[12px] border-b border-[var(--color-border)] transition-[background-color] duration-300">
             <div className="flex justify-between items-center max-md:gap-4 px-[clamp(24px,4vw,64px)] py-5 max-w-[1400px] mx-auto">
                 <div className="text-[clamp(20px,2vw,28px)] font-medium tracking-[0.08em] uppercase">
-                    <a href="/">{site.title}</a>
+                    <Link href="/">{site.title}</Link>
                 </div>
 
                 <div className="flex items-center gap-6 max-md:order-first max-md:shrink-0 max-md:gap-3">

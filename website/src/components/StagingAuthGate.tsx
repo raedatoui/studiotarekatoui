@@ -55,7 +55,17 @@ export default function StagingAuthGate({ children, allowedEmails }: { children:
         }
     }
 
-    if (!loading && authorized) {
+    if (loading) {
+        return (
+            <main className="flex min-h-screen items-center justify-center p-6" aria-busy="true">
+                <p role="status" className="text-sm text-[var(--color-text-secondary)]">
+                    Loading…
+                </p>
+            </main>
+        );
+    }
+
+    if (authorized) {
         return (
             <>
                 <div className="flex flex-wrap items-center justify-end gap-4 border-b border-[var(--color-border)] px-6 py-2 text-sm">
@@ -75,23 +85,17 @@ export default function StagingAuthGate({ children, allowedEmails }: { children:
             <section className="w-full max-w-md space-y-6" aria-label="Staging sign-in">
                 <p className="font-mono text-sm uppercase tracking-widest text-[var(--color-text-secondary)]">Staging</p>
                 <h1 className="font-display text-5xl">Studio Tarek Atoui</h1>
-                {loading ? (
-                    <p role="status">Loading your account…</p>
-                ) : (
-                    <>
-                        <p>Sign in with your approved Google account to view the staging website.</p>
-                        <button
-                            type="button"
-                            onClick={signIn}
-                            disabled={signingIn}
-                            className="cursor-pointer rounded border border-[var(--color-border)] px-5 py-3 disabled:cursor-wait disabled:opacity-50"
-                        >
-                            {signingIn ? 'Signing in…' : user ? 'Use another Google account' : 'Sign in with Google'}
-                        </button>
-                        {user && !authorized && <p role="alert">This account is not authorized to view staging.</p>}
-                        {error && <p role="alert">{error}</p>}
-                    </>
-                )}
+                <p>Sign in with your approved Google account to view the staging website.</p>
+                <button
+                    type="button"
+                    onClick={signIn}
+                    disabled={signingIn}
+                    className="cursor-pointer rounded border border-[var(--color-border)] px-5 py-3 disabled:cursor-wait disabled:opacity-50"
+                >
+                    {signingIn ? 'Signing in…' : user ? 'Use another Google account' : 'Sign in with Google'}
+                </button>
+                {user && !authorized && <p role="alert">This account is not authorized to view staging.</p>}
+                {error && <p role="alert">{error}</p>}
             </section>
         </main>
     );

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import type { Chronology as ChronologyContent, Project, Research } from '@tarek/content';
 import { mediaUrl } from '@/lib/mediaUrl';
 import VerticalTimeline from './VerticalTimeline';
@@ -19,9 +20,9 @@ function ProjectDetails({ project, research }: { project: Project; research: Res
                     <ul className="flex flex-wrap gap-x-4 gap-y-2">
                         {themes.map((theme) => (
                             <li key={theme.id}>
-                                <a className="research-title-link" href={`/research/${theme.slug}`}>
+                                <Link className="research-title-link" href={`/research/${theme.slug}`}>
                                     {theme.title} →
-                                </a>
+                                </Link>
                             </li>
                         ))}
                     </ul>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useId, useState } from 'react';
+import Link from 'next/link';
 import MediaSlider from '@/components/MediaSlider';
 import VerticalTimeline from '@/components/VerticalTimeline';
 import type { Research } from '@tarek/content';
@@ -32,12 +33,12 @@ export default function ResearchThread({ research }: { research: Research }) {
         <main className="bg-[var(--color-bg)] text-[var(--color-text)] max-sm:[&>section:last-child]:pb-6">
             {/* ── Hero ───────────────────────────────────────────────── */}
             <section className="max-w-[1400px] mx-auto px-[clamp(24px,4vw,64px)] pt-[clamp(32px,6vh,72px)] max-sm:pt-6 pb-[clamp(32px,5vw,56px)]">
-                <a
+                <Link
                     className="research-jump-link thread-rise font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.3em]"
                     href="/research"
                 >
                     ← Long-term research
-                </a>
+                </Link>
                 <div className="thread-rise mt-[clamp(20px,3vw,36px)] flex items-center gap-3 font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.22em] [animation-delay:60ms]">
                     {research.ongoing ? (
                         <span className="flex items-center gap-2 text-[var(--color-accent)]">

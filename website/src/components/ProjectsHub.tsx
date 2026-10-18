@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 import MediaSlider from '@/components/MediaSlider';
 import { useSiteData } from '@/data/SiteDataProvider';
 import type { ResearchInstance } from '@tarek/content';
@@ -381,12 +382,12 @@ export default function ProjectsHub() {
                                 id={`thread-heading-${document.id}`}
                                 className="mt-4 font-[family-name:var(--font-display)] text-[clamp(36px,5.6vw,80px)] font-normal leading-[0.98] tracking-[-0.01em]"
                             >
-                                <a
+                                <Link
                                     href={`/research/${document.slug}`}
                                     className="research-title-link transition-colors motion-reduce:transition-none"
                                 >
                                     {document.title}
-                                </a>
+                                </Link>
                             </h3>
                             {document.subtitle && (
                                 <p className="mt-2 font-[family-name:var(--font-display)] text-[clamp(17px,2vw,26px)] italic text-[var(--color-text-secondary)]">
@@ -481,12 +482,12 @@ export default function ProjectsHub() {
                                         </ol>
                                     </div>
 
-                                    <a
+                                    <Link
                                         href={`/research/${document.slug}`}
                                         className="research-jump-link mt-7 inline-block font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.18em]"
                                     >
                                         Explore the project →
-                                    </a>
+                                    </Link>
                                 </aside>
                             </div>
                             <a href="#projects" className="research-jump-link mt-8 inline-block py-1 text-[length:calc(12px*var(--copy-scale))]">
