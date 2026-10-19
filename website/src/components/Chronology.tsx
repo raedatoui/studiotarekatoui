@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import type { Chronology as ChronologyContent, Project, Research } from '@tarek/content';
 import { mediaUrl } from '@/lib/mediaUrl';
+import ChronologyFilter from './ChronologyFilter';
 import VerticalTimeline from './VerticalTimeline';
 
 function ProjectDetails({ project, research }: { project: Project; research: Research[] }) {
@@ -52,7 +53,6 @@ export default function Chronology({ content, research }: { content: ChronologyC
     const kinds = [...new Set(projects.map((project) => project.kind))].sort();
     const shown = projects.filter((project) => (year === 'all' || project.year === Number(year)) && (kind === 'all' || project.kind === kind));
     const shownYears = [...new Set(shown.map((project) => project.year))];
-    const selectClass = 'ml-3 border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-2 text-[var(--color-text)]';
 
     return (
         <main className="bg-[var(--color-bg)] text-[var(--color-text)]">
@@ -68,28 +68,18 @@ export default function Chronology({ content, research }: { content: ChronologyC
             </section>
             <section aria-label="Project timeline" className="max-w-[1400px] mx-auto px-[clamp(24px,4vw,64px)] pb-[clamp(40px,6vw,80px)]">
                 <div className="flex flex-wrap items-center gap-x-8 gap-y-4 border-y border-[var(--color-border)] py-4 font-mono text-[length:calc(11px*var(--copy-scale))]">
-                    <label>
-                        Year
-                        <select className={selectClass} value={year} onChange={(event) => setYear(event.target.value)}>
-                            <option value="all">All years</option>
-                            {years.map((value) => (
-                                <option key={value} value={value}>
-                                    {value}
-                                </option>
-                            ))}
-                        </select>
-                    </label>
-                    <label>
-                        Kind
-                        <select className={selectClass} value={kind} onChange={(event) => setKind(event.target.value)}>
-                            <option value="all">All kinds</option>
-                            {kinds.map((value) => (
-                                <option key={value} value={value}>
-                                    {value}
-                                </option>
-                            ))}
-                        </select>
-                    </label>
+                    <ChronologyFilter
+                        label="Year"
+                        value={year}
+                        options={[{ value: 'all', label: 'All years' }, ...years.map((value) => ({ value: String(value), label: String(value) }))]}
+                        onChange={setYear}
+                    />
+                    <ChronologyFilter
+                        label="Kind"
+                        value={kind}
+                        options={[{ value: 'all', label: 'All kinds' }, ...kinds.map((value) => ({ value, label: value }))]}
+                        onChange={setKind}
+                    />
                     <p aria-live="polite">
                         {shown.length} / {projects.length} projects
                     </p>
