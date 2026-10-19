@@ -1,5 +1,5 @@
 import { spawnSync } from 'node:child_process';
-import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { homedir } from 'node:os';
 import path from 'node:path';
 import { loadEnvFile } from 'node:process';
@@ -61,11 +61,36 @@ if (target === 'cms') {
     run('pnpm', ['build:web'], env);
 }
 
-// Firebase resolves source paths relative to this file, so keep it at the workspace root.
-const configPath = path.join(root, `.firebase.deploy-${process.pid}.json`);
+let deployRoot = root;
+let configPath;
 try {
+    if (target === 'cms') {
+        deployRoot = mkdtempSync(path.join(scratch, 'tarek-cms-deploy-'));
+        const sourceFiles = spawnSync('git', ['ls-files', '-z', '--cached', '--others', '--exclude-standard'], {
+            cwd: root,
+            env,
+            encoding: 'utf8',
+        });
+        if (sourceFiles.error) throw sourceFiles.error;
+        if (sourceFiles.status !== 0) throw new Error('Could not collect CMS deployment source.');
+
+        // Copy working files, including uncommitted changes, without upload-time Git ignore rules.
+        for (const file of new Set(sourceFiles.stdout.split('\0').filter(Boolean))) {
+            const source = path.join(root, file);
+            if (path.basename(file) === '.gitignore' || !existsSync(source)) continue;
+            const destination = path.join(deployRoot, file);
+            mkdirSync(path.dirname(destination), { recursive: true });
+            cpSync(source, destination);
+        }
+        // This generated file is Git-ignored but must always be present in the uploaded source.
+        cpSync(path.join(root, 'cms/apphosting.yaml'), path.join(deployRoot, 'cms/apphosting.yaml'));
+    }
+
+    // Firebase uploads source relative to the directory containing this configuration.
+    configPath = path.join(deployRoot, `.firebase.deploy-${process.pid}.json`);
     writeFileSync(configPath, `${JSON.stringify(config, null, 4)}\n`, { mode: 0o600, flag: 'wx' });
     run('pnpm', ['exec', 'firebase', 'deploy', '--config', configPath, '--only', only, '--project', project], env);
 } finally {
-    rmSync(configPath, { force: true });
+    if (deployRoot !== root) rmSync(deployRoot, { recursive: true, force: true });
+    else if (configPath) rmSync(configPath, { force: true });
 }
