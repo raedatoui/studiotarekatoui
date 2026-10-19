@@ -71,8 +71,22 @@ export function DashboardGuide({ payload }: ServerProps) {
                 <strong>Export JSON</strong> → rebuild and deploy the website. Publishing in the CMS alone does not immediately update the website.
             </p>
             <p>
-                <strong>Staging only:</strong> The new Publications and Chronology pages are available in local development and staging. Production
-                keeps the Publications menu link pointing to Galerie Chantal Crousel. Checkout is not configured.
+                <strong>Test site and public site:</strong> We use a test site, called <strong>staging</strong>, so the team can review new pages and
+                changes before they appear on the public website. The public site, sometimes called <strong>production</strong>, is the version
+                visitors normally see. Each site is updated separately, so changes on the test site do not automatically appear on the public site.
+            </p>
+            <p>
+                The new Publications and Chronology pages can currently be reviewed on the test site. They are not yet part of the public website.
+                On the public website, the Publications menu link still opens the Galerie Chantal Crousel website.
+            </p>
+            <p>
+                <strong>Buying publications:</strong> The new Publications page can display prices and availability, but it cannot accept orders or
+                payments. We need a team discussion to agree on how people should buy publications and how to proceed with this on the website.
+            </p>
+            <p>
+                <strong>Completing the Chronology page:</strong> We need a separate discussion to review the information for each project, including
+                links, its venue and location, and whether it is part of a research project. This will help us agree which details to add or complete
+                in each entry.
             </p>
         </section>
     );
