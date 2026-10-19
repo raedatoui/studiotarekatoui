@@ -9,6 +9,7 @@ import { ChronologyProjectsField as ChronologyProjectsField_77a14ed26c6ccda57391
 import { ChronologyRowLabel as ChronologyRowLabel_a9c0c4ae9d5bc1f63e79d5a6a0d499ae } from '../../../components/ChronologyRowLabel'
 import { ChronologyEditView as ChronologyEditView_5026f404dccc8e60688aac2ddc2cbd29 } from '../../../components/ChronologyEditView'
 import { GoogleLogout as GoogleLogout_aa6fac0737322a8012c2dd30990175ec } from '../../../components/GoogleLogout'
+import { DashboardPages as DashboardPages_41fd5a263ba04f982cc41292e6291865 } from '../../../components/DashboardPages'
 import { ChronologyCreateButton as ChronologyCreateButton_21c02df4bfeedaacb28dfa6452519e43 } from '../../../components/ChronologyCreateButton'
 import { PagesNav as PagesNav_aa89768a78829948eadfcae6e6562bc6 } from '../../../components/PagesNav'
 import { ExportContent as ExportContent_1c81066f5b50115a5ed7d2d5bc5bd39f } from '../../../components/ExportContent'
@@ -31,6 +32,7 @@ export const importMap = {
   "/components/ChronologyRowLabel#ChronologyRowLabel": ChronologyRowLabel_a9c0c4ae9d5bc1f63e79d5a6a0d499ae,
   "/components/ChronologyEditView#ChronologyEditView": ChronologyEditView_5026f404dccc8e60688aac2ddc2cbd29,
   "/components/GoogleLogout#GoogleLogout": GoogleLogout_aa6fac0737322a8012c2dd30990175ec,
+  "/components/DashboardPages#DashboardPages": DashboardPages_41fd5a263ba04f982cc41292e6291865,
   "/components/ChronologyCreateButton#ChronologyCreateButton": ChronologyCreateButton_21c02df4bfeedaacb28dfa6452519e43,
   "/components/PagesNav#PagesNav": PagesNav_aa89768a78829948eadfcae6e6562bc6,
   "/components/ExportContent#ExportContent": ExportContent_1c81066f5b50115a5ed7d2d5bc5bd39f,
