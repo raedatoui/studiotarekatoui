@@ -3,7 +3,19 @@
         {
             "target": "prod",
             "public": "website/out",
-            "ignore": ["firebase.json", "**/.*", "**/node_modules/**", ".firebase/**", ".idea/**", "images/**", "portfolio/**", "media/**"],
+            "ignore": [
+                "firebase.json",
+                "**/.*",
+                "**/node_modules/**",
+                ".firebase/**",
+                ".idea/**",
+                "images/**",
+                "portfolio/**",
+                "media/**",
+                "chronology.html",
+                "chronology.txt",
+                "chronology/**"
+            ],
             "cleanUrls": true
         },
         {
