@@ -77,10 +77,6 @@ export function DashboardGuide({ payload }: ServerProps) {
                 in. Each site is updated separately, so changes on the test site do not automatically appear on the public site.
             </p>
             <p>
-                The Google sign-in limits normal browsing to the team, but it does not make the test site&apos;s files private. Images and page data
-                can still be accessed directly without signing in.
-            </p>
-            <p>
                 The new Publications and Chronology pages can currently be reviewed on the test site. They are not yet part of the public website.
                 On the public website, the Publications menu link still opens the Galerie Chantal Crousel website.
             </p>
