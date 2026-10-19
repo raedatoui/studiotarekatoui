@@ -49,6 +49,7 @@ export default buildConfig({
         components: {
             beforeDashboard: ['/components/DashboardGuide#DashboardGuide'],
             afterDashboard: ['/components/ChronologyCreateButton#ChronologyCreateButton'],
+            beforeNavLinks: ['/components/HomeNav#HomeNav'],
             afterNavLinks: ['/components/PagesNav#PagesNav', '/components/ExportContent#ExportContent'],
             views: {
                 pages: { Component: '/components/PagesView#PagesView', path: '/pages', exact: true, meta: { title: 'Pages' } },

@@ -27,14 +27,18 @@ export function PagesNav() {
     }, []);
 
     const links = [
-        { href: `${admin}/pages`, label: 'All pages' },
-        ...cmsPages.map((page) => ({ href: `${admin}${'path' in page ? page.path : `/globals/${page.slug}`}`, label: page.label })),
+        { id: 'nav-all-pages', href: `${admin}/pages`, label: 'All pages' },
+        ...cmsPages.map((page) => ({
+            id: `nav-page-${page.slug}`,
+            href: `${admin}${'path' in page ? page.path : `/globals/${page.slug}`}`,
+            label: page.label,
+        })),
     ];
 
     const group = (
         <NavGroup label="Pages">
-            {links.map(({ href, label }) => (
-                <Link key={href} href={href} prefetch={false} className="nav__link" aria-current={pathname === href ? 'page' : undefined}>
+            {links.map(({ id, href, label }) => (
+                <Link id={id} key={href} href={href} prefetch={false} className="nav__link" aria-current={pathname === href ? 'page' : undefined}>
                     {pathname === href && <div className="nav__link-indicator" />}
                     <span className="nav__link-label">{label}</span>
                 </Link>

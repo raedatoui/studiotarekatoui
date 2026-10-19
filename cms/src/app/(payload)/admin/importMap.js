@@ -13,6 +13,7 @@ import { ChronologyCreateButton as ChronologyCreateButton_21c02df4bfeedaacb28dfa
 import { PagesNav as PagesNav_aa89768a78829948eadfcae6e6562bc6 } from '../../../components/PagesNav'
 import { ExportContent as ExportContent_1c81066f5b50115a5ed7d2d5bc5bd39f } from '../../../components/ExportContent'
 import { DashboardGuide as DashboardGuide_5bc0b881046fbf4b052c2db86e32d5a0 } from '../../../components/DashboardGuide'
+import { HomeNav as HomeNav_03e59baf8012ec78c255c8ba2900b1c0 } from '../../../components/HomeNav'
 import { PagesView as PagesView_32260a7b91844336ffb4851d34da28da } from '../../../components/PagesView'
 import { GoogleLogin as GoogleLogin_33130b039959c5f3ad51afcd63aa9968 } from '../../../components/GoogleLogin'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
@@ -34,6 +35,7 @@ export const importMap = {
   "/components/PagesNav#PagesNav": PagesNav_aa89768a78829948eadfcae6e6562bc6,
   "/components/ExportContent#ExportContent": ExportContent_1c81066f5b50115a5ed7d2d5bc5bd39f,
   "/components/DashboardGuide#DashboardGuide": DashboardGuide_5bc0b881046fbf4b052c2db86e32d5a0,
+  "/components/HomeNav#HomeNav": HomeNav_03e59baf8012ec78c255c8ba2900b1c0,
   "/components/PagesView#PagesView": PagesView_32260a7b91844336ffb4851d34da28da,
   "/components/GoogleLogin#GoogleLogin": GoogleLogin_33130b039959c5f3ad51afcd63aa9968,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
