@@ -2,7 +2,7 @@ import { DefaultTemplate } from '@payloadcms/next/templates';
 import { Gutter, Link, SetStepNav, Table } from '@payloadcms/ui';
 import type { AdminViewServerProps, Column } from 'payload';
 import { cmsPages } from '../globals/pages';
-import { PublicationDate, PublishedByCell } from './PublicationCells';
+import { PublicationDate } from './PublicationCells';
 
 export async function PagesView(props: AdminViewServerProps) {
     const {
@@ -21,7 +21,7 @@ export async function PagesView(props: AdminViewServerProps) {
                         draft: false,
                         depth: 0,
                         overrideAccess: false,
-                        select: { _status: true, updatedAt: true, publishedBy: true },
+                        select: { _status: true, updatedAt: true },
                     }),
                     payload.findGlobal({ slug, req, draft: true, depth: 0, overrideAccess: false, select: { _status: true } }),
                 ]);
@@ -32,7 +32,6 @@ export async function PagesView(props: AdminViewServerProps) {
                     href: `${payload.config.routes.admin}${'path' in page ? page.path : `/globals/${slug}`}`,
                     status: latest._status === 'published' ? 'Published' : 'Draft',
                     lastPublishedAt: isPublished ? published.updatedAt : null,
-                    publishedBy: isPublished ? published.publishedBy : null,
                 };
             })
     );
@@ -61,13 +60,6 @@ export async function PagesView(props: AdminViewServerProps) {
             field: { name: 'lastPublishedAt', type: 'date' },
             Heading: 'Last published',
             renderedCells: pages.map((page) => <PublicationDate key={page.id} value={page.lastPublishedAt} />),
-        },
-        {
-            accessor: 'publishedBy',
-            active: true,
-            field: { name: 'publishedBy', type: 'text' },
-            Heading: 'Published by',
-            renderedCells: pages.map((page) => <PublishedByCell key={page.id} cellData={page.publishedBy} rowData={page} />),
         },
     ];
 

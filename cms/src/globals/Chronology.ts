@@ -120,7 +120,7 @@ export const Chronology: GlobalConfig = {
                             hasMany: true,
                             admin: {
                                 description:
-                                    'Copy the URL ID from each related Research theme. Add only confirmed connections; leave blank if unsure.',
+                                    'Copy the URL ID from each related Research project. Add only confirmed connections; leave blank if unsure.',
                             },
                         },
                         { name: 'note', label: 'Public note', type: 'textarea' },

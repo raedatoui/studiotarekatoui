@@ -9,8 +9,12 @@ export function publishedByField(): Field {
         access: { create: () => false, update: () => false },
         admin: {
             readOnly: true,
+            hidden: true,
             position: 'sidebar',
             disableBulkEdit: true,
+            disableListColumn: true,
+            disableListFilter: true,
+            disableGroupBy: true,
             components: { Cell: '/components/PublicationCells#PublishedByCell' },
         },
         hooks: {

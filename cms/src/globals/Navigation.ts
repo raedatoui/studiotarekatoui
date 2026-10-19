@@ -22,6 +22,7 @@ export const Navigation: GlobalConfig = {
                 { label: 'About', href: '/about', external: false },
                 { label: 'Publications', href: '/publications', external: false },
                 { label: 'Contact', href: '/contact', external: false },
+                { label: 'Chronology', href: '/chronology', external: false },
             ],
             fields: [
                 { name: 'label', type: 'text', required: true },

@@ -5,11 +5,11 @@ import { INSTANCE_KINDS, INSTANCE_STATUSES, PRESS_TYPES } from '@tarek/content';
 
 export const Research: CollectionConfig = {
     slug: 'research',
-    labels: { singular: 'Research theme', plural: 'Research themes' },
+    labels: { singular: 'Research project', plural: 'Research projects' },
     admin: {
         useAsTitle: 'title',
         group: 'Content',
-        defaultColumns: ['title', 'slug', 'ongoing', '_status', 'updatedAt', 'updatedBy', 'lastPublishedAt', 'publishedBy'],
+        defaultColumns: ['title', 'slug', 'ongoing', '_status', 'updatedAt', 'lastPublishedAt'],
     },
     orderable: true,
     hooks: {
@@ -203,8 +203,12 @@ export const Research: CollectionConfig = {
             access: { create: () => false, update: () => false },
             admin: {
                 readOnly: true,
+                hidden: true,
                 position: 'sidebar',
                 disableBulkEdit: true,
+                disableListColumn: true,
+                disableListFilter: true,
+                disableGroupBy: true,
                 components: { Cell: '/components/PublicationCells#UpdatedByCell' },
             },
             hooks: {

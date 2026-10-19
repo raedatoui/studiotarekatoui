@@ -623,7 +623,7 @@ export interface Chronology {
         organization?: string | null;
         collaborators?: string[] | null;
         /**
-         * Copy the URL ID from each related Research theme. Add only confirmed connections; leave blank if unsure.
+         * Copy the URL ID from each related Research project. Add only confirmed connections; leave blank if unsure.
          */
         themeIds?: string[] | null;
         note?: string | null;

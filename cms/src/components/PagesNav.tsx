@@ -2,6 +2,8 @@
 
 import { Link, NavGroup, useConfig } from '@payloadcms/ui';
 import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { cmsPages } from '../globals/pages';
 
 export function PagesNav() {
@@ -11,12 +13,25 @@ export function PagesNav() {
         },
     } = useConfig();
     const pathname = usePathname();
+    const [slot, setSlot] = useState<HTMLElement | null>(null);
+
+    useEffect(() => {
+        const website = document.getElementById('nav-group-Website');
+        if (!website) return;
+
+        // Insert Pages before Website without changing the groups used by the dashboard.
+        const target = document.createElement('div');
+        website.before(target);
+        setSlot(target);
+        return () => target.remove();
+    }, []);
+
     const links = [
         { href: `${admin}/pages`, label: 'All pages' },
         ...cmsPages.map((page) => ({ href: `${admin}${'path' in page ? page.path : `/globals/${page.slug}`}`, label: page.label })),
     ];
 
-    return (
+    const group = (
         <NavGroup label="Pages">
             {links.map(({ href, label }) => (
                 <Link key={href} href={href} prefetch={false} className="nav__link" aria-current={pathname === href ? 'page' : undefined}>
@@ -26,4 +41,6 @@ export function PagesNav() {
             ))}
         </NavGroup>
     );
+
+    return slot ? createPortal(group, slot) : group;
 }

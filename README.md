@@ -83,7 +83,7 @@ Publish the entries and the `/publications` Navigation link in the CMS, then exp
 
 **Pages → Chronology** owns the full project timeline using the former `projects.json` fields: stable ID, research slugs, kind, title, year, dates/status, venue/location, organization, collaborators, public note, URL, media, and review flag. Private editorial notes never enter the website snapshot. The website shares the research page's vertical timeline and preserves CMS ordering within each year, newest year first, with year/kind filters and expandable documentation links.
 
-`/chronology` and its menu entry are available in local development (`pnpm dev` / `pnpm dev:web`) and with `NEXT_PUBLIC_SITE_ENV=staging`. Production returns the static 404, excludes chronology content from the client provider, and never lists it in the sitemap. The Chronology heading supplies the temporary menu label; the shared Navigation global is unchanged.
+`/chronology` and its menu entry are available in local development (`pnpm dev` / `pnpm dev:web`) and with `NEXT_PUBLIC_SITE_ENV=staging`. Production returns the static 404, excludes chronology content from the client provider, and never lists it in the sitemap. The Navigation global controls the menu label and position through its `/chronology` entry. Publish Navigation and export a new snapshot to reflect menu changes on the website.
 
 ```sh
 pnpm content:import:chronology ~/tmp/chronology-source/chronology.json --apply --publish

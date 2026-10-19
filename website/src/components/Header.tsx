@@ -43,8 +43,9 @@ export default function Header() {
         };
     }, [menuOpen]);
 
-    const items = navigation.items.filter((link) => new URL(link.href, site.url).pathname.replace(/\/+$/, '') !== '/chronology');
-    if (showChronology && chronology) items.push({ label: chronology.heading, href: '/chronology', external: false });
+    const items = navigation.items.filter(
+        (link) => (showChronology && Boolean(chronology)) || new URL(link.href, site.url).pathname.replace(/\/+$/, '') !== '/chronology'
+    );
     const navLinks = items.map((item, index) => {
         const link =
             !showPublications && new URL(item.href, site.url).pathname.replace(/\/+$/, '') === '/publications'
