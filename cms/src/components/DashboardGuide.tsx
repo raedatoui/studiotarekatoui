@@ -72,8 +72,13 @@ export function DashboardGuide({ payload }: ServerProps) {
             </p>
             <p>
                 <strong>Test site and public site:</strong> We use a test site, called <strong>staging</strong>, so the team can review new pages and
-                changes before they appear on the public website. The public site, sometimes called <strong>production</strong>, is the version
-                visitors normally see. Each site is updated separately, so changes on the test site do not automatically appear on the public site.
+                changes before they appear on the public website. The test site is intended for team review, and browsing it requires Google sign-in
+                with an approved team account. The public site, sometimes called <strong>production</strong>, is open to all visitors without signing
+                in. Each site is updated separately, so changes on the test site do not automatically appear on the public site.
+            </p>
+            <p>
+                The Google sign-in limits normal browsing to the team, but it does not make the test site&apos;s files private. Images and page data
+                can still be accessed directly without signing in.
             </p>
             <p>
                 The new Publications and Chronology pages can currently be reviewed on the test site. They are not yet part of the public website.
