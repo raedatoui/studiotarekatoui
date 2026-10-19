@@ -47,6 +47,7 @@ export default buildConfig({
             },
         },
         components: {
+            beforeDashboard: ['/components/DashboardGuide#DashboardGuide'],
             afterDashboard: ['/components/ChronologyCreateButton#ChronologyCreateButton'],
             afterNavLinks: ['/components/PagesNav#PagesNav', '/components/ExportContent#ExportContent'],
             views: {

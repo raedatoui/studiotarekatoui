@@ -12,6 +12,7 @@ import { GoogleLogout as GoogleLogout_aa6fac0737322a8012c2dd30990175ec } from '.
 import { ChronologyCreateButton as ChronologyCreateButton_21c02df4bfeedaacb28dfa6452519e43 } from '../../../components/ChronologyCreateButton'
 import { PagesNav as PagesNav_aa89768a78829948eadfcae6e6562bc6 } from '../../../components/PagesNav'
 import { ExportContent as ExportContent_1c81066f5b50115a5ed7d2d5bc5bd39f } from '../../../components/ExportContent'
+import { DashboardGuide as DashboardGuide_5bc0b881046fbf4b052c2db86e32d5a0 } from '../../../components/DashboardGuide'
 import { PagesView as PagesView_32260a7b91844336ffb4851d34da28da } from '../../../components/PagesView'
 import { GoogleLogin as GoogleLogin_33130b039959c5f3ad51afcd63aa9968 } from '../../../components/GoogleLogin'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
@@ -32,6 +33,7 @@ export const importMap = {
   "/components/ChronologyCreateButton#ChronologyCreateButton": ChronologyCreateButton_21c02df4bfeedaacb28dfa6452519e43,
   "/components/PagesNav#PagesNav": PagesNav_aa89768a78829948eadfcae6e6562bc6,
   "/components/ExportContent#ExportContent": ExportContent_1c81066f5b50115a5ed7d2d5bc5bd39f,
+  "/components/DashboardGuide#DashboardGuide": DashboardGuide_5bc0b881046fbf4b052c2db86e32d5a0,
   "/components/PagesView#PagesView": PagesView_32260a7b91844336ffb4851d34da28da,
   "/components/GoogleLogin#GoogleLogin": GoogleLogin_33130b039959c5f3ad51afcd63aa9968,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
