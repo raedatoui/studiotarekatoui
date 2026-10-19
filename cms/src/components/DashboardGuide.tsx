@@ -74,32 +74,6 @@ export function DashboardGuide({ payload }: ServerProps) {
                 <strong>Staging only:</strong> The new Publications and Chronology pages are available in local development and staging. Production
                 keeps the Publications menu link pointing to Galerie Chantal Crousel. Checkout is not configured.
             </p>
-            <details>
-                <summary>Recent updates · 16–19 October 2026</summary>
-                <ul>
-                    <li>
-                        <strong>Publications:</strong> Added book and record editing, cover credits, euro prices and availability. The website lists
-                        publications newest first. Page headings and introductions have their own editor and Live Preview.
-                    </li>
-                    <li>
-                        <strong>Chronology:</strong> Restored the staging timeline and added search, year/type/review filters, year dividers,
-                        Live Preview and a shortcut to add an entry from the dashboard. Introduction editing is separate from timeline entries.
-                    </li>
-                    <li>
-                        <strong>Research:</strong> Added image carousels to the overview and expandable descriptions on mobile. Research themes are
-                        now called Research projects, with clearer URL ID guidance. Keep existing URL IDs unchanged so links continue to work.
-                    </li>
-                    <li>
-                        <strong>Staging access:</strong> Added Google sign-in for approved accounts, with a separate session from the CMS, and fixed
-                        the login screen briefly reappearing between pages. This is a browser-level gate; exported files are not private.
-                    </li>
-                    <li>
-                        <strong>CMS navigation:</strong> The sidebar follows Content → Pages → Website, with shorter page labels. Published by and
-                        Last updated by are temporarily hidden. Chronology&apos;s menu label and position are managed in Website → Navigation.
-                    </li>
-                    <li><strong>Maintenance:</strong> Updated the platform dependencies and improved deployment configuration handling.</li>
-                </ul>
-            </details>
         </section>
     );
 }
