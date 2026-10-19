@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import MediaSlider from '@/components/MediaSlider';
+import MobileResearchTimeline, { ResearchLabNavigation, type MobileTimelineVariant } from '@/components/research-lab/MobileResearchTimeline';
 import { useSiteData } from '@/data/SiteDataProvider';
 import type { ResearchInstance } from '@tarek/content';
 import { gallerySlides } from '@/lib/media';
@@ -83,7 +84,7 @@ function MarkCard({ m, left }: { m: ResearchInstance; left: number }) {
     );
 }
 
-export default function ProjectsHub() {
+export default function ProjectsHub({ mobileTimelineVariant }: { mobileTimelineVariant?: MobileTimelineVariant } = {}) {
     const { research, researchPage, exportedAt } = useSiteData();
     const allInstances = research.flatMap((document) => document.instances);
     const [hovered, setHovered] = useState('');
@@ -186,6 +187,7 @@ export default function ProjectsHub() {
                 aria-labelledby="projects-heading"
                 className="max-w-[1400px] mx-auto scroll-mt-[calc(var(--header-height,64px)+16px)] px-[clamp(24px,4vw,64px)] outline-none"
             >
+                {mobileTimelineVariant && <ResearchLabNavigation variant={mobileTimelineVariant} />}
                 <div className="thread-rise flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3 border-t border-[var(--color-border)] pt-5">
                     <h2
                         id="projects-heading"
@@ -209,6 +211,16 @@ export default function ProjectsHub() {
                     </p>
                 </div>
 
+                {mobileTimelineVariant && (
+                    <MobileResearchTimeline
+                        variant={mobileTimelineVariant}
+                        tracks={tracks}
+                        minYear={MIN_YEAR}
+                        maxYear={MAX_YEAR}
+                        currentYear={THIS_YEAR}
+                    />
+                )}
+
                 {/* axis */}
                 <div className={`thread-rise mt-7 max-sm:hidden ${SCORE_GRID}`}>
                     <div className="hidden sm:block" />
@@ -226,7 +238,7 @@ export default function ProjectsHub() {
                 </div>
 
                 {/* tracks */}
-                <div className="mt-4 sm:mt-1">
+                <div className={`mt-4 sm:mt-1 ${mobileTimelineVariant ? 'max-sm:hidden' : ''}`}>
                     {tracks.map((t, i) => {
                         const active = hovered === t.document.id;
                         const left = pos(t.startYear);

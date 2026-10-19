@@ -39,6 +39,10 @@ Payload Live Preview opens `/preview/research`, `/preview/research-page`, `/prev
 
 The CMS navigation's **Export JSON** action downloads the same published snapshot through an authenticated endpoint. Validation errors identify the research document and field. Exporting does not deploy.
 
+### Mobile research timeline previews
+
+Local development and staging include `/research-lab/stacked`, `/research-lab/scroll`, and `/research-lab/vertical` for comparison. Each uses the complete Research hub and the existing CMS snapshot. The alternative chart appears below 640px; larger screens retain the existing chart. `/research` keeps its default rendering. The previews are noindex, absent from the sitemap and main navigation, and return 404 in production; production Hosting also excludes `research-lab/**`.
+
 ## Content contract and recovery
 
 `@tarek/content` owns schema version 3 and inferred website types. Version 2 added required published navigation; version 3 restores the News page. The staging-only Chronology is optional so exports from the hosted CMS before its deployment remain compatible. Publish News and Navigation, then re-export older snapshots to use the current contract. There is no hardcoded website menu fallback. CMS documents retain Payload-generated types; typed serializers use an explicit allowlist. The package includes no Payload, database, or authentication code.

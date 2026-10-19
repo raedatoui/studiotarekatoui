@@ -1,0 +1,439 @@
+.navigation {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 24px;
+    padding-bottom: 16px;
+    font-size: calc(12px * var(--copy-scale));
+}
+
+.navigation a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--color-text-secondary);
+}
+
+.navigation a[aria-current],
+.navigation a:hover,
+.projectTitle:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.mobile {
+    min-width: 0;
+    margin-top: 16px;
+}
+
+.mobile button {
+    cursor: pointer;
+}
+
+.mobile :is(button, a, [tabindex]):focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+}
+
+.guidance,
+.selectionStatus {
+    margin: 12px 0 20px;
+    font-size: calc(12px * var(--copy-scale));
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+}
+
+.legend {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: calc(10px * var(--copy-scale));
+    color: var(--color-text-secondary);
+}
+
+.legendDot,
+.dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-text-secondary);
+}
+
+.legendDot:not(:first-child),
+.legendLine,
+.legendEnd {
+    margin-left: 6px;
+}
+
+.legendLine {
+    width: 16px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--color-accent), transparent);
+}
+
+.legendEnd {
+    width: 2px;
+    height: 10px;
+    background: var(--color-text-secondary);
+}
+
+.dot {
+    position: absolute;
+    transform: translate(-50%, 50%);
+}
+
+.dot[data-current],
+.legendDot[data-current] {
+    background: var(--color-recent);
+    outline: 1px solid var(--color-accent);
+}
+
+.date,
+.stackedAxis,
+.scrollAxis,
+.verticalYear,
+.laneNumber {
+    font-family: var(--font-mono);
+    font-size: calc(10px * var(--copy-scale));
+    font-weight: 400;
+    color: var(--color-text-secondary);
+}
+
+.date[data-current],
+.stackedAxis [data-current],
+.scrollAxis [data-current],
+.verticalYear[data-current] {
+    color: var(--color-accent);
+    font-weight: 500;
+}
+
+.projectTitle {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+}
+
+.stackedProject {
+    padding: 20px 0 12px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.projectHeading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px 12px;
+}
+
+.trackButton {
+    display: block;
+    width: 100%;
+    margin-top: 8px;
+    padding: 0 16px 8px;
+    text-align: left;
+}
+
+.trackButton[aria-expanded="true"],
+.yearButton[aria-expanded="true"] {
+    background: var(--color-hover-bg);
+}
+
+.horizontalTrack {
+    display: block;
+    position: relative;
+}
+
+.gridline {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--color-border);
+    opacity: 0.5;
+}
+
+.lifeline,
+.tail {
+    position: absolute;
+    bottom: 12px;
+    height: 1px;
+    background: var(--color-text-secondary);
+}
+
+.tail {
+    right: 0;
+    background: linear-gradient(90deg, var(--color-accent), transparent);
+}
+
+.end {
+    position: absolute;
+    bottom: 12px;
+    width: 2px;
+    height: 12px;
+    background: var(--color-text-secondary);
+    transform: translate(-50%, 50%);
+}
+
+.stackedAxis {
+    display: block;
+    position: relative;
+    height: 24px;
+}
+
+.stackedAxis span {
+    position: absolute;
+    transform: translateX(-50%);
+}
+
+.disclosureLabel {
+    display: block;
+    margin-top: 4px;
+    font-size: calc(11px * var(--copy-scale));
+    color: var(--color-accent);
+}
+
+.details {
+    margin-top: 16px;
+    padding: 16px 0 8px;
+    border-top: 1px solid var(--color-border);
+    scroll-margin-top: calc(var(--header-height, 64px) + 20px);
+    overflow-wrap: anywhere;
+}
+
+.presentations {
+    margin-top: 16px;
+    list-style: none;
+}
+
+.presentations li {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr);
+    align-items: baseline;
+    gap: 12px;
+    padding: 12px 0;
+    border-top: 1px solid var(--color-border);
+    font-size: calc(12px * var(--copy-scale));
+    line-height: 1.5;
+}
+
+.presentations .date {
+    margin-top: 4px;
+}
+
+.secondary {
+    color: var(--color-text-secondary);
+}
+
+.scroller {
+    overflow-x: scroll;
+    scrollbar-width: auto;
+    scrollbar-color: var(--color-text-secondary) var(--color-border);
+    scrollbar-gutter: stable;
+    overscroll-behavior-x: contain;
+    padding-bottom: 12px;
+}
+
+.scroller::-webkit-scrollbar {
+    height: 8px;
+}
+
+.scroller::-webkit-scrollbar-track {
+    background: var(--color-border);
+}
+
+.scroller::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: var(--color-text-secondary);
+}
+
+.scrollRow {
+    display: flex;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.stickyTitle {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    flex: 0 0 112px;
+    width: 112px;
+    padding: 12px 10px 12px 4px;
+    border-right: 1px solid var(--color-border);
+    background: var(--color-bg);
+}
+
+.stickyTitle .projectTitle {
+    display: block;
+    font-size: 21px;
+}
+
+.stickyTitle .date,
+.detailHeading .date {
+    display: block;
+    margin-top: 8px;
+}
+
+.scrollAxis {
+    display: flex;
+    align-items: center;
+}
+
+.scrollAxis span {
+    flex: 0 0 56px;
+    text-align: center;
+}
+
+.scrollTrack {
+    position: relative;
+}
+
+.yearButton {
+    position: absolute;
+    top: 4px;
+    bottom: 0;
+    width: 44px;
+    min-height: 44px;
+    transform: translateX(-50%);
+}
+
+.mobile .yearButton:focus-visible,
+.mobile .stickyTitle a:focus-visible {
+    outline-offset: -2px;
+}
+
+.yearButton[aria-expanded="true"] {
+    box-shadow: inset 0 -2px var(--color-accent);
+}
+
+.detailHeading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.closeButton {
+    min-height: 44px;
+    min-width: 44px;
+    font-size: calc(12px * var(--copy-scale));
+    color: var(--color-accent);
+}
+
+.selector {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.selector button {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    min-height: 56px;
+    padding: 10px;
+    border: 1px solid var(--color-border);
+    font-family: var(--font-display);
+    font-size: 20px;
+    line-height: 1.2;
+    text-align: left;
+    overflow-wrap: anywhere;
+}
+
+.selector button[aria-pressed="true"] {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    background: var(--color-hover-bg);
+}
+
+.verticalScore {
+    position: relative;
+    margin-top: 44px;
+}
+
+.verticalYear {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    padding-left: 44px;
+}
+
+.verticalYear::after {
+    content: "";
+    display: block;
+    height: 1px;
+    background: var(--color-border);
+    opacity: 0.5;
+}
+
+.verticalYear span {
+    position: absolute;
+    left: 0;
+    transform: translateY(-50%);
+}
+
+.lanes {
+    position: absolute;
+    inset: 0 0 0 44px;
+    display: grid;
+}
+
+.lane {
+    position: relative;
+}
+
+.laneNumber {
+    position: absolute;
+    top: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.lane[data-selected] {
+    background: var(--color-hover-bg);
+    box-shadow: inset 1px 0 var(--color-border), inset -1px 0 var(--color-border);
+}
+
+.lane[data-selected] .laneNumber {
+    color: var(--color-accent);
+    font-weight: 500;
+}
+
+.verticalLine,
+.verticalTail,
+.verticalEnd {
+    position: absolute;
+    left: 50%;
+    width: 1px;
+    background: var(--color-text-secondary);
+}
+
+.lane[data-selected] .verticalLine,
+.lane[data-selected] .dot:not([data-current]) {
+    background: var(--color-accent);
+}
+
+.verticalTail {
+    bottom: 0;
+    background: linear-gradient(var(--color-accent), transparent);
+}
+
+.verticalEnd {
+    width: 12px;
+    height: 2px;
+    transform: translate(-50%, -50%);
+}
+
+.lane .dot {
+    transform: translate(-50%, -50%);
+}
+
+@media (min-width: 640px) {
+    .mobile {
+        display: none;
+    }
+}

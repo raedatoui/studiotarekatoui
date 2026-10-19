@@ -14,7 +14,8 @@
                 "media/**",
                 "chronology.html",
                 "chronology.txt",
-                "chronology/**"
+                "chronology/**",
+                "research-lab/**"
             ],
             "cleanUrls": true
         },

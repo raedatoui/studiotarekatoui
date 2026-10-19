@@ -7,3 +7,4 @@ export const site = {
 export const isStaging = process.env.NEXT_PUBLIC_SITE_ENV === 'staging';
 export const showChronology = isStaging || process.env.NODE_ENV === 'development';
 export const showPublications = isStaging || process.env.NODE_ENV === 'development';
+export const showResearchLab = isStaging || process.env.NODE_ENV === 'development';
