@@ -234,9 +234,12 @@ export default function ProjectsHub({ mobileTimelineVariant }: { mobileTimelineV
                                 type="button"
                                 aria-label="Show all projects"
                                 onClick={() => selectProject(null)}
-                                className="research-jump-link min-h-11 cursor-pointer normal-case tracking-normal"
+                                className="flex min-h-11 cursor-pointer items-center gap-2 hover:text-[var(--color-accent)] focus-visible:text-[var(--color-accent)]"
                             >
-                                <span aria-hidden="true">×</span> Show all
+                                <svg aria-hidden="true" className="h-2.5 w-2.5 shrink-0" viewBox="0 0 10 10" fill="none" stroke="currentColor">
+                                    <path d="m1 1 8 8M9 1 1 9" />
+                                </svg>
+                                Show all
                             </button>
                         )}
                     </p>
@@ -293,8 +296,11 @@ export default function ProjectsHub({ mobileTimelineVariant }: { mobileTimelineV
                                 }}
                                 onFocus={() => setHovered(t.document.id)}
                                 onBlur={() => setHovered('')}
-                                className={`group relative w-full cursor-pointer border-b border-[var(--color-border)] py-2 max-sm:py-3.5 text-left transition-colors motion-reduce:transition-none ${SCORE_GRID} sm:items-center hover:bg-[var(--color-hover-bg)] focus-visible:bg-[var(--color-hover-bg)] ${selected ? 'bg-[var(--color-hover-bg)] shadow-[inset_3px_0_var(--color-accent)]' : ''} ${active ? 'z-20' : ''}`}
+                                className={`group relative w-full cursor-pointer border-b border-[var(--color-border)] py-2 max-sm:py-3.5 text-left transition-colors motion-reduce:transition-none ${SCORE_GRID} sm:items-center hover:bg-[var(--color-hover-bg)] focus-visible:bg-[var(--color-hover-bg)] ${selected ? 'bg-[var(--color-hover-bg)]' : ''} ${active ? 'z-20' : ''}`}
                             >
+                                {selected && (
+                                    <span aria-hidden="true" className="absolute inset-y-0 -left-4 w-[3px] bg-[var(--color-accent)]" />
+                                )}
                                 {/* label */}
                                 <div
                                     className="thread-rise flex min-w-0 flex-col items-start gap-1 sm:block"
@@ -516,7 +522,7 @@ export default function ProjectsHub({ mobileTimelineVariant }: { mobileTimelineV
                                         href={`/research/${document.slug}`}
                                         className="research-jump-link mt-7 inline-block font-mono text-[length:calc(11px*var(--copy-scale))] uppercase tracking-[0.18em]"
                                     >
-                                        Explore the project →
+                                        Read more →
                                     </Link>
                                 </aside>
                             </div>
