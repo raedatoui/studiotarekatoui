@@ -35,8 +35,7 @@
     outline-offset: 3px;
 }
 
-.guidance,
-.selectionStatus {
+.guidance {
     margin: 12px 0 20px;
     font-size: calc(12px * var(--copy-scale));
     line-height: 1.6;
@@ -50,6 +49,14 @@
     gap: 8px;
     font-size: calc(10px * var(--copy-scale));
     color: var(--color-text-secondary);
+}
+
+.clearSelection {
+    min-height: 44px;
+    margin-left: 6px;
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 4px;
 }
 
 .legendDot,
@@ -100,7 +107,6 @@
     color: var(--color-text-secondary);
 }
 
-.date[data-current],
 .stackedAxis [data-current],
 .scrollAxis [data-current],
 .verticalYear[data-current] {
@@ -117,8 +123,11 @@
 }
 
 .stackedProject {
+    display: block;
+    width: 100%;
     padding: 20px 0 12px;
     border-bottom: 1px solid var(--color-border);
+    text-align: left;
 }
 
 .projectHeading {
@@ -137,9 +146,19 @@
     text-align: left;
 }
 
-.trackButton[aria-expanded="true"],
-.yearButton[aria-expanded="true"] {
+.stackedProject[aria-pressed="true"],
+.scrollRow[aria-pressed="true"] {
     background: var(--color-hover-bg);
+}
+
+:is(.stackedProject, .scrollRow)[aria-pressed="true"] .projectTitle {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+:is(.stackedProject, .scrollRow)[aria-pressed="true"] :is(.lifeline, .dot:not([data-current])) {
+    background: var(--color-accent);
 }
 
 .horizontalTrack {
@@ -189,45 +208,6 @@
     transform: translateX(-50%);
 }
 
-.disclosureLabel {
-    display: block;
-    margin-top: 4px;
-    font-size: calc(11px * var(--copy-scale));
-    color: var(--color-accent);
-}
-
-.details {
-    margin-top: 16px;
-    padding: 16px 0 8px;
-    border-top: 1px solid var(--color-border);
-    scroll-margin-top: calc(var(--header-height, 64px) + 20px);
-    overflow-wrap: anywhere;
-}
-
-.presentations {
-    margin-top: 16px;
-    list-style: none;
-}
-
-.presentations li {
-    display: grid;
-    grid-template-columns: 40px minmax(0, 1fr);
-    align-items: baseline;
-    gap: 12px;
-    padding: 12px 0;
-    border-top: 1px solid var(--color-border);
-    font-size: calc(12px * var(--copy-scale));
-    line-height: 1.5;
-}
-
-.presentations .date {
-    margin-top: 4px;
-}
-
-.secondary {
-    color: var(--color-text-secondary);
-}
-
 .scroller {
     overflow-x: scroll;
     scrollbar-width: auto;
@@ -252,7 +232,9 @@
 
 .scrollRow {
     display: flex;
+    width: 100%;
     border-bottom: 1px solid var(--color-border);
+    text-align: left;
 }
 
 .stickyTitle {
@@ -271,8 +253,7 @@
     font-size: 21px;
 }
 
-.stickyTitle .date,
-.detailHeading .date {
+.stickyTitle .date {
     display: block;
     margin-top: 8px;
 }
@@ -291,36 +272,13 @@
     position: relative;
 }
 
-.yearButton {
-    position: absolute;
-    top: 4px;
-    bottom: 0;
-    width: 44px;
-    min-height: 44px;
-    transform: translateX(-50%);
-}
-
-.mobile .yearButton:focus-visible,
-.mobile .stickyTitle a:focus-visible {
+.mobile .scrollRow:focus-visible {
     outline-offset: -2px;
 }
 
-.yearButton[aria-expanded="true"] {
-    box-shadow: inset 0 -2px var(--color-accent);
-}
-
-.detailHeading {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 16px;
-}
-
-.closeButton {
-    min-height: 44px;
-    min-width: 44px;
-    font-size: calc(12px * var(--copy-scale));
-    color: var(--color-accent);
+.scrollRow:focus-visible .stickyTitle {
+    outline: 2px solid var(--color-accent);
+    outline-offset: -2px;
 }
 
 .selector {
@@ -393,12 +351,12 @@
     transform: translateX(-50%);
 }
 
-.lane[data-selected] {
+.lane[aria-pressed="true"] {
     background: var(--color-hover-bg);
     box-shadow: inset 1px 0 var(--color-border), inset -1px 0 var(--color-border);
 }
 
-.lane[data-selected] .laneNumber {
+.lane[aria-pressed="true"] .laneNumber {
     color: var(--color-accent);
     font-weight: 500;
 }
@@ -412,8 +370,8 @@
     background: var(--color-text-secondary);
 }
 
-.lane[data-selected] .verticalLine,
-.lane[data-selected] .dot:not([data-current]) {
+.lane[aria-pressed="true"] .verticalLine,
+.lane[aria-pressed="true"] .dot:not([data-current]) {
     background: var(--color-accent);
 }
 

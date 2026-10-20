@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import MediaSlider from '@/components/MediaSlider';
+import VerticalTimeline from '@/components/VerticalTimeline';
 import MobileResearchTimeline, { ResearchLabNavigation, type MobileTimelineVariant } from '@/components/research-lab/MobileResearchTimeline';
 import { useSiteData } from '@/data/SiteDataProvider';
 import type { ResearchInstance } from '@tarek/content';
@@ -89,8 +90,10 @@ export default function ProjectsHub({ mobileTimelineVariant }: { mobileTimelineV
     const allInstances = research.flatMap((document) => document.instances);
     const [hovered, setHovered] = useState('');
     const [mark, setMark] = useState<{ researchId: string; m: ResearchInstance } | null>(null);
+    const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
     const [showBackToTop, setShowBackToTop] = useState(false);
     const mainRef = useRef<HTMLElement>(null);
+    const selectedProject = research.find((document) => document.id === selectedProjectId);
 
     const THIS_YEAR = new Date(exportedAt).getUTCFullYear();
     const allYears = allInstances.map((event) => event.year);
@@ -122,7 +125,7 @@ export default function ProjectsHub({ mobileTimelineVariant }: { mobileTimelineV
     const distinctCities = new Set(allInstances.filter((event) => event.city).map((event) => `${event.city}, ${event.country ?? ''}`));
 
     // Both the score and reading panels follow CMS ordering.
-    const threads = tracks;
+    const threads = selectedProjectId ? tracks.filter((track) => track.document.id === selectedProjectId) : tracks;
 
     useEffect(() => {
         const header = document.querySelector('header');
@@ -155,6 +158,24 @@ export default function ProjectsHub({ mobileTimelineVariant }: { mobileTimelineV
     const goToTop = () => {
         mainRef.current?.focus({ preventScroll: true });
         window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+    };
+
+    const selectProject = (id: string | null) => {
+        setSelectedProjectId(id);
+        setMark(null);
+        if (!id) {
+            document.getElementById('projects')?.focus({ preventScroll: true });
+            return;
+        }
+        // Wait for the filtered panel to mount before moving focus and scrolling.
+        requestAnimationFrame(() => {
+            const project = document.getElementById(`thread-${id}`);
+            project?.focus({ preventScroll: true });
+            project?.scrollIntoView({
+                block: 'start',
+                behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
+            });
+        });
     };
 
     return (
@@ -195,7 +216,7 @@ export default function ProjectsHub({ mobileTimelineVariant }: { mobileTimelineV
                     >
                         Projects
                     </h2>
-                    <p className="hidden flex-wrap gap-x-5 gap-y-2 font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.18em] text-[var(--color-text-secondary)] sm:flex">
+                    <p className={`${mobileTimelineVariant ? 'hidden sm:flex' : 'flex'} flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.18em] text-[var(--color-text-secondary)]`}>
                         <span className="flex items-center gap-2">
                             <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-[var(--color-text-secondary)]" />
                             presentation
@@ -208,8 +229,20 @@ export default function ProjectsHub({ mobileTimelineVariant }: { mobileTimelineV
                             <span aria-hidden="true" className="h-[10px] w-[2px] bg-[var(--color-text-secondary)]" />
                             concluded
                         </span>
+                        {selectedProject && (
+                            <button
+                                type="button"
+                                aria-label="Show all projects"
+                                onClick={() => selectProject(null)}
+                                className="research-jump-link min-h-11 cursor-pointer normal-case tracking-normal"
+                            >
+                                <span aria-hidden="true">×</span> Show all
+                            </button>
+                        )}
                     </p>
                 </div>
+
+                <p className="sr-only" role="status">{selectedProject ? `Showing ${selectedProject.title}` : 'Showing all projects'}</p>
 
                 {mobileTimelineVariant && (
                     <MobileResearchTimeline
@@ -218,6 +251,8 @@ export default function ProjectsHub({ mobileTimelineVariant }: { mobileTimelineV
                         minYear={MIN_YEAR}
                         maxYear={MAX_YEAR}
                         currentYear={THIS_YEAR}
+                        selectedProjectId={selectedProjectId}
+                        onSelectProject={selectProject}
                     />
                 )}
 
@@ -240,13 +275,17 @@ export default function ProjectsHub({ mobileTimelineVariant }: { mobileTimelineV
                 {/* tracks */}
                 <div className={`mt-4 sm:mt-1 ${mobileTimelineVariant ? 'max-sm:hidden' : ''}`}>
                     {tracks.map((t, i) => {
-                        const active = hovered === t.document.id;
+                        const selected = selectedProjectId === t.document.id;
+                        const active = hovered === t.document.id || selected;
                         const left = pos(t.startYear);
                         const width = pos(t.endYear) - left;
                         return (
-                            <a
+                            <button
+                                type="button"
                                 key={t.document.id}
-                                href={`#thread-${t.document.id}`}
+                                aria-pressed={selected}
+                                aria-controls="research-project-view"
+                                onClick={() => selectProject(t.document.id)}
                                 onMouseEnter={() => setHovered(t.document.id)}
                                 onMouseLeave={() => {
                                     setHovered('');
@@ -254,7 +293,7 @@ export default function ProjectsHub({ mobileTimelineVariant }: { mobileTimelineV
                                 }}
                                 onFocus={() => setHovered(t.document.id)}
                                 onBlur={() => setHovered('')}
-                                className={`group relative w-full border-b border-[var(--color-border)] py-2 max-sm:py-3.5 text-left transition-colors motion-reduce:transition-none ${SCORE_GRID} sm:items-center hover:bg-[var(--color-hover-bg)] focus-visible:bg-[var(--color-hover-bg)] ${active ? 'z-20' : ''}`}
+                                className={`group relative w-full cursor-pointer border-b border-[var(--color-border)] py-2 max-sm:py-3.5 text-left transition-colors motion-reduce:transition-none ${SCORE_GRID} sm:items-center hover:bg-[var(--color-hover-bg)] focus-visible:bg-[var(--color-hover-bg)] ${selected ? 'bg-[var(--color-hover-bg)] shadow-[inset_3px_0_var(--color-accent)]' : ''} ${active ? 'z-20' : ''}`}
                             >
                                 {/* label */}
                                 <div
@@ -356,14 +395,14 @@ export default function ProjectsHub({ mobileTimelineVariant }: { mobileTimelineV
                                     ))}
                                     {mark?.researchId === t.document.id && <MarkCard m={mark.m} left={pos(mark.m.year)} />}
                                 </div>
-                            </a>
+                            </button>
                         );
                     })}
                 </div>
             </section>
 
             {/* ── The threads, in full ───────────────────────────────── */}
-            <section className="max-w-[1400px] mx-auto px-[clamp(24px,4vw,64px)]">
+            <section id="research-project-view" className="max-w-[1400px] mx-auto px-[clamp(24px,4vw,64px)]">
                 {threads.map((t) => {
                     const { document } = t;
                     const slides = gallerySlides(document.gallery);
@@ -470,28 +509,7 @@ export default function ProjectsHub({ mobileTimelineVariant }: { mobileTimelineV
                                         <p className="mb-4 font-mono text-[length:calc(10px*var(--copy-scale))] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
                                             Where &amp; when
                                         </p>
-                                        <ol className="space-y-3">
-                                            {t.ms.map((m) => {
-                                                const place = [m.city, m.country].filter(Boolean).join(', ');
-                                                return (
-                                                    <li key={m.id} className="grid grid-cols-[40px_1fr] items-baseline gap-3">
-                                                        <span className="font-mono text-[length:calc(12px*var(--copy-scale))] text-[var(--color-accent)]">
-                                                            {m.year}
-                                                        </span>
-                                                        <span className="text-[length:calc(13px*var(--copy-scale))] leading-snug">
-                                                            {m.title ?? m.organization}
-                                                            <span className="mt-1 block text-[length:calc(12px*var(--copy-scale))] leading-relaxed text-[var(--color-text-secondary)]">
-                                                                {m.kind}
-                                                                {m.status ? ` · ${m.status}` : ''}
-                                                                {m.title && ` · ${m.organization}`}
-                                                                {place && ` — ${place}`}
-                                                                {` · ${m.dateDisplay}`}
-                                                            </span>
-                                                        </span>
-                                                    </li>
-                                                );
-                                            })}
-                                        </ol>
+                                        <VerticalTimeline entries={t.ms} />
                                     </div>
 
                                     <Link
@@ -502,9 +520,6 @@ export default function ProjectsHub({ mobileTimelineVariant }: { mobileTimelineV
                                     </Link>
                                 </aside>
                             </div>
-                            <a href="#projects" className="research-jump-link mt-8 inline-block py-1 text-[length:calc(12px*var(--copy-scale))]">
-                                Back to projects <span aria-hidden="true">↑</span>
-                            </a>
                         </article>
                     );
                 })}

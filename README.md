@@ -41,7 +41,7 @@ The CMS navigation's **Export JSON** action downloads the same published snapsho
 
 ### Mobile research timeline previews
 
-Local development and staging include `/research-lab/stacked`, `/research-lab/scroll`, and `/research-lab/vertical` for comparison. Each uses the complete Research hub and the existing CMS snapshot. The alternative chart appears below 640px; larger screens retain the existing chart. `/research` keeps its default rendering. The previews are noindex, absent from the sitemap and main navigation, and return 404 in production; production Hosting also excludes `research-lab/**`.
+Local development and staging include `/research-lab/stacked`, `/research-lab/scroll`, and `/research-lab/vertical` for comparison. Each uses the Research hub and the existing CMS snapshot. The alternative chart appears below 640px; larger screens retain the existing chart. On `/research` and the lab pages, selecting a project lane filters the existing panels below the chart and scrolls to the selected panel. The legend's “Show all” control clears the selection. Each panel's presentations use the same vertical track as the project detail page; the lab charts do not open additional presentation lists. The previews are noindex, absent from the sitemap and main navigation, and return 404 in production; production Hosting also excludes `research-lab/**`.
 
 ## Content contract and recovery
 
