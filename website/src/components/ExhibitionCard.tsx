@@ -10,7 +10,7 @@ export default function ExhibitionCard({ exhibition, id }: { exhibition: Exhibit
                         <div key={sub.title} className="pl-0">
                             <span className="italic">{sub.title}</span>
                             <span className="text-[var(--color-text-secondary)]">
-                                , {sub.dateDisplay} ({sub.location})
+                                , <span className="whitespace-pre-line">{sub.dateDisplay}</span> ({sub.location})
                             </span>
                         </div>
                     ))}
@@ -21,7 +21,7 @@ export default function ExhibitionCard({ exhibition, id }: { exhibition: Exhibit
                     {exhibition.title && <br />}
                     <span className="font-normal">{exhibition.venue}</span>
                     <br />
-                    <span className="text-[var(--color-text-secondary)]">{exhibition.dateDisplay}</span>
+                    <span className="text-[var(--color-text-secondary)] whitespace-pre-line">{exhibition.dateDisplay}</span>
                     {exhibition.organization && (
                         <>
                             <br />

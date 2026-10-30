@@ -5,6 +5,8 @@ import { PressRowLabel as PressRowLabel_7ee385f53b50372ad7db5b6ebe758cfd } from 
 import { PublishedByCell as PublishedByCell_e3c3c53dc478e919e494823754238cee } from '../../../components/PublicationCells'
 import { UpdatedByCell as UpdatedByCell_e3c3c53dc478e919e494823754238cee } from '../../../components/PublicationCells'
 import { NewsSectionRowLabel as NewsSectionRowLabel_7e1f83cbde081f307968364654593340 } from '../../../components/NewsSectionRowLabel'
+import { NewsExhibitionRowLabel as NewsExhibitionRowLabel_8fa88567033f42b4956b081ad413449d } from '../../../components/NewsExhibitionRowLabel'
+import { NewsSectionsField as NewsSectionsField_a904c0fcbb9ee8e532d296e6ebd067a8 } from '../../../components/NewsSectionsField'
 import { ChronologyProjectsField as ChronologyProjectsField_77a14ed26c6ccda573918226324bb438 } from '../../../components/ChronologyProjectsField'
 import { ChronologyRowLabel as ChronologyRowLabel_a9c0c4ae9d5bc1f63e79d5a6a0d499ae } from '../../../components/ChronologyRowLabel'
 import { ChronologyEditView as ChronologyEditView_5026f404dccc8e60688aac2ddc2cbd29 } from '../../../components/ChronologyEditView'
@@ -28,6 +30,8 @@ export const importMap = {
   "/components/PublicationCells#PublishedByCell": PublishedByCell_e3c3c53dc478e919e494823754238cee,
   "/components/PublicationCells#UpdatedByCell": UpdatedByCell_e3c3c53dc478e919e494823754238cee,
   "/components/NewsSectionRowLabel#NewsSectionRowLabel": NewsSectionRowLabel_7e1f83cbde081f307968364654593340,
+  "/components/NewsExhibitionRowLabel#NewsExhibitionRowLabel": NewsExhibitionRowLabel_8fa88567033f42b4956b081ad413449d,
+  "/components/NewsSectionsField#NewsSectionsField": NewsSectionsField_a904c0fcbb9ee8e532d296e6ebd067a8,
   "/components/ChronologyProjectsField#ChronologyProjectsField": ChronologyProjectsField_77a14ed26c6ccda573918226324bb438,
   "/components/ChronologyRowLabel#ChronologyRowLabel": ChronologyRowLabel_a9c0c4ae9d5bc1f63e79d5a6a0d499ae,
   "/components/ChronologyEditView#ChronologyEditView": ChronologyEditView_5026f404dccc8e60688aac2ddc2cbd29,

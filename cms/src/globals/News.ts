@@ -3,10 +3,17 @@ import type { Field, GlobalConfig } from 'payload';
 import { signedIn } from '../access';
 import { publishedByField } from '../fields/publishedBy';
 
+const sectionItemLabels = {
+    solo: 'Exhibition',
+    group: 'Group exhibition',
+    installations: 'Installation',
+    performances: 'Performance',
+};
+
 const exhibitionFields = (): Field[] => [
     { name: 'venue', type: 'text', required: true },
     { name: 'title', type: 'text' },
-    { name: 'dateDisplay', label: 'Display dates', type: 'text' },
+    { name: 'dateDisplay', label: 'Display dates', type: 'textarea' },
     { name: 'dateStart', label: 'Start date', type: 'date' },
     { name: 'dateEnd', label: 'End date', type: 'date' },
     { name: 'organization', type: 'text' },
@@ -21,11 +28,18 @@ const exhibitionFields = (): Field[] => [
     { name: 'status', type: 'select', options: [...INSTANCE_STATUSES] },
     {
         name: 'subExhibitions',
-        label: 'Shows at this venue',
+        label: 'Sub-exhibitions',
         type: 'array',
+        labels: { singular: 'Sub-exhibition', plural: 'Sub-exhibitions' },
+        admin: {
+            description:
+                'Adding a sub-exhibition replaces the main entry’s title, display dates, organization, location, and featured work on the website. '
+                + 'The venue and exhibition link remain. The main details stay saved and reappear if all sub-exhibitions are removed.',
+            components: { RowLabel: '/components/NewsExhibitionRowLabel#NewsExhibitionRowLabel' },
+        },
         fields: [
             { name: 'title', type: 'text', required: true },
-            { name: 'dateDisplay', label: 'Display dates', type: 'text', required: true },
+            { name: 'dateDisplay', label: 'Display dates', type: 'textarea', required: true },
             { name: 'location', type: 'text', required: true },
         ],
     },
@@ -49,7 +63,8 @@ export const News: GlobalConfig = {
             labels: { singular: 'Section', plural: 'Sections' },
             defaultValue: NEWS_SECTIONS.map((section) => ({ section })),
             admin: {
-                description: 'Drag to reorder the four news sections. Include each section once. Publish and export to update the website.',
+                description:
+                    'Drag to reorder the four news sections and the editors below. Include each section once. Publish and export to update the website.',
                 components: { RowLabel: '/components/NewsSectionRowLabel#NewsSectionRowLabel' },
             },
             validate: (value: unknown) =>
@@ -64,24 +79,32 @@ export const News: GlobalConfig = {
                 },
             ],
         },
-        { name: 'soloHeading', type: 'text', required: true, defaultValue: 'Exhibitions' },
-        { name: 'solo', label: 'Exhibitions', type: 'array', fields: exhibitionFields() },
-        { name: 'groupHeading', type: 'text', required: true, defaultValue: 'Group exhibitions' },
-        { name: 'group', label: 'Group exhibitions', type: 'array', fields: exhibitionFields() },
         {
-            name: 'installationsHeading',
-            label: 'Permanent installations heading',
-            type: 'text',
-            required: true,
-            defaultValue: 'Permanent installations',
+            type: 'row',
+            admin: { components: { Field: '/components/NewsSectionsField#NewsSectionsField' } },
+            fields: NEWS_SECTIONS.map(
+                (section): Field => ({
+                    type: 'group',
+                    label: NEWS_SECTION_LABELS[section],
+                    fields: [
+                        {
+                            name: `${section}Heading`,
+                            label: 'Heading',
+                            type: 'text',
+                            required: true,
+                            defaultValue: NEWS_SECTION_LABELS[section],
+                        },
+                        {
+                            name: section,
+                            label: 'Items',
+                            type: 'array',
+                            labels: { singular: sectionItemLabels[section], plural: NEWS_SECTION_LABELS[section] },
+                            admin: { components: { RowLabel: '/components/NewsExhibitionRowLabel#NewsExhibitionRowLabel' } },
+                            fields: exhibitionFields(),
+                        },
+                    ],
+                })
+            ),
         },
-        {
-            name: 'installations',
-            label: 'Permanent installations',
-            type: 'array',
-            fields: exhibitionFields(),
-        },
-        { name: 'performancesHeading', label: 'Performances heading', type: 'text', required: true, defaultValue: 'Performances' },
-        { name: 'performances', label: 'Performances', type: 'array', fields: exhibitionFields() },
     ],
 };

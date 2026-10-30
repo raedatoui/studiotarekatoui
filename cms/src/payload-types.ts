@@ -480,7 +480,7 @@ export interface News {
   id: string;
   publishedBy?: string | null;
   /**
-   * Drag to reorder the four news sections. Include each section once. Publish and export to update the website.
+   * Drag to reorder the four news sections and the editors below. Include each section once. Publish and export to update the website.
    */
   sectionOrder: {
     section: 'solo' | 'group' | 'installations' | 'performances';
@@ -499,6 +499,9 @@ export interface News {
         work?: string | null;
         url?: string | null;
         status?: ('current' | 'upcoming' | 'past') | null;
+        /**
+         * Adding a sub-exhibition replaces the main entry’s title, display dates, organization, location, and featured work on the website. The venue and exhibition link remain. The main details stay saved and reappear if all sub-exhibitions are removed.
+         */
         subExhibitions?:
           | {
               title: string;
@@ -523,6 +526,9 @@ export interface News {
         work?: string | null;
         url?: string | null;
         status?: ('current' | 'upcoming' | 'past') | null;
+        /**
+         * Adding a sub-exhibition replaces the main entry’s title, display dates, organization, location, and featured work on the website. The venue and exhibition link remain. The main details stay saved and reappear if all sub-exhibitions are removed.
+         */
         subExhibitions?:
           | {
               title: string;
@@ -547,6 +553,9 @@ export interface News {
         work?: string | null;
         url?: string | null;
         status?: ('current' | 'upcoming' | 'past') | null;
+        /**
+         * Adding a sub-exhibition replaces the main entry’s title, display dates, organization, location, and featured work on the website. The venue and exhibition link remain. The main details stay saved and reappear if all sub-exhibitions are removed.
+         */
         subExhibitions?:
           | {
               title: string;
@@ -571,6 +580,9 @@ export interface News {
         work?: string | null;
         url?: string | null;
         status?: ('current' | 'upcoming' | 'past') | null;
+        /**
+         * Adding a sub-exhibition replaces the main entry’s title, display dates, organization, location, and featured work on the website. The venue and exhibition link remain. The main details stay saved and reappear if all sub-exhibitions are removed.
+         */
         subExhibitions?:
           | {
               title: string;
