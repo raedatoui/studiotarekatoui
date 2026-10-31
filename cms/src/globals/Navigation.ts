@@ -15,7 +15,10 @@ export const Navigation: GlobalConfig = {
             required: true,
             minRows: 1,
             labels: { singular: 'Menu item', plural: 'Menu items' },
-            admin: { description: 'Drag to reorder. The same menu appears on desktop and mobile.' },
+            admin: {
+                description: 'Drag to reorder. The same menu appears on desktop and mobile.',
+                components: { RowLabel: '/components/NavigationRowLabel#NavigationRowLabel' },
+            },
             defaultValue: [
                 { label: 'Research', href: '/research', external: false },
                 { label: 'News', href: '/news', external: false },
