@@ -22,6 +22,9 @@ const nextConfig: NextConfig = {
     turbopack: {
         root: path.resolve(dirname, '..'),
     },
+    experimental: {
+        agentUpgrade: 'security',
+    },
 };
 
 export default withPayload(nextConfig, { devBundleServerPackages: false });
