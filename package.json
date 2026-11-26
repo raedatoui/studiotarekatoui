@@ -16,6 +16,8 @@
         "deploy:web:staging": "node scripts/deploy.mjs staging",
         "deploy:web:prod": "node scripts/deploy.mjs prod",
         "deploy:cms": "pnpm --filter @tarek/cms run deploy",
+        "publish:web:staging": "node scripts/publish.mjs staging",
+        "publish:web:prod": "node scripts/publish.mjs prod",
         "content:export": "tsx cms/scripts/export-content.ts",
         "content:validate": "tsx packages/content/src/validate.ts",
         "content:import": "tsx cms/scripts/import-content.ts",

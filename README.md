@@ -119,7 +119,14 @@ pnpm deploy:web:prod
 
 Each command builds the local checkout using the existing `website/src/data/generated/content.json`, then deploys only its configured Hosting site in `FIREBASE_PROJECT_ID`. Site IDs come from `FIREBASE_HOSTING_SITE_PROD` and `FIREBASE_HOSTING_SITE_STAGING`; the CMS backend comes from `FIREBASE_APPHOSTING_BACKEND_ID`. Staging sets `NEXT_PUBLIC_SITE_ENV=staging` for noindex output; production explicitly sets it to `production`. A failed build stops deployment. Run `content:export` first when you want fresh published CMS content; deploy commands do not re-export it.
 
-Cloud Build, GitHub setup, and Payload staging/production controls remain deferred to Phases 2 and 4. These commands deploy local code, including uncommitted changes. There are no GitHub Actions workflows.
+These commands deploy local code, including uncommitted changes. To build in Cloud Build instead:
+
+```sh
+pnpm publish:web:staging
+pnpm publish:web:prod
+```
+
+Each command uploads the existing generated snapshot to the private `PUBLISH_BUCKET` and runs the matching Cloud Build trigger in `PUBLISH_REGION`. The trigger checks out the pushed head of `main` from GitHub, not the local checkout, and runs the same `scripts/deploy.mjs` for that Hosting target. Build settings come from the `website-build-env` secret rather than local environment files. One-time setup and troubleshooting are in `infra/README.md`. Payload staging/production controls remain deferred. There are no GitHub Actions workflows.
 
 ## Sharing source
 

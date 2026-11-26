@@ -45,7 +45,8 @@ if (target === 'cms') {
     only = 'hosting';
     env.NEXT_PUBLIC_SITE_ENV = target === 'staging' ? 'staging' : 'production';
     env.NEXT_PUBLIC_CMS_ORIGIN = required('CMS_AUTH_URL');
-    if (target === 'staging') {
+    // Cloud Build supplies the list from Secret Manager; local deployments read it here.
+    if (target === 'staging' && !process.env.STAGING_ALLOWED_EMAILS?.trim()) {
         // Share only the approved email list; staging uses its own Firebase Auth session.
         const [secret, version = 'latest'] = required('CMS_ALLOWED_EMAILS_REF').split('@');
         const result = spawnSync('gcloud', ['secrets', 'versions', 'access', version, '--secret', secret, '--project', project], {

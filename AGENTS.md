@@ -9,5 +9,5 @@ Studio Tarek Atoui is a pnpm monorepo: `cms/` (Payload), `website/` (static Next
 - Use the root Biome style: four spaces, single quotes, semicolons, ES5 trailing commas, 150 columns. Keep formatting-only changes separate. Generated files and SCSS are excluded.
 - Public content comes only from a validated CMS snapshot at website/src/data/generated/content.json. No runtime content fetch, legacy fallback, or website database client.
 - Credentials, snapshots, public media working files, build output, and caches stay ignored. Backups and scratch output go under ~/tmp, never /tmp.
-- Keep CMS authentication and the existing CDN/database/cloud resources intact. Cloud website publishing is deferred.
+- Keep CMS authentication and the existing CDN/database/cloud resources intact. Cloud Build website publishing is started locally with `pnpm publish:web:*` (see infra/README.md); CMS publishing controls are deferred.
 - Preserve author information in history. Never add agent attribution to commits.

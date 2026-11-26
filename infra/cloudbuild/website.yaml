@@ -1,0 +1,47 @@
+# Builds the static website from one private CMS snapshot and deploys one Firebase Hosting target.
+# Started by the website-staging and website-prod triggers; see infra/README.md.
+steps:
+  - id: snapshot
+    name: gcr.io/google.com/cloudsdktool/google-cloud-cli:slim
+    entrypoint: bash
+    env:
+      - SNAPSHOT=$_SNAPSHOT
+    args:
+      - -c
+      - |
+        set -euo pipefail
+        mkdir -p website/src/data/generated
+        gcloud storage cp "$$SNAPSHOT" website/src/data/generated/content.json
+
+  - id: deploy
+    name: node:24.22.0
+    entrypoint: bash
+    env:
+      - TARGET=$_TARGET
+      - FIREBASE_PROJECT_ID=$PROJECT_ID
+      - COREPACK_ENABLE_DOWNLOAD_PROMPT=0
+    secretEnv:
+      - BUILD_ENV
+      - STAGING_ALLOWED_EMAILS
+    args:
+      - -c
+      - |
+        set -euo pipefail
+        # deploy.mjs loads this file the same way it loads the workspace .env locally.
+        printf '%s\n' "$$BUILD_ENV" > .env
+        # Only staging renders the sign-in gate; keep the email list out of production builds.
+        if [ "$$TARGET" != staging ]; then unset STAGING_ALLOWED_EMAILS; fi
+        corepack enable
+        pnpm install --frozen-lockfile
+        node scripts/deploy.mjs "$$TARGET"
+
+availableSecrets:
+  secretManager:
+    - versionName: projects/$PROJECT_ID/secrets/website-build-env/versions/latest
+      env: BUILD_ENV
+    - versionName: projects/$PROJECT_ID/secrets/$_ALLOWED_EMAILS_SECRET/versions/latest
+      env: STAGING_ALLOWED_EMAILS
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+timeout: 1200s
