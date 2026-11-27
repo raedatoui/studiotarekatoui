@@ -12,6 +12,16 @@ type StepState = { style: 'error' | 'light-gray' | 'success' | 'warning'; label:
 
 const siteLabels = { staging: 'Staging', prod: 'Production' };
 const changeLabels = { added: 'Added', removed: 'Removed', moved: 'Order changed' };
+// Step ids from infra/cloudbuild/website.yaml.
+const stepLabels: Record<string, string> = {
+    snapshot: 'Fetching the published content',
+    deploy: 'Building the website and uploading it',
+};
+
+function duration(milliseconds: number) {
+    const seconds = Math.round(milliseconds / 1000);
+    return seconds < 60 ? `${seconds} s` : `${Math.floor(seconds / 60)} min ${seconds % 60} s`;
+}
 
 function resultLabel(build: BuildSummary) {
     if (build.active) return 'In progress';
@@ -24,6 +34,27 @@ function LastPublished({ build }: { build: BuildSummary }) {
         <>
             Last published <PublicationDate value={build.createdAt} /> by {build.requestedBy || 'the command line'}.
         </>
+    );
+}
+
+/** Follows a running build: the step Cloud Build reports, and the time so far against the last successful publish. */
+function Progress({ build, last }: { build: BuildSummary; last?: BuildSummary }) {
+    const [now, setNow] = useState(Date.now);
+    useEffect(() => {
+        const timer = setInterval(() => setNow(Date.now()), 1000);
+        return () => clearInterval(timer);
+    }, []);
+    const elapsed = build.createdAt ? Math.max(0, now - Date.parse(build.createdAt)) : 0;
+    const usual = last?.createdAt && last.finishedAt ? Date.parse(last.finishedAt) - Date.parse(last.createdAt) : 0;
+    const stage = build.step ? (stepLabels[build.step] ?? build.step) : build.status === 'WORKING' ? '' : 'Waiting to start';
+
+    return (
+        <Banner type="info">
+            <strong>Publishing to {siteLabels[build.target].toLowerCase()}…</strong> {stage && `${stage}. `}
+            {duration(elapsed)} so far{usual > 0 ? `; the last publish took ${duration(usual)}` : '; this usually takes two to three minutes'}.
+            Started <PublicationDate value={build.createdAt} /> by {build.requestedBy || 'the command line'}.
+            {usual > 0 && <progress max={usual} value={Math.min(elapsed, usual)} />}
+        </Banner>
     );
 }
 
@@ -123,6 +154,8 @@ export function PublishPanel() {
         production = { style: 'success', label: 'Up to date' };
         productionNote = 'The public website already shows what is on staging.';
     }
+    if (running?.target === 'staging') staging = { style: 'warning', label: 'Publishing…' };
+    if (running?.target === 'prod') production = { style: 'warning', label: 'Publishing…' };
 
     return (
         <div className="studio-publish">
@@ -131,13 +164,7 @@ export function PublishPanel() {
                     <Banner type="error">{error}</Banner>
                 </div>
             )}
-            {running && (
-                <Banner type="info">
-                    <strong>Publishing to {siteLabels[running.target].toLowerCase()}…</strong> Started{' '}
-                    <PublicationDate value={running.createdAt} /> by {running.requestedBy || 'the command line'}. This usually takes two to three
-                    minutes.
-                </Banner>
-            )}
+            {running && <Progress build={running} last={status.builds.find((build) => build.status === 'SUCCESS' && build.finishedAt)} />}
 
             <section className="studio-publish__step">
                 <div className="studio-publish__header">

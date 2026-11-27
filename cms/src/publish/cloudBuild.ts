@@ -13,6 +13,9 @@ export type BuildSummary = {
     status: string;
     active: boolean;
     createdAt?: string;
+    finishedAt?: string;
+    /** The build step Cloud Build reports as running. */
+    step?: string;
     requestedBy?: string;
     snapshot?: string;
     commit?: string;
@@ -23,6 +26,8 @@ type CloudBuild = {
     id: string;
     status: string;
     createTime?: string;
+    finishTime?: string;
+    steps?: { id?: string; status?: string }[];
     failureInfo?: { detail?: string };
     substitutions?: Record<string, string>;
 };
@@ -52,6 +57,8 @@ function summarize(build: CloudBuild, target: Target): BuildSummary {
         status: build.status,
         active: activeStatuses.includes(build.status),
         createdAt: build.createTime,
+        finishedAt: build.finishTime,
+        step: build.steps?.find((step) => step.status === 'WORKING')?.id,
         requestedBy: substitutions._REQUESTED_BY,
         snapshot: substitutions._SNAPSHOT,
         commit: substitutions.COMMIT_SHA,
