@@ -33,6 +33,7 @@ const nextConfig: NextConfig = {
     transpilePackages: ['@tarek/content'],
     turbopack: { root: path.resolve(appDir, '..') },
     images: { unoptimized: true },
+    experimental: { agentUpgrade: 'security' },
 };
 
 export default nextConfig;
