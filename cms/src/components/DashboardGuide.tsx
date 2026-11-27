@@ -67,8 +67,9 @@ export function DashboardGuide({ payload }: ServerProps) {
                 for both desktop and mobile.
             </p>
             <p>
-                <strong>Publishing workflow:</strong> Save and review drafts → publish approved content → export fresh content with{' '}
-                <strong>Export JSON</strong> → rebuild and deploy the website. Publishing in the CMS alone does not immediately update the website.
+                <strong>Publishing workflow:</strong> Save and review drafts → publish approved content → open{' '}
+                <Link href={`${admin}/publish`} prefetch={false}>Publish website</Link> to review the changes → publish to staging → publish to
+                production. Publishing in the CMS alone does not immediately update the website.
             </p>
             <p>
                 <strong>Test site and public site:</strong> We use a test site, called <strong>staging</strong>, so the team can review new pages and

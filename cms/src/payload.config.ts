@@ -17,13 +17,14 @@ import { News } from './globals/News';
 import { Chronology } from './globals/Chronology';
 import { exportEndpoint } from './content/exportEndpoint';
 import { uploadEndpoint } from './media/uploadEndpoint';
+import { publishEndpoints } from './publish/endpoints';
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default buildConfig({
     serverURL,
     csrf: [serverURL],
-    endpoints: [exportEndpoint, uploadEndpoint],
+    endpoints: [exportEndpoint, uploadEndpoint, ...publishEndpoints],
     admin: {
         user: Users.slug,
         autoRefresh: false,
@@ -50,9 +51,10 @@ export default buildConfig({
             beforeDashboard: ['/components/DashboardGuide#DashboardGuide'],
             afterDashboard: ['/components/DashboardPages#DashboardPages', '/components/ChronologyCreateButton#ChronologyCreateButton'],
             beforeNavLinks: ['/components/HomeNav#HomeNav'],
-            afterNavLinks: ['/components/PagesNav#PagesNav', '/components/ExportContent#ExportContent'],
+            afterNavLinks: ['/components/PagesNav#PagesNav', '/components/PublishNav#PublishNav', '/components/ExportContent#ExportContent'],
             views: {
                 pages: { Component: '/components/PagesView#PagesView', path: '/pages', exact: true, meta: { title: 'Pages' } },
+                publish: { Component: '/components/PublishView#PublishView', path: '/publish', exact: true, meta: { title: 'Publish website' } },
                 login: { Component: '/components/GoogleLogin#GoogleLogin', path: '/login' },
                 logout: { Component: '/components/GoogleLogout#GoogleLogout', path: '/logout' },
                 inactivity: { Component: '/components/GoogleLogout#GoogleLogout', path: '/logout-inactivity' },

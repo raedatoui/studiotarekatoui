@@ -242,6 +242,7 @@ export interface Publication {
    * Private source notes for editorial review.
    */
   editorialNotes?: string | null;
+  publishedBy?: string | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -414,6 +415,7 @@ export interface PublicationsSelect<T extends boolean = true> {
   body?: T;
   sourceURL?: T;
   editorialNotes?: T;
+  publishedBy?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -714,6 +716,7 @@ export interface Contact {
  */
 export interface Navigation {
   id: string;
+  publishedBy?: string | null;
   /**
    * Drag to reorder. The same menu appears on desktop and mobile.
    */
@@ -953,6 +956,7 @@ export interface ContactSelect<T extends boolean = true> {
  * via the `definition` "navigation_select".
  */
 export interface NavigationSelect<T extends boolean = true> {
+  publishedBy?: T;
   items?:
     | T
     | {

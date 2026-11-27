@@ -30,6 +30,10 @@ Cloud Build builds the pushed head of `main`, never the local checkout. The snap
 `website-build` receives Firebase Hosting Admin and Logs Writer on the project, object read on the bucket, and secret access to
 `website-build-env` and the CMS email-list secret.
 
+The CMS publishes as its App Hosting runtime identity, `firebase-app-hosting-compute`. It receives Cloud Build Editor on the project
+(to start the triggers and read build history; this role can start any build in the project), Service Account User on `website-build`
+only, and object create and read on the bucket.
+
 ## One-time setup
 
 Prerequisites:
@@ -88,7 +92,17 @@ gcloud secrets versions add website-build-env --data-file ~/tmp/website-build.en
 
 Roll back a release from the Firebase Hosting console's release history.
 
-## Not included yet
+## Publishing from the CMS
 
-Publishing from the CMS, and pinning production to the snapshot and commit that staging built. Both commands currently build the current
-`main` with the snapshot you upload.
+The CMS **Publish website** page uses the same bucket and triggers. It compares the currently published CMS content with the snapshot
+staging was last built from and lists the differences field by field, with when each changed page or document was last published and
+by whom. **Publish to staging** exports a new snapshot and runs
+`website-staging`. **Publish to production** is available only when staging is up to date with the published content; it runs
+`website-prod` with the staged snapshot at the staged commit, so production gets exactly what was reviewed. A sidebar flag shows when
+published content is not on staging. Saved drafts are listed but never built.
+
+The CMS needs `PUBLISH_PROJECT`, `PUBLISH_REGION`, and `PUBLISH_BUCKET`: in `cms/.env` locally, and rendered from the root `.env` into
+`cms/apphosting.yaml` when deployed. After pulling this feature, re-run `bash infra/setup.sh` for the CMS grants, then `pnpm deploy:cms`.
+
+Build history is the release log, so command-line publishes appear on the page too. The command-line commands still build the current
+`main` with the snapshot you upload and are not pinned to staging.

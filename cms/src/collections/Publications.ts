@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload';
 import { contentAccess } from '../access';
+import { publishedByField } from '../fields/publishedBy';
 
 export const Publications: CollectionConfig = {
     slug: 'publications',
@@ -39,5 +40,6 @@ export const Publications: CollectionConfig = {
         { name: 'body', label: 'Body copy', type: 'textarea', required: true },
         { name: 'sourceURL', label: 'Source publication page', type: 'text', required: true, unique: true },
         { name: 'editorialNotes', type: 'textarea', admin: { description: 'Private source notes for editorial review.' } },
+        publishedByField(),
     ],
 };

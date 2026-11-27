@@ -67,6 +67,14 @@ for secret in "$env_secret" "$emails_secret"; do
     gc secrets add-iam-policy-binding "$secret" --member "$member" --role roles/secretmanager.secretAccessor >/dev/null
 done
 
+# The CMS publishes as its App Hosting runtime identity: it writes and reads snapshots and starts the two triggers.
+cms_member="serviceAccount:firebase-app-hosting-compute@$project.iam.gserviceaccount.com"
+gc projects add-iam-policy-binding "$project" --member "$cms_member" --role roles/cloudbuild.builds.editor --condition None >/dev/null
+gc iam service-accounts add-iam-policy-binding "$account" --member "$cms_member" --role roles/iam.serviceAccountUser >/dev/null
+for role in roles/storage.objectCreator roles/storage.objectViewer; do
+    gc storage buckets add-iam-policy-binding "$bucket" --member "$cms_member" --role "$role" >/dev/null
+done
+
 stage() {
     gc builds connections describe "$connection" --region "$region" --format 'value(installationState.stage)' 2>/dev/null || true
 }

@@ -1,6 +1,7 @@
 import { navigationLinkSchema } from '@tarek/content';
 import type { GlobalConfig } from 'payload';
 import { signedIn } from '../access';
+import { publishedByField } from '../fields/publishedBy';
 
 export const Navigation: GlobalConfig = {
     slug: 'navigation',
@@ -9,6 +10,7 @@ export const Navigation: GlobalConfig = {
     access: { read: signedIn, update: signedIn, readVersions: signedIn },
     versions: { drafts: true, max: 30 },
     fields: [
+        publishedByField(),
         {
             name: 'items',
             type: 'array',

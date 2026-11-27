@@ -126,7 +126,7 @@ pnpm publish:web:staging
 pnpm publish:web:prod
 ```
 
-Each command uploads the existing generated snapshot to the private `PUBLISH_BUCKET` and runs the matching Cloud Build trigger in `PUBLISH_REGION`. The trigger checks out the pushed head of `main` from GitHub, not the local checkout, and runs the same `scripts/deploy.mjs` for that Hosting target. Build settings come from the `website-build-env` secret rather than local environment files. One-time setup and troubleshooting are in `infra/README.md`. Payload staging/production controls remain deferred. There are no GitHub Actions workflows.
+Each command uploads the existing generated snapshot to the private `PUBLISH_BUCKET` and runs the matching Cloud Build trigger in `PUBLISH_REGION`. The trigger checks out the pushed head of `main` from GitHub, not the local checkout, and runs the same `scripts/deploy.mjs` for that Hosting target. Build settings come from the `website-build-env` secret rather than local environment files. One-time setup and troubleshooting are in `infra/README.md`. Editors can do the same from the CMS **Publish website** page: it lists the published changes that are not on staging, publishes them to staging, and then publishes that exact staged snapshot and commit to production. There are no GitHub Actions workflows.
 
 ## Sharing source
 

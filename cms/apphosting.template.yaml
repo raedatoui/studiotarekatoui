@@ -49,3 +49,15 @@ env:
     value: ${CMS_MEDIA_BASE_URL}
     availability:
       - RUNTIME
+  - variable: PUBLISH_PROJECT
+    value: ${FIREBASE_PROJECT_ID}
+    availability:
+      - RUNTIME
+  - variable: PUBLISH_REGION
+    value: ${PUBLISH_REGION}
+    availability:
+      - RUNTIME
+  - variable: PUBLISH_BUCKET
+    value: ${PUBLISH_BUCKET}
+    availability:
+      - RUNTIME
