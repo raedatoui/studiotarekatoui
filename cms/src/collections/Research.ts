@@ -10,6 +10,7 @@ export const Research: CollectionConfig = {
         useAsTitle: 'title',
         group: 'Content',
         defaultColumns: ['title', 'slug', 'ongoing', '_status', 'updatedAt', 'lastPublishedAt'],
+        components: { edit: { beforeDocumentControls: ['/components/DraftChanges#DraftChanges'] } },
     },
     orderable: true,
     hooks: {

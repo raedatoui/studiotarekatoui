@@ -144,16 +144,34 @@
   }
 }
 
-.studio-dashboard-guide {
-  font-size: 1.125rem;
+.studio-home {
+  display: grid;
+  gap: 16px;
   margin-bottom: 32px;
-  padding: 24px;
-  border: 1px solid var(--theme-elevation-200);
-  border-radius: 4px;
-  background: var(--theme-elevation-50);
+  font-size: 1.125rem;
 
-  h2 { margin: 0 0 12px; }
-  p { margin: 12px 0; line-height: 1.6; }
+  h2 { margin: 0; font-size: 1.25rem; font-weight: 600; }
+  p { max-width: 75ch; margin: 0; line-height: 1.6; }
+  a { text-decoration: underline; text-underline-offset: 3px; }
+  ul { margin: 0; padding-left: 20px; }
+  li { margin: 4px 0; line-height: 1.6; }
+
+  &__drafts {
+    display: grid;
+    gap: 10px;
+    padding: 24px;
+    border: 1px solid var(--theme-elevation-200);
+    border-radius: 10px;
+    background: var(--theme-elevation-50);
+  }
+}
+
+.studio-guide {
+  max-width: 920px;
+  padding-bottom: 48px;
+  font-size: 1.125rem;
+
+  p { max-width: 75ch; margin: 12px 0; line-height: 1.6; }
   a { text-decoration: underline; }
 
   &__table {
@@ -338,4 +356,83 @@
     display: grid;
     gap: 10px;
   }
+}
+
+// Payload sizes drawers to nearly the full window and blurs what is behind them.
+// This one stays a side panel, with the edit form still readable next to it.
+.studio-draft-drawer {
+  .drawer__blur-bg { display: none; }
+  .drawer__content-children { padding: 0 28px 48px; }
+
+  .drawer__content {
+    flex-shrink: 0;
+    width: min(620px, 100%) !important;
+  }
+}
+
+.studio-draft {
+  display: grid;
+  gap: 20px;
+  line-height: 1.6;
+
+  p { margin: 0; }
+  .banner { margin: 0; }
+
+  ul {
+    display: grid;
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    &:empty { display: none; }
+  }
+
+  // The first level follows the form's fields; each level below is a list row or a group inside it.
+  > ul > li + li {
+    padding-top: 16px;
+    border-top: 1px solid var(--theme-elevation-150);
+  }
+
+  li ul {
+    gap: 12px;
+    margin-top: 10px;
+    padding-left: 14px;
+    border-left: 2px solid var(--theme-elevation-150);
+  }
+
+  &__meta { color: var(--theme-elevation-700); }
+
+  &__label {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+  }
+
+  dl {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    gap: 4px 14px;
+    margin: 4px 0 0;
+  }
+
+  dt { color: var(--theme-elevation-700); }
+  dd { margin: 0; }
+  dd em { color: var(--theme-elevation-500); }
+  li p { margin-top: 4px; }
+  li p, dd { white-space: pre-wrap; overflow-wrap: anywhere; }
+
+  del, ins {
+    padding: 1px 3px;
+    border-radius: 3px;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+
+    &:empty { display: none; }
+  }
+
+  del { background: var(--theme-error-100); }
+  ins { background: var(--theme-success-100); text-decoration: none; }
 }

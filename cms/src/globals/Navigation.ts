@@ -6,7 +6,7 @@ import { publishedByField } from '../fields/publishedBy';
 export const Navigation: GlobalConfig = {
     slug: 'navigation',
     label: 'Navigation',
-    admin: { group: 'Website' },
+    admin: { group: 'Website', components: { elements: { beforeDocumentControls: ['/components/DraftChanges#DraftChanges'] } } },
     access: { read: signedIn, update: signedIn, readVersions: signedIn },
     versions: { drafts: true, max: 30 },
     fields: [

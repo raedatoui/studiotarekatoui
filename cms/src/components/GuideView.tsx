@@ -1,17 +1,16 @@
-import { Link } from '@payloadcms/ui';
-import type { ServerProps } from 'payload';
+import { DefaultTemplate } from '@payloadcms/next/templates';
+import { Gutter, Link, SetStepNav } from '@payloadcms/ui';
+import type { AdminViewServerProps } from 'payload';
 
-export function DashboardGuide({ payload }: ServerProps) {
-    const admin = payload.config.routes.admin;
-
+function Guide({ admin }: { admin: string }) {
     return (
-        <section className="studio-dashboard-guide" aria-labelledby="studio-dashboard-guide-title">
-            <h2 id="studio-dashboard-guide-title">Managing content and pages</h2>
+        <section className="studio-guide" aria-labelledby="studio-guide-title">
+            <h1 id="studio-guide-title">Managing content and pages</h1>
             <p>
                 Use <strong>Content</strong> to add and edit individual records. Use <strong>Pages</strong> to change the headings and introductions
                 around those records.
             </p>
-            <div className="studio-dashboard-guide__table" role="region" aria-label="Content and page editors" tabIndex={0}>
+            <div className="studio-guide__table" role="region" aria-label="Content and page editors" tabIndex={0}>
                 <table>
                     <thead>
                         <tr>
@@ -91,5 +90,21 @@ export function DashboardGuide({ payload }: ServerProps) {
                 in each entry.
             </p>
         </section>
+    );
+}
+
+export function GuideView(props: AdminViewServerProps) {
+    const {
+        initPageResult: { req, permissions, visibleEntities },
+        payload,
+    } = props;
+
+    return (
+        <DefaultTemplate {...props} req={req} permissions={permissions} visibleEntities={visibleEntities}>
+            <SetStepNav nav={[{ label: 'Managing content and pages' }]} />
+            <Gutter>
+                <Guide admin={payload.config.routes.admin} />
+            </Gutter>
+        </DefaultTemplate>
     );
 }

@@ -4,7 +4,7 @@ import { publishedByField } from '../fields/publishedBy';
 
 export const About: GlobalConfig = {
     slug: 'about',
-    admin: { group: false },
+    admin: { group: false, components: { elements: { beforeDocumentControls: ['/components/DraftChanges#DraftChanges'] } } },
     access: { read: signedIn, update: signedIn, readVersions: signedIn },
     versions: { drafts: true, max: 30 },
     fields: [

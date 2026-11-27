@@ -8,6 +8,7 @@ export const PublicationsPage: GlobalConfig = {
     admin: {
         group: false,
         description: 'The heading and introduction above the publications list. Currently visible in local development and on the staging website.',
+        components: { elements: { beforeDocumentControls: ['/components/DraftChanges#DraftChanges'] } },
     },
     access: { read: signedIn, update: signedIn, readVersions: signedIn },
     versions: { drafts: true, max: 30 },

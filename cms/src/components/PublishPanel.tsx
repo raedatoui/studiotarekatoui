@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from 'react';
 import type { BuildSummary } from '../publish/cloudBuild';
 import type { PublishStatus } from '../publish/endpoints';
 import { PublicationDate } from './PublicationCells';
+import { SavedDrafts } from './SavedDrafts';
 
 type StepState = { style: 'error' | 'light-gray' | 'success' | 'warning'; label: string };
 
@@ -242,15 +243,7 @@ export function PublishPanel() {
                         These are not changes waiting to be published. They have edits saved as drafts in the CMS, and the website leaves drafts out.
                         Publish one in the CMS and it will appear above as a change.
                     </p>
-                    <ul>
-                        {drafts.map((draft) => (
-                            <li key={draft.href}>
-                                <Link href={`${admin}${draft.href}`} prefetch={false}>
-                                    {draft.label}
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
+                    <SavedDrafts admin={admin} drafts={drafts} />
                 </section>
             )}
 

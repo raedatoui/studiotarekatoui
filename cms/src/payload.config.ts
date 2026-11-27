@@ -48,13 +48,19 @@ export default buildConfig({
             },
         },
         components: {
-            beforeDashboard: ['/components/DashboardGuide#DashboardGuide'],
+            beforeDashboard: ['/components/DashboardDrafts#DashboardDrafts'],
             afterDashboard: ['/components/DashboardPages#DashboardPages', '/components/ChronologyCreateButton#ChronologyCreateButton'],
             beforeNavLinks: ['/components/HomeNav#HomeNav'],
             afterNavLinks: ['/components/PagesNav#PagesNav', '/components/PublishNav#PublishNav', '/components/ExportContent#ExportContent'],
             views: {
                 pages: { Component: '/components/PagesView#PagesView', path: '/pages', exact: true, meta: { title: 'Pages' } },
                 publish: { Component: '/components/PublishView#PublishView', path: '/publish', exact: true, meta: { title: 'Publish website' } },
+                guide: {
+                    Component: '/components/GuideView#GuideView',
+                    path: '/guide',
+                    exact: true,
+                    meta: { title: 'Managing content and pages' },
+                },
                 login: { Component: '/components/GoogleLogin#GoogleLogin', path: '/login' },
                 logout: { Component: '/components/GoogleLogout#GoogleLogout', path: '/logout' },
                 inactivity: { Component: '/components/GoogleLogout#GoogleLogout', path: '/logout-inactivity' },

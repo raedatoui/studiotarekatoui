@@ -18,6 +18,7 @@ export const Chronology: GlobalConfig = {
         group: 'Content',
         description: 'The full project timeline. Currently visible in local development and on the staging website.',
         components: {
+            elements: { beforeDocumentControls: ['/components/DraftChanges#DraftChanges'] },
             views: {
                 edit: {
                     default: { Component: '/components/ChronologyEditView#ChronologyEditView' },

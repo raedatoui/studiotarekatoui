@@ -5,7 +5,7 @@ import { publishedByField } from '../fields/publishedBy';
 export const ResearchPage: GlobalConfig = {
     slug: 'research-page',
     label: 'Research page',
-    admin: { group: false },
+    admin: { group: false, components: { elements: { beforeDocumentControls: ['/components/DraftChanges#DraftChanges'] } } },
     access: { read: signedIn, update: signedIn, readVersions: signedIn },
     versions: { drafts: true, max: 30 },
     fields: [

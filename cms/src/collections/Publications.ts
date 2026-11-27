@@ -10,6 +10,7 @@ export const Publications: CollectionConfig = {
         group: 'Content',
         defaultColumns: ['title', 'year', 'price', 'availability', '_status'],
         description: 'Books and records on the staging Publications page. Prices are in euros; checkout is not configured.',
+        components: { edit: { beforeDocumentControls: ['/components/DraftChanges#DraftChanges'] } },
     },
     access: contentAccess,
     versions: { drafts: true, maxPerDoc: 30 },

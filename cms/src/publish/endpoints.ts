@@ -1,9 +1,10 @@
-import type { Endpoint, Payload, PayloadRequest } from 'payload';
+import type { Endpoint, Field, Payload, PayloadRequest } from 'payload';
 import { isAllowedEmail, serverURL } from '../auth/settings';
 import { ContentExportError, exportContent } from '../content/export';
 import { cmsPages } from '../globals/pages';
 import { type BuildSummary, listBuilds, PublishError, readSnapshot, runTrigger, saveSnapshot } from './cloudBuild';
 import { type ChangeGroup, diffSnapshots } from './diff';
+import { type DraftChange, diffDraft } from './draftDiff';
 
 type Publication = { publishedAt: string; publishedBy: string };
 
@@ -23,6 +24,14 @@ export type PublishStatus = {
     /** Saved drafts, which builds leave out. `href` is relative to the admin route. */
     drafts: { label: string; href: string }[];
     exportError: string;
+};
+
+export type DraftStatus = {
+    /** The saved draft compared with the published version, in the order of the edit form. */
+    changes: DraftChange[];
+    publishedAt: string;
+    publishedBy: string;
+    savedAt: string;
 };
 
 const noStore = { 'Cache-Control': 'no-store' };
@@ -72,7 +81,7 @@ async function publishState(payload: Payload) {
     };
 }
 
-async function findDrafts(payload: Payload): Promise<PublishStatus['drafts']> {
+export async function findDrafts(payload: Payload): Promise<PublishStatus['drafts']> {
     const [research, publications, globals] = await Promise.all([
         payload.find({
             collection: 'research',
@@ -153,6 +162,34 @@ async function findPublished(payload: Payload): Promise<Map<string, Publication>
     ]);
 }
 
+/** Compares one page or document's saved draft with its published version. */
+async function draftStatus({ payload, query }: PayloadRequest): Promise<DraftStatus | null> {
+    type Doc = { updatedAt?: string | null; publishedBy?: string | null };
+    const compare = (fields: Field[], published: Doc, draft: Doc): DraftStatus => ({
+        changes: diffDraft(fields, published, draft),
+        // Drafts live in versions; the main document keeps the last published timestamp.
+        publishedAt: published.updatedAt ?? '',
+        publishedBy: published.publishedBy ?? '',
+        savedAt: draft.updatedAt ?? '',
+    });
+    const collection = (['research', 'publications'] as const).find((slug) => slug === query.collection);
+    const id = typeof query.id === 'string' ? query.id : '';
+    if (collection && id) {
+        const [published, draft] = await Promise.all([
+            payload.findByID({ collection, id, draft: false, depth: 0, overrideAccess: true }),
+            payload.findByID({ collection, id, draft: true, depth: 0, overrideAccess: true }),
+        ]);
+        return compare(payload.collections[collection].config.fields, published, draft);
+    }
+    const page = globalPages.find(({ slug }) => slug === query.global);
+    if (!page) return null;
+    const [published, draft] = await Promise.all([
+        payload.findGlobal({ slug: page.slug, draft: false, depth: 0, overrideAccess: true }),
+        payload.findGlobal({ slug: page.slug, draft: true, depth: 0, overrideAccess: true }),
+    ]);
+    return compare(payload.config.globals.find(({ slug }) => slug === page.slug)?.fields ?? [], published, draft);
+}
+
 async function start(req: PayloadRequest, run: (email: string) => Promise<BuildSummary>) {
     const refused = denied(req);
     if (refused) return refused;
@@ -191,6 +228,22 @@ export const publishEndpoints: Endpoint[] = [
                 return Response.json(status, { headers: noStore });
             } catch (error) {
                 return failure(req, error);
+            }
+        },
+    },
+    {
+        path: '/publish/draft',
+        method: 'get',
+        handler: async (req) => {
+            const refused = denied(req);
+            if (refused) return refused;
+            try {
+                const status = await draftStatus(req);
+                if (!status) return Response.json({ error: 'Unknown page or document.' }, { status: 400, headers: noStore });
+                return Response.json(status, { headers: noStore });
+            } catch (error) {
+                req.payload.logger.error({ err: error, msg: 'Draft comparison failed' });
+                return Response.json({ error: 'Could not compare this draft with the published version.' }, { status: 500, headers: noStore });
             }
         },
     },

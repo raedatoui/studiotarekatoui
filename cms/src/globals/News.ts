@@ -48,7 +48,7 @@ const exhibitionFields = (): Field[] => [
 export const News: GlobalConfig = {
     slug: 'news',
     label: 'News',
-    admin: { group: false },
+    admin: { group: false, components: { elements: { beforeDocumentControls: ['/components/DraftChanges#DraftChanges'] } } },
     access: { read: signedIn, update: signedIn, readVersions: signedIn },
     versions: { drafts: true, max: 30 },
     fields: [
