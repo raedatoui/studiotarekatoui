@@ -29,7 +29,7 @@ export function ExportContent() {
     }
 
     return (
-        <div style={{ padding: '1rem 0' }}>
+        <div>
             <button type="button" className="btn btn--style-secondary btn--size-small" disabled={busy} onClick={download}>
                 {busy ? 'Exporting…' : 'Export JSON'}
             </button>

@@ -51,7 +51,7 @@ export default buildConfig({
             beforeDashboard: ['/components/DashboardDrafts#DashboardDrafts'],
             afterDashboard: ['/components/DashboardPages#DashboardPages', '/components/ChronologyCreateButton#ChronologyCreateButton'],
             beforeNavLinks: ['/components/HomeNav#HomeNav'],
-            afterNavLinks: ['/components/PagesNav#PagesNav', '/components/PublishNav#PublishNav', '/components/ExportContent#ExportContent'],
+            afterNavLinks: ['/components/PagesNav#PagesNav', '/components/PublishNav#PublishNav'],
             views: {
                 pages: { Component: '/components/PagesView#PagesView', path: '/pages', exact: true, meta: { title: 'Pages' } },
                 publish: { Component: '/components/PublishView#PublishView', path: '/publish', exact: true, meta: { title: 'Publish website' } },

@@ -37,7 +37,7 @@ Export a published baseline before starting the website. In local CMS configurat
 
 Payload Live Preview opens `/preview/research`, `/preview/research-page`, `/preview/about`, `/preview/contact`, `/preview/navigation`, or `/preview/news`. Initial form state and unsaved edits arrive through Payload's [client-side preview messaging](https://payloadcms.com/docs/live-preview/client). The preview overlays only the active document on the published baseline and uses the public renderers. It also handles new research documents with no public route. Messages must match the configured CMS origin and the parent/opener window. Drafts stay in browser memory; preview links are disabled to keep the editor in the frame.
 
-The CMS navigation's **Export JSON** action downloads the same published snapshot through an authenticated endpoint. Validation errors identify the research document and field. Exporting does not deploy.
+The **Export JSON** action on the CMS Publish website page downloads the same published snapshot through an authenticated endpoint. Validation errors identify the research document and field. Exporting does not deploy.
 
 ### Mobile research timeline previews
 

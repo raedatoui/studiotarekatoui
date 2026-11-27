@@ -4,6 +4,7 @@ import { Banner, Button, Link, Pill, useConfig } from '@payloadcms/ui';
 import { useCallback, useEffect, useState } from 'react';
 import type { BuildSummary } from '../publish/cloudBuild';
 import type { PublishStatus } from '../publish/endpoints';
+import { ExportContent } from './ExportContent';
 import { PublicationDate } from './PublicationCells';
 import { SavedDrafts } from './SavedDrafts';
 
@@ -277,6 +278,12 @@ export function PublishPanel() {
                         </table>
                     </div>
                 )}
+            </section>
+
+            <section className="studio-publish__section">
+                <h2>Export content</h2>
+                <p>Download everything that is published in the CMS as a JSON file. Exporting does not publish anything.</p>
+                <ExportContent />
             </section>
         </div>
     );
