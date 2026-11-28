@@ -13,12 +13,10 @@ import { ChronologyRowLabel as ChronologyRowLabel_a9c0c4ae9d5bc1f63e79d5a6a0d499
 import { ChronologyEditView as ChronologyEditView_5026f404dccc8e60688aac2ddc2cbd29 } from '../../../components/ChronologyEditView'
 import { NavigationRowLabel as NavigationRowLabel_50c90f63ffce0309cd2859daa16f2bd8 } from '../../../components/NavigationRowLabel'
 import { GoogleLogout as GoogleLogout_aa6fac0737322a8012c2dd30990175ec } from '../../../components/GoogleLogout'
-import { DashboardPages as DashboardPages_41fd5a263ba04f982cc41292e6291865 } from '../../../components/DashboardPages'
-import { ChronologyCreateButton as ChronologyCreateButton_21c02df4bfeedaacb28dfa6452519e43 } from '../../../components/ChronologyCreateButton'
 import { PagesNav as PagesNav_aa89768a78829948eadfcae6e6562bc6 } from '../../../components/PagesNav'
 import { PublishNav as PublishNav_ad66fecd5604bb1088011f8207c4d451 } from '../../../components/PublishNav'
-import { DashboardDrafts as DashboardDrafts_1add4801ddd045f00ea71d8362f58a99 } from '../../../components/DashboardDrafts'
 import { HomeNav as HomeNav_03e59baf8012ec78c255c8ba2900b1c0 } from '../../../components/HomeNav'
+import { HomeView as HomeView_78d4460baf957364b329d4c0fed6bcb8 } from '../../../components/HomeView'
 import { PagesView as PagesView_32260a7b91844336ffb4851d34da28da } from '../../../components/PagesView'
 import { PublishView as PublishView_cb0e5f29218de3a8d9bb8a1762d801ad } from '../../../components/PublishView'
 import { GuideView as GuideView_ad97d362163f2df4de5bd57b0f3a8acd } from '../../../components/GuideView'
@@ -42,12 +40,10 @@ export const importMap = {
   "/components/ChronologyEditView#ChronologyEditView": ChronologyEditView_5026f404dccc8e60688aac2ddc2cbd29,
   "/components/NavigationRowLabel#NavigationRowLabel": NavigationRowLabel_50c90f63ffce0309cd2859daa16f2bd8,
   "/components/GoogleLogout#GoogleLogout": GoogleLogout_aa6fac0737322a8012c2dd30990175ec,
-  "/components/DashboardPages#DashboardPages": DashboardPages_41fd5a263ba04f982cc41292e6291865,
-  "/components/ChronologyCreateButton#ChronologyCreateButton": ChronologyCreateButton_21c02df4bfeedaacb28dfa6452519e43,
   "/components/PagesNav#PagesNav": PagesNav_aa89768a78829948eadfcae6e6562bc6,
   "/components/PublishNav#PublishNav": PublishNav_ad66fecd5604bb1088011f8207c4d451,
-  "/components/DashboardDrafts#DashboardDrafts": DashboardDrafts_1add4801ddd045f00ea71d8362f58a99,
   "/components/HomeNav#HomeNav": HomeNav_03e59baf8012ec78c255c8ba2900b1c0,
+  "/components/HomeView#HomeView": HomeView_78d4460baf957364b329d4c0fed6bcb8,
   "/components/PagesView#PagesView": PagesView_32260a7b91844336ffb4851d34da28da,
   "/components/PublishView#PublishView": PublishView_cb0e5f29218de3a8d9bb8a1762d801ad,
   "/components/GuideView#GuideView": GuideView_ad97d362163f2df4de5bd57b0f3a8acd,

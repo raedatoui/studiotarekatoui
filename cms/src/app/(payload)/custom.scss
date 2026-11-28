@@ -12,7 +12,7 @@
   @return url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E#{$shape}%3C/svg%3E");
 }
 
-.nav, .dashboard {
+.nav {
   --studio-icon-home: #{studio-nav-icon("%3Cpath d='m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9'/%3E")};
   --studio-icon-folder: #{studio-nav-icon("%3Cpath d='M3 7V5a2 2 0 0 1 2-2h5l2 3h7a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z'/%3E")};
   --studio-icon-page: #{studio-nav-icon("%3Cpath d='M14 3H5v18h14V8l-5-5Zm0 0v5h5M8 12h8M8 16h6'/%3E")};
@@ -65,104 +65,132 @@
   #nav-global-navigation { --studio-nav-icon: var(--studio-icon-navigation); }
 }
 
-.dashboard {
-  .collections__wrap { gap: 32px; }
-  .collections__group { gap: 14px; }
-  .collections__label { font-size: 1.25rem; font-weight: 600; }
+// The CMS home is an index of the website. Each part is named in the website's display face,
+// and verdigris, the website's accent, marks what can be opened.
+.studio-home {
+  --studio-accent: #2f6b5e;
+  --studio-accent-strong: #1f5347;
+  display: grid;
+  gap: 56px;
+  max-width: 1040px;
+  padding: 8px 0 72px;
+  font-size: 1.125rem;
+  line-height: 1.55;
 
-  .collections__card-list {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 14px;
-
-    @media (max-width: 1000px) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    @media (max-width: 600px) { grid-template-columns: minmax(0, 1fr); }
+  html[data-theme='dark'] & {
+    --studio-accent: #6fb3a1;
+    --studio-accent-strong: #8ecdbb;
   }
 
-  .collections .card {
-    min-height: 132px;
-    padding: 20px;
-    border: 1px solid var(--theme-elevation-200);
-    border-radius: 10px;
-    background: var(--theme-elevation-0);
-    box-shadow: none;
+  :where(h1, h2, h3, p, ul) { margin: 0; }
+  h2 { font-size: 1.25rem; font-weight: 600; line-height: 1.3; }
+
+  a {
+    color: var(--studio-accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
 
     &:hover {
-      border-color: var(--theme-elevation-400);
-      background: var(--theme-elevation-50);
-      box-shadow: none;
+      color: var(--studio-accent-strong);
+      text-decoration-thickness: 2px;
     }
 
-    &:has(:focus-visible) {
-      outline: 2px solid var(--theme-text);
+    &:focus-visible {
+      outline: 2px solid var(--studio-accent);
       outline-offset: 3px;
+      border-radius: 2px;
     }
   }
 
-  .collections .card__title {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 18px;
-    margin: 0;
-    font-size: 1.125rem;
-    line-height: 1.35;
-
-    &::before {
-      content: '';
-      width: 25px;
-      height: 25px;
-      flex-shrink: 0;
-      background-color: var(--theme-elevation-700);
-      -webkit-mask: var(--studio-card-icon, var(--studio-icon-page)) center / contain no-repeat;
-      mask: var(--studio-card-icon, var(--studio-icon-page)) center / contain no-repeat;
-    }
-  }
-
-  .collections .card__actions { align-self: flex-start; }
-
-  #card-users { --studio-card-icon: var(--studio-icon-users); }
-  #card-research, #card-page-research-page { --studio-card-icon: var(--studio-icon-research); }
-  #card-chronology, #card-page-chronology { --studio-card-icon: var(--studio-icon-chronology); }
-  #card-publications, #card-page-publications-page { --studio-card-icon: var(--studio-icon-book); }
-  #card-page-news { --studio-card-icon: var(--studio-icon-news); }
-  #card-page-about { --studio-card-icon: var(--studio-icon-info); }
-  #card-page-contact { --studio-card-icon: var(--studio-icon-mail); }
-  #card-navigation { --studio-card-icon: var(--studio-icon-navigation); }
-}
-
-.studio-dashboard-pages {
-  margin-top: 32px;
-
-  &__heading {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: space-between;
+  &__intro {
+    display: grid;
     gap: 12px;
-
-    a { text-underline-offset: 3px; }
+    max-width: 62ch;
   }
-}
 
-.studio-home {
-  display: grid;
-  gap: 16px;
-  margin-bottom: 32px;
-  font-size: 1.125rem;
+  &__title, &__name {
+    font-family: var(--studio-serif), Georgia, 'Times New Roman', serif;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
 
-  h2 { margin: 0; font-size: 1.25rem; font-weight: 600; }
-  p { max-width: 75ch; margin: 0; line-height: 1.6; }
-  a { text-decoration: underline; text-underline-offset: 3px; }
-  ul { margin: 0; padding-left: 20px; }
-  li { margin: 4px 0; line-height: 1.6; }
+  &__title {
+    margin-bottom: 8px;
+    font-size: clamp(2.75rem, 6vw, 4.5rem);
+    line-height: 1;
+  }
+
+  &__meta, &__note { color: var(--theme-elevation-700); }
 
   &__drafts {
     display: grid;
     gap: 10px;
-    padding: 24px;
-    border: 1px solid var(--theme-elevation-200);
-    border-radius: 10px;
+    max-width: 75ch;
+    padding: 24px 28px;
+    border: 1px solid var(--theme-elevation-150);
+    border-radius: var(--style-radius-m);
     background: var(--theme-elevation-50);
+
+    ul { padding-left: 20px; }
+    li { margin: 4px 0; }
+  }
+
+  &__section {
+    display: grid;
+    gap: 16px;
+  }
+
+  &__index {
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--theme-elevation-150);
+  }
+
+  // The page name and its description share a first baseline.
+  &__area {
+    display: grid;
+    grid-template-columns: minmax(10rem, 15rem) minmax(0, 1fr);
+    align-items: baseline;
+    gap: 10px 40px;
+    padding: 28px 0 30px;
+    border-bottom: 1px solid var(--theme-elevation-150);
+  }
+
+  &__name {
+    font-size: 2.5rem;
+    line-height: 1.05;
+  }
+
+  &__note {
+    margin-top: 6px;
+    font-size: 0.9375rem;
+  }
+
+  &__body {
+    display: grid;
+    gap: 12px;
+    max-width: 60ch;
+  }
+
+  &__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 28px;
+    padding: 0;
+    list-style: none;
+    font-weight: 500;
+  }
+
+  @media (max-width: 700px) {
+    gap: 40px;
+
+    &__area {
+      grid-template-columns: minmax(0, 1fr);
+      padding: 22px 0 24px;
+    }
+
+    &__name { font-size: 2.125rem; }
   }
 }
 
